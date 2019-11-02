@@ -42,8 +42,7 @@ namespace Watchables.WebAPI
             //Interface overrides
             services.AddScoped<IInitializeService, InitializeService>();
             services.AddScoped<ICinemasService, CinemasService>();
-            services.AddScoped<IHallsService, HallsService>();
-            
+            services.AddScoped<IHallsService, HallsService>();          
 
         }
 
