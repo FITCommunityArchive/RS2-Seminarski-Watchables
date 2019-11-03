@@ -22,5 +22,11 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<string> AddDays() {
             return _service.AddDays();
         }
+
+
+        [HttpPost("AddMovies")]
+        public ActionResult<string> AddMovies() {
+            return _service.AddMovies();
+        }
     }
 }

@@ -31,6 +31,11 @@ namespace Watchables.WebAPI.Controllers
             return _service.GetHallsOfCinema(cinemaId);
         }
 
+        [HttpPost("addToCinema/{cinemaId}")]
+        public ActionResult<Model.Hall> AddHallToCinema(int cinemaId, Model.Hall hall) {
+            return _service.AddHallToCinema(cinemaId, hall);
+        }
+
 
     }
 }

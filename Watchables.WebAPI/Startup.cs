@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using eProdaja.WebAPI.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,8 +29,8 @@ namespace Watchables.WebAPI
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddControllers();
-
+            services.AddControllers(x => x.Filters.Add<ErrorFilter>());          
+         
             //Swagger
             services.AddSwaggerGen(c =>{ c.SwaggerDoc("v1", new OpenApiInfo { Title = "Watchables API", Version = "v1" });});
 
@@ -42,7 +43,8 @@ namespace Watchables.WebAPI
             //Interface overrides
             services.AddScoped<IInitializeService, InitializeService>();
             services.AddScoped<ICinemasService, CinemasService>();
-            services.AddScoped<IHallsService, HallsService>();          
+            services.AddScoped<IHallsService, HallsService>();
+            services.AddScoped<IProductsService, ProductsService>();
 
         }
 

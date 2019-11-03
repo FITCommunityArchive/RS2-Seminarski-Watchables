@@ -8,5 +8,6 @@ namespace Watchables.WebAPI.Services
     public interface IInitializeService
     {
         string AddDays();
+        string AddMovies();
     }
 }

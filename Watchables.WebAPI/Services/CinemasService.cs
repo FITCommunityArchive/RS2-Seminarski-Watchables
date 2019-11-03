@@ -32,10 +32,11 @@ namespace Watchables.WebAPI.Services
 
             var cinema = _mapper.Map<Database.Cinemas>(request.Cinema);
             var halls = _mapper.Map<List<Database.Hall>>(request.Halls);
-            var products = _mapper.Map <List<Database.Products>>(request.Products);
+            var products = _mapper.Map<List<Database.Products>>(request.Products);
             var inBaseProducts = _context.Products.ToList();
             var airingDays = _context.AiringDays.ToList();
 
+     
             _context.Cinemas.Add(cinema);
             _context.SaveChanges();
 
