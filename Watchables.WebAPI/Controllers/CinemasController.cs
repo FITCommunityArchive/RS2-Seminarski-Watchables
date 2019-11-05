@@ -22,8 +22,8 @@ namespace Watchables.WebAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Model.Cinema>> Get() {
-            return _service.Get();
+        public ActionResult<List<Model.Cinema>> Get([FromQuery]Model.Requests.CinemasSearchRequest request) {
+            return _service.Get(request);
         }
 
         [HttpGet("{id}")]

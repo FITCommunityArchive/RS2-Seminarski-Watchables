@@ -9,7 +9,7 @@ namespace Watchables.WebAPI.Services
 {
     public interface ICinemasService
     {
-        List<Model.Cinema> Get();
+        List<Model.Cinema> Get(Model.Requests.CinemasSearchRequest request);
         Model.Cinema GetById(int id);
         InsertCinemaRequest Insert(InsertCinemaRequest request);
       

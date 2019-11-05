@@ -20,8 +20,15 @@ namespace Watchables.WebAPI.Services
             _mapper = mapper;
         }
 
-        public List<Model.Cinema> Get() {
-            return _mapper.Map<List<Model.Cinema>>(_context.Cinemas.ToList());       
+        public List<Model.Cinema> Get(Model.Requests.CinemasSearchRequest request) {
+
+            var query = _context.Cinemas.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(request?.Name)) query = query.Where(c => c.Name.ToLower().StartsWith(request.Name.ToLower()));
+            if (!string.IsNullOrWhiteSpace(request?.Address)) query = query.Where(c => c.Address.ToLower().StartsWith(request.Address.ToLower()));
+            if (!string.IsNullOrWhiteSpace(request?.Location)) query = query.Where(c => c.Location.ToLower().StartsWith(request.Location.ToLower()));
+            if (request?.Rating >= 0) query = query.Where(c => c.Rating >= request.Rating);  
+
+            return _mapper.Map<List<Model.Cinema>>(query.ToList());       
         }
 
         public Model.Cinema GetById(int id) {
