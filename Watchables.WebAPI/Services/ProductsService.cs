@@ -26,47 +26,5 @@ namespace Watchables.WebAPI.Services
         public Product GetById(int id) {
             return _mapper.Map<Model.Product>(_context.Products.Find(id));
         }
-
-        public Model.Product AddProductToCinema(int cinemaId, Model.Product pr) {
-
-            var product = _mapper.Map<Database.Products>(pr);
-            var inBaseProducts = _context.Products.ToList();
-            bool isThere = false;
-            foreach(var inProduct in inBaseProducts) {
-                if(inProduct.Name==product.Name && inProduct.Price == product.Price) {
-                    var cinemaProducts = new CinemaProducts() {
-                        CinemaId = cinemaId,
-                        Product = inProduct
-                    };
-                    _context.CinemaProducts.Add(cinemaProducts);
-                    _context.SaveChanges();
-                    isThere = true;
-                    break;
-                }
-            }
-            if (!isThere) {
-                _context.Products.Add(product);
-                _context.SaveChanges();
-                var cinemaProducts = new CinemaProducts() {
-                    CinemaId = cinemaId,
-                    Product = product
-                };
-                _context.CinemaProducts.Add(cinemaProducts);
-                _context.SaveChanges();
-            }
-
-            return pr;
-        }
-
-        public List<Product> GetProductsOfCinema(int cinemaId) {
-
-            var cinemaProducts = _context.CinemaProducts.Include(cp => cp.Product).ToList();
-            var databaseProducts = new List<Database.Products>();
-            foreach(var cinemaProduct in cinemaProducts) {
-                if (cinemaProduct.CinemaId == cinemaId) databaseProducts.Add(cinemaProduct.Product);
-            }
-
-            return _mapper.Map<List<Model.Product>>(databaseProducts);
-        }
     }
 }

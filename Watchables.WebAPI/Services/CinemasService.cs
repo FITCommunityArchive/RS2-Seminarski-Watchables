@@ -35,57 +35,81 @@ namespace Watchables.WebAPI.Services
             return _mapper.Map<Model.Cinema>(_context.Cinemas.Find(id));
         }
 
-        public InsertCinemaRequest Insert(InsertCinemaRequest request) {
+        public Model.Cinema Insert(InsertCinemaRequest request) {
 
-            var cinema = _mapper.Map<Database.Cinemas>(request.Cinema);
-            var halls = _mapper.Map<List<Database.Hall>>(request.Halls);
-            var products = _mapper.Map<List<Database.Products>>(request.Products);
-            var inBaseProducts = _context.Products.ToList();
-            var airingDays = _context.AiringDays.ToList();
+            _context.Cinemas.Add(_mapper.Map<Database.Cinemas>(request));
+            _context.SaveChanges();
+            return _mapper.Map<Model.Cinema>(_mapper.Map<Database.Cinemas>(request));  
+        }
 
-     
-            _context.Cinemas.Add(cinema);
+        public Model.Hall AddHallToCinema(Model.Hall h) {
+            var hall = _mapper.Map<Database.Hall>(h);
+            var inBaseHalls = _context.Hall.Where(ha => ha.CinemaId == h.CinemaId).ToList();
+
+            foreach (var inHall in inBaseHalls) {
+                if (inHall.HallName.ToLower() == hall.HallName.ToLower() && inHall.HallNumber == hall.HallNumber && hall.NumberOfseats == inHall.NumberOfseats) {
+                    return h;
+                }
+            }
+            _context.Hall.Add(hall);
             _context.SaveChanges();
 
-            foreach(var hall in halls) {
-                hall.Cinema = cinema;
-                _context.Hall.Add(hall);
+            return h;
+        }
+
+        public Model.Product AddProductToCinema(int cinemaId, Model.Product pr) {
+
+            var product = _mapper.Map<Database.Products>(pr);
+            var inBaseProducts = _context.Products.ToList();
+            bool isThere = false;
+            foreach (var inProduct in inBaseProducts) {
+                if (inProduct.Name.ToLower() == product.Name.ToLower() && inProduct.Price == product.Price) {
+
+                    var allCinemaProducts = _context.CinemaProducts.ToList();
+                    foreach (var cinemaProduct in allCinemaProducts) {
+                        if (cinemaProduct.ProductId == inProduct.ProductId && cinemaProduct.CinemaId==cinemaId) {
+                            return pr;
+                        }
+                    }
+
+                    var cinemaProducts = new CinemaProducts() {
+                        CinemaId = cinemaId,
+                        Product = inProduct
+                    };
+                  
+                    _context.CinemaProducts.Add(cinemaProducts);
+                    _context.SaveChanges();
+                    isThere = true;
+                    break;
+                }
+            }
+            if (!isThere) {
+                _context.Products.Add(product);
+                _context.SaveChanges();
+                var cinemaProducts = new CinemaProducts() {
+                    CinemaId = cinemaId,
+                    Product = product
+                };
+                _context.CinemaProducts.Add(cinemaProducts);
                 _context.SaveChanges();
             }
 
-            foreach(var product in products) {
-                bool added = false;
-                foreach(var inProduct in inBaseProducts) {
-                    if(product.Name==inProduct.Name && product.Price == inProduct.Price) {
-                        var cinemaProduct = new Database.CinemaProducts() {
-                            Cinema = cinema,
-                            Product = inProduct
-                        };
-                        _context.CinemaProducts.Add(cinemaProduct);
-                        _context.SaveChanges();
-                        added = true;
-                        break;
-                    }
-                }
-                if (!added) {
-                    var cinemaProduct = new Database.CinemaProducts() {
-                        Cinema = cinema,
-                        Product = product
-                    };
-                    _context.Products.Add(product);
-                    _context.CinemaProducts.Add(cinemaProduct);
-                    _context.SaveChanges();
-                }  
+            return pr;
+        }
+
+        public List<Model.Hall> GetHallsOfCinema(int cinemaId) {
+            return _mapper.Map<List<Model.Hall>>(_context.Hall.Where(h => h.CinemaId == cinemaId).ToList());
+        }
+
+        public List<Product> GetProductsOfCinema(int cinemaId) {
+
+            var cinemaProducts = _context.CinemaProducts.Include(cp => cp.Product).ToList();
+            var databaseProducts = new List<Database.Products>();
+            foreach (var cinemaProduct in cinemaProducts) {
+                if (cinemaProduct.CinemaId == cinemaId) databaseProducts.Add(cinemaProduct.Product);
             }
-            foreach(var day in airingDays) {
-                var airingDaysOfCinema = new AiringDaysOfCinema() {
-                    Cinema=cinema,
-                    AiringDay=day
-                };
-                _context.AiringDaysOfCinema.Add(airingDaysOfCinema);
-                _context.SaveChanges();
-            }
-            return request;
+
+            return _mapper.Map<List<Model.Product>>(databaseProducts);
         }
     }
 }

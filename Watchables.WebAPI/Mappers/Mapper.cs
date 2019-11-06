@@ -12,6 +12,7 @@ namespace Watchables.WebAPI.Mappers
             CreateMap<Database.Cinemas, Model.Cinema>().ReverseMap();
             CreateMap<Database.Products, Model.Product>().ReverseMap();
             CreateMap<Database.Hall, Model.Hall>().ReverseMap();
+            CreateMap<Database.Cinemas, Model.Requests.InsertCinemaRequest>().ReverseMap();
         }
     }
 }

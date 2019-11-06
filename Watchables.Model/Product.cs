@@ -10,7 +10,7 @@ namespace Watchables.Model
     {
         public int ProductId { get; set; }
         [Required]
-        [MinLength(4)]
+        [MinLength(3)]
         public string Name { get; set; }
 
         [Range(1, 150)]

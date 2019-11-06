@@ -25,16 +25,6 @@ namespace Watchables.WebAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<Model.Product> GetById(int id) {
             return _service.GetById(id);
-        }
-
-        [HttpPost("addToCinema/{cinemaId}")]
-        public ActionResult<Model.Product> AddProductToCinema(int cinemaId, Model.Product product) {
-            return _service.AddProductToCinema(cinemaId, product);
-        }
-
-        [HttpGet("getProducts/{cinemaId}")]
-        public ActionResult<List<Model.Product>> GetProductsOfCinema(int cinemaId) {
-            return _service.GetProductsOfCinema(cinemaId);
-        }
+        }      
     }
 }

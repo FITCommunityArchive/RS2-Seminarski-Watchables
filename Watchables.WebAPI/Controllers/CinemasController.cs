@@ -32,8 +32,28 @@ namespace Watchables.WebAPI.Controllers
         }
    
         [HttpPost("insert")]
-        public ActionResult<InsertCinemaRequest> Insert(InsertCinemaRequest request) {
+        public ActionResult<Model.Cinema> Insert(InsertCinemaRequest request) {
             return _service.Insert(request);
+        }
+
+        [HttpPost("addHall")]
+        public ActionResult<Model.Hall> AddHallToCinema(Model.Hall hall) {
+            return _service.AddHallToCinema(hall);
+        }
+
+        [HttpPost("addProduct/{cinemaId}")]
+        public ActionResult<Model.Product> AddProductToCinema(int cinemaId, Model.Product product) {
+            return _service.AddProductToCinema(cinemaId, product);
+        }
+
+        [HttpGet("GetHalls/{cinemaId}")]
+        public ActionResult<List<Model.Hall>> GetHallsOfCinema(int cinemaId) {
+            return _service.GetHallsOfCinema(cinemaId);
+        }
+
+        [HttpGet("getProducts/{cinemaId}")]
+        public ActionResult<List<Model.Product>> GetProductsOfCinema(int cinemaId) {
+            return _service.GetProductsOfCinema(cinemaId);
         }
 
     }

@@ -94,16 +94,56 @@ namespace Watchables.WinUI
 
         private void ShowDashboardBtn_Click(object sender, EventArgs e) {
             DashboardForm form = new DashboardForm {
-                MdiParent = this
-            };
+                MdiParent = this,
+                Dock=DockStyle.Fill                   
+        };         
             form.Show();
+            Slider.Top = ShowDashboardBtn.Top;
+            Slider.Height = ShowDashboardBtn.Height;
         }
 
         private void ShowCinemasBtn_Click(object sender, EventArgs e) {
             CinemasForm form = new CinemasForm {
-                MdiParent = this
+                MdiParent = this,
+                Dock = DockStyle.Fill
             };
             form.Show();
+            Slider.Height = ShowCinemasBtn.Height;
+            Slider.Top = ShowCinemasBtn.Top;
         }
+
+        private void ShowMoviesBtn_Click(object sender, EventArgs e) {
+            Slider.Top = ShowMoviesBtn.Top;
+            Slider.Height = ShowMoviesBtn.Height;
+        }
+
+        private void ShowShowsBtn_Click(object sender, EventArgs e) {
+            Slider.Top = ShowShowsBtn.Top;
+            Slider.Height = ShowShowsBtn.Height;
+        }
+
+        private void ShowSubscriptionsBtn_Click(object sender, EventArgs e) {
+            Slider.Top = ShowSubscriptionsBtn.Top;
+            Slider.Height = ShowSubscriptionsBtn.Height;
+        }
+
+        private void ShowRotationsBtn_Click(object sender, EventArgs e) {
+            Slider.Top = ShowRotationsBtn.Top;
+            Slider.Height = ShowRotationsBtn.Height;
+        }
+
+        private void ShowUsersBtn_Click(object sender, EventArgs e) {
+            Slider.Top = ShowUsersBtn.Top;
+            Slider.Height = ShowUsersBtn.Height;
+        }
+
+        private void ExitBtn_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        private void MinimizeBtn_Click(object sender, EventArgs e) {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
     }
 }
