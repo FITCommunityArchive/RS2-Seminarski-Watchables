@@ -111,5 +111,12 @@ namespace Watchables.WebAPI.Services
 
             return _mapper.Map<List<Model.Product>>(databaseProducts);
         }
+
+        public Cinema Update(int cinemaId, InsertCinemaRequest request) {
+            var cinema = _context.Cinemas.Find(cinemaId);
+            _mapper.Map(request, cinema);
+            _context.SaveChanges();
+            return _mapper.Map<Model.Cinema>(cinema);            
+        }
     }
 }

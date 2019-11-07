@@ -31,7 +31,7 @@ namespace Watchables.WebAPI.Controllers
             return _service.GetById(id);
         }
    
-        [HttpPost("insert")]
+        [HttpPost]
         public ActionResult<Model.Cinema> Insert(InsertCinemaRequest request) {
             return _service.Insert(request);
         }
@@ -54,6 +54,11 @@ namespace Watchables.WebAPI.Controllers
         [HttpGet("getProducts/{cinemaId}")]
         public ActionResult<List<Model.Product>> GetProductsOfCinema(int cinemaId) {
             return _service.GetProductsOfCinema(cinemaId);
+        }
+
+        [HttpPut("{cinemaId}")]
+        public ActionResult<Model.Cinema> Update(int cinemaId, InsertCinemaRequest request) {
+            return _service.Update(cinemaId, request);
         }
 
     }

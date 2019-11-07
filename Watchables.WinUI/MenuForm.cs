@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Watchables.WinUI.Forms;
+using Watchables.WinUI.Forms.Cinema;
 
 namespace Watchables.WinUI
 {
@@ -16,7 +17,7 @@ namespace Watchables.WinUI
         private int childFormNumber = 0;
 
         public MenuForm() {
-            InitializeComponent();
+            InitializeComponent();          
         }
 
         protected override void OnLoad(EventArgs e) {
@@ -93,6 +94,9 @@ namespace Watchables.WinUI
         }
 
         private void ShowDashboardBtn_Click(object sender, EventArgs e) {
+            foreach (Form frm in this.MdiChildren) {
+                frm.Close();
+            }
             DashboardForm form = new DashboardForm {
                 MdiParent = this,
                 Dock=DockStyle.Fill                   
@@ -103,6 +107,9 @@ namespace Watchables.WinUI
         }
 
         private void ShowCinemasBtn_Click(object sender, EventArgs e) {
+            foreach (Form frm in this.MdiChildren) {
+                frm.Close();
+            }
             CinemasForm form = new CinemasForm {
                 MdiParent = this,
                 Dock = DockStyle.Fill
@@ -112,7 +119,7 @@ namespace Watchables.WinUI
             Slider.Top = ShowCinemasBtn.Top;
         }
 
-        private void ShowMoviesBtn_Click(object sender, EventArgs e) {
+        private void ShowMoviesBtn_Click(object sender, EventArgs e) {         
             Slider.Top = ShowMoviesBtn.Top;
             Slider.Height = ShowMoviesBtn.Height;
         }

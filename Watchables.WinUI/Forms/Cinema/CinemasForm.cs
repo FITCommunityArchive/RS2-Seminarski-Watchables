@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Watchables.Model.Requests;
+using Watchables.WinUI.Forms.Cinema;
 
 namespace Watchables.WinUI.Forms
 {
@@ -31,9 +32,7 @@ namespace Watchables.WinUI.Forms
 
         }
 
-        private void AddCinemaButton_Click(object sender, EventArgs e) {
-
-        }
+     
 
         private async void button1_Click(object sender, EventArgs e) {
 
@@ -48,16 +47,29 @@ namespace Watchables.WinUI.Forms
             var result = await _apiService.Get<List<Model.Cinema>>(search);
             dgvCinemas.AutoGenerateColumns = false;
             dgvCinemas.DataSource = result;
-
-
         }
-      
+
+        private void AddCinemaButton_Click(object sender, EventArgs e) {
+
+            MenuForm menuForm = (MenuForm)this.MdiParent;
+            AddEditCinemaForm form = new AddEditCinemaForm {
+                MdiParent = menuForm,
+                Dock = DockStyle.Fill
+            };
+            form.Show();
+        }
+
         private void dgvCinemas_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var cinemaId = dgvCinemas.Rows[e.RowIndex].Cells["CinemaId"].Value;
                 var action = dgvCinemas.Columns[e.ColumnIndex].Name;
                 if (action == "Edit") {
-                    MessageBox.Show(cinemaId.ToString(), action);
+                    MenuForm menuForm = (MenuForm)this.MdiParent;
+                    AddEditCinemaForm form = new AddEditCinemaForm(int.Parse(cinemaId.ToString())) {
+                        MdiParent = menuForm,
+                        Dock = DockStyle.Fill
+                    };
+                    form.Show();
                 }
                 else if (action == "Delete") {
                     MessageBox.Show(cinemaId.ToString(), action);
