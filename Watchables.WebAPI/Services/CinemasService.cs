@@ -37,8 +37,20 @@ namespace Watchables.WebAPI.Services
 
         public Model.Cinema Insert(InsertCinemaRequest request) {
 
-            _context.Cinemas.Add(_mapper.Map<Database.Cinemas>(request));
+            var cinema = _mapper.Map<Database.Cinemas>(request);
+            _context.Cinemas.Add(cinema);
             _context.SaveChanges();
+
+            var airingDays = _context.AiringDays.ToList();
+            foreach(var airingDay in airingDays) {
+                var airingDaysOfCinema = new AiringDaysOfCinema() {
+                    AiringDayId = airingDay.AiringDayId,
+                    Cinema = cinema
+                };
+                _context.AiringDaysOfCinema.Add(airingDaysOfCinema);
+                _context.SaveChanges(); 
+            }
+
             return _mapper.Map<Model.Cinema>(_mapper.Map<Database.Cinemas>(request));  
         }
 
