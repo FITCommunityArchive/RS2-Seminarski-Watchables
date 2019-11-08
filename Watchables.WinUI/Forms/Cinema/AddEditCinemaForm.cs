@@ -18,10 +18,12 @@ namespace Watchables.WinUI.Forms.Cinema
 
         private int? _cinemaId = null;
         private readonly APIService _apiService = new APIService("cinemas");
+        private MenuForm _menuForm;
 
-        public AddEditCinemaForm(int? cinemaId = null) {
+        public AddEditCinemaForm(MenuForm menuForm, int? cinemaId = null) {
             InitializeComponent();
             _cinemaId = cinemaId;
+            _menuForm = menuForm;
         }
 
         private void Close_Click(object sender, EventArgs e) {
@@ -45,21 +47,20 @@ namespace Watchables.WinUI.Forms.Cinema
 
         private async void SaveBtn_Click(object sender, EventArgs e) {
 
+            var messageBox = new CustomMessageBox();
+
             if (string.IsNullOrWhiteSpace(Cinema.Text) || Cinema.Text.Length<=4) {
-                var msgForm = new CustomMessageBox("The Cinema field is required and must contain at least 4 letters!");
-                msgForm.Show();
+                messageBox.Show("The cinema field requires 4 letters!", "error");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(Address.Text) || Address.Text.Length <= 5) {
-                var msgForm = new CustomMessageBox("The Address field is required and must contain at least 4 letters!");
-                msgForm.Show();
+              
                 return;
             }
 
             if (StreetNumber.Value<=0 || StreetNumber.Value >100) {
-                var msgForm = new CustomMessageBox("The Street Number has to be a value between 1 and 100!");
-                msgForm.Show();
+              
                 return;
             }
 
@@ -76,10 +77,25 @@ namespace Watchables.WinUI.Forms.Cinema
             };
 
             if (_cinemaId.HasValue) {
-                await _apiService.Update<Model.Cinema>(_cinemaId, request);
+                await _apiService.Update<Model.Cinema>(_cinemaId, request);                
             }
             else {
-                await _apiService.Insert<Model.Cinema>(request);
+                await _apiService.Insert<Model.Cinema>(request);               
+            }
+            this.Close();
+            foreach (Form frm in _menuForm.MdiChildren) {
+                frm.Close();
+            }
+            CinemasForm form = new CinemasForm {
+                MdiParent = _menuForm,
+                Dock = DockStyle.Fill
+            };           
+            form.Show();
+            if (_cinemaId.HasValue) {
+                messageBox.Show("Cinema updated successfully!", "success");
+            }
+            else {
+                messageBox.Show("Cinema added successfully!", "success");
             }
         }       
     }

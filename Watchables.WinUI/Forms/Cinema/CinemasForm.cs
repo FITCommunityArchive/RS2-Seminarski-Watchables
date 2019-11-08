@@ -19,6 +19,7 @@ namespace Watchables.WinUI.Forms
 
         public CinemasForm() {
             InitializeComponent();
+            var nesto = AddCinemaButton.Height;
         }
 
         protected override async void OnLoad(EventArgs e) {
@@ -52,7 +53,7 @@ namespace Watchables.WinUI.Forms
         private void AddCinemaButton_Click(object sender, EventArgs e) {
 
             MenuForm menuForm = (MenuForm)this.MdiParent;
-            AddEditCinemaForm form = new AddEditCinemaForm {
+            AddEditCinemaForm form = new AddEditCinemaForm(menuForm) {
                 MdiParent = menuForm,
                 Dock = DockStyle.Fill
             };
@@ -65,7 +66,7 @@ namespace Watchables.WinUI.Forms
                 var action = dgvCinemas.Columns[e.ColumnIndex].Name;
                 if (action == "Edit") {
                     MenuForm menuForm = (MenuForm)this.MdiParent;
-                    AddEditCinemaForm form = new AddEditCinemaForm(int.Parse(cinemaId.ToString())) {
+                    AddEditCinemaForm form = new AddEditCinemaForm(menuForm, int.Parse(cinemaId.ToString())) {
                         MdiParent = menuForm,
                         Dock = DockStyle.Fill
                     };
