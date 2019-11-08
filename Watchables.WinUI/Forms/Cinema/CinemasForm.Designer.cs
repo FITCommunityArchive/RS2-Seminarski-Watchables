@@ -25,6 +25,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -54,6 +55,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.clearSearch = new System.Windows.Forms.Button();
+            this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCinemas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -269,7 +271,7 @@
             // 
             // searchTextBox
             // 
-            this.searchTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
+            this.searchTextBox.BackColor = System.Drawing.Color.Snow;
             this.searchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchTextBox.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchTextBox.Location = new System.Drawing.Point(961, 103);
@@ -299,7 +301,7 @@
             // 
             // locationTextBox
             // 
-            this.locationTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
+            this.locationTextBox.BackColor = System.Drawing.Color.Snow;
             this.locationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.locationTextBox.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.locationTextBox.Location = new System.Drawing.Point(1293, 103);
@@ -309,7 +311,7 @@
             // 
             // ratingTextBox
             // 
-            this.ratingTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
+            this.ratingTextBox.BackColor = System.Drawing.Color.Snow;
             this.ratingTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ratingTextBox.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ratingTextBox.Location = new System.Drawing.Point(1467, 103);
@@ -413,5 +415,6 @@
         private System.Windows.Forms.DataGridViewImageColumn Halls;
         private System.Windows.Forms.DataGridViewImageColumn Schedule;
         private System.Windows.Forms.Button clearSearch;
+        private System.Windows.Forms.ToolTip ToolTip;
     }
 }

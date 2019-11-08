@@ -37,12 +37,25 @@ namespace Watchables.WinUI.Forms
 
         private async void button1_Click(object sender, EventArgs e) {
 
-            decimal value = (!string.IsNullOrWhiteSpace(ratingTextBox.Text)) ? decimal.Parse(ratingTextBox.Text) : 0;
+            var messageBox = new CustomMessageBox();
+
+            if(!string.IsNullOrWhiteSpace(ratingTextBox.Text) && !decimal.TryParse(ratingTextBox.Text, out decimal n)) {
+                messageBox.Show("Enter a valid rating (0-5)!", "error");
+                return;
+            }
+
+            decimal rating = (!string.IsNullOrWhiteSpace(ratingTextBox.Text)) ? decimal.Parse(ratingTextBox.Text) : (-1);
+
+            if (rating < 0 || rating > 5) {
+                messageBox.Show("Enter a valid rating (0-5)!", "error");
+                return;
+            }
+            
 
             var search = new CinemasSearchRequest() {
                 Name= searchTextBox.Text,
                 Location=locationTextBox.Text,
-                Rating=value                
+                Rating= rating
             };
 
             var result = await _apiService.Get<List<Model.Cinema>>(search);
@@ -64,7 +77,7 @@ namespace Watchables.WinUI.Forms
             if (e.RowIndex >= 0) {
                 var cinemaId = dgvCinemas.Rows[e.RowIndex].Cells["CinemaId"].Value;
                 var action = dgvCinemas.Columns[e.ColumnIndex].Name;
-                if (action == "Edit") {
+                if (action == "Edit" || action == "Cinema") {
                     MenuForm menuForm = (MenuForm)this.MdiParent;
                     AddEditCinemaForm form = new AddEditCinemaForm(menuForm, int.Parse(cinemaId.ToString())) {
                         MdiParent = menuForm,
@@ -83,10 +96,7 @@ namespace Watchables.WinUI.Forms
                 }
                 else if (action == "Products") {
                     MessageBox.Show(cinemaId.ToString(), action);
-                }
-                else if (action == "Cinema") {
-                    MessageBox.Show(cinemaId.ToString(), action);
-                }
+                }                
                 else return;
             }
         }

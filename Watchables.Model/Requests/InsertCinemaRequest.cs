@@ -28,7 +28,7 @@ namespace Watchables.Model.Requests
         [MinLength(9)]
         public string PhoneNumber { get; set; }
 
-        [Range(1, 5)]
+        [Range(0, 5)]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Rating { get; set; }
 
