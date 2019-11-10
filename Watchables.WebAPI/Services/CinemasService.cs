@@ -130,5 +130,22 @@ namespace Watchables.WebAPI.Services
             _context.SaveChanges();
             return _mapper.Map<Model.Cinema>(cinema);            
         }
+
+        public Model.Hall UpdateHall(int hallId, Model.Hall hall) {
+            var baseHall = _context.Hall.Find(hallId);
+            baseHall.HallName = hall.HallName;
+            baseHall.HallNumber = hall.HallNumber;
+            baseHall.NumberOfseats = hall.NumberOfseats;
+            _context.SaveChanges();
+            return _mapper.Map<Model.Hall>(baseHall);
+        }
+
+        public Product UpdateProduct(int productId, Product product) {
+            var baseProduct = _context.Products.Find(productId);
+            baseProduct.Name = product.Name;
+            baseProduct.Price = product.Price;
+            _context.SaveChanges();
+            return _mapper.Map<Model.Product>(baseProduct);
+        }
     }
 }

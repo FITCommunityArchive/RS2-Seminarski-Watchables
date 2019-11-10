@@ -73,12 +73,13 @@ namespace Watchables.WinUI.Forms
             form.Show();
         }
 
-        private void dgvCinemas_CellClick(object sender, DataGridViewCellEventArgs e) {
+        private async void dgvCinemas_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var cinemaId = dgvCinemas.Rows[e.RowIndex].Cells["CinemaId"].Value;
                 var action = dgvCinemas.Columns[e.ColumnIndex].Name;
-                if (action == "Edit" || action == "Cinema") {
-                    MenuForm menuForm = (MenuForm)this.MdiParent;
+                MenuForm menuForm = (MenuForm)this.MdiParent;
+
+                if (action == "Edit" || action == "Cinema") {                    
                     AddEditCinemaForm form = new AddEditCinemaForm(menuForm, int.Parse(cinemaId.ToString())) {
                         MdiParent = menuForm,
                         Dock = DockStyle.Fill
@@ -86,10 +87,24 @@ namespace Watchables.WinUI.Forms
                     form.Show();
                 }
                 else if (action == "Delete") {
-                    MessageBox.Show(cinemaId.ToString(), action);
+                    MessageBox.Show("Implement delete cinema", "To-do");
                 }
                 else if (action == "Halls") {
-                    MessageBox.Show(cinemaId.ToString(), action);
+                    var cinemaName = dgvCinemas.Rows[e.RowIndex].Cells["Cinema"].Value;
+                    var cinemaLocation = dgvCinemas.Rows[e.RowIndex].Cells["Location"].Value;
+
+                    CinemasHallsForm cinemasHallsForm = new CinemasHallsForm(menuForm, int.Parse(cinemaId.ToString()), cinemaName.ToString(), cinemaLocation.ToString()){};
+
+                    cinemasHallsForm.Show();
+
+                    cinemasHallsForm.Opacity = 0;
+                    while (cinemasHallsForm.Opacity < 1.0) {
+                        await Task.Delay(18);
+                        cinemasHallsForm.Opacity += 0.05;
+                    }
+                    cinemasHallsForm.Opacity = 1;
+                  
+
                 }
                 else if (action == "Schedule") {
                     MessageBox.Show(cinemaId.ToString(), action);

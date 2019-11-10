@@ -60,6 +60,14 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.Cinema> Update(int cinemaId, InsertCinemaRequest request) {
             return _service.Update(cinemaId, request);
         }
+        [HttpPut("updateHall/{hallId}")]
+        public ActionResult<Model.Hall> UpdateHall(int hallId, Model.Hall hall) {
+            return _service.UpdateHall(hallId, hall);
+        }
+        [HttpPut("updateProduct/{productId}")]
+        public ActionResult<Model.Product> UpdateProduct(int productId, Model.Product product) {
+            return _service.UpdateProduct(productId, product);
+        }
 
     }
 }

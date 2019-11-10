@@ -50,5 +50,34 @@ namespace Watchables.WinUI
             return result;
         }
 
+
+        public async Task<T> GetItems<T>(object id, string items) {
+
+            var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{items}/{id}";
+            var result = await url.GetJsonAsync<T>();
+            return result;
+        }
+
+        public async Task<T> UpdateItem<T>(object id, string action, object item) {
+
+            var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}/{id}";
+            var result = await url.PutJsonAsync(item).ReceiveJson<T>();
+            return result;
+        }
+
+        public async Task<T> InsertItem<T>(string action, object item, int? id = null) {
+
+            if (id == null) {
+                var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}";
+                var result = await url.PostJsonAsync(item).ReceiveJson<T>();
+                return result;
+            }
+            else {
+                var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}/{id}";
+                var result = await url.PostJsonAsync(item).ReceiveJson<T>();
+                return result;
+            }
+        }
+
     }
 }

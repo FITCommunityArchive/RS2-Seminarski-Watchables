@@ -17,5 +17,7 @@ namespace Watchables.WebAPI.Services
         List<Model.Hall> GetHallsOfCinema(int cinemaId);
         List<Model.Product> GetProductsOfCinema(int cinemaId);
         Model.Cinema Update(int cinemaId, InsertCinemaRequest request);
+        Model.Hall UpdateHall(int hallId, Model.Hall hall);
+        Model.Product UpdateProduct(int productId, Model.Product product);
     }
 }
