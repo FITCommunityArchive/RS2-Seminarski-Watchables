@@ -15,6 +15,9 @@ namespace Watchables.Model
 
         [Range(1, 150)]
         [Column(TypeName = "decimal(18, 2)")]
+        [Required]
         public decimal Price { get; set; }
+
+        public int CinemaId { get; set; }
     }
 }

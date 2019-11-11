@@ -93,6 +93,9 @@ namespace Watchables.WinUI
             }
         }
 
+
+        //MAIN MENU
+
         private void ShowDashboardBtn_Click(object sender, EventArgs e) {
             foreach (Form frm in this.MdiChildren) {
                 frm.Close();

@@ -8,8 +8,8 @@ namespace Watchables.WebAPI.Database
         public Cinemas()
         {
             AiringDaysOfCinema = new HashSet<AiringDaysOfCinema>();
-            CinemaProducts = new HashSet<CinemaProducts>();
             Hall = new HashSet<Hall>();
+            Products = new HashSet<Products>();
         }
 
         public int CinemaId { get; set; }
@@ -23,7 +23,7 @@ namespace Watchables.WebAPI.Database
         public string ImageLink { get; set; }
 
         public virtual ICollection<AiringDaysOfCinema> AiringDaysOfCinema { get; set; }
-        public virtual ICollection<CinemaProducts> CinemaProducts { get; set; }
         public virtual ICollection<Hall> Hall { get; set; }
+        public virtual ICollection<Products> Products { get; set; }
     }
 }

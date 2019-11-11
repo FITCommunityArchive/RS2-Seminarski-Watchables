@@ -7,15 +7,15 @@ namespace Watchables.WebAPI.Database
     {
         public Products()
         {
-            CinemaProducts = new HashSet<CinemaProducts>();
             OrderProducts = new HashSet<OrderProducts>();
         }
 
         public int ProductId { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public int CinemaId { get; set; }
 
-        public virtual ICollection<CinemaProducts> CinemaProducts { get; set; }
+        public virtual Cinemas Cinema { get; set; }
         public virtual ICollection<OrderProducts> OrderProducts { get; set; }
     }
 }

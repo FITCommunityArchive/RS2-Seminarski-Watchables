@@ -11,7 +11,7 @@ namespace Watchables.WebAPI.Services
     {
         //Dependency injection
         private readonly _160304Context _context;
-        public InitializeService (_160304Context context) {
+        public InitializeService(_160304Context context) {
             _context = context;
         }
 
@@ -82,11 +82,11 @@ namespace Watchables.WebAPI.Services
                     Year = 2019,
                     Duration = "2:25",
                     Rating = (decimal)8.8,
-                    Description= "In Gotham City, mentally-troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: 'The Joker'.",
-                    Cast= " Joaquin Phoenix, Robert De Niro, Zazie Beetz",
-                    TrailerLink= "https://www.youtube.com/embed/zAGVQLHvwOY",
-                    ImageLink= "https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
-                    Standalone=false,
+                    Description = "In Gotham City, mentally-troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: 'The Joker'.",
+                    Cast = " Joaquin Phoenix, Robert De Niro, Zazie Beetz",
+                    TrailerLink = "https://www.youtube.com/embed/zAGVQLHvwOY",
+                    ImageLink = "https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
+                    Standalone = false,
                     Price = (decimal)20.00
                 };
 

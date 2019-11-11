@@ -19,7 +19,6 @@ namespace Watchables.WebAPI.Database
         public virtual DbSet<AiringDaysOfCinema> AiringDaysOfCinema { get; set; }
         public virtual DbSet<Appointments> Appointments { get; set; }
         public virtual DbSet<CinemaDayMovie> CinemaDayMovie { get; set; }
-        public virtual DbSet<CinemaProducts> CinemaProducts { get; set; }
         public virtual DbSet<Cinemas> Cinemas { get; set; }
         public virtual DbSet<Hall> Hall { get; set; }
         public virtual DbSet<Movies> Movies { get; set; }
@@ -36,7 +35,14 @@ namespace Watchables.WebAPI.Database
         public virtual DbSet<UsersShows> UsersShows { get; set; }
         public virtual DbSet<UsersSubscriptions> UsersSubscriptions { get; set; }
 
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=160304; Trusted_Connection=True;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -95,21 +101,6 @@ namespace Watchables.WebAPI.Database
                     .HasForeignKey(d => d.MovieId);
             });
 
-            modelBuilder.Entity<CinemaProducts>(entity =>
-            {
-                entity.HasKey(e => new { e.CinemaId, e.ProductId });
-
-                entity.HasIndex(e => e.ProductId);
-
-                entity.HasOne(d => d.Cinema)
-                    .WithMany(p => p.CinemaProducts)
-                    .HasForeignKey(d => d.CinemaId);
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.CinemaProducts)
-                    .HasForeignKey(d => d.ProductId);
-            });
-
             modelBuilder.Entity<Cinemas>(entity =>
             {
                 entity.HasKey(e => e.CinemaId);
@@ -149,7 +140,8 @@ namespace Watchables.WebAPI.Database
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderProducts)
-                    .HasForeignKey(d => d.ProductId);
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Orders>(entity =>
@@ -175,7 +167,13 @@ namespace Watchables.WebAPI.Database
             {
                 entity.HasKey(e => e.ProductId);
 
+                entity.HasIndex(e => e.CinemaId);
+
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+
+                entity.HasOne(d => d.Cinema)
+                    .WithMany(p => p.Products)
+                    .HasForeignKey(d => d.CinemaId);
             });
 
             modelBuilder.Entity<Rotations>(entity =>

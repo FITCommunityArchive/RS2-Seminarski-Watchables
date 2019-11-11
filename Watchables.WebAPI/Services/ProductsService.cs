@@ -17,7 +17,7 @@ namespace Watchables.WebAPI.Services
         public ProductsService(_160304Context context, IMapper mapper) {
             _context = context;
             _mapper = mapper;
-        }     
+        }
 
         public List<Product> Get() {
             return _mapper.Map<List<Model.Product>>(_context.Products.ToList());

@@ -16,6 +16,7 @@ namespace Watchables.WinUI.Forms
     {
 
         private readonly APIService _apiService=new APIService("cinemas");
+        private readonly Helper _helper = new Helper();
 
         public CinemasForm() {
             InitializeComponent();
@@ -26,11 +27,12 @@ namespace Watchables.WinUI.Forms
             base.OnLoad(e);
             var search = new CinemasSearchRequest() { };
 
+
             var result = await _apiService.Get<List<Model.Cinema>>(search);
+            result.Sort((a, b) => a.Name.CompareTo(b.Name));
             dgvCinemas.AutoGenerateColumns = false;
             dgvCinemas.DataSource = result;
-            Cinema.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-
+            Cinema.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;            
         }
 
      
@@ -73,7 +75,7 @@ namespace Watchables.WinUI.Forms
             form.Show();
         }
 
-        private async void dgvCinemas_CellClick(object sender, DataGridViewCellEventArgs e) {
+        private void dgvCinemas_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var cinemaId = dgvCinemas.Rows[e.RowIndex].Cells["CinemaId"].Value;
                 var action = dgvCinemas.Columns[e.ColumnIndex].Name;
@@ -95,14 +97,7 @@ namespace Watchables.WinUI.Forms
 
                     CinemasHallsForm cinemasHallsForm = new CinemasHallsForm(menuForm, int.Parse(cinemaId.ToString()), cinemaName.ToString(), cinemaLocation.ToString()){};
 
-                    cinemasHallsForm.Show();
-
-                    cinemasHallsForm.Opacity = 0;
-                    while (cinemasHallsForm.Opacity < 1.0) {
-                        await Task.Delay(18);
-                        cinemasHallsForm.Opacity += 0.05;
-                    }
-                    cinemasHallsForm.Opacity = 1;
+                    _helper.ShowForm(cinemasHallsForm, 18);
                   
 
                 }
@@ -110,7 +105,9 @@ namespace Watchables.WinUI.Forms
                     MessageBox.Show(cinemaId.ToString(), action);
                 }
                 else if (action == "Products") {
-                    MessageBox.Show(cinemaId.ToString(), action);
+                    var cinemaName = dgvCinemas.Rows[e.RowIndex].Cells["Cinema"].Value;
+                    CinemasProductsForm cinemasProductsForm = new CinemasProductsForm(menuForm, int.Parse(cinemaId.ToString()), cinemaName.ToString());
+                    _helper.ShowForm(cinemasProductsForm, 18);
                 }                
                 else return;
             }

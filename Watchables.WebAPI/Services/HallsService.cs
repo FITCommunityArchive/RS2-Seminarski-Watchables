@@ -16,9 +16,9 @@ namespace Watchables.WebAPI.Services
         public HallsService(_160304Context context, IMapper mapper) {
             _context = context;
             _mapper = mapper;
-        }      
+        }
 
-        public List<Model.Hall> Get() {            
+        public List<Model.Hall> Get() {
             return _mapper.Map<List<Model.Hall>>(_context.Hall.ToList());
         }
 
@@ -26,6 +26,6 @@ namespace Watchables.WebAPI.Services
             return _mapper.Map<Model.Hall>(_context.Hall.Find(id));
         }
 
-      
+
     }
 }

@@ -12,10 +12,13 @@ namespace Watchables.WebAPI.Services
         List<Model.Cinema> Get(Model.Requests.CinemasSearchRequest request);
         Model.Cinema GetById(int id);
         Model.Cinema Insert(InsertCinemaRequest request);
+
         Model.Hall AddHallToCinema(Model.Hall hall);
-        Model.Product AddProductToCinema(int cinemaId, Model.Product pr);
+        Model.Product AddProductToCinema(Model.Product pr);
+
         List<Model.Hall> GetHallsOfCinema(int cinemaId);
         List<Model.Product> GetProductsOfCinema(int cinemaId);
+
         Model.Cinema Update(int cinemaId, InsertCinemaRequest request);
         Model.Hall UpdateHall(int hallId, Model.Hall hall);
         Model.Product UpdateProduct(int productId, Model.Product product);

@@ -26,9 +26,9 @@ namespace Watchables.WebAPI.Services
             if (!string.IsNullOrWhiteSpace(request?.Name)) query = query.Where(c => c.Name.ToLower().StartsWith(request.Name.ToLower()));
             if (!string.IsNullOrWhiteSpace(request?.Address)) query = query.Where(c => c.Address.ToLower().StartsWith(request.Address.ToLower()));
             if (!string.IsNullOrWhiteSpace(request?.Location)) query = query.Where(c => c.Location.ToLower().StartsWith(request.Location.ToLower()));
-            if (request?.Rating >= 0) query = query.Where(c => c.Rating >= request.Rating);  
+            if (request?.Rating >= 0) query = query.Where(c => c.Rating >= request.Rating);
 
-            return _mapper.Map<List<Model.Cinema>>(query.ToList());       
+            return _mapper.Map<List<Model.Cinema>>(query.ToList());
         }
 
         public Model.Cinema GetById(int id) {
@@ -39,19 +39,9 @@ namespace Watchables.WebAPI.Services
 
             var cinema = _mapper.Map<Database.Cinemas>(request);
             _context.Cinemas.Add(cinema);
-            _context.SaveChanges();
+            _context.SaveChanges();          
 
-            var airingDays = _context.AiringDays.ToList();
-            foreach(var airingDay in airingDays) {
-                var airingDaysOfCinema = new AiringDaysOfCinema() {
-                    AiringDayId = airingDay.AiringDayId,
-                    Cinema = cinema
-                };
-                _context.AiringDaysOfCinema.Add(airingDaysOfCinema);
-                _context.SaveChanges(); 
-            }
-
-            return _mapper.Map<Model.Cinema>(_mapper.Map<Database.Cinemas>(request));  
+            return _mapper.Map<Model.Cinema>(_mapper.Map<Database.Cinemas>(request));
         }
 
         public Model.Hall AddHallToCinema(Model.Hall h) {
@@ -69,42 +59,18 @@ namespace Watchables.WebAPI.Services
             return h;
         }
 
-        public Model.Product AddProductToCinema(int cinemaId, Model.Product pr) {
+        public Model.Product AddProductToCinema(Model.Product pr) {
 
             var product = _mapper.Map<Database.Products>(pr);
-            var inBaseProducts = _context.Products.ToList();
-            bool isThere = false;
+            var inBaseProducts = _context.Products.Where(p => p.CinemaId == pr.CinemaId).ToList();
+
             foreach (var inProduct in inBaseProducts) {
-                if (inProduct.Name.ToLower() == product.Name.ToLower() && inProduct.Price == product.Price) {
-
-                    var allCinemaProducts = _context.CinemaProducts.ToList();
-                    foreach (var cinemaProduct in allCinemaProducts) {
-                        if (cinemaProduct.ProductId == inProduct.ProductId && cinemaProduct.CinemaId==cinemaId) {
-                            return pr;
-                        }
-                    }
-
-                    var cinemaProducts = new CinemaProducts() {
-                        CinemaId = cinemaId,
-                        Product = inProduct
-                    };
-                  
-                    _context.CinemaProducts.Add(cinemaProducts);
-                    _context.SaveChanges();
-                    isThere = true;
-                    break;
+                if (inProduct.Name.ToLower() == product.Name.ToLower() && inProduct.Price==product.Price) {
+                    return pr;
                 }
             }
-            if (!isThere) {
-                _context.Products.Add(product);
-                _context.SaveChanges();
-                var cinemaProducts = new CinemaProducts() {
-                    CinemaId = cinemaId,
-                    Product = product
-                };
-                _context.CinemaProducts.Add(cinemaProducts);
-                _context.SaveChanges();
-            }
+            _context.Products.Add(product);
+            _context.SaveChanges();
 
             return pr;
         }
@@ -114,21 +80,14 @@ namespace Watchables.WebAPI.Services
         }
 
         public List<Product> GetProductsOfCinema(int cinemaId) {
-
-            var cinemaProducts = _context.CinemaProducts.Include(cp => cp.Product).ToList();
-            var databaseProducts = new List<Database.Products>();
-            foreach (var cinemaProduct in cinemaProducts) {
-                if (cinemaProduct.CinemaId == cinemaId) databaseProducts.Add(cinemaProduct.Product);
-            }
-
-            return _mapper.Map<List<Model.Product>>(databaseProducts);
+            return _mapper.Map<List<Model.Product>>(_context.Products.Where(p => p.CinemaId == cinemaId).ToList());
         }
 
         public Cinema Update(int cinemaId, InsertCinemaRequest request) {
             var cinema = _context.Cinemas.Find(cinemaId);
             _mapper.Map(request, cinema);
             _context.SaveChanges();
-            return _mapper.Map<Model.Cinema>(cinema);            
+            return _mapper.Map<Model.Cinema>(cinema);
         }
 
         public Model.Hall UpdateHall(int hallId, Model.Hall hall) {

@@ -79,7 +79,6 @@
             this.label3.Size = new System.Drawing.Size(75, 30);
             this.label3.TabIndex = 5;
             this.label3.Text = "Seats";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // HallSeats
             // 

@@ -65,18 +65,12 @@ namespace Watchables.WinUI
             return result;
         }
 
-        public async Task<T> InsertItem<T>(string action, object item, int? id = null) {
-
-            if (id == null) {
+        public async Task<T> InsertItem<T>(string action, object item) {
+         
                 var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}";
                 var result = await url.PostJsonAsync(item).ReceiveJson<T>();
-                return result;
-            }
-            else {
-                var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}/{id}";
-                var result = await url.PostJsonAsync(item).ReceiveJson<T>();
-                return result;
-            }
+                return result;           
+        
         }
 
     }

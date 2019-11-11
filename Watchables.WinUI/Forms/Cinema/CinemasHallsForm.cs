@@ -32,6 +32,7 @@ namespace Watchables.WinUI.Forms.Cinema
         private async void CinemasHallsForm_Load(object sender, EventArgs e) {
             Title.Text = $"Halls of {_cinemaName}";
             var result = await _apiService.GetItems<List<Model.Hall>>(_cinemaId, "GetHalls");
+            result.Sort((a, b) => a.HallName.CompareTo(b.HallName));
             dgvHalls.AutoGenerateColumns = false;
             dgvHalls.DataSource = result;
         }
@@ -77,5 +78,7 @@ namespace Watchables.WinUI.Forms.Cinema
             }
             form.Opacity = 1;
         }
+
+   
     }
 }
