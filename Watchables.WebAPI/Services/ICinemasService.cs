@@ -22,5 +22,7 @@ namespace Watchables.WebAPI.Services
         Model.Cinema Update(int cinemaId, InsertCinemaRequest request);
         Model.Hall UpdateHall(int hallId, Model.Hall hall);
         Model.Product UpdateProduct(int productId, Model.Product product);
+
+        CinemasScheduleRequest GetCinemasSchedule(int id);
     }
 }

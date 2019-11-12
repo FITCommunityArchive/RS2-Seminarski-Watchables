@@ -73,5 +73,20 @@ namespace Watchables.WinUI
         
         }
 
+        public async Task<T> CustomGet<T>(string action, object id=null) {
+
+            var url="";
+            if (id == null) {
+                url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}";
+            }
+            else {
+                url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}/{id}";
+            }
+            var result = await url.GetJsonAsync<T>();
+            return result;
+
+
+
+        }
     }
 }

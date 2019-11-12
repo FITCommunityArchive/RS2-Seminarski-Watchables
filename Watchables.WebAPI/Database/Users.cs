@@ -9,6 +9,7 @@ namespace Watchables.WebAPI.Database
         {
             Orders = new HashSet<Orders>();
             UsersMovies = new HashSet<UsersMovies>();
+            UsersNotifications = new HashSet<UsersNotifications>();
             UsersRotations = new HashSet<UsersRotations>();
             UsersShows = new HashSet<UsersShows>();
             UsersSubscriptions = new HashSet<UsersSubscriptions>();
@@ -27,6 +28,7 @@ namespace Watchables.WebAPI.Database
 
         public virtual ICollection<Orders> Orders { get; set; }
         public virtual ICollection<UsersMovies> UsersMovies { get; set; }
+        public virtual ICollection<UsersNotifications> UsersNotifications { get; set; }
         public virtual ICollection<UsersRotations> UsersRotations { get; set; }
         public virtual ICollection<UsersShows> UsersShows { get; set; }
         public virtual ICollection<UsersSubscriptions> UsersSubscriptions { get; set; }

@@ -13,6 +13,7 @@ namespace Watchables.WebAPI.Database
         public int AiringDaysOfCinemaId { get; set; }
         public int CinemaId { get; set; }
         public int AiringDayId { get; set; }
+        public DateTime Date { get; set; }
 
         public virtual AiringDays AiringDay { get; set; }
         public virtual Cinemas Cinema { get; set; }

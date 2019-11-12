@@ -22,6 +22,7 @@ namespace Watchables.WebAPI.Database
         public virtual DbSet<Cinemas> Cinemas { get; set; }
         public virtual DbSet<Hall> Hall { get; set; }
         public virtual DbSet<Movies> Movies { get; set; }
+        public virtual DbSet<Notifications> Notifications { get; set; }
         public virtual DbSet<OrderProducts> OrderProducts { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Products> Products { get; set; }
@@ -31,10 +32,19 @@ namespace Watchables.WebAPI.Database
         public virtual DbSet<Tickets> Tickets { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<UsersMovies> UsersMovies { get; set; }
+        public virtual DbSet<UsersNotifications> UsersNotifications { get; set; }
         public virtual DbSet<UsersRotations> UsersRotations { get; set; }
         public virtual DbSet<UsersShows> UsersShows { get; set; }
         public virtual DbSet<UsersSubscriptions> UsersSubscriptions { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=160304; Trusted_Connection=True;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -118,6 +128,11 @@ namespace Watchables.WebAPI.Database
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.Rating).HasColumnType("decimal(18, 2)");
+            });
+
+            modelBuilder.Entity<Notifications>(entity =>
+            {
+                entity.HasKey(e => e.NotificationId);
             });
 
             modelBuilder.Entity<OrderProducts>(entity =>
@@ -229,6 +244,21 @@ namespace Watchables.WebAPI.Database
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UsersMovies)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<UsersNotifications>(entity =>
+            {
+                entity.HasIndex(e => e.NotificationId);
+
+                entity.HasIndex(e => e.UserId);
+
+                entity.HasOne(d => d.Notification)
+                    .WithMany(p => p.UsersNotifications)
+                    .HasForeignKey(d => d.NotificationId);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UsersNotifications)
                     .HasForeignKey(d => d.UserId);
             });
 

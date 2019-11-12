@@ -102,7 +102,11 @@ namespace Watchables.WinUI.Forms
 
                 }
                 else if (action == "Schedule") {
-                    MessageBox.Show(cinemaId.ToString(), action);
+                    ScheduleForm scheduleForm = new ScheduleForm(int.Parse(cinemaId.ToString()), menuForm) {
+                        MdiParent = menuForm,
+                        Dock = DockStyle.Fill
+                    };
+                    scheduleForm.Show();
                 }
                 else if (action == "Products") {
                     var cinemaName = dgvCinemas.Rows[e.RowIndex].Cells["Cinema"].Value;

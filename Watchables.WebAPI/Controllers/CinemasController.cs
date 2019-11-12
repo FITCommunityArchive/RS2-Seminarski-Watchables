@@ -69,5 +69,10 @@ namespace Watchables.WebAPI.Controllers
             return _service.UpdateProduct(productId, product);
         }
 
+        [HttpGet("GetCinemasSchedule/{id}")]
+        public ActionResult<CinemasScheduleRequest> GetCinemasSchedule(int id) {
+            return _service.GetCinemasSchedule(id);
+        }
+
     }
 }

@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace Watchables.WebAPI.Services
 {
-    public interface IInitializeService
+    public interface IMoviesService
     {
-        string AddDays();
-        string AddMovies();
-        string Init();
+        List<Model.Movie> Get();
+        Model.Movie GetById(int id);
     }
 }

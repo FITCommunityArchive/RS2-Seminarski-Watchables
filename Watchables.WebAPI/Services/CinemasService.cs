@@ -106,5 +106,63 @@ namespace Watchables.WebAPI.Services
             _context.SaveChanges();
             return _mapper.Map<Model.Product>(baseProduct);
         }
+
+        public CinemasScheduleRequest GetCinemasSchedule(int id) {
+
+            //cinema
+            var cinema = _mapper.Map<Model.Cinema>(_context.Cinemas.Find(id));
+
+            //airing days of cinema
+            var baseAiringDaysOfCinema = _context.AiringDaysOfCinema
+                .Include(adoc=>adoc.AiringDay)
+                .Include(adoc=>adoc.CinemaDayMovie)              
+                .Where(adoc => adoc.CinemaId == id)
+                .ToList();
+            var airingDaysOfCinema = _mapper.Map<List<Model.AiringDaysOfCinema>>(baseAiringDaysOfCinema);
+
+            
+            var baseAiringDays = new List<Database.AiringDays>();
+            var baseCinemaDayMovies = new List<Database.CinemaDayMovie>();
+            var baseMovies = new List<Database.Movies>();
+            var baseAppointemnts = new List<Database.Appointments>();
+            foreach (var airingDayOfCinema in baseAiringDaysOfCinema) {
+                baseAiringDays.Add(airingDayOfCinema.AiringDay);
+                foreach (var cinemaDayMovie in airingDayOfCinema.CinemaDayMovie) {
+                    baseCinemaDayMovies.Add(cinemaDayMovie);
+                    foreach (var movie in _context.Movies.ToList()) {
+                        if (movie.MovieId == cinemaDayMovie.MovieId) {
+                            baseMovies.Add(movie);
+                        }
+                    }
+                    foreach (var appointment in _context.Appointments) {
+                        if (appointment.CinemaDayMovieId == cinemaDayMovie.CinemaDayMovieId) {
+                            baseAppointemnts.Add(appointment);
+                        }
+
+                    }
+                }
+            }
+            baseMovies = baseMovies.Distinct().ToList();
+            baseAiringDays = baseAiringDays.Distinct().ToList();
+            var airingDays = _mapper.Map<List<Model.AiringDay>>(baseAiringDays);
+            var cinemaDayMovies = _mapper.Map<List<Model.CinemaDayMovie>>(baseCinemaDayMovies);
+            var movies = _mapper.Map<List<Model.Movie>>(baseMovies);
+            var appointments = _mapper.Map<List<Model.Appointments>>(baseAppointemnts);
+
+            airingDaysOfCinema.Sort((a, b) => b.Date.CompareTo(a.Date));
+
+
+            //return model
+            CinemasScheduleRequest schedule = new CinemasScheduleRequest {
+                Cinema = cinema,
+                AiringDaysOfCinema = airingDaysOfCinema,
+                AiringDays = airingDays,
+                CinemaDayMovies = cinemaDayMovies,
+                Movies = movies,
+                Appointments = appointments
+            };
+
+            return schedule;
+        }
     }
 }

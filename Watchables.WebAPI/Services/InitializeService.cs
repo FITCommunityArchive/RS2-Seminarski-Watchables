@@ -98,5 +98,141 @@ namespace Watchables.WebAPI.Services
             }
             else throw new UserException("The database is already initialized with movies!");
         }
+
+        public string Init() {
+
+            if (!_context.AiringDaysOfCinema.Any()) {
+
+                var day1 = new AiringDaysOfCinema() {
+                    Cinema = _context.Cinemas.First(),
+                    AiringDay = _context.AiringDays.Where(ad => ad.Name == "Monday").Single(),
+                    Date = new DateTime(2019, 11, 25)
+                };
+                var day2 = new AiringDaysOfCinema() {
+                    Cinema = _context.Cinemas.First(),
+                    AiringDay = _context.AiringDays.Where(ad => ad.Name == "Tuesday").Single(),
+                    Date = new DateTime(2019, 11, 26)
+                };
+                var day3 = new AiringDaysOfCinema() {
+                    Cinema = _context.Cinemas.First(),
+                    AiringDay = _context.AiringDays.Where(ad => ad.Name == "Monday").Single(),
+                    Date = new DateTime(2019, 12, 02)
+                };
+                var day4 = new AiringDaysOfCinema() {
+                    Cinema = _context.Cinemas.ToList().ToList().Last(),
+                    AiringDay = _context.AiringDays.Where(ad => ad.Name == "Monday").Single(),
+                    Date = new DateTime(2019, 11, 25)
+                };
+
+                _context.AiringDaysOfCinema.AddRange(day1, day2, day3, day4);
+                _context.SaveChanges();
+
+
+                var dayMovie1 = new CinemaDayMovie() {
+                    AiringDaysOfCinema = day1,
+                    Movie = _context.Movies.First()
+                };
+                var dayMovie2 = new CinemaDayMovie() {
+                    AiringDaysOfCinema = day1,
+                    Movie = _context.Movies.ToList().Last()
+                };
+                var dayMovie3 = new CinemaDayMovie() {
+                    AiringDaysOfCinema = day2,
+                    Movie = _context.Movies.ToList().Last()
+                };
+                var dayMovie4 = new CinemaDayMovie() {
+                    AiringDaysOfCinema = day3,
+                    Movie = _context.Movies.First()
+                };
+                var dayMovie5 = new CinemaDayMovie() {
+                    AiringDaysOfCinema = day4,
+                    Movie = _context.Movies.ToList().Last()
+                };
+
+                _context.CinemaDayMovie.AddRange(dayMovie1, dayMovie2, dayMovie3, dayMovie4, dayMovie5);
+                _context.SaveChanges();
+
+                var app1 = new Appointments() {
+                    CinemaDayMovie = dayMovie1,
+                    Hall = _context.Hall.First(),
+                    Price = 8,
+                    SoldSeats = 0,
+                    StartsAt = "17:00"
+                };
+                var app2 = new Appointments() {
+                    CinemaDayMovie = dayMovie1,
+                    Hall = _context.Hall.ToList().Last(),
+                    Price = 8,
+                    SoldSeats = 0,
+                    StartsAt = "20:00"
+                };
+
+                var app3 = new Appointments() {
+                    CinemaDayMovie = dayMovie2,
+                    Hall = _context.Hall.First(),
+                    Price = 8,
+                    SoldSeats = 0,
+                    StartsAt = "17:00"
+                };
+                var app4 = new Appointments() {
+                    CinemaDayMovie = dayMovie2,
+                    Hall = _context.Hall.ToList().Last(),
+                    Price = 8,
+                    SoldSeats = 0,
+                    StartsAt = "20:00"
+                };
+
+                var app5 = new Appointments() {
+                    CinemaDayMovie = dayMovie3,
+                    Hall = _context.Hall.First(),
+                    Price = 8,
+                    SoldSeats = 0,
+                    StartsAt = "17:00"
+                };
+                var app6 = new Appointments() {
+                    CinemaDayMovie = dayMovie3,
+                    Hall = _context.Hall.ToList().Last(),
+                    Price = 8,
+                    SoldSeats = 0,
+                    StartsAt = "20:00"
+                };
+
+                var app7 = new Appointments() {
+                    CinemaDayMovie = dayMovie4,
+                    Hall = _context.Hall.First(),
+                    Price = 8,
+                    SoldSeats = 0,
+                    StartsAt = "17:00"
+                };
+                var app8 = new Appointments() {
+                    CinemaDayMovie = dayMovie4,
+                    Hall = _context.Hall.ToList().Last(),
+                    Price = 8,
+                    SoldSeats = 0,
+                    StartsAt = "20:00"
+                };
+
+                var app9 = new Appointments() {
+                    CinemaDayMovie = dayMovie5,
+                    Hall = _context.Hall.First(),
+                    Price = 8,
+                    SoldSeats = 0,
+                    StartsAt = "17:00"
+                };
+                var app10 = new Appointments() {
+                    CinemaDayMovie = dayMovie5,
+                    Hall = _context.Hall.ToList().Last(),
+                    Price = 8,
+                    SoldSeats = 0,
+                    StartsAt = "20:00"
+                };
+
+                _context.Appointments.AddRange(app1, app2, app3, app4, app5, app6, app7, app8, app9, app10);
+                _context.SaveChanges();
+                return "Initialized";
+            }
+
+            else throw new UserException("The database is already initialized");
+        }
     }
 }
