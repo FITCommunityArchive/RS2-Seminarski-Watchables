@@ -91,8 +91,11 @@ namespace Watchables.WinUI.Forms.Cinema
             ScheduleForm sch = new ScheduleForm(_schedule.Cinema.CinemaId, _menuForm) {
                 MdiParent = _menuForm,
                 Dock = DockStyle.Fill
-            };
-            sch.Show();           
+            };          
+            var schedule = await _apiService.CustomGet<Model.Requests.CinemasScheduleRequest>("GetCinemasSchedule", _schedule.Cinema.CinemaId);
+            CinemaDayMovieForm form = new CinemaDayMovieForm(sch, schedule, _menuForm, _airingDayId, _date, _day);
+            sch.Show();
+            _helper.ShowForm(form, 15);
             var messageBox = new CustomMessageBox();
             messageBox.Show("Movie added successfully", "success");
         }
