@@ -34,8 +34,6 @@
             this.Close = new System.Windows.Forms.Button();
             this.Title = new System.Windows.Forms.Label();
             this.dgvSchedule = new Bunifu.Framework.UI.BunifuCustomDataGrid();
-            this.AddDaybtn = new System.Windows.Forms.Button();
-            this.selectList = new System.Windows.Forms.ComboBox();
             this.AiringDaysOfCinemasId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Day = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +41,8 @@
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.MoviesBtn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.AddDaybtn = new System.Windows.Forms.Button();
+            this.selectList = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).BeginInit();
             this.SuspendLayout();
@@ -83,6 +83,7 @@
             this.Title.Size = new System.Drawing.Size(171, 58);
             this.Title.TabIndex = 20;
             this.Title.Text = "label1";
+            this.Title.Click += new System.EventHandler(this.Title_Click);
             // 
             // dgvSchedule
             // 
@@ -150,33 +151,6 @@
             this.dgvSchedule.TabIndex = 21;
             this.dgvSchedule.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSchedule_CellContentClick);
             // 
-            // AddDaybtn
-            // 
-            this.AddDaybtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.AddDaybtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AddDaybtn.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.AddDaybtn.FlatAppearance.BorderSize = 0;
-            this.AddDaybtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddDaybtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddDaybtn.ForeColor = System.Drawing.Color.White;
-            this.AddDaybtn.Location = new System.Drawing.Point(0, 885);
-            this.AddDaybtn.Name = "AddDaybtn";
-            this.AddDaybtn.Size = new System.Drawing.Size(1787, 43);
-            this.AddDaybtn.TabIndex = 22;
-            this.AddDaybtn.Text = "Generate day";
-            this.AddDaybtn.UseVisualStyleBackColor = false;
-            this.AddDaybtn.Click += new System.EventHandler(this.AddDaybtn_Click);
-            // 
-            // selectList
-            // 
-            this.selectList.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectList.FormattingEnabled = true;
-            this.selectList.Location = new System.Drawing.Point(1484, 101);
-            this.selectList.Name = "selectList";
-            this.selectList.Size = new System.Drawing.Size(230, 29);
-            this.selectList.TabIndex = 24;
-            this.selectList.SelectionChangeCommitted += new System.EventHandler(this.selectList_SelectionChangeCommitted);
-            // 
             // AiringDaysOfCinemasId
             // 
             this.AiringDaysOfCinemasId.DataPropertyName = "AiringDaysOfCinemasId";
@@ -232,6 +206,33 @@
             this.MoviesBtn.Image = ((System.Drawing.Image)(resources.GetObject("MoviesBtn.Image")));
             this.MoviesBtn.MinimumWidth = 6;
             this.MoviesBtn.Name = "MoviesBtn";
+            // 
+            // AddDaybtn
+            // 
+            this.AddDaybtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.AddDaybtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddDaybtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.AddDaybtn.FlatAppearance.BorderSize = 0;
+            this.AddDaybtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddDaybtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddDaybtn.ForeColor = System.Drawing.Color.White;
+            this.AddDaybtn.Location = new System.Drawing.Point(0, 885);
+            this.AddDaybtn.Name = "AddDaybtn";
+            this.AddDaybtn.Size = new System.Drawing.Size(1787, 43);
+            this.AddDaybtn.TabIndex = 22;
+            this.AddDaybtn.Text = "Generate day";
+            this.AddDaybtn.UseVisualStyleBackColor = false;
+            this.AddDaybtn.Click += new System.EventHandler(this.AddDaybtn_Click);
+            // 
+            // selectList
+            // 
+            this.selectList.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectList.FormattingEnabled = true;
+            this.selectList.Location = new System.Drawing.Point(1484, 101);
+            this.selectList.Name = "selectList";
+            this.selectList.Size = new System.Drawing.Size(230, 29);
+            this.selectList.TabIndex = 24;
+            this.selectList.SelectionChangeCommitted += new System.EventHandler(this.selectList_SelectionChangeCommitted);
             // 
             // ScheduleForm
             // 

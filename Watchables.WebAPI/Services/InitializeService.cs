@@ -39,7 +39,7 @@ namespace Watchables.WebAPI.Services
                     EndsAt = "23:30"
                 };
                 var friday = new AiringDays() {
-                    Name = "Firday",
+                    Name = "Friday",
                     StartsAt = "09:00",
                     EndsAt = "23:30"
                 };

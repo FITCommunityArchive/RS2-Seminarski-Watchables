@@ -74,5 +74,18 @@ namespace Watchables.WebAPI.Controllers
             return _service.GetCinemasSchedule(id);
         }
 
+        [HttpPost("addAiringDay")]
+        public ActionResult<Model.AiringDaysOfCinema> AddAiringDayToCinema(Model.AiringDaysOfCinema ad) {
+            return _service.AddAiringDayToCinema(ad);
+        }
+        [HttpPut("updateAiringDay/{airingDayId}")]
+        public ActionResult<Model.AiringDaysOfCinema> UpdateAiringDay(int airingDayId, Model.AiringDaysOfCinema ad) {
+            return _service.UpdateAiringDay(airingDayId, ad);
+        }
+        [HttpPost("AddCinemaDayMovie")]
+        public ActionResult<Model.CinemaDayMovie> AddCinemaDayMovieToCinema(Model.CinemaDayMovie cdm) {
+            return _service.AddCinemaDayMovieToCinema(cdm);
+        }
+
     }
 }

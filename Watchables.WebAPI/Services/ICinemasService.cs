@@ -15,6 +15,8 @@ namespace Watchables.WebAPI.Services
 
         Model.Hall AddHallToCinema(Model.Hall hall);
         Model.Product AddProductToCinema(Model.Product pr);
+        Model.AiringDaysOfCinema AddAiringDayToCinema(Model.AiringDaysOfCinema ad);
+        Model.CinemaDayMovie AddCinemaDayMovieToCinema(Model.CinemaDayMovie cdm);
 
         List<Model.Hall> GetHallsOfCinema(int cinemaId);
         List<Model.Product> GetProductsOfCinema(int cinemaId);
@@ -22,7 +24,10 @@ namespace Watchables.WebAPI.Services
         Model.Cinema Update(int cinemaId, InsertCinemaRequest request);
         Model.Hall UpdateHall(int hallId, Model.Hall hall);
         Model.Product UpdateProduct(int productId, Model.Product product);
+        Model.AiringDaysOfCinema UpdateAiringDay(int airingDayId, Model.AiringDaysOfCinema ad);
 
         CinemasScheduleRequest GetCinemasSchedule(int id);
+
+
     }
 }

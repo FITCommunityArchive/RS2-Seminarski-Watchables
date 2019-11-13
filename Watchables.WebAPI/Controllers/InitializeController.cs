@@ -29,7 +29,7 @@ namespace Watchables.WebAPI.Controllers
             return _service.AddMovies();
         }
 
-        [HttpPost("Initialize")]
+        [HttpPost("Schedule")]
         public ActionResult<string> Init() {
             return _service.Init();
         }

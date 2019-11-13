@@ -47,7 +47,7 @@ namespace Watchables.WinUI.Forms.Cinema
                 }
                 var Object = new Model.dgvLists.ScheduleItem() {
                     AiringDaysOfCinemasId=item.AiringDaysOfCinemaId,
-                    Date = item.Date,
+                    Date = item.Date.Date,
                     Day = airingDay,
                     NumberOfMovies=numberOfMovies
                 };
@@ -83,22 +83,29 @@ namespace Watchables.WinUI.Forms.Cinema
             if (e.RowIndex >= 0) {
                 var airingDayOfCinemaId = dgvSchedule.Rows[e.RowIndex].Cells["AiringDaysOfCinemasId"].Value;
                 var action = dgvSchedule.Columns[e.ColumnIndex].Name;
+                var date = dgvSchedule.Rows[e.RowIndex].Cells["Date"].Value;
+                var day = dgvSchedule.Rows[e.RowIndex].Cells["Day"].Value;
                 if (action == "Edit") {
-                    var form = new AddEditDayOfCinemaForm(this, _schedule, int.Parse(airingDayOfCinemaId.ToString()));
+                    var form = new AddEditDayOfCinemaForm(this, _schedule, _menuForm, int.Parse(airingDayOfCinemaId.ToString()));
                     _helper.ShowForm(form, 15);
                 }
                 else if (action == "Delete") {
                     MessageBox.Show("delete", airingDayOfCinemaId.ToString());
                 }
                 else if (action == "MoviesBtn") {
-                    MessageBox.Show("movies", airingDayOfCinemaId.ToString());
+                    var form = new CinemaDayMovieForm(this, _schedule, _menuForm, int.Parse(airingDayOfCinemaId.ToString()), (DateTime)date, day.ToString());
+                    _helper.ShowForm(form, 15);
                 }
             }
         }
 
         private void AddDaybtn_Click(object sender, EventArgs e) {
-            var form = new AddEditDayOfCinemaForm(this, _schedule);
+            var form = new AddEditDayOfCinemaForm(this, _schedule, _menuForm);
             _helper.ShowForm(form,15);
+        }
+
+        private void Title_Click(object sender, EventArgs e) {
+
         }
     }
 }

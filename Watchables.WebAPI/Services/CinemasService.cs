@@ -164,5 +164,41 @@ namespace Watchables.WebAPI.Services
 
             return schedule;
         }
+
+        public Model.AiringDaysOfCinema AddAiringDayToCinema(Model.AiringDaysOfCinema ad) {
+            var baseAd = _mapper.Map<Database.AiringDaysOfCinema>(ad);
+            var day = baseAd.Date.DayOfWeek;
+            var days = _context.AiringDays.ToList();            
+            foreach(var airingDay in days) {
+                if (airingDay.Name == day.ToString()) {
+                    baseAd.AiringDayId = airingDay.AiringDayId;
+                    break;
+                }
+            }            
+            _context.AiringDaysOfCinema.Add(baseAd);
+            _context.SaveChanges();
+            return ad;
+        }
+
+        public Model.AiringDaysOfCinema UpdateAiringDay(int airingDayId, Model.AiringDaysOfCinema ad) {
+            var baseAd = _context.AiringDaysOfCinema.Find(airingDayId);
+            baseAd.Date = ad.Date;
+            var day = ad.Date.DayOfWeek;
+            var days = _context.AiringDays.ToList();
+            foreach (var airingDay in days) {
+                if (airingDay.Name == day.ToString()) {
+                    baseAd.AiringDayId = airingDay.AiringDayId;
+                    break;
+                }
+            }
+            _context.SaveChanges();
+            return _mapper.Map<Model.AiringDaysOfCinema>(baseAd);
+        }
+
+        public Model.CinemaDayMovie AddCinemaDayMovieToCinema(Model.CinemaDayMovie cdm) {
+            _context.CinemaDayMovie.Add(_mapper.Map<Database.CinemaDayMovie>(cdm));
+            _context.SaveChanges();
+            return cdm;
+        }
     }
 }
