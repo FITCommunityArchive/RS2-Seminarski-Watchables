@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Watchables.WebAPI.Services
 {
-    public interface IHallsService
+    public interface IAppointmentsService
     {
-        List<Model.Hall> Get();
-        Model.Hall GetById(int id);
+        List<Model.Appointments> Get();
+        Model.Appointments GetById(int id);
     }
 }

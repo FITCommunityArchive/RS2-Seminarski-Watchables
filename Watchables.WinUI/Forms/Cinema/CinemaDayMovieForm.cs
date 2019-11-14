@@ -42,10 +42,12 @@ namespace Watchables.WinUI.Forms.Cinema
             foreach(var item in _schedule.CinemaDayMovies){
                 if (item.AiringDaysOfCinemaId == _airingDayId) {
                     string movie = "";
+                    int movieId = 0;
                     int numberOfAppointments = 0;
                     foreach (var mv in _schedule.Movies) {
                         if (mv.MovieId == item.MovieId) {
                             movie = mv.Title;
+                            movieId = mv.MovieId;
                             break;
                         }
                     }
@@ -54,6 +56,7 @@ namespace Watchables.WinUI.Forms.Cinema
                     }
                     var Object = new Model.dgvLists.CinemaDayMovieItem() {
                         CinemaDayMovieId = item.CinemaDayMovieId,
+                        MovieId=movieId,
                         Movie = movie,
                         NumberOfAppointments = numberOfAppointments
                     };
@@ -73,12 +76,15 @@ namespace Watchables.WinUI.Forms.Cinema
         private void dgvScheduledMovies_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var cinemaDayMovieId = dgvScheduledMovies.Rows[e.RowIndex].Cells["CinemaDayMovieId"].Value;
+                var movieId = dgvScheduledMovies.Rows[e.RowIndex].Cells["MovieId"].Value;
                 var action = dgvScheduledMovies.Columns[e.ColumnIndex].Name;
                 if (action == "Delete") {
                     MessageBox.Show("Delete", cinemaDayMovieId.ToString());
                 }
                 else if (action == "Apps") {
-                    MessageBox.Show("Apps", cinemaDayMovieId.ToString());
+                    AppointmentsForm form = new AppointmentsForm(_scheduleForm, _schedule, _menuForm, _airingDayId, _date, _day, int.Parse(cinemaDayMovieId.ToString()), int.Parse(movieId.ToString()));
+                    _helper.CloseForm(this, 15);
+                    _helper.ShowForm(form, 15);
                 }
             }
         }

@@ -86,6 +86,14 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.CinemaDayMovie> AddCinemaDayMovieToCinema(Model.CinemaDayMovie cdm) {
             return _service.AddCinemaDayMovieToCinema(cdm);
         }
+        [HttpPost("AddAppointment")]
+        public ActionResult<Model.Appointments> AddAppointmentToCinema(Model.Appointments app) {
+            return _service.AddAppointmentToCinema(app);
+        }
+        [HttpPut("updateAppointment/{appointmentId}")]
+        public ActionResult<Model.Appointments> UpdateAppointment(int appointmentId, Model.Appointments ap) {
+            return _service.UpdateAppointment(appointmentId, ap);
+        }
 
     }
 }

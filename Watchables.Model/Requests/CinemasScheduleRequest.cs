@@ -12,5 +12,6 @@ namespace Watchables.Model.Requests
         public List<Model.CinemaDayMovie> CinemaDayMovies { get; set; }
         public List<Model.Appointments> Appointments { get; set; }
         public List<Model.Movie> Movies { get; set; }
+        public List<Model.Hall> Halls { get; set; }
     }
 }

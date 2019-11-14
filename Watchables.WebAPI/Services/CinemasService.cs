@@ -125,6 +125,7 @@ namespace Watchables.WebAPI.Services
             var baseCinemaDayMovies = new List<Database.CinemaDayMovie>();
             var baseMovies = new List<Database.Movies>();
             var baseAppointemnts = new List<Database.Appointments>();
+            var baseHalls = new List<Database.Hall>();
             foreach (var airingDayOfCinema in baseAiringDaysOfCinema) {
                 baseAiringDays.Add(airingDayOfCinema.AiringDay);
                 foreach (var cinemaDayMovie in airingDayOfCinema.CinemaDayMovie) {
@@ -137,6 +138,11 @@ namespace Watchables.WebAPI.Services
                     foreach (var appointment in _context.Appointments) {
                         if (appointment.CinemaDayMovieId == cinemaDayMovie.CinemaDayMovieId) {
                             baseAppointemnts.Add(appointment);
+                            foreach(var hall in _context.Hall.ToList()) {
+                                if (appointment.HallId == hall.HallId) {
+                                    baseHalls.Add(hall);
+                                }
+                            }
                         }
 
                     }
@@ -144,10 +150,12 @@ namespace Watchables.WebAPI.Services
             }
             baseMovies = baseMovies.Distinct().ToList();
             baseAiringDays = baseAiringDays.Distinct().ToList();
+            baseHalls = baseHalls.Distinct().ToList();
             var airingDays = _mapper.Map<List<Model.AiringDay>>(baseAiringDays);
             var cinemaDayMovies = _mapper.Map<List<Model.CinemaDayMovie>>(baseCinemaDayMovies);
             var movies = _mapper.Map<List<Model.Movie>>(baseMovies);
             var appointments = _mapper.Map<List<Model.Appointments>>(baseAppointemnts);
+            var halls = _mapper.Map<List<Model.Hall>>(baseHalls);
 
             airingDaysOfCinema.Sort((a, b) => b.Date.CompareTo(a.Date));
 
@@ -159,7 +167,8 @@ namespace Watchables.WebAPI.Services
                 AiringDays = airingDays,
                 CinemaDayMovies = cinemaDayMovies,
                 Movies = movies,
-                Appointments = appointments
+                Appointments = appointments,
+                Halls=halls
             };
 
             return schedule;
@@ -199,6 +208,21 @@ namespace Watchables.WebAPI.Services
             _context.CinemaDayMovie.Add(_mapper.Map<Database.CinemaDayMovie>(cdm));
             _context.SaveChanges();
             return cdm;
+        }
+
+        public Model.Appointments AddAppointmentToCinema(Model.Appointments app) {            
+            _context.Appointments.Add(_mapper.Map<Database.Appointments>(app));
+            _context.SaveChanges();
+            return app;
+        }
+
+        public Model.Appointments UpdateAppointment(int appointmentId, Model.Appointments app) {
+            var baseAppointment = _context.Appointments.Find(appointmentId);
+            baseAppointment.Price = app.Price;
+            baseAppointment.StartsAt = app.StartsAt;
+            baseAppointment.HallId = app.HallId;
+            _context.SaveChanges();
+            return _mapper.Map<Model.Appointments>(baseAppointment);
         }
     }
 }

@@ -75,7 +75,15 @@ namespace Watchables.WinUI.Forms.Cinema
             foreach(var movie in finalMovies) {
                 select.Items.Add(new { Text = movie.Title, Value = movie.MovieId });
             }
-            select.SelectedIndex = 0;          
+            if (select.Items.Count != 0) {
+                select.SelectedIndex = 0;
+            }
+            else {
+                saveBtn.Dispose();
+                select.Dispose();
+                Title.Text = "All movies are airing that day";
+            }
+                   
             
         }
 

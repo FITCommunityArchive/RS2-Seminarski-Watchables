@@ -36,6 +36,7 @@
             this.Title = new System.Windows.Forms.Label();
             this.dgvScheduledMovies = new Bunifu.Framework.UI.BunifuCustomDataGrid();
             this.CinemaDayMovieId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MovieId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Movie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Appointments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apps = new System.Windows.Forms.DataGridViewImageColumn();
@@ -123,6 +124,7 @@
             this.dgvScheduledMovies.ColumnHeadersHeight = 45;
             this.dgvScheduledMovies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CinemaDayMovieId,
+            this.MovieId,
             this.Movie,
             this.Appointments,
             this.Apps,
@@ -167,6 +169,14 @@
             this.CinemaDayMovieId.MinimumWidth = 6;
             this.CinemaDayMovieId.Name = "CinemaDayMovieId";
             this.CinemaDayMovieId.Visible = false;
+            // 
+            // MovieId
+            // 
+            this.MovieId.DataPropertyName = "MovieId";
+            this.MovieId.HeaderText = "MovieId";
+            this.MovieId.MinimumWidth = 6;
+            this.MovieId.Name = "MovieId";
+            this.MovieId.Visible = false;
             // 
             // Movie
             // 
@@ -229,6 +239,7 @@
         private System.Windows.Forms.Label Title;
         private Bunifu.Framework.UI.BunifuCustomDataGrid dgvScheduledMovies;
         private System.Windows.Forms.DataGridViewTextBoxColumn CinemaDayMovieId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MovieId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Movie;
         private System.Windows.Forms.DataGridViewTextBoxColumn Appointments;
         private System.Windows.Forms.DataGridViewImageColumn Apps;
