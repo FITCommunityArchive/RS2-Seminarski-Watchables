@@ -33,6 +33,8 @@ namespace Watchables.WinUI.Forms.Cinema
             var result = await _apiService.GetItems<List<Model.Product>>(_cinemaId, "GetProducts");
             result.Sort((a, b) => a.Name.CompareTo(b.Name));
             dgvProducts.AutoGenerateColumns = false;
+            dgvProducts.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(178, 8, 55);
+            dgvProducts.EnableHeadersVisualStyles = false;
             dgvProducts.DataSource = result;
         }
 
@@ -40,7 +42,13 @@ namespace Watchables.WinUI.Forms.Cinema
             _helper.CloseForm(this, 15);
         }
 
-        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+        private void AddProductBtn_Click(object sender, EventArgs e) {
+            AddEditProductForm form = new AddEditProductForm(_menuForm, this, _cinemaName, _cinemaId) { };
+            _helper.ShowForm(form, 15);
+        }
+
+        private void dgvProducts_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var productId = dgvProducts.Rows[e.RowIndex].Cells["ProductId"].Value;
                 var action = dgvProducts.Columns[e.ColumnIndex].Name;
@@ -52,11 +60,6 @@ namespace Watchables.WinUI.Forms.Cinema
                     MessageBox.Show("Implement delete", "To-Do");
                 }
             }
-        }
-
-        private void AddProductBtn_Click(object sender, EventArgs e) {
-            AddEditProductForm form = new AddEditProductForm(_menuForm, this, _cinemaName, _cinemaId) { };
-            _helper.ShowForm(form, 15);
         }
     }
 }

@@ -63,6 +63,8 @@ namespace Watchables.WinUI.Forms.Cinema
                     list.Add(Object);
                 }
             }
+            dgvScheduledMovies.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(178, 8, 55);
+            dgvScheduledMovies.EnableHeadersVisualStyles = false;
             dgvScheduledMovies.DataSource = list;
             Title.Text = $"{_day}, {_date.ToString("dd. MMMM yyyy")}, {_schedule.Cinema.Name}";
         }
@@ -71,9 +73,9 @@ namespace Watchables.WinUI.Forms.Cinema
             AddMovieForm form = new AddMovieForm(_scheduleForm, _schedule, _menuForm, _airingDayId, _date, _day);
             _helper.CloseForm(this, 15);
             _helper.ShowForm(form, 15);
-        }
+        }      
 
-        private void dgvScheduledMovies_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private void dgvScheduledMovies_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var cinemaDayMovieId = dgvScheduledMovies.Rows[e.RowIndex].Cells["CinemaDayMovieId"].Value;
                 var movieId = dgvScheduledMovies.Rows[e.RowIndex].Cells["MovieId"].Value;

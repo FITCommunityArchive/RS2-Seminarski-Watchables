@@ -26,25 +26,11 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CinemasForm));
-            this.dgvCinemas = new Bunifu.Framework.UI.BunifuCustomDataGrid();
-            this.CinemaId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cinema = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.Rating = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Products = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Halls = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Schedule = new System.Windows.Forms.DataGridViewImageColumn();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.AddCinemaButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.searchTextBox = new System.Windows.Forms.TextBox();
@@ -56,191 +42,21 @@
             this.button1 = new System.Windows.Forms.Button();
             this.clearSearch = new System.Windows.Forms.Button();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.dgvCinemas = new System.Windows.Forms.DataGridView();
+            this.CinemaId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cinema = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.Rating = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Products = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Halls = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Schedule = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCinemas)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgvCinemas
-            // 
-            this.dgvCinemas.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.dgvCinemas.AllowUserToAddRows = false;
-            this.dgvCinemas.AllowUserToDeleteRows = false;
-            this.dgvCinemas.AllowUserToResizeColumns = false;
-            this.dgvCinemas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvCinemas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvCinemas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvCinemas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
-            this.dgvCinemas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvCinemas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
-            this.dgvCinemas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCinemas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.dgvCinemas.ColumnHeadersHeight = 45;
-            this.dgvCinemas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CinemaId,
-            this.Cinema,
-            this.Rating,
-            this.Address,
-            this.Number,
-            this.Location,
-            this.phoneNumber,
-            this.Edit,
-            this.Delete,
-            this.Products,
-            this.Halls,
-            this.Schedule});
-            this.dgvCinemas.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCinemas.DefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvCinemas.DoubleBuffered = true;
-            this.dgvCinemas.EnableHeadersVisualStyles = false;
-            this.dgvCinemas.GridColor = System.Drawing.Color.White;
-            this.dgvCinemas.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.dgvCinemas.HeaderForeColor = System.Drawing.Color.White;
-            this.dgvCinemas.Location = new System.Drawing.Point(42, 156);
-            this.dgvCinemas.Name = "dgvCinemas";
-            this.dgvCinemas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCinemas.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.dgvCinemas.RowHeadersVisible = false;
-            this.dgvCinemas.RowHeadersWidth = 51;
-            this.dgvCinemas.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCinemas.RowTemplate.Height = 45;
-            this.dgvCinemas.Size = new System.Drawing.Size(1669, 618);
-            this.dgvCinemas.TabIndex = 0;
-            this.dgvCinemas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCinemas_CellClick);
-            // 
-            // CinemaId
-            // 
-            this.CinemaId.DataPropertyName = "CinemaId";
-            this.CinemaId.HeaderText = "CinemaId";
-            this.CinemaId.MinimumWidth = 6;
-            this.CinemaId.Name = "CinemaId";
-            this.CinemaId.Visible = false;
-            // 
-            // Cinema
-            // 
-            this.Cinema.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.Cinema.DataPropertyName = "Name";
-            this.Cinema.FillWeight = 165.6535F;
-            this.Cinema.HeaderText = "Cinema";
-            this.Cinema.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.Cinema.MinimumWidth = 6;
-            this.Cinema.Name = "Cinema";
-            this.Cinema.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Cinema.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Cinema.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            // 
-            // Rating
-            // 
-            this.Rating.DataPropertyName = "Rating";
-            this.Rating.FillWeight = 99.82187F;
-            this.Rating.HeaderText = "Rating";
-            this.Rating.MinimumWidth = 6;
-            this.Rating.Name = "Rating";
-            // 
-            // Address
-            // 
-            this.Address.DataPropertyName = "Address";
-            this.Address.FillWeight = 228.7124F;
-            this.Address.HeaderText = "Address";
-            this.Address.MinimumWidth = 6;
-            this.Address.Name = "Address";
-            // 
-            // Number
-            // 
-            this.Number.DataPropertyName = "StreetNumber";
-            this.Number.FillWeight = 99.86478F;
-            this.Number.HeaderText = "Number";
-            this.Number.MinimumWidth = 6;
-            this.Number.Name = "Number";
-            // 
-            // Location
-            // 
-            this.Location.DataPropertyName = "Location";
-            this.Location.FillWeight = 116.3875F;
-            this.Location.HeaderText = "Location";
-            this.Location.MinimumWidth = 6;
-            this.Location.Name = "Location";
-            // 
-            // phoneNumber
-            // 
-            this.phoneNumber.DataPropertyName = "PhoneNumber";
-            this.phoneNumber.FillWeight = 118.6339F;
-            this.phoneNumber.HeaderText = "Phone";
-            this.phoneNumber.MinimumWidth = 6;
-            this.phoneNumber.Name = "phoneNumber";
-            // 
-            // Edit
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle8.NullValue")));
-            this.Edit.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Edit.FillWeight = 57.67153F;
-            this.Edit.HeaderText = "";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.MinimumWidth = 4;
-            this.Edit.Name = "Edit";
-            this.Edit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Edit.ToolTipText = "Edit";
-            // 
-            // Delete
-            // 
-            this.Delete.FillWeight = 54.04951F;
-            this.Delete.HeaderText = "";
-            this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
-            this.Delete.MinimumWidth = 6;
-            this.Delete.Name = "Delete";
-            this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Products
-            // 
-            this.Products.FillWeight = 54.92332F;
-            this.Products.HeaderText = "";
-            this.Products.Image = ((System.Drawing.Image)(resources.GetObject("Products.Image")));
-            this.Products.MinimumWidth = 6;
-            this.Products.Name = "Products";
-            this.Products.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Halls
-            // 
-            this.Halls.FillWeight = 51.61634F;
-            this.Halls.HeaderText = "";
-            this.Halls.Image = ((System.Drawing.Image)(resources.GetObject("Halls.Image")));
-            this.Halls.MinimumWidth = 6;
-            this.Halls.Name = "Halls";
-            this.Halls.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Schedule
-            // 
-            this.Schedule.FillWeight = 52.66536F;
-            this.Schedule.HeaderText = "";
-            this.Schedule.Image = ((System.Drawing.Image)(resources.GetObject("Schedule.Image")));
-            this.Schedule.MinimumWidth = 6;
-            this.Schedule.Name = "Schedule";
-            this.Schedule.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Schedule.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // AddCinemaButton
             // 
@@ -363,12 +179,180 @@
             this.clearSearch.UseVisualStyleBackColor = true;
             this.clearSearch.Click += new System.EventHandler(this.clearSearch_Click);
             // 
+            // dgvCinemas
+            // 
+            this.dgvCinemas.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.dgvCinemas.AllowUserToAddRows = false;
+            this.dgvCinemas.AllowUserToDeleteRows = false;
+            this.dgvCinemas.AllowUserToResizeColumns = false;
+            this.dgvCinemas.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvCinemas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvCinemas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCinemas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
+            this.dgvCinemas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvCinemas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
+            this.dgvCinemas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCinemas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvCinemas.ColumnHeadersHeight = 45;
+            this.dgvCinemas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CinemaId,
+            this.Cinema,
+            this.Rating,
+            this.Address,
+            this.Number,
+            this.Location,
+            this.Phone,
+            this.Edit,
+            this.Delete,
+            this.Products,
+            this.Halls,
+            this.Schedule});
+            this.dgvCinemas.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCinemas.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvCinemas.GridColor = System.Drawing.Color.White;
+            this.dgvCinemas.Location = new System.Drawing.Point(42, 149);
+            this.dgvCinemas.Name = "dgvCinemas";
+            this.dgvCinemas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCinemas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvCinemas.RowHeadersVisible = false;
+            this.dgvCinemas.RowHeadersWidth = 51;
+            this.dgvCinemas.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvCinemas.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCinemas.RowTemplate.Height = 45;
+            this.dgvCinemas.Size = new System.Drawing.Size(1669, 618);
+            this.dgvCinemas.TabIndex = 13;
+            this.dgvCinemas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCinemas_CellContentClick);
+            // 
+            // CinemaId
+            // 
+            this.CinemaId.DataPropertyName = "CinemaId";
+            this.CinemaId.HeaderText = "CinemaId";
+            this.CinemaId.MinimumWidth = 6;
+            this.CinemaId.Name = "CinemaId";
+            this.CinemaId.Visible = false;
+            // 
+            // Cinema
+            // 
+            this.Cinema.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.Cinema.DataPropertyName = "Name";
+            this.Cinema.FillWeight = 178.575F;
+            this.Cinema.HeaderText = "Cinema";
+            this.Cinema.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.Cinema.MinimumWidth = 6;
+            this.Cinema.Name = "Cinema";
+            this.Cinema.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            // 
+            // Rating
+            // 
+            this.Rating.DataPropertyName = "Rating";
+            this.Rating.FillWeight = 111.9251F;
+            this.Rating.HeaderText = "Rating";
+            this.Rating.MinimumWidth = 6;
+            this.Rating.Name = "Rating";
+            // 
+            // Address
+            // 
+            this.Address.DataPropertyName = "Address";
+            this.Address.FillWeight = 230.6771F;
+            this.Address.HeaderText = "Address";
+            this.Address.MinimumWidth = 6;
+            this.Address.Name = "Address";
+            // 
+            // Number
+            // 
+            this.Number.DataPropertyName = "StreetNumber";
+            this.Number.FillWeight = 110.2608F;
+            this.Number.HeaderText = "Number";
+            this.Number.MinimumWidth = 6;
+            this.Number.Name = "Number";
+            // 
+            // Location
+            // 
+            this.Location.DataPropertyName = "Location";
+            this.Location.FillWeight = 124.1493F;
+            this.Location.HeaderText = "Location";
+            this.Location.MinimumWidth = 6;
+            this.Location.Name = "Location";
+            // 
+            // Phone
+            // 
+            this.Phone.DataPropertyName = "PhoneNumber";
+            this.Phone.FillWeight = 143.0696F;
+            this.Phone.HeaderText = "Phone";
+            this.Phone.MinimumWidth = 6;
+            this.Phone.Name = "Phone";
+            // 
+            // Edit
+            // 
+            this.Edit.FillWeight = 46.29558F;
+            this.Edit.HeaderText = "";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.MinimumWidth = 6;
+            this.Edit.Name = "Edit";
+            // 
+            // Delete
+            // 
+            this.Delete.FillWeight = 43.3924F;
+            this.Delete.HeaderText = "";
+            this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
+            this.Delete.MinimumWidth = 6;
+            this.Delete.Name = "Delete";
+            // 
+            // Products
+            // 
+            this.Products.FillWeight = 37.25721F;
+            this.Products.HeaderText = "";
+            this.Products.Image = ((System.Drawing.Image)(resources.GetObject("Products.Image")));
+            this.Products.MinimumWidth = 6;
+            this.Products.Name = "Products";
+            // 
+            // Halls
+            // 
+            this.Halls.FillWeight = 40.38095F;
+            this.Halls.HeaderText = "";
+            this.Halls.Image = ((System.Drawing.Image)(resources.GetObject("Halls.Image")));
+            this.Halls.MinimumWidth = 6;
+            this.Halls.Name = "Halls";
+            // 
+            // Schedule
+            // 
+            this.Schedule.FillWeight = 34.01698F;
+            this.Schedule.HeaderText = "";
+            this.Schedule.Image = ((System.Drawing.Image)(resources.GetObject("Schedule.Image")));
+            this.Schedule.MinimumWidth = 6;
+            this.Schedule.Name = "Schedule";
+            // 
             // CinemasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(1775, 835);
+            this.Controls.Add(this.dgvCinemas);
             this.Controls.Add(this.clearSearch);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
@@ -379,7 +363,6 @@
             this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.AddCinemaButton);
-            this.Controls.Add(this.dgvCinemas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CinemasForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -391,8 +374,6 @@
         }
 
         #endregion
-
-        private Bunifu.Framework.UI.BunifuCustomDataGrid dgvCinemas;
         private System.Windows.Forms.Button AddCinemaButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox searchTextBox;
@@ -402,19 +383,20 @@
         private System.Windows.Forms.TextBox ratingTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button clearSearch;
+        private System.Windows.Forms.ToolTip ToolTip;
+        private System.Windows.Forms.DataGridView dgvCinemas;
         private System.Windows.Forms.DataGridViewTextBoxColumn CinemaId;
         private System.Windows.Forms.DataGridViewLinkColumn Cinema;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rating;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn Location;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
         private System.Windows.Forms.DataGridViewImageColumn Products;
         private System.Windows.Forms.DataGridViewImageColumn Halls;
         private System.Windows.Forms.DataGridViewImageColumn Schedule;
-        private System.Windows.Forms.Button clearSearch;
-        private System.Windows.Forms.ToolTip ToolTip;
     }
 }

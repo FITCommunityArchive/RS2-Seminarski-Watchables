@@ -26,15 +26,15 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppointmentsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.AddAppBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.closeBtn = new System.Windows.Forms.Button();
-            this.dgvAppointments = new Bunifu.Framework.UI.BunifuCustomDataGrid();
             this.Title = new System.Windows.Forms.Label();
+            this.dgvAppointments = new System.Windows.Forms.DataGridView();
             this.AppointmentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HallId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartsAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,7 +43,7 @@
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hall = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HallSeats = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoldSeats = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SeatsSold = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
@@ -92,6 +92,16 @@
             this.closeBtn.UseVisualStyleBackColor = true;
             this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
+            // Title
+            // 
+            this.Title.AutoSize = true;
+            this.Title.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title.Location = new System.Drawing.Point(12, 9);
+            this.Title.Name = "Title";
+            this.Title.Size = new System.Drawing.Size(99, 34);
+            this.Title.TabIndex = 24;
+            this.Title.Text = "label1";
+            // 
             // dgvAppointments
             // 
             this.dgvAppointments.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -99,24 +109,24 @@
             this.dgvAppointments.AllowUserToDeleteRows = false;
             this.dgvAppointments.AllowUserToResizeColumns = false;
             this.dgvAppointments.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Snow;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Snow;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvAppointments.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Snow;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvAppointments.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAppointments.BackgroundColor = System.Drawing.Color.Snow;
             this.dgvAppointments.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvAppointments.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
             this.dgvAppointments.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAppointments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvAppointments.ColumnHeadersHeight = 35;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAppointments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvAppointments.ColumnHeadersHeight = 40;
             this.dgvAppointments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AppointmentId,
             this.HallId,
@@ -126,55 +136,43 @@
             this.Price,
             this.Hall,
             this.HallSeats,
-            this.SoldSeats,
+            this.SeatsSold,
             this.Edit,
             this.Delete});
             this.dgvAppointments.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Snow;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.Snow;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAppointments.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dgvAppointments.DoubleBuffered = true;
-            this.dgvAppointments.EnableHeadersVisualStyles = false;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Snow;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAppointments.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvAppointments.GridColor = System.Drawing.Color.White;
-            this.dgvAppointments.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.dgvAppointments.HeaderForeColor = System.Drawing.Color.White;
-            this.dgvAppointments.Location = new System.Drawing.Point(12, 54);
+            this.dgvAppointments.Location = new System.Drawing.Point(18, 62);
             this.dgvAppointments.Name = "dgvAppointments";
             this.dgvAppointments.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAppointments.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAppointments.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAppointments.RowHeadersVisible = false;
             this.dgvAppointments.RowHeadersWidth = 51;
+            this.dgvAppointments.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvAppointments.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvAppointments.RowTemplate.Height = 35;
-            this.dgvAppointments.Size = new System.Drawing.Size(1517, 477);
-            this.dgvAppointments.TabIndex = 15;
-            this.dgvAppointments.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAppointments_CellContentClick);
-            // 
-            // Title
-            // 
-            this.Title.AutoSize = true;
-            this.Title.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(12, 7);
-            this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(99, 34);
-            this.Title.TabIndex = 24;
-            this.Title.Text = "label1";
+            this.dgvAppointments.RowTemplate.Height = 45;
+            this.dgvAppointments.Size = new System.Drawing.Size(1511, 469);
+            this.dgvAppointments.TabIndex = 25;
+            this.dgvAppointments.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAppointments_CellContentClick_1);
             // 
             // AppointmentId
             // 
             this.AppointmentId.DataPropertyName = "AppointmentId";
+            this.AppointmentId.FillWeight = 112.2132F;
             this.AppointmentId.HeaderText = "AppointmentId";
             this.AppointmentId.MinimumWidth = 6;
             this.AppointmentId.Name = "AppointmentId";
@@ -183,6 +181,7 @@
             // HallId
             // 
             this.HallId.DataPropertyName = "HallId";
+            this.HallId.FillWeight = 112.2132F;
             this.HallId.HeaderText = "HallId";
             this.HallId.MinimumWidth = 6;
             this.HallId.Name = "HallId";
@@ -191,7 +190,7 @@
             // StartsAt
             // 
             this.StartsAt.DataPropertyName = "StartsAt";
-            this.StartsAt.FillWeight = 137.5873F;
+            this.StartsAt.FillWeight = 112.2132F;
             this.StartsAt.HeaderText = "Starts at";
             this.StartsAt.MinimumWidth = 6;
             this.StartsAt.Name = "StartsAt";
@@ -199,7 +198,7 @@
             // Duration
             // 
             this.Duration.DataPropertyName = "MovieDuration";
-            this.Duration.FillWeight = 137.5873F;
+            this.Duration.FillWeight = 112.2132F;
             this.Duration.HeaderText = "Duration";
             this.Duration.MinimumWidth = 6;
             this.Duration.Name = "Duration";
@@ -207,7 +206,7 @@
             // EndsAt
             // 
             this.EndsAt.DataPropertyName = "EndsAt";
-            this.EndsAt.FillWeight = 137.5873F;
+            this.EndsAt.FillWeight = 112.2132F;
             this.EndsAt.HeaderText = "Ends at";
             this.EndsAt.MinimumWidth = 6;
             this.EndsAt.Name = "EndsAt";
@@ -215,7 +214,7 @@
             // Price
             // 
             this.Price.DataPropertyName = "Price";
-            this.Price.FillWeight = 137.5873F;
+            this.Price.FillWeight = 112.2132F;
             this.Price.HeaderText = "Price";
             this.Price.MinimumWidth = 6;
             this.Price.Name = "Price";
@@ -223,7 +222,7 @@
             // Hall
             // 
             this.Hall.DataPropertyName = "Hall";
-            this.Hall.FillWeight = 137.5873F;
+            this.Hall.FillWeight = 112.2132F;
             this.Hall.HeaderText = "Hall";
             this.Hall.MinimumWidth = 6;
             this.Hall.Name = "Hall";
@@ -231,31 +230,30 @@
             // HallSeats
             // 
             this.HallSeats.DataPropertyName = "HallSeats";
-            this.HallSeats.FillWeight = 112.6017F;
+            this.HallSeats.FillWeight = 112.2132F;
             this.HallSeats.HeaderText = "Hall seats";
             this.HallSeats.MinimumWidth = 6;
             this.HallSeats.Name = "HallSeats";
             // 
-            // SoldSeats
+            // SeatsSold
             // 
-            this.SoldSeats.DataPropertyName = "SoldSeats";
-            this.SoldSeats.FillWeight = 137.5873F;
-            this.SoldSeats.HeaderText = "Seats sold";
-            this.SoldSeats.MinimumWidth = 6;
-            this.SoldSeats.Name = "SoldSeats";
+            this.SeatsSold.DataPropertyName = "SoldSeats";
+            this.SeatsSold.FillWeight = 112.2132F;
+            this.SeatsSold.HeaderText = "Seats sold";
+            this.SeatsSold.MinimumWidth = 6;
+            this.SeatsSold.Name = "SeatsSold";
             // 
             // Edit
             // 
-            this.Edit.FillWeight = 47.33779F;
+            this.Edit.FillWeight = 43.67968F;
             this.Edit.HeaderText = "";
             this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
             this.Edit.MinimumWidth = 6;
             this.Edit.Name = "Edit";
-            this.Edit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Delete
             // 
-            this.Delete.FillWeight = 47.67271F;
+            this.Delete.FillWeight = 46.40107F;
             this.Delete.HeaderText = "";
             this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
             this.Delete.MinimumWidth = 6;
@@ -267,8 +265,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Snow;
             this.ClientSize = new System.Drawing.Size(1541, 576);
-            this.Controls.Add(this.Title);
             this.Controls.Add(this.dgvAppointments);
+            this.Controls.Add(this.Title);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.AddAppBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -287,8 +285,8 @@
         private System.Windows.Forms.Button AddAppBtn;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button closeBtn;
-        private Bunifu.Framework.UI.BunifuCustomDataGrid dgvAppointments;
         private System.Windows.Forms.Label Title;
+        private System.Windows.Forms.DataGridView dgvAppointments;
         private System.Windows.Forms.DataGridViewTextBoxColumn AppointmentId;
         private System.Windows.Forms.DataGridViewTextBoxColumn HallId;
         private System.Windows.Forms.DataGridViewTextBoxColumn StartsAt;
@@ -297,7 +295,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hall;
         private System.Windows.Forms.DataGridViewTextBoxColumn HallSeats;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SoldSeats;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SeatsSold;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
     }

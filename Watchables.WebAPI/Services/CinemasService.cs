@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Watchables.Model;
 using Watchables.Model.Requests;
 using Watchables.WebAPI.Database;
+using Watchables.WebAPI.Exceptions;
 
 namespace Watchables.WebAPI.Services
 {
@@ -45,18 +46,31 @@ namespace Watchables.WebAPI.Services
         }
 
         public Model.Hall AddHallToCinema(Model.Hall h) {
+
+            bool validCinemaId = false;
+            foreach (var cinema in _context.Cinemas.ToList()) {
+                if (h.CinemaId == cinema.CinemaId) {
+                    validCinemaId = true;
+                    break;
+                }
+            }
+            if (!validCinemaId) throw new UserException("Could not find sepcified cinemaId!");
+
+
             var hall = _mapper.Map<Database.Hall>(h);
+            hall.HallId = 0;           
+           
             var inBaseHalls = _context.Hall.Where(ha => ha.CinemaId == h.CinemaId).ToList();
 
             foreach (var inHall in inBaseHalls) {
-                if (inHall.HallName.ToLower() == hall.HallName.ToLower() && inHall.HallNumber == hall.HallNumber && hall.NumberOfseats == inHall.NumberOfseats) {
+                if (inHall.HallName.ToLower() == hall.HallName.ToLower() && inHall.HallNumber == hall.HallNumber && hall.NumberOfseats == inHall.NumberOfseats && hall.CinemaId==inHall.CinemaId) {
                     return h;
                 }
             }
             _context.Hall.Add(hall);
             _context.SaveChanges();
 
-            return h;
+            return _mapper.Map<Model.Hall>(hall);
         }
 
         public Model.Product AddProductToCinema(Model.Product pr) {
@@ -91,7 +105,32 @@ namespace Watchables.WebAPI.Services
         }
 
         public Model.Hall UpdateHall(int hallId, Model.Hall hall) {
+
+            hall.HallId = 0;
+
+            bool validHallId = false;
+            foreach(var inHall in _context.Hall.ToList()) {
+                if (hallId == inHall.HallId) {
+                    validHallId = true;
+                    break;
+                }
+            }
+
+            if (!validHallId) throw new UserException("Cannot find specified Hall with that hallId!");
+
             var baseHall = _context.Hall.Find(hallId);
+
+            bool validCinemaId = false;
+            foreach(var cinema in _context.Cinemas.ToList()) {
+                if (hall.CinemaId == cinema.CinemaId) {
+                    validCinemaId = true;
+                    break;
+                }
+            }
+
+            if (!validCinemaId) throw new UserException("Invalid cinemaId inside of hall!");
+
+
             baseHall.HallName = hall.HallName;
             baseHall.HallNumber = hall.HallNumber;
             baseHall.NumberOfseats = hall.NumberOfseats;

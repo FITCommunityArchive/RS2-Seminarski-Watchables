@@ -68,7 +68,8 @@ namespace Watchables.WinUI.Forms.Cinema
                 Model.Hall hall = new Model.Hall() {
                     HallName = HallName.Text,
                     HallNumber = (int)HallNumber.Value,
-                    NumberOfseats = (int)HallSeats.Value
+                    NumberOfseats = (int)HallSeats.Value,
+                    CinemaId=_cinemaId                    
                 };
                 await _apiService.UpdateItem<Model.Hall>(_hallId, "updateHall", hall);
                 messageBox.Show("Hall updated succesfully", "Success");

@@ -34,6 +34,8 @@ namespace Watchables.WinUI.Forms.Cinema
             var result = await _apiService.GetItems<List<Model.Hall>>(_cinemaId, "GetHalls");
             result.Sort((a, b) => a.HallName.CompareTo(b.HallName));
             dgvHalls.AutoGenerateColumns = false;
+            dgvHalls.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(178, 8, 55);
+            dgvHalls.EnableHeadersVisualStyles = false;
             dgvHalls.DataSource = result;
         }
 
@@ -46,7 +48,19 @@ namespace Watchables.WinUI.Forms.Cinema
             this.Close();
         }
 
-        private async void dgvHalls_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private async void AddHallBtn_Click(object sender, EventArgs e) {
+            AddEditHallForm form = new AddEditHallForm(_menuForm, this, _cinemaName, _cinemaLoactin, _cinemaId) { };
+            form.Show();
+
+            form.Opacity = 0;
+            while (form.Opacity < 1.0) {
+                await Task.Delay(15);
+                form.Opacity += 0.05;
+            }
+            form.Opacity = 1;
+        }
+
+        private async void dgvHalls_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var hallId = dgvHalls.Rows[e.RowIndex].Cells["HallId"].Value;
                 var action = dgvHalls.Columns[e.ColumnIndex].Name;
@@ -65,20 +79,6 @@ namespace Watchables.WinUI.Forms.Cinema
                     MessageBox.Show("Implement delete", "To-Do");
                 }
             }
-            }
-
-        private async void AddHallBtn_Click(object sender, EventArgs e) {
-            AddEditHallForm form = new AddEditHallForm(_menuForm, this, _cinemaName, _cinemaLoactin, _cinemaId) { };
-            form.Show();
-
-            form.Opacity = 0;
-            while (form.Opacity < 1.0) {
-                await Task.Delay(15);
-                form.Opacity += 0.05;
-            }
-            form.Opacity = 1;
         }
-
-   
     }
 }

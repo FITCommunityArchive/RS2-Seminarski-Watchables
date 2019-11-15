@@ -156,7 +156,7 @@
   <metadata name="HallSeats.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="SoldSeats.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="SeatsSold.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Edit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -166,7 +166,7 @@
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJ
-        TUUH4wsHFxMPXjoj0gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH6SURBVEhL
+        TUUH4wsGFCMHNV1ELwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH6SURBVEhL
         tZXPS5RBGMeHfrwz8+6lm1gkSBc1imDdmXfr4smLeQn8Czx76R/Q/6BDdYggkCB18cfOTJcoFJUOJt1S
         FBGCPdaxU7ht32eajWVV0HH8wvC+88yz3887M8/Mshq7mxmhZ63Qv9DeUJ+lFJmifXNcj+K5a3ixbIWa
         fMXK10PKxQTTn44X4/S+wh/ecUL/RqxpuV5MAjFSv4DhocuqAzBftaL4Us/0EGJ7SSA1NnEVxnMwPCLz

@@ -31,6 +31,8 @@ namespace Watchables.WinUI.Forms
             var result = await _apiService.Get<List<Model.Cinema>>(search);
             result.Sort((a, b) => a.Name.CompareTo(b.Name));
             dgvCinemas.AutoGenerateColumns = false;
+            dgvCinemas.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(178, 8, 55);
+            dgvCinemas.EnableHeadersVisualStyles = false;
             dgvCinemas.DataSource = result;
             Cinema.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;            
         }
@@ -40,8 +42,12 @@ namespace Watchables.WinUI.Forms
         private async void button1_Click(object sender, EventArgs e) {
 
             var messageBox = new CustomMessageBox();
+            if (string.IsNullOrWhiteSpace(ratingTextBox.Text)){
+                ratingTextBox.Text = "0";
+            }
 
-            if(!string.IsNullOrWhiteSpace(ratingTextBox.Text) && !decimal.TryParse(ratingTextBox.Text, out decimal n)) {
+
+            if (!string.IsNullOrWhiteSpace(ratingTextBox.Text) && !decimal.TryParse(ratingTextBox.Text, out decimal n)) {
                 messageBox.Show("Enter a valid rating (0-5)!", "error");
                 return;
             }
@@ -75,13 +81,28 @@ namespace Watchables.WinUI.Forms
             form.Show();
         }
 
-        private void dgvCinemas_CellClick(object sender, DataGridViewCellEventArgs e) {
+      
+
+        private async void clearSearch_Click(object sender, EventArgs e) {
+            searchTextBox.Text = "";
+            locationTextBox.Text = "";
+            ratingTextBox.Text = "";
+
+            var search = new CinemasSearchRequest() { };
+
+            var result = await _apiService.Get<List<Model.Cinema>>(search);
+            dgvCinemas.AutoGenerateColumns = false;
+            dgvCinemas.DataSource = result;
+
+        }
+
+        private void dgvCinemas_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var cinemaId = dgvCinemas.Rows[e.RowIndex].Cells["CinemaId"].Value;
                 var action = dgvCinemas.Columns[e.ColumnIndex].Name;
                 MenuForm menuForm = (MenuForm)this.MdiParent;
 
-                if (action == "Edit" || action == "Cinema") {                    
+                if (action == "Edit" || action == "Cinema") {
                     AddEditCinemaForm form = new AddEditCinemaForm(menuForm, int.Parse(cinemaId.ToString())) {
                         MdiParent = menuForm,
                         Dock = DockStyle.Fill
@@ -95,10 +116,10 @@ namespace Watchables.WinUI.Forms
                     var cinemaName = dgvCinemas.Rows[e.RowIndex].Cells["Cinema"].Value;
                     var cinemaLocation = dgvCinemas.Rows[e.RowIndex].Cells["Location"].Value;
 
-                    CinemasHallsForm cinemasHallsForm = new CinemasHallsForm(menuForm, int.Parse(cinemaId.ToString()), cinemaName.ToString(), cinemaLocation.ToString()){};
+                    CinemasHallsForm cinemasHallsForm = new CinemasHallsForm(menuForm, int.Parse(cinemaId.ToString()), cinemaName.ToString(), cinemaLocation.ToString()) { };
 
                     _helper.ShowForm(cinemasHallsForm, 18);
-                  
+
 
                 }
                 else if (action == "Schedule") {
@@ -112,22 +133,9 @@ namespace Watchables.WinUI.Forms
                     var cinemaName = dgvCinemas.Rows[e.RowIndex].Cells["Cinema"].Value;
                     CinemasProductsForm cinemasProductsForm = new CinemasProductsForm(menuForm, int.Parse(cinemaId.ToString()), cinemaName.ToString());
                     _helper.ShowForm(cinemasProductsForm, 18);
-                }                
+                }
                 else return;
             }
-        }
-
-        private async void clearSearch_Click(object sender, EventArgs e) {
-            searchTextBox.Text = "";
-            locationTextBox.Text = "";
-            ratingTextBox.Text = "";
-
-            var search = new CinemasSearchRequest() { };
-
-            var result = await _apiService.Get<List<Model.Cinema>>(search);
-            dgvCinemas.AutoGenerateColumns = false;
-            dgvCinemas.DataSource = result;
-
         }
     }
 }

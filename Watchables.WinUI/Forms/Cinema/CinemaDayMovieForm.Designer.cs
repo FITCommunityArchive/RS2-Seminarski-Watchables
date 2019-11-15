@@ -26,15 +26,15 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CinemaDayMovieForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.addMovieBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.closeBtn = new System.Windows.Forms.Button();
             this.Title = new System.Windows.Forms.Label();
-            this.dgvScheduledMovies = new Bunifu.Framework.UI.BunifuCustomDataGrid();
+            this.dgvScheduledMovies = new System.Windows.Forms.DataGridView();
             this.CinemaDayMovieId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MovieId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Movie = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,7 +66,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Snow;
             this.panel1.Controls.Add(this.closeBtn);
-            this.panel1.Location = new System.Drawing.Point(814, 21);
+            this.panel1.Location = new System.Drawing.Point(814, 9);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(114, 36);
             this.panel1.TabIndex = 10;
@@ -91,7 +91,7 @@
             // 
             this.Title.AutoSize = true;
             this.Title.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(18, 23);
+            this.Title.Location = new System.Drawing.Point(12, 9);
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(99, 34);
             this.Title.TabIndex = 22;
@@ -104,24 +104,24 @@
             this.dgvScheduledMovies.AllowUserToDeleteRows = false;
             this.dgvScheduledMovies.AllowUserToResizeColumns = false;
             this.dgvScheduledMovies.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Snow;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Snow;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvScheduledMovies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Snow;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Snow;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvScheduledMovies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvScheduledMovies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvScheduledMovies.BackgroundColor = System.Drawing.Color.Snow;
             this.dgvScheduledMovies.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvScheduledMovies.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
             this.dgvScheduledMovies.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvScheduledMovies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvScheduledMovies.ColumnHeadersHeight = 45;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvScheduledMovies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvScheduledMovies.ColumnHeadersHeight = 40;
             this.dgvScheduledMovies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CinemaDayMovieId,
             this.MovieId,
@@ -130,41 +130,39 @@
             this.Apps,
             this.Delete});
             this.dgvScheduledMovies.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Snow;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Snow;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvScheduledMovies.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvScheduledMovies.DoubleBuffered = true;
-            this.dgvScheduledMovies.EnableHeadersVisualStyles = false;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Snow;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.Snow;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvScheduledMovies.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvScheduledMovies.GridColor = System.Drawing.Color.White;
-            this.dgvScheduledMovies.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.dgvScheduledMovies.HeaderForeColor = System.Drawing.Color.White;
-            this.dgvScheduledMovies.Location = new System.Drawing.Point(24, 78);
+            this.dgvScheduledMovies.Location = new System.Drawing.Point(12, 63);
             this.dgvScheduledMovies.Name = "dgvScheduledMovies";
             this.dgvScheduledMovies.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvScheduledMovies.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvScheduledMovies.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvScheduledMovies.RowHeadersVisible = false;
             this.dgvScheduledMovies.RowHeadersWidth = 51;
+            this.dgvScheduledMovies.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvScheduledMovies.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvScheduledMovies.RowTemplate.Height = 45;
-            this.dgvScheduledMovies.Size = new System.Drawing.Size(886, 368);
+            this.dgvScheduledMovies.Size = new System.Drawing.Size(916, 391);
             this.dgvScheduledMovies.TabIndex = 23;
-            this.dgvScheduledMovies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScheduledMovies_CellContentClick);
+            this.dgvScheduledMovies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScheduledMovies_CellContentClick_1);
             // 
             // CinemaDayMovieId
             // 
             this.CinemaDayMovieId.DataPropertyName = "CinemaDayMovieId";
+            this.CinemaDayMovieId.FillWeight = 128.8824F;
             this.CinemaDayMovieId.HeaderText = "CinemaDayMovieId";
             this.CinemaDayMovieId.MinimumWidth = 6;
             this.CinemaDayMovieId.Name = "CinemaDayMovieId";
@@ -173,6 +171,7 @@
             // MovieId
             // 
             this.MovieId.DataPropertyName = "MovieId";
+            this.MovieId.FillWeight = 128.8824F;
             this.MovieId.HeaderText = "MovieId";
             this.MovieId.MinimumWidth = 6;
             this.MovieId.Name = "MovieId";
@@ -181,7 +180,7 @@
             // Movie
             // 
             this.Movie.DataPropertyName = "Movie";
-            this.Movie.FillWeight = 185.5894F;
+            this.Movie.FillWeight = 168.1286F;
             this.Movie.HeaderText = "Movie";
             this.Movie.MinimumWidth = 6;
             this.Movie.Name = "Movie";
@@ -189,14 +188,14 @@
             // Appointments
             // 
             this.Appointments.DataPropertyName = "NumberOfAppointments";
-            this.Appointments.FillWeight = 160.0739F;
+            this.Appointments.FillWeight = 105.1745F;
             this.Appointments.HeaderText = "Appointments";
             this.Appointments.MinimumWidth = 6;
             this.Appointments.Name = "Appointments";
             // 
             // Apps
             // 
-            this.Apps.FillWeight = 27.24866F;
+            this.Apps.FillWeight = 32.07184F;
             this.Apps.HeaderText = "";
             this.Apps.Image = ((System.Drawing.Image)(resources.GetObject("Apps.Image")));
             this.Apps.MinimumWidth = 6;
@@ -204,7 +203,7 @@
             // 
             // Delete
             // 
-            this.Delete.FillWeight = 27.08803F;
+            this.Delete.FillWeight = 36.86022F;
             this.Delete.HeaderText = "";
             this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
             this.Delete.MinimumWidth = 6;
@@ -216,8 +215,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Snow;
             this.ClientSize = new System.Drawing.Size(940, 499);
-            this.Controls.Add(this.Title);
             this.Controls.Add(this.dgvScheduledMovies);
+            this.Controls.Add(this.Title);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.addMovieBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -237,7 +236,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button closeBtn;
         private System.Windows.Forms.Label Title;
-        private Bunifu.Framework.UI.BunifuCustomDataGrid dgvScheduledMovies;
+        private System.Windows.Forms.DataGridView dgvScheduledMovies;
         private System.Windows.Forms.DataGridViewTextBoxColumn CinemaDayMovieId;
         private System.Windows.Forms.DataGridViewTextBoxColumn MovieId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Movie;

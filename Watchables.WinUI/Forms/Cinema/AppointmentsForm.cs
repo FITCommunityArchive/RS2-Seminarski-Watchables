@@ -77,11 +77,17 @@ namespace Watchables.WinUI.Forms.Cinema
                 }               
             }
             dgvAppointments.AutoGenerateColumns = false;
+            dgvAppointments.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(178, 8, 55);
+            dgvAppointments.EnableHeadersVisualStyles = false;
             dgvAppointments.DataSource = list;            
             Title.Text = $"{_schedule.Cinema.Name}, {_day} {_date.ToString("dd. MMM yyyy")}, {movie.Title}";
+        }      
+
+        private void AddAppBtn_Click(object sender, EventArgs e) {
+            MessageBox.Show("Add");
         }
 
-        private void dgvAppointments_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private void dgvAppointments_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var appointmentId = dgvAppointments.Rows[e.RowIndex].Cells["AppointmentId"].Value;
                 var movieId = dgvAppointments.Rows[e.RowIndex].Cells["HallId"].Value;
@@ -89,14 +95,10 @@ namespace Watchables.WinUI.Forms.Cinema
                 if (action == "Edit") {
                     MessageBox.Show("Edit", appointmentId.ToString());
                 }
-                else if(action=="Delete") {
+                else if (action == "Delete") {
                     MessageBox.Show("Delete", appointmentId.ToString());
                 }
             }
-        }
-
-        private void AddAppBtn_Click(object sender, EventArgs e) {
-            MessageBox.Show("Add");
         }
     }
 }

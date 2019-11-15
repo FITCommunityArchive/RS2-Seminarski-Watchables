@@ -33,7 +33,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.Close = new System.Windows.Forms.Button();
             this.Title = new System.Windows.Forms.Label();
-            this.dgvSchedule = new Bunifu.Framework.UI.BunifuCustomDataGrid();
+            this.AddDaybtn = new System.Windows.Forms.Button();
+            this.selectList = new System.Windows.Forms.ComboBox();
+            this.dgvSchedule = new System.Windows.Forms.DataGridView();
             this.AiringDaysOfCinemasId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Day = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,8 +43,6 @@
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.MoviesBtn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.AddDaybtn = new System.Windows.Forms.Button();
-            this.selectList = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).BeginInit();
             this.SuspendLayout();
@@ -84,6 +84,33 @@
             this.Title.TabIndex = 20;
             this.Title.Text = "label1";
             this.Title.Click += new System.EventHandler(this.Title_Click);
+            // 
+            // AddDaybtn
+            // 
+            this.AddDaybtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.AddDaybtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddDaybtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.AddDaybtn.FlatAppearance.BorderSize = 0;
+            this.AddDaybtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddDaybtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddDaybtn.ForeColor = System.Drawing.Color.White;
+            this.AddDaybtn.Location = new System.Drawing.Point(0, 885);
+            this.AddDaybtn.Name = "AddDaybtn";
+            this.AddDaybtn.Size = new System.Drawing.Size(1787, 43);
+            this.AddDaybtn.TabIndex = 22;
+            this.AddDaybtn.Text = "Generate day";
+            this.AddDaybtn.UseVisualStyleBackColor = false;
+            this.AddDaybtn.Click += new System.EventHandler(this.AddDaybtn_Click);
+            // 
+            // selectList
+            // 
+            this.selectList.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectList.FormattingEnabled = true;
+            this.selectList.Location = new System.Drawing.Point(1484, 101);
+            this.selectList.Name = "selectList";
+            this.selectList.Size = new System.Drawing.Size(230, 29);
+            this.selectList.TabIndex = 24;
+            this.selectList.SelectionChangeCommitted += new System.EventHandler(this.selectList_SelectionChangeCommitted);
             // 
             // dgvSchedule
             // 
@@ -127,33 +154,31 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvSchedule.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvSchedule.DoubleBuffered = true;
-            this.dgvSchedule.EnableHeadersVisualStyles = false;
             this.dgvSchedule.GridColor = System.Drawing.Color.White;
-            this.dgvSchedule.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.dgvSchedule.HeaderForeColor = System.Drawing.Color.White;
-            this.dgvSchedule.Location = new System.Drawing.Point(45, 154);
+            this.dgvSchedule.Location = new System.Drawing.Point(45, 155);
             this.dgvSchedule.Name = "dgvSchedule";
             this.dgvSchedule.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvSchedule.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvSchedule.RowHeadersVisible = false;
             this.dgvSchedule.RowHeadersWidth = 51;
+            this.dgvSchedule.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvSchedule.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvSchedule.RowTemplate.Height = 45;
-            this.dgvSchedule.Size = new System.Drawing.Size(1669, 647);
-            this.dgvSchedule.TabIndex = 21;
-            this.dgvSchedule.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSchedule_CellContentClick);
+            this.dgvSchedule.Size = new System.Drawing.Size(1683, 618);
+            this.dgvSchedule.TabIndex = 25;
+            this.dgvSchedule.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSchedule_CellContentClick_1);
             // 
             // AiringDaysOfCinemasId
             // 
             this.AiringDaysOfCinemasId.DataPropertyName = "AiringDaysOfCinemasId";
+            this.AiringDaysOfCinemasId.FillWeight = 152.7282F;
             this.AiringDaysOfCinemasId.HeaderText = "AiringDaysOfCinemasId";
             this.AiringDaysOfCinemasId.MinimumWidth = 6;
             this.AiringDaysOfCinemasId.Name = "AiringDaysOfCinemasId";
@@ -162,7 +187,7 @@
             // Date
             // 
             this.Date.DataPropertyName = "Date";
-            this.Date.FillWeight = 178.1432F;
+            this.Date.FillWeight = 152.7652F;
             this.Date.HeaderText = "Date";
             this.Date.MinimumWidth = 6;
             this.Date.Name = "Date";
@@ -170,7 +195,7 @@
             // Day
             // 
             this.Day.DataPropertyName = "Day";
-            this.Day.FillWeight = 168.7016F;
+            this.Day.FillWeight = 152.7652F;
             this.Day.HeaderText = "Day";
             this.Day.MinimumWidth = 6;
             this.Day.Name = "Day";
@@ -178,14 +203,14 @@
             // Movies
             // 
             this.Movies.DataPropertyName = "NumberOfMovies";
-            this.Movies.FillWeight = 168.7016F;
+            this.Movies.FillWeight = 152.7652F;
             this.Movies.HeaderText = "Movies";
             this.Movies.MinimumWidth = 6;
             this.Movies.Name = "Movies";
             // 
             // Edit
             // 
-            this.Edit.FillWeight = 27.98134F;
+            this.Edit.FillWeight = 29.75783F;
             this.Edit.HeaderText = "";
             this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
             this.Edit.MinimumWidth = 6;
@@ -193,7 +218,7 @@
             // 
             // Delete
             // 
-            this.Delete.FillWeight = 28.13961F;
+            this.Delete.FillWeight = 34.1799F;
             this.Delete.HeaderText = "";
             this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
             this.Delete.MinimumWidth = 6;
@@ -201,48 +226,21 @@
             // 
             // MoviesBtn
             // 
-            this.MoviesBtn.FillWeight = 28.33268F;
+            this.MoviesBtn.FillWeight = 25.03857F;
             this.MoviesBtn.HeaderText = "";
             this.MoviesBtn.Image = ((System.Drawing.Image)(resources.GetObject("MoviesBtn.Image")));
             this.MoviesBtn.MinimumWidth = 6;
             this.MoviesBtn.Name = "MoviesBtn";
-            // 
-            // AddDaybtn
-            // 
-            this.AddDaybtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.AddDaybtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AddDaybtn.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.AddDaybtn.FlatAppearance.BorderSize = 0;
-            this.AddDaybtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddDaybtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddDaybtn.ForeColor = System.Drawing.Color.White;
-            this.AddDaybtn.Location = new System.Drawing.Point(0, 885);
-            this.AddDaybtn.Name = "AddDaybtn";
-            this.AddDaybtn.Size = new System.Drawing.Size(1787, 43);
-            this.AddDaybtn.TabIndex = 22;
-            this.AddDaybtn.Text = "Generate day";
-            this.AddDaybtn.UseVisualStyleBackColor = false;
-            this.AddDaybtn.Click += new System.EventHandler(this.AddDaybtn_Click);
-            // 
-            // selectList
-            // 
-            this.selectList.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectList.FormattingEnabled = true;
-            this.selectList.Location = new System.Drawing.Point(1484, 101);
-            this.selectList.Name = "selectList";
-            this.selectList.Size = new System.Drawing.Size(230, 29);
-            this.selectList.TabIndex = 24;
-            this.selectList.SelectionChangeCommitted += new System.EventHandler(this.selectList_SelectionChangeCommitted);
             // 
             // ScheduleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1787, 928);
+            this.Controls.Add(this.dgvSchedule);
             this.Controls.Add(this.selectList);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.AddDaybtn);
-            this.Controls.Add(this.dgvSchedule);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ScheduleForm";
@@ -260,9 +258,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button Close;
         private System.Windows.Forms.Label Title;
-        private Bunifu.Framework.UI.BunifuCustomDataGrid dgvSchedule;
         private System.Windows.Forms.Button AddDaybtn;
         private System.Windows.Forms.ComboBox selectList;
+        private System.Windows.Forms.DataGridView dgvSchedule;
         private System.Windows.Forms.DataGridViewTextBoxColumn AiringDaysOfCinemasId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Day;

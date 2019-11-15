@@ -20,6 +20,8 @@ namespace Watchables.Model
         [Range(1, 100)]
         public int NumberOfseats { get; set; }
 
+        [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer number for cinemaId")]
         public int CinemaId { get; set; }
     }
 }

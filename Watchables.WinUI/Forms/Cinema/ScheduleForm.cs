@@ -54,6 +54,9 @@ namespace Watchables.WinUI.Forms.Cinema
                 list.Add(Object);
             }
             dgvSchedule.AutoGenerateColumns = false;
+            dgvSchedule.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(178, 8, 55);
+            dgvSchedule.EnableHeadersVisualStyles = false;
+
             dgvSchedule.DataSource = list;
             _list = list;
             selectList.DataSource = new string[] {
@@ -79,7 +82,16 @@ namespace Watchables.WinUI.Forms.Cinema
             dgvSchedule.DataSource = list;
         }
 
-        private void dgvSchedule_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private void AddDaybtn_Click(object sender, EventArgs e) {
+            var form = new AddEditDayOfCinemaForm(this, _schedule, _menuForm);
+            _helper.ShowForm(form,15);
+        }
+
+        private void Title_Click(object sender, EventArgs e) {
+
+        }
+
+        private void dgvSchedule_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var airingDayOfCinemaId = dgvSchedule.Rows[e.RowIndex].Cells["AiringDaysOfCinemasId"].Value;
                 var action = dgvSchedule.Columns[e.ColumnIndex].Name;
@@ -97,15 +109,6 @@ namespace Watchables.WinUI.Forms.Cinema
                     _helper.ShowForm(form, 15);
                 }
             }
-        }
-
-        private void AddDaybtn_Click(object sender, EventArgs e) {
-            var form = new AddEditDayOfCinemaForm(this, _schedule, _menuForm);
-            _helper.ShowForm(form,15);
-        }
-
-        private void Title_Click(object sender, EventArgs e) {
-
         }
     }
 }
