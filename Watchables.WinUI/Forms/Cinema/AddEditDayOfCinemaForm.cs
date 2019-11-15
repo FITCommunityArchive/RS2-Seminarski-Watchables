@@ -68,17 +68,25 @@ namespace Watchables.WinUI.Forms.Cinema
                     return;
                 }
             }
-
-            var Object = new Model.AiringDaysOfCinema() {
-                Date = datePicker.Value
-            };
+           
 
             if (_airingDayId.HasValue) {
+                var Object = new Model.AiringDaysOfCinema() {
+                    Date = datePicker.Value,
+                    AiringDayId = 0,
+                    CinemaId = _schedule.Cinema.CinemaId
+                };
                 await _apiService.UpdateItem<Model.AiringDaysOfCinema>(_airingDayId, "updateAiringDay", Object);
+                messageBox.Show("Airing day updated successfully", "success");
             }
             else {
-                Object.CinemaId = _schedule.Cinema.CinemaId;
+                var Object = new Model.AiringDaysOfCinema() {
+                    Date = datePicker.Value,
+                    AiringDayId = 0,
+                    CinemaId = _schedule.Cinema.CinemaId
+                };
                 await _apiService.InsertItem<Model.AiringDaysOfCinema>("addAiringDay", Object);
+                messageBox.Show("Airing day added successfully", "success");
             }
             this.Close();
             _scheduleForm.Close();
@@ -87,7 +95,7 @@ namespace Watchables.WinUI.Forms.Cinema
                 Dock = DockStyle.Fill
             };
             form.Show();
-            messageBox.Show("Airing day added successfully", "success");
+            
         }
     }
 }

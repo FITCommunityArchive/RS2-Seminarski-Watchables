@@ -75,18 +75,28 @@ namespace Watchables.WebAPI.Services
 
         public Model.Product AddProductToCinema(Model.Product pr) {
 
+            bool validCinemaId = false;
+            foreach (var cinema in _context.Cinemas.ToList()) {
+                if (pr.CinemaId == cinema.CinemaId) {
+                    validCinemaId = true;
+                    break;
+                }
+            }
+            if (!validCinemaId) throw new UserException("Could not find sepcified cinemaId!");
+
             var product = _mapper.Map<Database.Products>(pr);
+            product.ProductId = 0;
             var inBaseProducts = _context.Products.Where(p => p.CinemaId == pr.CinemaId).ToList();
 
             foreach (var inProduct in inBaseProducts) {
-                if (inProduct.Name.ToLower() == product.Name.ToLower() && inProduct.Price==product.Price) {
+                if (inProduct.Name.ToLower() == product.Name.ToLower() && inProduct.Price==product.Price && inProduct.CinemaId==product.CinemaId) {
                     return pr;
                 }
             }
             _context.Products.Add(product);
             _context.SaveChanges();
 
-            return pr;
+            return _mapper.Map<Model.Product>(product);
         }
 
         public List<Model.Hall> GetHallsOfCinema(int cinemaId) {
@@ -117,7 +127,7 @@ namespace Watchables.WebAPI.Services
             }
 
             if (!validHallId) throw new UserException("Cannot find specified Hall with that hallId!");
-
+            hall.HallId = hallId;
             var baseHall = _context.Hall.Find(hallId);
 
             bool validCinemaId = false;
@@ -138,8 +148,30 @@ namespace Watchables.WebAPI.Services
             return _mapper.Map<Model.Hall>(baseHall);
         }
 
-        public Product UpdateProduct(int productId, Product product) {
+        public Product UpdateProduct(int productId, Product product) {           
+
+            bool validProductId = false;
+            foreach (var inProdict in _context.Products.ToList()) {
+                if (productId == inProdict.ProductId) {
+                    validProductId = true;
+                    break;
+                }
+            }
+
+            if (!validProductId) throw new UserException("Cannot find specified Product with that productId!");
+            product.ProductId = productId;
             var baseProduct = _context.Products.Find(productId);
+
+            bool validCinemaId = false;
+            foreach (var cinema in _context.Cinemas.ToList()) {
+                if (product.CinemaId == cinema.CinemaId) {
+                    validCinemaId = true;
+                    break;
+                }
+            }
+
+            if (!validCinemaId) throw new UserException("Invalid cinemaId inside of hall!");
+
             baseProduct.Name = product.Name;
             baseProduct.Price = product.Price;
             _context.SaveChanges();
@@ -214,7 +246,20 @@ namespace Watchables.WebAPI.Services
         }
 
         public Model.AiringDaysOfCinema AddAiringDayToCinema(Model.AiringDaysOfCinema ad) {
+
+            bool validCinemaId = false;
+            foreach (var cinema in _context.Cinemas.ToList()) {
+                if (ad.CinemaId == cinema.CinemaId) {
+                    validCinemaId = true;
+                    break;
+                }
+            }
+            if (!validCinemaId) throw new UserException("Could not find sepcified cinemaId!");
+            ad.AiringDayId = 0;
+
+
             var baseAd = _mapper.Map<Database.AiringDaysOfCinema>(ad);
+            baseAd.AiringDaysOfCinemaId = 0;
             var day = baseAd.Date.DayOfWeek;
             var days = _context.AiringDays.ToList();            
             foreach(var airingDay in days) {
@@ -225,10 +270,43 @@ namespace Watchables.WebAPI.Services
             }            
             _context.AiringDaysOfCinema.Add(baseAd);
             _context.SaveChanges();
-            return ad;
+            return _mapper.Map<Model.AiringDaysOfCinema>(baseAd);
         }
 
         public Model.AiringDaysOfCinema UpdateAiringDay(int airingDayId, Model.AiringDaysOfCinema ad) {
+
+            
+
+            bool validAiringDayId = false;
+            foreach (var inDay in _context.AiringDaysOfCinema.ToList()) {
+                if (airingDayId == inDay.AiringDaysOfCinemaId) {
+                    validAiringDayId = true;
+                    break;
+                }
+            }
+
+            if (!validAiringDayId) throw new UserException("Cannot find specified day with that airingDaysOfCinemaId!");
+            ad.AiringDaysOfCinemaId = airingDayId;
+            bool validCinemaId = false;
+            foreach (var cinema in _context.Cinemas.ToList()) {
+                if (ad.CinemaId == cinema.CinemaId) {
+                    validCinemaId = true;
+                    break;
+                }
+            }
+
+            if (!validCinemaId) throw new UserException("Invalid cinemaId inside of airing day of cinema!");
+
+            bool validDay = false;
+            foreach (var airingDay in _context.AiringDays.ToList()) {
+                if (ad.AiringDayId == airingDay.AiringDayId) {
+                    validDay = true;
+                    break;
+                }
+            }
+            if (ad.AiringDayId == 0) validDay = true;
+            if (!validDay) throw new UserException("Invalid airingDayId inside of airing day of cinema!");
+
             var baseAd = _context.AiringDaysOfCinema.Find(airingDayId);
             baseAd.Date = ad.Date;
             var day = ad.Date.DayOfWeek;
@@ -244,18 +322,95 @@ namespace Watchables.WebAPI.Services
         }
 
         public Model.CinemaDayMovie AddCinemaDayMovieToCinema(Model.CinemaDayMovie cdm) {
-            _context.CinemaDayMovie.Add(_mapper.Map<Database.CinemaDayMovie>(cdm));
+
+            cdm.CinemaDayMovieId = 0;
+            bool validAirinDayOfCinema = false;
+            foreach(var day in _context.AiringDaysOfCinema) {
+                if(cdm.AiringDaysOfCinemaId == day.AiringDaysOfCinemaId) {
+                    validAirinDayOfCinema = true;
+                    break;
+                }
+            }
+            if (!validAirinDayOfCinema) throw new UserException("Invalid airingDaysOfCinemaId");
+
+            bool validMovie = false;
+            foreach(var movie in _context.Movies.Where(m => !m.Standalone).ToList()) {
+                if (cdm.MovieId == movie.MovieId) {
+                    validMovie = true;
+                    break;
+                }
+            }
+            if (!validMovie) throw new UserException("Invalid movieId");
+
+            var CDM = _mapper.Map<Database.CinemaDayMovie>(cdm);
+            _context.CinemaDayMovie.Add(CDM);
             _context.SaveChanges();
-            return cdm;
+            return _mapper.Map<Model.CinemaDayMovie>(CDM);
         }
 
-        public Model.Appointments AddAppointmentToCinema(Model.Appointments app) {            
-            _context.Appointments.Add(_mapper.Map<Database.Appointments>(app));
+        public Model.Appointments AddAppointmentToCinema(Model.Appointments app) {
+
+            app.AppointmentId = 0;
+
+            bool validCinemDayMovie = false;
+            foreach(var cdm in _context.CinemaDayMovie) {
+                if (app.CinemaDayMovieId == cdm.CinemaDayMovieId) {
+                    validCinemDayMovie = true;
+                    break;
+                }
+            }
+            if (!validCinemDayMovie) throw new UserException("Invalid cinemaDayMovieId");
+
+            bool validHall = false;
+            foreach(var hall in _context.Hall) {
+                if (hall.HallId == app.HallId) {
+                    validHall = true;
+                    break;
+                }
+            }
+            if (!validHall) throw new UserException("Invalid hallId");
+
+            var appointment = _mapper.Map<Database.Appointments>(app);
+
+            _context.Appointments.Add(appointment);
             _context.SaveChanges();
-            return app;
+            return _mapper.Map<Model.Appointments>(appointment);
         }
 
         public Model.Appointments UpdateAppointment(int appointmentId, Model.Appointments app) {
+
+            app.AppointmentId = 0;
+
+            bool validAppId = false;
+            foreach (var inApp in _context.Appointments.ToList()) {
+                if (appointmentId == inApp.AppointmentId) {
+                    validAppId = true;
+                    break;
+                }
+            }
+
+            if (!validAppId) throw new UserException("Cannot find specified Appointment with that appointmentId!");
+            app.AppointmentId=appointmentId;
+
+            bool validCinemDayMovie = false;
+            foreach (var cdm in _context.CinemaDayMovie) {
+                if (app.CinemaDayMovieId == cdm.CinemaDayMovieId) {
+                    validCinemDayMovie = true;
+                    break;
+                }
+            }
+            if (!validCinemDayMovie) throw new UserException("Invalid cinemaDayMovieId");
+
+            bool validHall = false;
+            foreach (var hall in _context.Hall) {
+                if (hall.HallId == app.HallId) {
+                    validHall = true;
+                    break;
+                }
+            }
+            if (!validHall) throw new UserException("Invalid hallId");
+
+
             var baseAppointment = _context.Appointments.Find(appointmentId);
             baseAppointment.Price = app.Price;
             baseAppointment.StartsAt = app.StartsAt;

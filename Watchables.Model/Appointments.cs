@@ -8,6 +8,8 @@ namespace Watchables.Model
     public class Appointments
     {
         public int AppointmentId { get; set; }
+        [Required]
+        [Range(1,100)]
         public decimal Price { get; set; }
       
         [Required]
@@ -17,7 +19,13 @@ namespace Watchables.Model
 
         [Range(0,0, ErrorMessage = "A new appointment must have 0 seats to begin with")]
         public int SoldSeats { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter valid integer number for CinemaDayMovieId")]
         public int CinemaDayMovieId { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter valid integer number for HallId")]
         public int HallId { get; set; }
     }
 }

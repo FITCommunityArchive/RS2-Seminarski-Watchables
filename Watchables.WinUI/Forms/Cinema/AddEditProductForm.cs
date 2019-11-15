@@ -78,7 +78,8 @@ namespace Watchables.WinUI.Forms.Cinema
             if (_productId.HasValue) {
                 Model.Product product = new Model.Product() {
                     Name = ProductName.Text,
-                    Price = decimal.Parse(ProductPrice.Text)
+                    Price = decimal.Parse(ProductPrice.Text),
+                    CinemaId = _cinemaId
                 };
                 await _apiService.UpdateItem<Model.Product>(_productId, "UpdateProduct", product);
                 messageBox.Show("Product updated succesfully", "Success");

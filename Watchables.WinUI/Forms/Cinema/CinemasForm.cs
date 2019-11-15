@@ -20,7 +20,8 @@ namespace Watchables.WinUI.Forms
 
         public CinemasForm() {
             InitializeComponent();
-            var nesto = AddCinemaButton.Height;
+            dgvCinemas.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(178, 8, 55);
+            dgvCinemas.EnableHeadersVisualStyles = false;
         }
 
         protected override async void OnLoad(EventArgs e) {
@@ -30,9 +31,7 @@ namespace Watchables.WinUI.Forms
 
             var result = await _apiService.Get<List<Model.Cinema>>(search);
             result.Sort((a, b) => a.Name.CompareTo(b.Name));
-            dgvCinemas.AutoGenerateColumns = false;
-            dgvCinemas.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(178, 8, 55);
-            dgvCinemas.EnableHeadersVisualStyles = false;
+            dgvCinemas.AutoGenerateColumns = false;            
             dgvCinemas.DataSource = result;
             Cinema.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;            
         }
@@ -41,10 +40,7 @@ namespace Watchables.WinUI.Forms
 
         private async void button1_Click(object sender, EventArgs e) {
 
-            var messageBox = new CustomMessageBox();
-            if (string.IsNullOrWhiteSpace(ratingTextBox.Text)){
-                ratingTextBox.Text = "0";
-            }
+            var messageBox = new CustomMessageBox();        
 
 
             if (!string.IsNullOrWhiteSpace(ratingTextBox.Text) && !decimal.TryParse(ratingTextBox.Text, out decimal n)) {
@@ -52,7 +48,7 @@ namespace Watchables.WinUI.Forms
                 return;
             }
 
-            decimal rating = (!string.IsNullOrWhiteSpace(ratingTextBox.Text)) ? decimal.Parse(ratingTextBox.Text) : (-1);
+            decimal rating = (!string.IsNullOrWhiteSpace(ratingTextBox.Text)) ? decimal.Parse(ratingTextBox.Text) : (0);
 
             if (rating < 0 || rating > 5) {
                 messageBox.Show("Enter a valid rating (0-5)!", "error");

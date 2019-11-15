@@ -18,6 +18,8 @@ namespace Watchables.Model
         [Required]
         public decimal Price { get; set; }
 
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter valid integer number for cinemaId")]
         public int CinemaId { get; set; }
     }
 }

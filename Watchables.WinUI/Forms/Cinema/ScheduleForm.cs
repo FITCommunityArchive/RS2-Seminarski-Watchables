@@ -23,6 +23,9 @@ namespace Watchables.WinUI.Forms.Cinema
             InitializeComponent();
             _cinemaId = cinemaId;
             _menuForm = menuForm;
+
+            dgvSchedule.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(178, 8, 55);
+            dgvSchedule.EnableHeadersVisualStyles = false;
         }
 
      
@@ -53,9 +56,7 @@ namespace Watchables.WinUI.Forms.Cinema
                 };
                 list.Add(Object);
             }
-            dgvSchedule.AutoGenerateColumns = false;
-            dgvSchedule.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(178, 8, 55);
-            dgvSchedule.EnableHeadersVisualStyles = false;
+            dgvSchedule.AutoGenerateColumns = false;       
 
             dgvSchedule.DataSource = list;
             _list = list;
