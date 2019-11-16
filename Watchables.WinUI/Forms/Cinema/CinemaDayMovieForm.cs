@@ -84,7 +84,7 @@ namespace Watchables.WinUI.Forms.Cinema
                     MessageBox.Show("Delete", cinemaDayMovieId.ToString());
                 }
                 else if (action == "Apps") {
-                    AppointmentsForm form = new AppointmentsForm(_scheduleForm, _schedule, _menuForm, _airingDayId, _date, _day, int.Parse(cinemaDayMovieId.ToString()), int.Parse(movieId.ToString()));
+                    AppointmentsForm form = new AppointmentsForm(_scheduleForm, _schedule, _menuForm, _airingDayId, _date, _day, int.Parse(cinemaDayMovieId.ToString()), int.Parse(movieId.ToString()), this);
                     _helper.CloseForm(this, 15);
                     _helper.ShowForm(form, 15);
                 }

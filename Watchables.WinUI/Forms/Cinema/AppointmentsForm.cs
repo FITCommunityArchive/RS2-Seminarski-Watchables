@@ -23,8 +23,9 @@ namespace Watchables.WinUI.Forms.Cinema
         private readonly string _day;
         private readonly int _cinemaDayMovieId;
         private readonly int _movieId;
+        private readonly CinemaDayMovieForm _cinemaDayMovieForm;
 
-        public AppointmentsForm(ScheduleForm scheduleForm, Model.Requests.CinemasScheduleRequest schedule, MenuForm menuForm, int airingDayId, DateTime date, string day, int cinemaDayMovieId, int movieId) {
+        public AppointmentsForm(ScheduleForm scheduleForm, Model.Requests.CinemasScheduleRequest schedule, MenuForm menuForm, int airingDayId, DateTime date, string day, int cinemaDayMovieId, int movieId, CinemaDayMovieForm cinemaDayMovieForm) {
             InitializeComponent();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 20 - this.Width, Screen.PrimaryScreen.Bounds.Height - this.Height - AddAppBtn.Height - 20);
@@ -36,6 +37,7 @@ namespace Watchables.WinUI.Forms.Cinema
             _day = day;
             _cinemaDayMovieId = cinemaDayMovieId;           
             _movieId = movieId;
+            _cinemaDayMovieForm = cinemaDayMovieForm;
         }
 
         private void closeBtn_Click(object sender, EventArgs e) {
@@ -79,12 +81,15 @@ namespace Watchables.WinUI.Forms.Cinema
             dgvAppointments.AutoGenerateColumns = false;
             dgvAppointments.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(178, 8, 55);
             dgvAppointments.EnableHeadersVisualStyles = false;
+            list.Sort((a, b) => a.StartsAt.CompareTo(b.StartsAt));
             dgvAppointments.DataSource = list;            
             Title.Text = $"{_schedule.Cinema.Name}, {_day} {_date.ToString("dd. MMM yyyy")}, {movie.Title}";
         }      
 
         private void AddAppBtn_Click(object sender, EventArgs e) {
-            MessageBox.Show("Add");
+            var form = new AddEditAppointmentForm(this, _scheduleForm, _schedule, _menuForm, _airingDayId, _date, _day, _cinemaDayMovieId, _movieId, _cinemaDayMovieForm);
+            _helper.CloseForm(this, 15);
+            _helper.ShowForm(form, 15);
         }
 
         private void dgvAppointments_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
@@ -93,7 +98,9 @@ namespace Watchables.WinUI.Forms.Cinema
                 var movieId = dgvAppointments.Rows[e.RowIndex].Cells["HallId"].Value;
                 var action = dgvAppointments.Columns[e.ColumnIndex].Name;
                 if (action == "Edit") {
-                    MessageBox.Show("Edit", appointmentId.ToString());
+                    var form = new AddEditAppointmentForm(this,_scheduleForm, _schedule, _menuForm, _airingDayId, _date, _day, _cinemaDayMovieId, _movieId, _cinemaDayMovieForm, int.Parse(appointmentId.ToString()));
+                    _helper.CloseForm(this, 15);
+                    _helper.ShowForm(form, 15);
                 }
                 else if (action == "Delete") {
                     MessageBox.Show("Delete", appointmentId.ToString());

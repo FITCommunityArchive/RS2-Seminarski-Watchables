@@ -65,6 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIService.cs" />
+    <Compile Include="Forms\Cinema\AddEditAppointmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Cinema\AddEditAppointmentForm.Designer.cs">
+      <DependentUpon>AddEditAppointmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Cinema\AddEditCinemaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +158,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Cinema\AddEditAppointmentForm.resx">
+      <DependentUpon>AddEditAppointmentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Cinema\AddEditCinemaForm.resx">
       <DependentUpon>AddEditCinemaForm.cs</DependentUpon>
     </EmbeddedResource>
