@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Watchables.Model
+namespace Watchables.Model.Requests
 {
-    public class Movie
+    public class InsertMovieRequest
     {
-        public int MovieId { get; set; }
         [Required]
         [MinLength(4)]
         public string Title { get; set; }

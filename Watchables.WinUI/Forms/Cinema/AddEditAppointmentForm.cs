@@ -175,12 +175,10 @@ namespace Watchables.WinUI.Forms.Cinema
                 Dock = DockStyle.Fill
             };
             var schedule = await _apiService.CustomGet<Model.Requests.CinemasScheduleRequest>("GetCinemasSchedule", _schedule.Cinema.CinemaId);
-            CinemaDayMovieForm form = new CinemaDayMovieForm(sch, schedule, _menuForm, _airingDayId, _date, _day);
-            AppointmentsForm form2 = new AppointmentsForm(sch, schedule, _menuForm, _airingDayId, _date, _day, _cinemaDayMovieId, _movieId, _cinemaDayMovieForm);
+            AppointmentsForm form = new AppointmentsForm(sch, schedule, _menuForm, _airingDayId, _date, _day, _cinemaDayMovieId, _movieId, _cinemaDayMovieForm);
             
             sch.Show();
-            form.Show();
-            _helper.ShowForm(form2, 15); 
+            _helper.ShowForm(form, 15); 
         }
 
      

@@ -18,6 +18,7 @@ namespace Watchables.WebAPI.Mappers
             CreateMap<Database.CinemaDayMovie, Model.CinemaDayMovie>().ReverseMap();
             CreateMap<Database.Appointments, Model.Appointments>().ReverseMap();
             CreateMap<Database.Movies, Model.Movie>().ReverseMap();
+            CreateMap<Database.Movies, Model.Requests.InsertMovieRequest>().ReverseMap();
         }
     }
 }

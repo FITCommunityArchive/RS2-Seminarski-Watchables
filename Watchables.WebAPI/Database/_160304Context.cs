@@ -36,15 +36,7 @@ namespace Watchables.WebAPI.Database
         public virtual DbSet<UsersRotations> UsersRotations { get; set; }
         public virtual DbSet<UsersShows> UsersShows { get; set; }
         public virtual DbSet<UsersSubscriptions> UsersSubscriptions { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=160304; Trusted_Connection=True;");
-            }
-        }
+   
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

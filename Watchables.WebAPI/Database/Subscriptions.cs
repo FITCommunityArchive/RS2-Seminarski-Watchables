@@ -15,6 +15,7 @@ namespace Watchables.WebAPI.Database
         public int NumberOfShows { get; set; }
         public int NumberOfTickets { get; set; }
         public decimal Price { get; set; }
+        public bool Available { get; set; }
 
         public virtual ICollection<UsersSubscriptions> UsersSubscriptions { get; set; }
     }

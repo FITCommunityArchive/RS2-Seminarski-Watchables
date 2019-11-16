@@ -17,6 +17,7 @@ namespace Watchables.WebAPI.Database
         public bool ForBirthday { get; set; }
         public int ShowId { get; set; }
         public int MovieId { get; set; }
+        public bool Available { get; set; }
 
         public virtual Movies Movie { get; set; }
         public virtual Shows Show { get; set; }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Watchables.WinUI.Forms;
 using Watchables.WinUI.Forms.Cinema;
+using Watchables.WinUI.Forms.Movie;
 
 namespace Watchables.WinUI
 {
@@ -122,7 +123,15 @@ namespace Watchables.WinUI
             Slider.Top = ShowCinemasBtn.Top;
         }
 
-        private void ShowMoviesBtn_Click(object sender, EventArgs e) {         
+        private void ShowMoviesBtn_Click(object sender, EventArgs e) {
+            foreach (Form frm in this.MdiChildren) {
+                frm.Close();
+            }
+            MoviesForm form = new MoviesForm {
+                MdiParent = this,
+                Dock = DockStyle.Fill
+            };
+            form.Show();
             Slider.Top = ShowMoviesBtn.Top;
             Slider.Height = ShowMoviesBtn.Height;
         }

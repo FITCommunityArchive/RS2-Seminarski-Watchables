@@ -25,6 +25,7 @@ namespace Watchables.WebAPI.Database
         public string Address { get; set; }
         public DateTime BirthDate { get; set; }
         public string ImageLink { get; set; }
+        public bool Locked { get; set; }
 
         public virtual ICollection<Orders> Orders { get; set; }
         public virtual ICollection<UsersMovies> UsersMovies { get; set; }

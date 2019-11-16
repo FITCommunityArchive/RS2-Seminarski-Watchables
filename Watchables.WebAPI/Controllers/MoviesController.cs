@@ -19,13 +19,17 @@ namespace Watchables.WebAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Model.Movie>> Get() {
-            return _service.Get();
+        public ActionResult<List<Model.Movie>> Get([FromQuery]Model.Requests.MovieSearchRequest request) {
+            return _service.Get(request);
         }
 
         [HttpGet("{id}")]
         public ActionResult<Model.Movie> GetById(int id) {
             return _service.GetById(id);
+        }
+        [HttpPost]
+        public ActionResult<Model.Movie> Insert(Model.Requests.InsertMovieRequest request) {
+            return _service.Insert(request);
         }
 
     }

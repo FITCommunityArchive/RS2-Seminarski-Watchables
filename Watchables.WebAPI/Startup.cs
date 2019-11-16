@@ -42,6 +42,7 @@ namespace Watchables.WebAPI
             //AutoMapper
             services.AddAutoMapper();
 
+
             //Interface overrides
             services.AddScoped<IInitializeService, InitializeService>();
             services.AddScoped<ICinemasService, CinemasService>();
