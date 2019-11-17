@@ -58,5 +58,52 @@ namespace Watchables.WinUI.Forms.Movie
             };
             form.Show();
         }
+
+        private async void searchBtn_Click(object sender, EventArgs e) {
+            var messageBox = new CustomMessageBox();
+
+            if (!string.IsNullOrWhiteSpace(RatingSearch.Text) && !decimal.TryParse(RatingSearch.Text, out decimal n)) {
+                messageBox.Show("Enter a valid rating (0-10)!", "error");
+                return;
+            }
+
+            decimal rating = (!string.IsNullOrWhiteSpace(RatingSearch.Text)) ? decimal.Parse(RatingSearch.Text) : (0);
+
+            if (rating < 0 || rating > 10) {
+                messageBox.Show("Enter a valid rating (0-10)!", "error");
+                return;
+            }
+
+            string standalone = "";            
+            if (StandaloneCB.Checked) standalone = "true";
+            else standalone = "false";
+
+            var search = new Model.Requests.MovieSearchRequest() {
+                Rating = rating,
+                Standalone = standalone,
+                Title = Movie.Text,
+                Year = int.Parse(YearSearch.Value.ToString())
+            };
+
+            var list = await _apiService.Get<List<Model.Movie>>(search);
+            list.Sort((a, b) => a.Title.CompareTo(b.Title));
+            dgvMovies.AutoGenerateColumns = false;
+            dgvMovies.DataSource = list;
+
+        }
+
+        private async void clearSearch_Click(object sender, EventArgs e) {
+            RatingSearch.Text = "";
+            YearSearch.Value = YearSearch.Minimum;
+            StandaloneCB.Checked = false;
+            Movie.Text = "";           
+
+            var list = await _apiService.Get<List<Model.Movie>>(null);
+            list.Sort((a, b) => a.Title.CompareTo(b.Title));
+            dgvMovies.AutoGenerateColumns = false;
+            dgvMovies.DataSource = list;
+        }
+
+     
     }
 }

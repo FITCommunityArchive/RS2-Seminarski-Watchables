@@ -181,6 +181,22 @@ namespace Watchables.WinUI.Forms.Cinema
             _helper.ShowForm(form, 15); 
         }
 
-     
+        private async void reloadBtn_Click(object sender, EventArgs e) {
+            if (_appointmentId.HasValue) {
+                var appApi = new APIService("Appointments");
+                var app = await appApi.GetById<Model.Appointments>(_appointmentId);
+
+                Price.Text = app.Price.ToString();
+                StartsAt.Value = DateTime.Parse(app.StartsAt.ToString());
+                var hallApi = new APIService("halls");
+                var hall = await hallApi.GetById<Model.Hall>(app.HallId);
+                HallsBox.SelectedIndex = HallsBox.Items.IndexOf(new { Text = hall.HallName + " " + hall.HallNumber, Value = hall.HallId });
+            }
+            else {
+                Price.Text = "";
+                StartsAt.Value = DateTime.Now;
+                HallsBox.SelectedIndex = -1;
+            }
+        }
     }
 }

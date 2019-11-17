@@ -63,6 +63,7 @@ namespace Watchables.WinUI.Forms
             };
 
             var result = await _apiService.Get<List<Model.Cinema>>(search);
+            result.Sort((a, b) => a.Name.CompareTo(b.Name));
             dgvCinemas.AutoGenerateColumns = false;
             dgvCinemas.DataSource = result;
         }
@@ -87,6 +88,7 @@ namespace Watchables.WinUI.Forms
             var search = new CinemasSearchRequest() { };
 
             var result = await _apiService.Get<List<Model.Cinema>>(search);
+            result.Sort((a, b) => a.Name.CompareTo(b.Name));
             dgvCinemas.AutoGenerateColumns = false;
             dgvCinemas.DataSource = result;
 

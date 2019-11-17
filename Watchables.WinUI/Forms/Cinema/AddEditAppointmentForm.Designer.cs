@@ -42,6 +42,7 @@
             this.Cinema = new System.Windows.Forms.Label();
             this.Day = new System.Windows.Forms.Label();
             this.Movie = new System.Windows.Forms.Label();
+            this.reloadBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +66,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Snow;
+            this.panel1.Controls.Add(this.reloadBtn);
             this.panel1.Controls.Add(this.closeBtn);
             this.panel1.Location = new System.Drawing.Point(749, 12);
             this.panel1.Name = "panel1";
@@ -212,6 +214,22 @@
             this.Movie.TabIndex = 28;
             this.Movie.Text = "label9";
             // 
+            // reloadBtn
+            // 
+            this.reloadBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.reloadBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.reloadBtn.FlatAppearance.BorderSize = 0;
+            this.reloadBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.reloadBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.reloadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reloadBtn.Image = ((System.Drawing.Image)(resources.GetObject("reloadBtn.Image")));
+            this.reloadBtn.Location = new System.Drawing.Point(29, 0);
+            this.reloadBtn.Name = "reloadBtn";
+            this.reloadBtn.Size = new System.Drawing.Size(43, 36);
+            this.reloadBtn.TabIndex = 2;
+            this.reloadBtn.UseVisualStyleBackColor = true;
+            this.reloadBtn.Click += new System.EventHandler(this.reloadBtn_Click);
+            // 
             // AddEditAppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -261,5 +279,6 @@
         private System.Windows.Forms.Label Cinema;
         private System.Windows.Forms.Label Day;
         private System.Windows.Forms.Label Movie;
+        private System.Windows.Forms.Button reloadBtn;
     }
 }
