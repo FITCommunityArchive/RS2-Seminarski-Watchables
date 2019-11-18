@@ -99,6 +99,53 @@ namespace Watchables.WebAPI.Services
             else throw new UserException("The database is already initialized with movies!");
         }
 
+        public string AddShows() {
+            if (!_context.Shows.Any()) {
+
+                var show1 = new Database.Shows() {
+                    Cast= "Zach Braff, Donald Faison, Sarah Chalke",
+                    Description= "In the unreal world of Sacred Heart Hospital, intern John 'J.D' Dorian learns the ways of medicine, friendship, and life.",
+                    ImageLink= "https://m.media-amazon.com/images/M/MV5BODE1MGVjZjMtODc5My00ODBjLTg0NWItMDllNTNlM2Y3ZGYyXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SY1000_CR0,0,647,1000_AL_.jpg",
+                    NumberOfSeasons=9,
+                    Ongoing=false,
+                    Price=20,
+                    Rating=decimal.Parse(8.3.ToString()),
+                    Title="Scrubs",
+                    Year=2001,
+                    TrailerLink= "https://www.youtube.com/embed/Ji6-Pbfypys"   
+                };
+                var show2 = new Database.Shows() {
+                    Cast= "Josh Radnor, Jason Segel, Cobie Smulders",
+                    Description= "A father recounts to his children, through a series of flashbacks, the journey he and his four best friends took leading up to him meeting their mother.",
+                    ImageLink= "https://m.media-amazon.com/images/M/MV5BZWJjMDEzZjUtYWE1Yy00M2ZiLThlMmItODljNTAzODFiMzc2XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SY1000_CR0,0,666,1000_AL_.jpg",
+                    NumberOfSeasons=9,
+                    Ongoing=false,
+                    Price=20,
+                    Rating=decimal.Parse(8.3.ToString()),
+                    Title="How I met your mother",
+                    Year=2005,
+                    TrailerLink= "https://www.youtube.com/embed/C8-4jMTOUJI"
+                };
+
+                _context.AddRange(show1, show2);
+                _context.SaveChanges();
+
+
+                return "Initialized";
+            }
+            else throw new UserException("The database is already initialized with shows!");
+        }
+
+        public string AddUsers() {
+            if (!_context.Users.Any()) {
+
+               
+
+                return "Initialized";
+            }
+            else throw new UserException("The database is already initialized with users!");
+        }
+
         public string Init() {
 
             if (!_context.AiringDaysOfCinema.Any()) {

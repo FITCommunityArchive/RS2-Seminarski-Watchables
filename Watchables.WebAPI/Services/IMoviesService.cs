@@ -10,5 +10,6 @@ namespace Watchables.WebAPI.Services
         List<Model.Movie> Get(Model.Requests.MovieSearchRequest request);
         Model.Movie GetById(int id);
         Model.Movie Insert(Model.Requests.InsertMovieRequest request);
+        Model.Movie Update(int movieId, Model.Requests.InsertMovieRequest request);
     }
 }

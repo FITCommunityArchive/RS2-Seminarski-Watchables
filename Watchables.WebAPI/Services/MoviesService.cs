@@ -44,5 +44,12 @@ namespace Watchables.WebAPI.Services
 
             return _mapper.Map<Model.Movie>(_mapper.Map<Database.Movies>(request));
         }
+
+        public Movie Update(int movieId, InsertMovieRequest request) {
+            var movie = _context.Movies.Find(movieId);
+            _mapper.Map(request, movie);
+            _context.SaveChanges();
+            return _mapper.Map<Model.Movie>(movie);
+        }
     }
 }

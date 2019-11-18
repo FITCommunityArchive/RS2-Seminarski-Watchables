@@ -29,7 +29,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.Reset = new System.Windows.Forms.Button();
             this.Close = new System.Windows.Forms.Button();
-            this.Title = new System.Windows.Forms.Label();
+            this.PageTitle = new System.Windows.Forms.Label();
             this.Trailer = new System.Windows.Forms.WebBrowser();
             this.MovieTitle = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -60,7 +60,7 @@
             // 
             this.panel1.Controls.Add(this.Reset);
             this.panel1.Controls.Add(this.Close);
-            this.panel1.Controls.Add(this.Title);
+            this.panel1.Controls.Add(this.PageTitle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -81,6 +81,7 @@
             this.Reset.Size = new System.Drawing.Size(56, 74);
             this.Reset.TabIndex = 18;
             this.Reset.UseVisualStyleBackColor = true;
+            this.Reset.Click += new System.EventHandler(this.Reset_Click_1);
             // 
             // Close
             // 
@@ -100,15 +101,15 @@
             this.Close.UseVisualStyleBackColor = false;
             this.Close.Click += new System.EventHandler(this.Close_Click);
             // 
-            // Title
+            // PageTitle
             // 
-            this.Title.AutoSize = true;
-            this.Title.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(42, 9);
-            this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(143, 74);
-            this.Title.TabIndex = 23;
-            this.Title.Text = "Title";
+            this.PageTitle.AutoSize = true;
+            this.PageTitle.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PageTitle.Location = new System.Drawing.Point(42, 9);
+            this.PageTitle.Name = "PageTitle";
+            this.PageTitle.Size = new System.Drawing.Size(143, 74);
+            this.PageTitle.TabIndex = 23;
+            this.PageTitle.Text = "Title";
             // 
             // Trailer
             // 
@@ -315,6 +316,7 @@
             this.SaveBtn.TabIndex = 53;
             this.SaveBtn.Text = "Save";
             this.SaveBtn.UseVisualStyleBackColor = false;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // Standalone
             // 
@@ -381,7 +383,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button Reset;
         private System.Windows.Forms.Button Close;
-        private System.Windows.Forms.Label Title;
+        private System.Windows.Forms.Label PageTitle;
         private System.Windows.Forms.WebBrowser Trailer;
         private System.Windows.Forms.TextBox MovieTitle;
         private System.Windows.Forms.Label label1;

@@ -33,6 +33,10 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<string> Init() {
             return _service.Init();
         }
+        [HttpPost("AddShows")]
+        public ActionResult<string> AddShows() {
+            return _service.AddShows();
+        }
 
     }
 }

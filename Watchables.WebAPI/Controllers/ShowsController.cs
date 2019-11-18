@@ -10,32 +10,30 @@ namespace Watchables.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MoviesController : ControllerBase
+    public class ShowsController : ControllerBase
     {
         //Dependency injection
-        private readonly IMoviesService _service;
-        public MoviesController(IMoviesService service) {
+        private readonly IShowsService _service;
+        public ShowsController(IShowsService service) {
             _service = service;
         }
-
         [HttpGet]
-        public ActionResult<List<Model.Movie>> Get([FromQuery]Model.Requests.MovieSearchRequest request) {
+        public ActionResult<List<Model.Show>> Get([FromQuery]Model.Requests.ShowSearchRequest request) {
             return _service.Get(request);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Model.Movie> GetById(int id) {
+        public ActionResult<Model.Show> GetById(int id) {
             return _service.GetById(id);
         }
         [HttpPost]
-        public ActionResult<Model.Movie> Insert(Model.Requests.InsertMovieRequest request) {
+        public ActionResult<Model.Show> Insert(Model.Requests.InsertShowRequest request) {
             return _service.Insert(request);
         }
 
-        [HttpPut("{movieId}")]
-        public ActionResult<Model.Movie> Update(int movieId, Model.Requests.InsertMovieRequest request) {
-            return _service.Update(movieId, request);
+        [HttpPut("{showId}")]
+        public ActionResult<Model.Show> Update(int showId, Model.Requests.InsertShowRequest request) {
+            return _service.Update(showId, request);
         }
-
     }
 }

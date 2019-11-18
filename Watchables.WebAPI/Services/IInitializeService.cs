@@ -10,5 +10,7 @@ namespace Watchables.WebAPI.Services
         string AddDays();
         string AddMovies();
         string Init();
+        string AddShows();
+        string AddUsers();
     }
 }

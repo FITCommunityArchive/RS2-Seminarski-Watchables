@@ -53,6 +53,7 @@ namespace Watchables.WebAPI
             services.AddScoped<IAiringDaysOfCinemaService, AirinDaysOfCinemaService>();
             services.AddScoped<ICinemaDayMovieService, CinemaDayMovieService>();
             services.AddScoped<IAppointmentsService, AppointmentsService>();
+            services.AddScoped<IShowsService, ShowsService>();
 
         }
 
