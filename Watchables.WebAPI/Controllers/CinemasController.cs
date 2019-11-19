@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Watchables.Model.Requests;
@@ -20,7 +21,7 @@ namespace Watchables.WebAPI.Controllers
         public CinemasController(ICinemasService service) {
             _service = service;
         }
-
+        
         [HttpGet]
         public ActionResult<List<Model.Cinema>> Get([FromQuery]Model.Requests.CinemasSearchRequest request) {
             return _service.Get(request);

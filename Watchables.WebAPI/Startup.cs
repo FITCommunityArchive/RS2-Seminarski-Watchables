@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using eProdaja.WebAPI.Filters;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,11 +15,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using Watchables.WebAPI.Database;
+using Watchables.WebAPI.Securitydb;
 using Watchables.WebAPI.Services;
 
 namespace Watchables.WebAPI
 {
+
     public class Startup
     {
         public Startup(IConfiguration configuration) {
@@ -31,10 +36,31 @@ namespace Watchables.WebAPI
         public void ConfigureServices(IServiceCollection services) {
 
             //Controllers and filters
-            services.AddControllers(x => x.Filters.Add<ErrorFilter>());          
-         
+            services.AddControllers(x => x.Filters.Add<ErrorFilter>());
+
             //Swagger
-            services.AddSwaggerGen(c =>{ c.SwaggerDoc("v1", new OpenApiInfo { Title = "Watchables API", Version = "v1" });});
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Watchables API", Version = "v1" });
+
+                c.AddSecurityDefinition("basicAuth", new OpenApiSecurityScheme() {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "  ",
+                    Description = "Input your username and password to access this API",
+                    In = ParameterLocation.Header,
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "basicAuth" }
+                        }, new List<string>() }
+                });
+            });
+
 
             //Database
             services.AddDbContext<_160304Context>(options => options.UseSqlServer(Configuration.GetConnectionString("connectionString")));
@@ -42,6 +68,9 @@ namespace Watchables.WebAPI
             //AutoMapper
             services.AddAutoMapper();
 
+            //Authentication
+            services.AddAuthentication("BasicAuthentication")
+               .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             //Interface overrides
             services.AddScoped<IInitializeService, InitializeService>();
@@ -54,7 +83,10 @@ namespace Watchables.WebAPI
             services.AddScoped<ICinemaDayMovieService, CinemaDayMovieService>();
             services.AddScoped<IAppointmentsService, AppointmentsService>();
             services.AddScoped<IShowsService, ShowsService>();
-
+            services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IUserService, UserService>();
+            // services.AddScoped<IAuthService, AuthService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,13 +97,14 @@ namespace Watchables.WebAPI
 
             app.UseSwagger();
 
-          
+
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {

@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 using Flurl.Http;
 using Flurl;
 using Watchables.Model;
+using System.Windows.Forms;
 
 namespace Watchables.WinUI
 {
     public class APIService
     {
+        public static string Username { get; set; }
+        public static string Password { get; set; }
         private readonly string _controller;
+        private readonly CustomMessageBox _customMessageBox = new CustomMessageBox();
         public APIService(string route) {
             _controller = route;
         }
@@ -24,29 +28,40 @@ namespace Watchables.WinUI
                 url += "?";
                 url += await search.ToQueryString();
             }
+            try {
+                var result = await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    _customMessageBox.Show("Niste authentificirani", "error");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    _customMessageBox.Show("Forbidden", "error");
+                }
+                throw;
+            }
 
-            var result = await url.GetJsonAsync<T>();
-            return result;
         }
 
         public async Task<T> GetById<T>(object id) {
 
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{id}";           
-            var result = await url.GetJsonAsync<T>();
+            var result = await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
             return result;
         }
 
         public async Task<T> Insert<T>(object request) {
 
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}";
-            var result = await url.PostJsonAsync(request).ReceiveJson<T>();
+            var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(request).ReceiveJson<T>();
             return result;
         }
 
         public async Task<T> Update<T>(object id, object request) {
 
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{id}";
-            var result = await url.PutJsonAsync(request).ReceiveJson<T>();
+            var result = await url.WithBasicAuth(Username, Password).PutJsonAsync(request).ReceiveJson<T>();
             return result;
         }
 
@@ -54,21 +69,21 @@ namespace Watchables.WinUI
         public async Task<T> GetItems<T>(object id, string items) {
 
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{items}/{id}";
-            var result = await url.GetJsonAsync<T>();
+            var result = await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
             return result;
         }
 
         public async Task<T> UpdateItem<T>(object id, string action, object item) {
 
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}/{id}";
-            var result = await url.PutJsonAsync(item).ReceiveJson<T>();
+            var result = await url.WithBasicAuth(Username, Password).PutJsonAsync(item).ReceiveJson<T>();
             return result;
         }
 
         public async Task<T> InsertItem<T>(string action, object item) {
          
                 var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}";
-                var result = await url.PostJsonAsync(item).ReceiveJson<T>();
+                var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(item).ReceiveJson<T>();
                 return result;           
         
         }
@@ -82,7 +97,7 @@ namespace Watchables.WinUI
             else {
                 url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}/{id}";
             }
-            var result = await url.GetJsonAsync<T>();
+            var result = await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
             return result;
 
 

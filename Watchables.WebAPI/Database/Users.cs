@@ -16,9 +16,7 @@ namespace Watchables.WebAPI.Database
         }
 
         public int UserId { get; set; }
-        public string Mail { get; set; }
-        public string Password { get; set; }
-        public string Username { get; set; }
+        public string Mail { get; set; }       
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
@@ -26,6 +24,9 @@ namespace Watchables.WebAPI.Database
         public DateTime BirthDate { get; set; }
         public string ImageLink { get; set; }
         public bool Locked { get; set; }
+
+        public int AccountId { get; set; }
+        public virtual Account Account { get; set; }
 
         public virtual ICollection<Orders> Orders { get; set; }
         public virtual ICollection<UsersMovies> UsersMovies { get; set; }

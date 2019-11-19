@@ -157,7 +157,7 @@ namespace Watchables.WinUI
         }
 
         private void ExitBtn_Click(object sender, EventArgs e) {
-            this.Close();
+            Environment.Exit(0);
         }
 
         private void MinimizeBtn_Click(object sender, EventArgs e) {

@@ -21,6 +21,15 @@ namespace Watchables.WebAPI.Mappers
             CreateMap<Database.Movies, Model.Requests.InsertMovieRequest>().ReverseMap();
             CreateMap<Database.Shows, Model.Show>().ReverseMap();
             CreateMap<Database.Shows, Model.Requests.InsertShowRequest>().ReverseMap();
+
+            CreateMap<Database.Admins, Model.Admin>().ReverseMap();
+            CreateMap<Database.Admins, Model.Requests.InsertAdminRequest>().ReverseMap();
+
+            CreateMap<Database.Account, Model.Account>().ReverseMap();
+            CreateMap<Database.Account, Model.Requests.InsertAccountRequest>().ReverseMap();
+
+            CreateMap<Database.Users, Model.User>().ReverseMap();
+            CreateMap<Database.Users, Model.Requests.InsertUserRequest>().ReverseMap();
         }
     }
 }

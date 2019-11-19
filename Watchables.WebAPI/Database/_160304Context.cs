@@ -15,6 +15,7 @@ namespace Watchables.WebAPI.Database
         {
         }
 
+        public virtual DbSet<Admins> Admins { get; set; }
         public virtual DbSet<AiringDays> AiringDays { get; set; }
         public virtual DbSet<AiringDaysOfCinema> AiringDaysOfCinema { get; set; }
         public virtual DbSet<Appointments> Appointments { get; set; }
@@ -36,10 +37,15 @@ namespace Watchables.WebAPI.Database
         public virtual DbSet<UsersRotations> UsersRotations { get; set; }
         public virtual DbSet<UsersShows> UsersShows { get; set; }
         public virtual DbSet<UsersSubscriptions> UsersSubscriptions { get; set; }
-   
+        public virtual DbSet<Account> Accounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Admins>(entity =>
+            {
+                entity.HasKey(e => e.AdminId);
+            });
+
             modelBuilder.Entity<AiringDays>(entity =>
             {
                 entity.HasKey(e => e.AiringDayId);
