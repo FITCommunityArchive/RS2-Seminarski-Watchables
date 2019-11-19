@@ -34,10 +34,10 @@ namespace Watchables.WinUI
             }
             catch (FlurlHttpException ex) {
                 if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
-                    _customMessageBox.Show("Niste authentificirani", "error");
+                    _customMessageBox.Show("Access denied!", "error");
                 }
                 if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
-                    _customMessageBox.Show("Forbidden", "error");
+                    _customMessageBox.Show("Access forbidden", "error");
                 }
                 throw;
             }
@@ -54,15 +54,37 @@ namespace Watchables.WinUI
         public async Task<T> Insert<T>(object request) {
 
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}";
-            var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(request).ReceiveJson<T>();
-            return result;
+            try {
+                var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(request).ReceiveJson<T>();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    _customMessageBox.Show("Access denied!", "error");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    _customMessageBox.Show("Access forbidden", "error");
+                }
+                throw;
+            }
         }
 
         public async Task<T> Update<T>(object id, object request) {
 
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{id}";
-            var result = await url.WithBasicAuth(Username, Password).PutJsonAsync(request).ReceiveJson<T>();
-            return result;
+            try {
+                var result = await url.WithBasicAuth(Username, Password).PutJsonAsync(request).ReceiveJson<T>();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    _customMessageBox.Show("Access denied!", "error");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    _customMessageBox.Show("Access forbidden", "error");
+                }
+                throw;
+            }
         }
 
 
@@ -76,16 +98,37 @@ namespace Watchables.WinUI
         public async Task<T> UpdateItem<T>(object id, string action, object item) {
 
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}/{id}";
-            var result = await url.WithBasicAuth(Username, Password).PutJsonAsync(item).ReceiveJson<T>();
-            return result;
+            try {
+                var result = await url.WithBasicAuth(Username, Password).PutJsonAsync(item).ReceiveJson<T>();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    _customMessageBox.Show("Access denied!", "error");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    _customMessageBox.Show("Access forbidden", "error");
+                }
+                throw;
+            }
         }
 
         public async Task<T> InsertItem<T>(string action, object item) {
          
                 var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}";
+            try {
                 var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(item).ReceiveJson<T>();
-                return result;           
-        
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    _customMessageBox.Show("Access denied!", "error");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    _customMessageBox.Show("Access forbidden", "error");
+                }
+                throw;
+            }
         }
 
         public async Task<T> CustomGet<T>(string action, object id=null) {
@@ -97,9 +140,19 @@ namespace Watchables.WinUI
             else {
                 url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}/{id}";
             }
-            var result = await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
-            return result;
-
+            try {
+                var result = await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    _customMessageBox.Show("Access denied!", "error");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    _customMessageBox.Show("Access forbidden", "error");
+                }
+                throw;
+            }
 
 
         }

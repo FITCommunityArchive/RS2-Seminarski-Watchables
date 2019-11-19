@@ -108,6 +108,7 @@
             this.datePicker.CalendarFont = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.datePicker.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.datePicker.Location = new System.Drawing.Point(118, 80);
+            this.datePicker.MaxDate = new System.DateTime(2025, 12, 31, 0, 0, 0, 0);
             this.datePicker.Name = "datePicker";
             this.datePicker.Size = new System.Drawing.Size(282, 36);
             this.datePicker.TabIndex = 14;

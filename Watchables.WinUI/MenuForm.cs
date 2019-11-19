@@ -17,13 +17,17 @@ namespace Watchables.WinUI
     {
         private int childFormNumber = 0;
 
-        public MenuForm() {
-            InitializeComponent();          
+        private readonly string _username;
+
+        public MenuForm(string username) {
+            InitializeComponent();
+            _username = username;
         }
 
         protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
             ShowDashboardBtn.PerformClick();
+            User.Text = _username;
         }
 
         private void ShowNewForm(object sender, EventArgs e) {
@@ -164,5 +168,10 @@ namespace Watchables.WinUI
             this.WindowState = FormWindowState.Minimized;
         }
 
+        private void Logout_Click(object sender, EventArgs e) {
+            LoginForm form = new LoginForm();
+            form.Show();
+            this.Close();
+        }       
     }
 }

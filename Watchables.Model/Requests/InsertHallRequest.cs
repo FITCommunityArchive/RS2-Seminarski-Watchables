@@ -1,15 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Watchables.Model
+namespace Watchables.Model.Requests
 {
-    public class Hall
+    public class InsertHallRequest
     {
-        
-        public int HallId { get; set; }
         [Required]
         [MinLength(4)]
         public string HallName { get; set; }

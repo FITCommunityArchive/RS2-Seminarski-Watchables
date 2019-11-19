@@ -9,5 +9,7 @@ namespace Watchables.WebAPI.Services
     {
         List<Model.Appointments> Get();
         Model.Appointments GetById(int id);
+        Model.Appointments Insert(Model.Requests.InsertAppointmentRequest app);
+        Model.Appointments Update(int appointmentId, Model.Requests.InsertAppointmentRequest app);
     }
 }

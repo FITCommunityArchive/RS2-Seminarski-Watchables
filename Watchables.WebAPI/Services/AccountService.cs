@@ -56,6 +56,9 @@ namespace Watchables.WebAPI.Services
             if (request.Password != request.ConfirmPassword) {
                 throw new UserException("Passwords are not matching");
             }
+            foreach(var acc in _context.Accounts.ToList()) {
+                if (acc.Username == request.Username) throw new UserException("The username is taken");
+            }
             var account = _mapper.Map<Database.Account>(request);
 
             account.PasswordSalt = GenerateSalt();

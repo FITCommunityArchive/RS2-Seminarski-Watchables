@@ -20,6 +20,14 @@ namespace Watchables.WinUI
             InitializeComponent();
         }
 
+        private void ExitBtn_Click(object sender, EventArgs e) {
+            Environment.Exit(0);
+        }
+
+        private void MinimizeBtn_Click(object sender, EventArgs e) {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
         private async void Login_Click(object sender, EventArgs e) {
             var username = Username.Text;
             var password = Password.Text;
@@ -28,17 +36,20 @@ namespace Watchables.WinUI
             APIService.Password = password;
 
             try {
-                await _apiService.Get < List<Model.Admin>>(null);
+                await _apiService.Get<List<Model.Admin>>(null);
                 this.Hide();
-                var form = new MenuForm();
+                var form = new MenuForm(username);
                 form.Show();
 
-                
+
             }
-            catch { }
-
-           
-
+            catch {/*error handled in API service*/ }
         }
+
+        private void eye_Click(object sender, EventArgs e) {
+            if (Password.PasswordChar == '*') Password.PasswordChar = '\0';
+            else Password.PasswordChar = '*';
+        }
+
     }
 }

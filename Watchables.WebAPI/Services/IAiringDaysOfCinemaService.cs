@@ -9,5 +9,7 @@ namespace Watchables.WebAPI.Services
     {
         List<Model.AiringDaysOfCinema> Get();
         Model.AiringDaysOfCinema GetById(int id);
+        Model.AiringDaysOfCinema Insert(Model.Requests.InserAiringDayOfCinemaRequest ad);
+        Model.AiringDaysOfCinema Update(int airingDayId, Model.Requests.InserAiringDayOfCinemaRequest ad);
     }
 }

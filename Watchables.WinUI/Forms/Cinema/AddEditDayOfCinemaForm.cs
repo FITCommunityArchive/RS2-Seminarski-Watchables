@@ -14,7 +14,7 @@ namespace Watchables.WinUI.Forms.Cinema
     {
         private readonly ScheduleForm _scheduleForm;
         private readonly int? _airingDayId;
-        private readonly APIService _apiService = new APIService("cinemas");
+        private readonly APIService _apiService = new APIService("AiringDaysOfCinema");
         private readonly Model.Requests.CinemasScheduleRequest _schedule;
         private readonly Helper _helper = new Helper();
         private readonly MenuForm _menuForm;
@@ -37,10 +37,13 @@ namespace Watchables.WinUI.Forms.Cinema
         private async void AddEditDayOfCinemaForm_Load(object sender, EventArgs e) {
             datePicker.MinDate = DateTime.Now;
             if (_airingDayId.HasValue) {
-                Title.Text = $"Day of: {_schedule.Cinema.Name}";
-                var daysApi = new APIService("AiringDaysOfCinema");
-                var airingDay = await daysApi.GetById<Model.AiringDaysOfCinema>(_airingDayId);
+                Title.Text = $"Day of: {_schedule.Cinema.Name}";                
+                var airingDay = await _apiService.GetById<Model.AiringDaysOfCinema>(_airingDayId);
+                if (airingDay.Date.Date == datePicker.MinDate.Date) {
+                    datePicker.MinDate = DateTime.Now.AddDays(-1);
+                }
                 datePicker.Value = airingDay.Date;
+                datePicker.MinDate = DateTime.Now;
             }
             else {
                 Title.Text = $"Day to: {_schedule.Cinema.Name}";
@@ -68,24 +71,18 @@ namespace Watchables.WinUI.Forms.Cinema
                     return;
                 }
             }
-           
+            var Object = new Model.Requests.InserAiringDayOfCinemaRequest() {
+                Date = datePicker.Value,
+                CinemaId = _schedule.Cinema.CinemaId
+            };
 
             if (_airingDayId.HasValue) {
-                var Object = new Model.AiringDaysOfCinema() {
-                    Date = datePicker.Value,
-                    AiringDayId = 0,
-                    CinemaId = _schedule.Cinema.CinemaId
-                };
-                await _apiService.UpdateItem<Model.AiringDaysOfCinema>(_airingDayId, "updateAiringDay", Object);
+               
+                await _apiService.Update<Model.AiringDaysOfCinema>(_airingDayId, Object);
                 messageBox.Show("Airing day updated successfully", "success");
             }
             else {
-                var Object = new Model.AiringDaysOfCinema() {
-                    Date = datePicker.Value,
-                    AiringDayId = 0,
-                    CinemaId = _schedule.Cinema.CinemaId
-                };
-                await _apiService.InsertItem<Model.AiringDaysOfCinema>("addAiringDay", Object);
+                await _apiService.Insert<Model.AiringDaysOfCinema>( Object);
                 messageBox.Show("Airing day added successfully", "success");
             }
             this.Close();

@@ -30,6 +30,8 @@
             this.ShowDashboardBtn = new System.Windows.Forms.Button();
             this.ShowCinemasBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.Logout = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Slider = new System.Windows.Forms.Panel();
             this.ShowUsersBtn = new System.Windows.Forms.Button();
@@ -41,7 +43,9 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.MinimizeBtn = new System.Windows.Forms.Button();
             this.ExitBtn = new System.Windows.Forms.Button();
+            this.User = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -89,6 +93,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
+            this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.Slider);
             this.panel1.Controls.Add(this.ShowUsersBtn);
@@ -101,13 +106,42 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(291, 678);
+            this.panel1.Size = new System.Drawing.Size(291, 701);
             this.panel1.TabIndex = 4;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.Logout);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 615);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(291, 86);
+            this.panel3.TabIndex = 10;
+            // 
+            // Logout
+            // 
+            this.Logout.BackColor = System.Drawing.Color.Transparent;
+            this.Logout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Logout.FlatAppearance.BorderSize = 0;
+            this.Logout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
+            this.Logout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
+            this.Logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Logout.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Logout.ForeColor = System.Drawing.Color.White;
+            this.Logout.Image = ((System.Drawing.Image)(resources.GetObject("Logout.Image")));
+            this.Logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Logout.Location = new System.Drawing.Point(19, 10);
+            this.Logout.Name = "Logout";
+            this.Logout.Size = new System.Drawing.Size(272, 64);
+            this.Logout.TabIndex = 6;
+            this.Logout.Text = "Logout";
+            this.Logout.UseVisualStyleBackColor = false;
+            this.Logout.Click += new System.EventHandler(this.Logout_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 35);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 32);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(263, 52);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -225,6 +259,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.panel2.Controls.Add(this.User);
             this.panel2.Controls.Add(this.MinimizeBtn);
             this.panel2.Controls.Add(this.ExitBtn);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -265,12 +300,24 @@
             this.ExitBtn.UseVisualStyleBackColor = true;
             this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
+            // User
+            // 
+            this.User.AutoSize = true;
+            this.User.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.User.Font = new System.Drawing.Font("Century Gothic", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.User.ForeColor = System.Drawing.Color.White;
+            this.User.Location = new System.Drawing.Point(0, 0);
+            this.User.Name = "User";
+            this.User.Size = new System.Drawing.Size(62, 30);
+            this.User.TabIndex = 2;
+            this.User.Text = "User";
+            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1238, 678);
+            this.ClientSize = new System.Drawing.Size(1238, 701);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -280,8 +327,10 @@
             this.Text = "Watchables";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -301,6 +350,9 @@
         private System.Windows.Forms.Button MinimizeBtn;
         private System.Windows.Forms.Button ExitBtn;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button Logout;
+        private System.Windows.Forms.Label User;
     }
 }
 

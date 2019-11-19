@@ -9,5 +9,7 @@ namespace Watchables.WebAPI.Services
     {
         List<Model.Hall> Get();
         Model.Hall GetById(int id);
+        Model.Hall Insert(Model.Requests.InsertHallRequest hall);
+        Model.Hall Update(int hallId, Model.Requests.InsertHallRequest hall);
     }
 }

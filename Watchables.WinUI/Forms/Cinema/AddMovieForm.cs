@@ -93,13 +93,15 @@ namespace Watchables.WinUI.Forms.Cinema
                 AiringDaysOfCinemaId = _airingDayId,
                 MovieId = movieId
             };
-            await _apiService.InsertItem<Model.CinemaDayMovie>("AddCinemaDayMovie", Object);
+            APIService cdmService = new APIService("cinemaDayMovie");
+            await cdmService.Insert<Model.CinemaDayMovie>(Object);
             this.Close();
             _scheduleForm.Close();
             ScheduleForm sch = new ScheduleForm(_schedule.Cinema.CinemaId, _menuForm) {
                 MdiParent = _menuForm,
                 Dock = DockStyle.Fill
-            };          
+            };
+           
             var schedule = await _apiService.CustomGet<Model.Requests.CinemasScheduleRequest>("GetCinemasSchedule", _schedule.Cinema.CinemaId);
             CinemaDayMovieForm form = new CinemaDayMovieForm(sch, schedule, _menuForm, _airingDayId, _date, _day);
             sch.Show();

@@ -26,5 +26,9 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.CinemaDayMovie> GetById(int id) {
             return _service.GetById(id);
         }
+        [HttpPost]
+        public ActionResult<Model.CinemaDayMovie> AddCinemaDayMovieToCinema(Model.Requests.InsertCinemaDayMovieRequest cdm) {
+            return _service.Insert(cdm);
+        }
     }
 }

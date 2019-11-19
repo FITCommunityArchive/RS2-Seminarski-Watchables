@@ -9,7 +9,7 @@ using Watchables.WebAPI.Services;
 
 namespace Watchables.WebAPI.Controllers
 {
-    [Authorize(Roles = "Korisnik")]
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase

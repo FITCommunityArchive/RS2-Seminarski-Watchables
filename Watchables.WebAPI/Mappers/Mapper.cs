@@ -30,6 +30,15 @@ namespace Watchables.WebAPI.Mappers
 
             CreateMap<Database.Users, Model.User>().ReverseMap();
             CreateMap<Database.Users, Model.Requests.InsertUserRequest>().ReverseMap();
+
+            CreateMap<Database.Hall, Model.Requests.InsertHallRequest>().ReverseMap();
+            CreateMap<Database.Products, Model.Requests.InsertProductRequest>().ReverseMap();
+
+            CreateMap<Database.AiringDaysOfCinema, Model.Requests.InserAiringDayOfCinemaRequest>().ReverseMap();
+            CreateMap<Database.CinemaDayMovie, Model.Requests.InsertCinemaDayMovieRequest>().ReverseMap();
+
+            CreateMap<Database.Appointments, Model.Requests.InsertAppointmentRequest>().ReverseMap();
+
         }
     }
 }

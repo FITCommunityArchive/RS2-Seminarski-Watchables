@@ -25,6 +25,14 @@ namespace Watchables.WebAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<Model.Hall> GetById(int id) {
             return _service.GetById(id);
-        }  
+        }
+        [HttpPost]
+        public ActionResult<Model.Hall> Inesrt(Model.Requests.InsertHallRequest hall) {
+            return _service.Insert(hall);
+        }
+        [HttpPut("{hallId}")]
+        public ActionResult<Model.Hall> Update(int hallId, Model.Requests.InsertHallRequest hall) {
+            return _service.Update(hallId, hall);
+        }
     }
 }

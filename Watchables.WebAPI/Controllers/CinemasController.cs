@@ -11,6 +11,7 @@ using Watchables.WebAPI.Services;
 
 namespace Watchables.WebAPI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CinemasController : ControllerBase
@@ -37,15 +38,7 @@ namespace Watchables.WebAPI.Controllers
             return _service.Insert(request);
         }
 
-        [HttpPost("addHall")]
-        public ActionResult<Model.Hall> AddHallToCinema(Model.Hall hall) {
-            return _service.AddHallToCinema(hall);
-        }
-
-        [HttpPost("addProduct")]
-        public ActionResult<Model.Product> AddProductToCinema(Model.Product product) {
-            return _service.AddProductToCinema(product);
-        }
+      
 
         [HttpGet("GetHalls/{cinemaId}")]
         public ActionResult<List<Model.Hall>> GetHallsOfCinema(int cinemaId) {
@@ -61,40 +54,10 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.Cinema> Update(int cinemaId, InsertCinemaRequest request) {
             return _service.Update(cinemaId, request);
         }
-        [HttpPut("updateHall/{hallId}")]
-        public ActionResult<Model.Hall> UpdateHall(int hallId, Model.Hall hall) {
-            return _service.UpdateHall(hallId, hall);
-        }
-        [HttpPut("updateProduct/{productId}")]
-        public ActionResult<Model.Product> UpdateProduct(int productId, Model.Product product) {
-            return _service.UpdateProduct(productId, product);
-        }
 
         [HttpGet("GetCinemasSchedule/{id}")]
         public ActionResult<CinemasScheduleRequest> GetCinemasSchedule(int id) {
             return _service.GetCinemasSchedule(id);
         }
-
-        [HttpPost("addAiringDay")]
-        public ActionResult<Model.AiringDaysOfCinema> AddAiringDayToCinema(Model.AiringDaysOfCinema ad) {
-            return _service.AddAiringDayToCinema(ad);
-        }
-        [HttpPut("updateAiringDay/{airingDayId}")]
-        public ActionResult<Model.AiringDaysOfCinema> UpdateAiringDay(int airingDayId, Model.AiringDaysOfCinema ad) {
-            return _service.UpdateAiringDay(airingDayId, ad);
-        }
-        [HttpPost("AddCinemaDayMovie")]
-        public ActionResult<Model.CinemaDayMovie> AddCinemaDayMovieToCinema(Model.CinemaDayMovie cdm) {
-            return _service.AddCinemaDayMovieToCinema(cdm);
-        }
-        [HttpPost("AddAppointment")]
-        public ActionResult<Model.Appointments> AddAppointmentToCinema(Model.Appointments app) {
-            return _service.AddAppointmentToCinema(app);
-        }
-        [HttpPut("updateAppointment/{appointmentId}")]
-        public ActionResult<Model.Appointments> UpdateAppointment(int appointmentId, Model.Appointments ap) {
-            return _service.UpdateAppointment(appointmentId, ap);
-        }
-
     }
 }

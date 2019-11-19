@@ -44,7 +44,7 @@ namespace Watchables.WebAPI
 
                 c.AddSecurityDefinition("basicAuth", new OpenApiSecurityScheme() {
                     Type = SecuritySchemeType.Http,
-                    Scheme = "  ",
+                    Scheme = "basic",
                     Description = "Input your username and password to access this API",
                     In = ParameterLocation.Header,
                 });

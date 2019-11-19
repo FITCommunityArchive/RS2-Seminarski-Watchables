@@ -26,5 +26,15 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.AiringDaysOfCinema> GetById(int id) {
             return _service.GetById(id);
         }
+
+
+        [HttpPost]
+        public ActionResult<Model.AiringDaysOfCinema> AddAiringDayToCinema(Model.Requests.InserAiringDayOfCinemaRequest ad) {
+            return _service.Insert(ad);
+        }
+        [HttpPut("{airingDayId}")]
+        public ActionResult<Model.AiringDaysOfCinema> UpdateAiringDay(int airingDayId, Model.Requests.InserAiringDayOfCinemaRequest ad) {
+            return _service.Update(airingDayId, ad);
+        }
     }
 }

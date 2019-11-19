@@ -26,5 +26,13 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.Appointments> GetById(int id) {
             return _service.GetById(id);
         }
+        [HttpPost]
+        public ActionResult<Model.Appointments> AddAppointmentToCinema(Model.Requests.InsertAppointmentRequest app) {
+            return _service.Insert(app);
+        }
+        [HttpPut("{appointmentId}")]
+        public ActionResult<Model.Appointments> UpdateAppointment(int appointmentId, Model.Requests.InsertAppointmentRequest ap) {
+            return _service.Update(appointmentId, ap);
+        }
     }
 }

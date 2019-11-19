@@ -18,7 +18,7 @@ namespace Watchables.WinUI.Forms.Cinema
         private readonly int? _productId;
         private readonly CinemasProductsForm _cinemasProductsForm;
         private readonly string _cinemaName;
-        private readonly APIService _apiService = new APIService("cinemas");
+        private readonly APIService _apiService = new APIService("products");
         private readonly Helper _helper = new Helper();
 
         public AddEditProductForm(MenuForm menuForm, CinemasProductsForm cinemasProductsForm, string cinemaName, int cinemaId, int? productId = null) {
@@ -34,8 +34,8 @@ namespace Watchables.WinUI.Forms.Cinema
 
         private async void AddEditProductForm_Load(object sender, EventArgs e) {
             if (_productId.HasValue) {
-                APIService productsApi = new APIService("products");
-                var product = await productsApi.GetById<Model.Product>(_productId);
+                
+                var product = await _apiService.GetById<Model.Product>(_productId);
                 ProductName.Text = product.Name;
                 ProductPrice.Text = product.Price.ToString();
                 Title.Text = $"Product of: {_cinemaName}";
@@ -73,25 +73,23 @@ namespace Watchables.WinUI.Forms.Cinema
             if (!_helper.ValidateDecimalString(ProductPrice.Text, 1, 150)) {
                 messageBox.Show("Enter a valid price (1-150)!", "error");
                 return;
-            }         
+            }
+
+            Model.Requests.InsertProductRequest product = new Model.Requests.InsertProductRequest() {
+                Name = ProductName.Text,
+                Price = decimal.Parse(ProductPrice.Text),
+                CinemaId = _cinemaId
+            };
 
             if (_productId.HasValue) {
-                Model.Product product = new Model.Product() {
-                    Name = ProductName.Text,
-                    Price = decimal.Parse(ProductPrice.Text),
-                    CinemaId = _cinemaId
-                };
-                await _apiService.UpdateItem<Model.Product>(_productId, "UpdateProduct", product);
+                
+                await _apiService.Update<Model.Product>(_productId, product);
                 messageBox.Show("Product updated succesfully", "Success");
 
             }
             else {
-                Model.Product product = new Model.Product() {
-                    Name = ProductName.Text,
-                    Price = decimal.Parse(ProductPrice.Text),
-                    CinemaId = _cinemaId
-                };
-                await _apiService.InsertItem<Model.Product>("addProduct", product);
+             
+                await _apiService.Insert<Model.Product>(product);
                 messageBox.Show("Product added succesfully", "Success");
             }
 

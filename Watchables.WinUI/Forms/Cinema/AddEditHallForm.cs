@@ -19,7 +19,7 @@ namespace Watchables.WinUI.Forms.Cinema
         private readonly CinemasHallsForm _cinemasHallsForm;
         private readonly string _cinemaName;
         private readonly string _cinemaLocation;
-        private readonly APIService _apiService = new APIService("cinemas");
+        private readonly APIService _apiService = new APIService("halls");
 
         public AddEditHallForm(MenuForm menuForm, CinemasHallsForm cinemasHallsForm, string cinemaName, string cinemaLocation, int cinemaId, int? hallId = null) {
             InitializeComponent();
@@ -35,8 +35,8 @@ namespace Watchables.WinUI.Forms.Cinema
 
         private async void AddEditHallForm_Load(object sender, EventArgs e) {
             if (_hallId.HasValue) {
-                APIService hallsApi = new APIService("halls");
-                var hall = await hallsApi.GetById<Model.Hall>(_hallId);
+                
+                var hall = await _apiService.GetById<Model.Hall>(_hallId);
                 HallName.Text = hall.HallName;
                 HallNumber.Value = hall.HallNumber;
                 HallSeats.Value = hall.NumberOfseats;
@@ -63,26 +63,22 @@ namespace Watchables.WinUI.Forms.Cinema
                 messageBox.Show("Enter valid seats (1-100)!", "error");
                 return;
             }
-          
+
+            Model.Requests.InsertHallRequest hall = new Model.Requests.InsertHallRequest() {
+                HallName = HallName.Text,
+                HallNumber = (int)HallNumber.Value,
+                NumberOfseats = (int)HallSeats.Value,
+                CinemaId = _cinemaId
+            };
+
             if (_hallId.HasValue) {
-                Model.Hall hall = new Model.Hall() {
-                    HallName = HallName.Text,
-                    HallNumber = (int)HallNumber.Value,
-                    NumberOfseats = (int)HallSeats.Value,
-                    CinemaId=_cinemaId                    
-                };
-                await _apiService.UpdateItem<Model.Hall>(_hallId, "updateHall", hall);
+
+                await _apiService.Update<Model.Hall>(_hallId, hall);
                 messageBox.Show("Hall updated succesfully", "Success");
               
             }
             else {
-                Model.Hall hall = new Model.Hall() {
-                    HallName = HallName.Text,
-                    HallNumber = (int)HallNumber.Value,
-                    NumberOfseats = (int)HallSeats.Value,
-                    CinemaId = _cinemaId
-                };
-                await _apiService.InsertItem<Model.Hall>("addHall", hall);
+                await _apiService.Insert<Model.Hall>(hall);
                 messageBox.Show("Hall added succesfully", "Success");
             }
 

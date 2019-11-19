@@ -150,19 +150,20 @@ namespace Watchables.WinUI.Forms.Cinema
                 return;
             }
 
-            Model.Appointments Object = new Model.Appointments() {
+            Model.Requests.InsertAppointmentRequest Object = new Model.Requests.InsertAppointmentRequest() {
                 Price = decimal.Parse(Price.Text),
                 CinemaDayMovieId = _cinemaDayMovieId,
                 HallId = (HallsBox.SelectedItem as dynamic).Value,
                 SoldSeats = 0,
                 StartsAt = StartsAt.Value.ToString("HH:mm")
             };
+            
             if (_appointmentId.HasValue) {
-                await _apiService.UpdateItem<Model.Appointments>(_appointmentId, "updateAppointment", Object);
+                await appApi.Update<Model.Appointments>(_appointmentId, Object);
                 messageBox.Show("Appointment updated succesfully", "Success");
             }
             else {
-                await _apiService.InsertItem<Model.Appointments>("AddAppointment", Object);
+                await appApi.Insert<Model.Appointments>(Object);
                 messageBox.Show("Appointment added succesfully", "Success");
             }
 
