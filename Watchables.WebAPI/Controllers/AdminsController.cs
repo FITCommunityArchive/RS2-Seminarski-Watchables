@@ -34,5 +34,13 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.Admin> Update(int adminId, Model.Requests.InsertAdminRequest request) {
             return _service.Update(adminId, request);
         }
+        [HttpGet("{adminId}")]
+        public ActionResult<Model.Admin>GetById(int adminId) {
+            return _service.GetById(adminId);
+        }
+         [HttpDelete("{adminId}")]
+         public ActionResult<string> Delete(int adminId) {
+            return _service.Delete(adminId);
+        }
     }
 }

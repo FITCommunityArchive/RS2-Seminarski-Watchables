@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -39,8 +40,7 @@ namespace Watchables.WinUI
                 await _apiService.Get<List<Model.Admin>>(null);
                 this.Hide();
                 var form = new MenuForm(username);
-                form.Show();
-
+                form.Show();            
 
             }
             catch {/*error handled in API service*/ }

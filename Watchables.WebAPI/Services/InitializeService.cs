@@ -74,7 +74,8 @@ namespace Watchables.WebAPI.Services
                     TrailerLink = "https://www.youtube.com/embed/Nt9L1jCKGnE",
                     ImageLink = "https://m.media-amazon.com/images/M/MV5BMGZlNTY1ZWUtYTMzNC00ZjUyLWE0MjQtMTMxN2E3ODYxMWVmXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
                     Standalone = false,
-                    Price = (decimal)20.00
+                    Price = (decimal)20.00,
+                    Genre= "Fantasy"
                 };
 
                 var movie2 = new Database.Movies() {
@@ -87,7 +88,8 @@ namespace Watchables.WebAPI.Services
                     TrailerLink = "https://www.youtube.com/embed/zAGVQLHvwOY",
                     ImageLink = "https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
                     Standalone = false,
-                    Price = (decimal)20.00
+                    Price = (decimal)20.00,
+                    Genre= "Drama"
                 };
 
                 _context.Movies.AddRange(movie1, movie2);
@@ -105,26 +107,28 @@ namespace Watchables.WebAPI.Services
                 var show1 = new Database.Shows() {
                     Cast= "Zach Braff, Donald Faison, Sarah Chalke",
                     Description= "In the unreal world of Sacred Heart Hospital, intern John 'J.D' Dorian learns the ways of medicine, friendship, and life.",
-                    ImageLink= "https://m.media-amazon.com/images/M/MV5BODE1MGVjZjMtODc5My00ODBjLTg0NWItMDllNTNlM2Y3ZGYyXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SY1000_CR0,0,647,1000_AL_.jpg",
+                    ImageLink= "http://www.tvposter.net/posters/scrubs_2001_607_poster.jpg",
                     NumberOfSeasons=9,
                     Ongoing=false,
                     Price=20,
                     Rating=decimal.Parse(8.3.ToString()),
                     Title="Scrubs",
                     Year=2001,
-                    TrailerLink= "https://www.youtube.com/embed/Ji6-Pbfypys"   
+                    TrailerLink= "https://www.youtube.com/embed/Ji6-Pbfypys",
+                    Genre="Comedy"
                 };
                 var show2 = new Database.Shows() {
                     Cast= "Josh Radnor, Jason Segel, Cobie Smulders",
                     Description= "A father recounts to his children, through a series of flashbacks, the journey he and his four best friends took leading up to him meeting their mother.",
-                    ImageLink= "https://m.media-amazon.com/images/M/MV5BZWJjMDEzZjUtYWE1Yy00M2ZiLThlMmItODljNTAzODFiMzc2XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SY1000_CR0,0,666,1000_AL_.jpg",
+                    ImageLink= "https://i.redd.it/6wbukl5yc0u21.jpg",
                     NumberOfSeasons=9,
                     Ongoing=false,
                     Price=20,
                     Rating=decimal.Parse(8.3.ToString()),
                     Title="How I met your mother",
                     Year=2005,
-                    TrailerLink= "https://www.youtube.com/embed/C8-4jMTOUJI"
+                    TrailerLink= "https://www.youtube.com/embed/aJtVL2_fA5w",
+                    Genre="Comedy"
                 };
 
                 _context.AddRange(show1, show2);

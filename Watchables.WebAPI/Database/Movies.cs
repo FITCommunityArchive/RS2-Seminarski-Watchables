@@ -23,6 +23,7 @@ namespace Watchables.WebAPI.Database
         public string ImageLink { get; set; }
         public bool Standalone { get; set; }
         public decimal Price { get; set; }
+        public string Genre { get; set; }
 
         public virtual ICollection<CinemaDayMovie> CinemaDayMovie { get; set; }
         public virtual ICollection<Rotations> Rotations { get; set; }

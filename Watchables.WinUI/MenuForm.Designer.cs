@@ -30,6 +30,7 @@
             this.ShowDashboardBtn = new System.Windows.Forms.Button();
             this.ShowCinemasBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.AdminBtn = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.Logout = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -41,9 +42,10 @@
             this.ShowMoviesBtn = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.LockCB = new System.Windows.Forms.CheckBox();
+            this.User = new System.Windows.Forms.Label();
             this.MinimizeBtn = new System.Windows.Forms.Button();
             this.ExitBtn = new System.Windows.Forms.Button();
-            this.User = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -93,6 +95,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
+            this.panel1.Controls.Add(this.AdminBtn);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.Slider);
@@ -106,14 +109,34 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(291, 701);
+            this.panel1.Size = new System.Drawing.Size(291, 780);
             this.panel1.TabIndex = 4;
+            // 
+            // AdminBtn
+            // 
+            this.AdminBtn.BackColor = System.Drawing.Color.Transparent;
+            this.AdminBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AdminBtn.FlatAppearance.BorderSize = 0;
+            this.AdminBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
+            this.AdminBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
+            this.AdminBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AdminBtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AdminBtn.ForeColor = System.Drawing.Color.White;
+            this.AdminBtn.Image = ((System.Drawing.Image)(resources.GetObject("AdminBtn.Image")));
+            this.AdminBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AdminBtn.Location = new System.Drawing.Point(19, 581);
+            this.AdminBtn.Name = "AdminBtn";
+            this.AdminBtn.Size = new System.Drawing.Size(272, 64);
+            this.AdminBtn.TabIndex = 11;
+            this.AdminBtn.Text = "Admins";
+            this.AdminBtn.UseVisualStyleBackColor = false;
+            this.AdminBtn.Click += new System.EventHandler(this.AdminBtn_Click);
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.Logout);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 615);
+            this.panel3.Location = new System.Drawing.Point(0, 694);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(291, 86);
             this.panel3.TabIndex = 10;
@@ -259,46 +282,37 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.panel2.Controls.Add(this.User);
+            this.panel2.Controls.Add(this.LockCB);
             this.panel2.Controls.Add(this.MinimizeBtn);
             this.panel2.Controls.Add(this.ExitBtn);
+            this.panel2.Controls.Add(this.User);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(291, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(947, 29);
             this.panel2.TabIndex = 6;
             // 
-            // MinimizeBtn
+            // LockCB
             // 
-            this.MinimizeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.MinimizeBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.MinimizeBtn.FlatAppearance.BorderSize = 0;
-            this.MinimizeBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.MinimizeBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.MinimizeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MinimizeBtn.Image = ((System.Drawing.Image)(resources.GetObject("MinimizeBtn.Image")));
-            this.MinimizeBtn.Location = new System.Drawing.Point(877, 0);
-            this.MinimizeBtn.Name = "MinimizeBtn";
-            this.MinimizeBtn.Size = new System.Drawing.Size(24, 29);
-            this.MinimizeBtn.TabIndex = 1;
-            this.MinimizeBtn.UseVisualStyleBackColor = true;
-            this.MinimizeBtn.Click += new System.EventHandler(this.MinimizeBtn_Click);
-            // 
-            // ExitBtn
-            // 
-            this.ExitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ExitBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.ExitBtn.FlatAppearance.BorderSize = 0;
-            this.ExitBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.ExitBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.ExitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ExitBtn.Image = ((System.Drawing.Image)(resources.GetObject("ExitBtn.Image")));
-            this.ExitBtn.Location = new System.Drawing.Point(901, 0);
-            this.ExitBtn.Name = "ExitBtn";
-            this.ExitBtn.Size = new System.Drawing.Size(46, 29);
-            this.ExitBtn.TabIndex = 0;
-            this.ExitBtn.UseVisualStyleBackColor = true;
-            this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
+            this.LockCB.Appearance = System.Windows.Forms.Appearance.Button;
+            this.LockCB.AutoSize = true;
+            this.LockCB.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LockCB.Dock = System.Windows.Forms.DockStyle.Right;
+            this.LockCB.FlatAppearance.BorderSize = 0;
+            this.LockCB.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.LockCB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.LockCB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LockCB.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LockCB.ForeColor = System.Drawing.Color.White;
+            this.LockCB.Image = ((System.Drawing.Image)(resources.GetObject("LockCB.Image")));
+            this.LockCB.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LockCB.Location = new System.Drawing.Point(789, 0);
+            this.LockCB.Name = "LockCB";
+            this.LockCB.Size = new System.Drawing.Size(79, 29);
+            this.LockCB.TabIndex = 3;
+            this.LockCB.Text = "    Lock";
+            this.LockCB.UseVisualStyleBackColor = true;
+            this.LockCB.Click += new System.EventHandler(this.LockCB_Click);
             // 
             // User
             // 
@@ -312,12 +326,44 @@
             this.User.TabIndex = 2;
             this.User.Text = "User";
             // 
+            // MinimizeBtn
+            // 
+            this.MinimizeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.MinimizeBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MinimizeBtn.FlatAppearance.BorderSize = 0;
+            this.MinimizeBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.MinimizeBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.MinimizeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MinimizeBtn.Image = ((System.Drawing.Image)(resources.GetObject("MinimizeBtn.Image")));
+            this.MinimizeBtn.Location = new System.Drawing.Point(868, 0);
+            this.MinimizeBtn.Name = "MinimizeBtn";
+            this.MinimizeBtn.Size = new System.Drawing.Size(29, 29);
+            this.MinimizeBtn.TabIndex = 4;
+            this.MinimizeBtn.UseVisualStyleBackColor = true;
+            this.MinimizeBtn.Click += new System.EventHandler(this.MinimizeBtn_Click_1);
+            // 
+            // ExitBtn
+            // 
+            this.ExitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ExitBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ExitBtn.FlatAppearance.BorderSize = 0;
+            this.ExitBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.ExitBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.ExitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ExitBtn.Image = ((System.Drawing.Image)(resources.GetObject("ExitBtn.Image")));
+            this.ExitBtn.Location = new System.Drawing.Point(897, 0);
+            this.ExitBtn.Name = "ExitBtn";
+            this.ExitBtn.Size = new System.Drawing.Size(50, 29);
+            this.ExitBtn.TabIndex = 3;
+            this.ExitBtn.UseVisualStyleBackColor = true;
+            this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click_1);
+            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1238, 701);
+            this.ClientSize = new System.Drawing.Size(1238, 780);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -347,12 +393,14 @@
         private System.Windows.Forms.Button ShowMoviesBtn;
         private System.Windows.Forms.Panel Slider;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button MinimizeBtn;
-        private System.Windows.Forms.Button ExitBtn;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button Logout;
         private System.Windows.Forms.Label User;
+        private System.Windows.Forms.Button AdminBtn;
+        private System.Windows.Forms.CheckBox LockCB;
+        private System.Windows.Forms.Button MinimizeBtn;
+        private System.Windows.Forms.Button ExitBtn;
     }
 }
 

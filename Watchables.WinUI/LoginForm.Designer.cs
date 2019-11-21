@@ -49,7 +49,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(2397, 29);
+            this.panel2.Size = new System.Drawing.Size(1942, 29);
             this.panel2.TabIndex = 7;
             // 
             // MinimizeBtn
@@ -61,7 +61,7 @@
             this.MinimizeBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
             this.MinimizeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.MinimizeBtn.Image = ((System.Drawing.Image)(resources.GetObject("MinimizeBtn.Image")));
-            this.MinimizeBtn.Location = new System.Drawing.Point(2327, 0);
+            this.MinimizeBtn.Location = new System.Drawing.Point(1872, 0);
             this.MinimizeBtn.Name = "MinimizeBtn";
             this.MinimizeBtn.Size = new System.Drawing.Size(24, 29);
             this.MinimizeBtn.TabIndex = 1;
@@ -77,7 +77,7 @@
             this.ExitBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
             this.ExitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExitBtn.Image = ((System.Drawing.Image)(resources.GetObject("ExitBtn.Image")));
-            this.ExitBtn.Location = new System.Drawing.Point(2351, 0);
+            this.ExitBtn.Location = new System.Drawing.Point(1896, 0);
             this.ExitBtn.Name = "ExitBtn";
             this.ExitBtn.Size = new System.Drawing.Size(46, 29);
             this.ExitBtn.TabIndex = 0;
@@ -93,9 +93,9 @@
             this.Login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Login.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Login.ForeColor = System.Drawing.Color.White;
-            this.Login.Location = new System.Drawing.Point(0, 1126);
+            this.Login.Location = new System.Drawing.Point(0, 1059);
             this.Login.Name = "Login";
-            this.Login.Size = new System.Drawing.Size(2397, 43);
+            this.Login.Size = new System.Drawing.Size(1942, 43);
             this.Login.TabIndex = 8;
             this.Login.Text = "Login";
             this.Login.UseVisualStyleBackColor = false;
@@ -155,9 +155,9 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 25.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.label3.Location = new System.Drawing.Point(257, 345);
+            this.label3.Location = new System.Drawing.Point(258, 357);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(287, 55);
+            this.label3.Size = new System.Drawing.Size(281, 52);
             this.label3.TabIndex = 12;
             this.label3.Text = "Welcome to";
             // 
@@ -170,7 +170,7 @@
             this.eye.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.eye.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.eye.Image = ((System.Drawing.Image)(resources.GetObject("eye.Image")));
-            this.eye.Location = new System.Drawing.Point(1722, 669);
+            this.eye.Location = new System.Drawing.Point(1718, 669);
             this.eye.Name = "eye";
             this.eye.Size = new System.Drawing.Size(40, 35);
             this.eye.TabIndex = 13;
@@ -182,7 +182,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(2397, 1169);
+            this.ClientSize = new System.Drawing.Size(1942, 1102);
             this.Controls.Add(this.eye);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);

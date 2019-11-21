@@ -8,8 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Watchables.WinUI.Forms;
+using Watchables.WinUI.Forms.Admin;
 using Watchables.WinUI.Forms.Cinema;
 using Watchables.WinUI.Forms.Movie;
+using Watchables.WinUI.Forms.Show;
+using Watchables.WinUI.Forms.User;
 
 namespace Watchables.WinUI
 {
@@ -17,17 +20,44 @@ namespace Watchables.WinUI
     {
         private int childFormNumber = 0;
 
-        private readonly string _username;
+        private string _username;
+
+        private bool _locked;
 
         public MenuForm(string username) {
             InitializeComponent();
             _username = username;
+
+        }
+        
+        public void ChangeTopUsername(string newUsername) {
+            _username = newUsername;
+            User.Text = _username;
         }
 
-        protected override void OnLoad(EventArgs e) {
+        protected override async void OnLoad(EventArgs e) {
             base.OnLoad(e);
             ShowDashboardBtn.PerformClick();
             User.Text = _username;
+            APIService apiService = new APIService("users");
+            var users = await apiService.Get<List<Model.User>>(null);
+            if (users.Count==0) {
+                LockCB.Checked = false;
+                LockCB.Text = "No users";
+            }
+            else {
+                _locked = users.First().Locked;
+                if (users.First().Locked) {
+                    LockCB.Text = "    Unlock";
+                    LockCB.Checked = true;
+                }
+                else {
+                    LockCB.Text = "    Lock";
+                    LockCB.Checked = false;
+                }
+            }
+
+
         }
 
         private void ShowNewForm(object sender, EventArgs e) {
@@ -53,11 +83,7 @@ namespace Watchables.WinUI
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK) {
                 string FileName = saveFileDialog.FileName;
             }
-        }
-
-        private void ExitToolsStripMenuItem_Click(object sender, EventArgs e) {
-            this.Close();
-        }
+        }      
 
         private void CutToolStripMenuItem_Click(object sender, EventArgs e) {
         }
@@ -141,6 +167,14 @@ namespace Watchables.WinUI
         }
 
         private void ShowShowsBtn_Click(object sender, EventArgs e) {
+            foreach (Form frm in this.MdiChildren) {
+                frm.Close();
+            }
+            ShowsForm form = new ShowsForm {
+                MdiParent = this,
+                Dock = DockStyle.Fill
+            };
+            form.Show();
             Slider.Top = ShowShowsBtn.Top;
             Slider.Height = ShowShowsBtn.Height;
         }
@@ -156,6 +190,14 @@ namespace Watchables.WinUI
         }
 
         private void ShowUsersBtn_Click(object sender, EventArgs e) {
+            foreach (Form frm in this.MdiChildren) {
+                frm.Close();
+            }
+            UsersForm form = new UsersForm {
+                MdiParent = this,
+                Dock = DockStyle.Fill
+            };
+            form.Show();
             Slider.Top = ShowUsersBtn.Top;
             Slider.Height = ShowUsersBtn.Height;
         }
@@ -164,14 +206,49 @@ namespace Watchables.WinUI
             Environment.Exit(0);
         }
 
-        private void MinimizeBtn_Click(object sender, EventArgs e) {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
         private void Logout_Click(object sender, EventArgs e) {
             LoginForm form = new LoginForm();
             form.Show();
             this.Close();
-        }       
+        }
+
+        private void AdminBtn_Click(object sender, EventArgs e) {
+            foreach (Form frm in this.MdiChildren) {
+                frm.Close();
+            }
+            AdminsForm form = new AdminsForm(_username) {
+                MdiParent = this,
+                Dock = DockStyle.Fill
+            };
+            form.Show();
+            Slider.Top = AdminBtn.Top;
+            Slider.Height = AdminBtn.Height;
+        }
+
+        private async void LockCB_Click(object sender, EventArgs e) {
+            if (LockCB.Text != "No users") {
+                APIService service = new APIService("users");
+                if (_locked) {
+                    LockCB.Checked = false;
+                    LockCB.Text = "    Lock";
+                    await service.Lock<string>(false);
+                }
+                else {
+                    LockCB.Checked = true;
+                    LockCB.Text = "    Unlock";
+                    await service.Lock<string>(true);
+                }
+                _locked = !_locked;
+            }
+            else LockCB.Checked = false;
+        }
+
+        private void ExitBtn_Click_1(object sender, EventArgs e) {
+            Environment.Exit(0);
+        }
+
+        private void MinimizeBtn_Click_1(object sender, EventArgs e) {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }

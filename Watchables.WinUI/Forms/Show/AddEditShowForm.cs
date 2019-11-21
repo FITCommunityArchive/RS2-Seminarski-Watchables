@@ -8,67 +8,111 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Watchables.WinUI.Forms.Movie
+namespace Watchables.WinUI.Forms.Show
 {
-    public partial class AddEditMovieForm : Form
+    public partial class AddEditShowForm : Form
     {
-        private readonly int? _movieId;
+        private readonly int? _showId;
         private readonly MenuForm _menuForm;
-        private readonly APIService _apiService = new APIService("movies");
+        private readonly APIService _apiService = new APIService("shows");
 
-        public AddEditMovieForm(MenuForm menuForm, int? movieId=null) {
+        public AddEditShowForm(MenuForm menuForm, int? showId = null) {
             InitializeComponent();
             _menuForm = menuForm;
-            _movieId = movieId;
-
-            Duration.Format = DateTimePickerFormat.Custom;
-            Duration.CustomFormat = "HH:mm";
-            Duration.ShowUpDown = true;        
+            _showId = showId;
         }
 
         private void Close_Click(object sender, EventArgs e) {
             this.Close();
         }
 
-        private async void AddEditMovieForm_Load(object sender, EventArgs e) {
-            if (_movieId.HasValue) {
-                var movie = await _apiService.GetById<Model.Movie>(_movieId);
-                PageTitle.Text = movie.Title;
+        private async void AddEditShowForm_Load(object sender, EventArgs e) {
+            if (_showId.HasValue) {
+                var show = await _apiService.GetById<Model.Show>(_showId);
+                PageTitle.Text = show.Title;
 
                 Image.DocumentText = "<style>.imgStyle{color:red; object-fit:cover;} body{margin:0;}</style>" +
-                   $"<img alt='No available image with the provided link' src={movie.ImageLink} class='imgStyle' width='{Image.Width}' height='{Image.Height}'/>";
-               
+                   $"<img alt='No available image with the provided link' src={show.ImageLink} class='imgStyle' width='{Image.Width}' height='{Image.Height}'/>";
+
                 var embed = "<html style='margin:0;'><head>" +
                   "<meta http-equiv='X-UA-Compatible' content='IE=Edge\'>" +
                   "</head><body style='margin:0; overflow:hidden';>" +
-                  $"<div><iframe width={Trailer.Width} height={Trailer.Height} src='{movie.TrailerLink}'" +
+                  $"<div><iframe width={Trailer.Width} height={Trailer.Height} src='{show.TrailerLink}'" +
                   "frameborder = '0' allow = 'autoplay; encrypted-media' allowfullscreen></iframe></div>" +
                   "</body></html>";
-            
+
                 Trailer.DocumentText = embed;
 
-                MovieTitle.Text = movie.Title;
-                Year.Value = movie.Year;
-                Duration.Value = DateTime.Parse(movie.Duration);
-                Rating.Text = movie.Rating.ToString();
-                ImageLink.Text = movie.ImageLink;
-                Description.Text = movie.Description;
-                Cast.Text = movie.Cast;
-                Price.Text = movie.Price.ToString();
-                Standalone.Checked = movie.Standalone;
-                TrailerLink.Text = movie.TrailerLink.Substring(30);
-                Genre.Text = movie.Genre;
-
-                Duration.Enabled = false;               
+                ShowTitle.Text = show.Title;
+                Year.Value = show.Year;
+                Seasons.Value = show.NumberOfSeasons;
+                Rating.Text = show.Rating.ToString();
+                ImageLink.Text = show.ImageLink;
+                Description.Text = show.Description;
+                Cast.Text = show.Cast;
+                Price.Text = show.Price.ToString();
+                Ongoing.Checked = show.Ongoing;
+                TrailerLink.Text = show.TrailerLink.Substring(30);
+                Genre.Text = show.Genre;
             }
             else {
                 Image.DocumentText = "<style>.imgStyle{color:red; object-fit:cover;} body{margin:0;}</style>" +
                   $"<img alt='No available image with the provided link' src=https://www.colburnschool.edu/wp-content/uploads/2018/02/pix-vertical-placeholder.jpg class='imgStyle' width='{Image.Width}' height='{Image.Height}'/>";
                 Trailer.DocumentText = "<style>.imgStyle{color:red; object-fit:cover;} body{margin:0;}</style>" +
                 $"<img alt='No available image with the provided link' src=https://womenandbloodclots.org/wp-content/uploads/2015/05/video-placeholder.png class='imgStyle' width='{Trailer.Width}' height='{Trailer.Height}'/>";
-                PageTitle.Text = "Add a new movie";
+                PageTitle.Text = "Add a new show";
             }
+        }
 
+        private async void Reset_Click(object sender, EventArgs e) {
+            if (_showId.HasValue) {
+
+                var show = await _apiService.GetById<Model.Show>(_showId);
+                var movie = await _apiService.GetById<Model.Show>(_showId);
+
+                Image.DocumentText = "<style>.imgStyle{color:red; object-fit:cover;} body{margin:0;}</style>" +
+                    $"<img alt='No available image with the provided link' src={show.ImageLink} class='imgStyle' width='{Image.Width}' height='{Image.Height}'/>";
+
+                var embed = "<html style='margin:0;'><head>" +
+                  "<meta http-equiv='X-UA-Compatible' content='IE=Edge\'>" +
+                  "</head><body style='margin:0; overflow:hidden';>" +
+                  $"<div><iframe width={Trailer.Width} height={Trailer.Height} src='{show.TrailerLink}'" +
+                  "frameborder = '0' allow = 'autoplay; encrypted-media' allowfullscreen></iframe></div>" +
+                  "</body></html>";
+
+                Trailer.DocumentText = embed;
+
+                ShowTitle.Text = show.Title;
+                Year.Value = show.Year;
+                Seasons.Value = show.NumberOfSeasons;
+                Rating.Text = show.Rating.ToString();
+                ImageLink.Text = show.ImageLink;
+                Description.Text = show.Description;
+                Cast.Text = show.Cast;
+                Price.Text = show.Price.ToString();
+                Ongoing.Checked = show.Ongoing;
+                TrailerLink.Text = show.TrailerLink.Substring(30);
+                Genre.Text = show.Genre;
+            }
+            else {
+
+                ShowTitle.Text = "";
+                Year.Value = Year.Minimum;
+                Seasons.Value =0;
+                Rating.Text = "";
+                Description.Text = "";
+                Cast.Text = "";
+                Price.Text = "";
+                Ongoing.Checked = false;
+                TrailerLink.Text = "";
+                ImageLink.Text = "";
+                Image.DocumentText = "<style>.imgStyle{color:red; object-fit:cover;} body{margin:0;}</style>" +
+                  $"<img alt='No available image with the provided link' src=https://www.colburnschool.edu/wp-content/uploads/2018/02/pix-vertical-placeholder.jpg class='imgStyle' width='{Image.Width}' height='{Image.Height}'/>";
+                Trailer.DocumentText = "<style>.imgStyle{color:red; object-fit:cover;} body{margin:0;}</style>" +
+                $"<img alt='No available image with the provided link' src=https://womenandbloodclots.org/wp-content/uploads/2015/05/video-placeholder.png class='imgStyle' width='{Trailer.Width}' height='{Trailer.Height}'/>";
+                PageTitle.Text = "Add a new show";
+                Genre.Text = "";
+            }
         }
 
         private void ImageLink_KeyUp(object sender, KeyEventArgs e) {
@@ -99,59 +143,10 @@ namespace Watchables.WinUI.Forms.Movie
             }
         }
 
-        private async void Reset_Click_1(object sender, EventArgs e) {
-            if (_movieId.HasValue) {
-                var movie = await _apiService.GetById<Model.Movie>(_movieId);
-
-                Image.DocumentText = "<style>.imgStyle{color:red; object-fit:cover;} body{margin:0;}</style>" +
-                   $"<img alt='No available image with the provided link' src={movie.ImageLink} class='imgStyle' width='{Image.Width}' height='{Image.Height}'/>";
-
-                var embed = "<html style='margin:0;'><head>" +
-                  "<meta http-equiv='X-UA-Compatible' content='IE=Edge\'>" +
-                  "</head><body style='margin:0; overflow:hidden';>" +
-                  $"<div><iframe width={Trailer.Width} height={Trailer.Height} src='{movie.TrailerLink}'" +
-                  "frameborder = '0' allow = 'autoplay; encrypted-media' allowfullscreen></iframe></div>" +
-                  "</body></html>";
-
-                Trailer.DocumentText = embed;
-
-                MovieTitle.Text = movie.Title;
-                Year.Value = movie.Year;
-                Duration.Value = DateTime.Parse(movie.Duration);
-                Rating.Text = movie.Rating.ToString();
-                ImageLink.Text = movie.ImageLink;
-                Description.Text = movie.Description;
-                Cast.Text = movie.Cast;
-                Price.Text = movie.Price.ToString();
-                Standalone.Checked = movie.Standalone;
-                TrailerLink.Text = movie.TrailerLink.Substring(30);
-                Genre.Text = movie.Genre;
-            }
-            else {
-
-                MovieTitle.Text = "";
-                Year.Value = Year.Minimum;
-                Duration.Value = DateTime.Now;
-                Rating.Text = "";
-                Description.Text = "";
-                Cast.Text = "";
-                Price.Text = "";
-                Standalone.Checked = false;
-                TrailerLink.Text = "";
-                ImageLink.Text = "";
-                Image.DocumentText = "<style>.imgStyle{color:red; object-fit:cover;} body{margin:0;}</style>" +
-                  $"<img alt='No available image with the provided link' src=https://www.colburnschool.edu/wp-content/uploads/2018/02/pix-vertical-placeholder.jpg class='imgStyle' width='{Image.Width}' height='{Image.Height}'/>";
-                Trailer.DocumentText = "<style>.imgStyle{color:red; object-fit:cover;} body{margin:0;}</style>" +
-                $"<img alt='No available image with the provided link' src=https://womenandbloodclots.org/wp-content/uploads/2015/05/video-placeholder.png class='imgStyle' width='{Trailer.Width}' height='{Trailer.Height}'/>";
-                PageTitle.Text = "Add a new movie";
-                Genre.Text = "";
-            }
-        }
-
         private async void SaveBtn_Click(object sender, EventArgs e) {
             var messageBox = new CustomMessageBox();
 
-            if (string.IsNullOrWhiteSpace(MovieTitle.Text) || MovieTitle.Text.Length < 4) {
+            if (string.IsNullOrWhiteSpace(ShowTitle.Text) || ShowTitle.Text.Length < 4) {
                 messageBox.Show("The title field requires 4 letters!", "error");
                 return;
             }
@@ -193,13 +188,13 @@ namespace Watchables.WinUI.Forms.Movie
                 messageBox.Show("Enter a valid price (1-200)!", "error");
                 return;
             }
-            if(Year.Value<Year.Minimum || Year.Value > Year.Maximum) {
+            if (Year.Value < Year.Minimum || Year.Value > Year.Maximum) {
                 messageBox.Show("Enter a valid year (1800-2025)!", "error");
                 return;
             }
-            var hours = Duration.Value.Hour;
-            if(hours<0 || hours > 4) {
-                messageBox.Show("Enter a valid duration (up to 5 hours)!", "error");
+            
+            if (Seasons.Value<1 || Seasons.Value>100) {
+                messageBox.Show("Enter a valid seasons number (1-100)!", "error");
                 return;
             }
 
@@ -208,43 +203,42 @@ namespace Watchables.WinUI.Forms.Movie
                 return;
             }
 
-            Model.Requests.InsertMovieRequest request = new Model.Requests.InsertMovieRequest() {
-                Title = MovieTitle.Text,
+            Model.Requests.InsertShowRequest request = new Model.Requests.InsertShowRequest() {
+                Title = ShowTitle.Text,
                 Year = (int)Year.Value,
-                Duration = Duration.Value.ToString("HH:mm"),
+                NumberOfSeasons = (int)Seasons.Value,
                 Rating = decimal.Parse(Rating.Text),
                 Description = Description.Text,
                 Cast = Cast.Text,
-                ImageLink=ImageLink.Text,
-                Standalone=Standalone.Checked,
-                Price=decimal.Parse(Price.Text),
-                TrailerLink=$"https://www.youtube.com/embed/{TrailerLink.Text}",
-                Genre=Genre.Text
+                ImageLink = ImageLink.Text,
+                Ongoing = Ongoing.Checked,
+                Price = decimal.Parse(Price.Text),
+                TrailerLink = $"https://www.youtube.com/embed/{TrailerLink.Text}",
+                Genre = Genre.Text
             };
 
-            if (_movieId.HasValue) {
-                await _apiService.Update<Model.Movie>(_movieId, request);
+            if (_showId.HasValue) {
+                await _apiService.Update<Model.Show>(_showId, request);
             }
             else {
-                await _apiService.Insert<Model.Movie>(request);
+                await _apiService.Insert<Model.Show>(request);
             }
 
             this.Close();
             foreach (Form frm in _menuForm.MdiChildren) {
                 frm.Close();
             }
-            MoviesForm form = new MoviesForm {
+            ShowsForm form = new ShowsForm {
                 MdiParent = _menuForm,
                 Dock = DockStyle.Fill
             };
             form.Show();
-            if (_movieId.HasValue) {
-                messageBox.Show("Movie updated successfully!", "success");
+            if (_showId.HasValue) {
+                messageBox.Show("Show updated successfully!", "success");
             }
             else {
-                messageBox.Show("Movie added successfully!", "success");
+                messageBox.Show("Show added successfully!", "success");
             }
-
         }
     }
 }

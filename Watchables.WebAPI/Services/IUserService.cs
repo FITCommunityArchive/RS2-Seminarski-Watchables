@@ -11,5 +11,6 @@ namespace Watchables.WebAPI.Services
         Model.User GetById(int id);
         Model.User Insert(Model.Requests.InsertUserRequest request);
         Model.User Update(int userId, Model.Requests.InsertUserRequest request);
+        string LockToggle(bool flag);
     }
 }

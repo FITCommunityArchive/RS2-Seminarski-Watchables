@@ -56,5 +56,19 @@ namespace Watchables.WebAPI.Services
             return _mapper.Map<Model.Admin>(admin);
         }
 
+        public Admin GetById(int id) {
+            var admin = _mapper.Map<Model.Admin>(_context.Admins.Include(u => u.Account).Single(u => u.AdminId == id));
+            return admin;
+        }
+
+        public string Delete(int id) {
+            var admin = _context.Admins.Find(id);
+            if (admin == null) return "Admin could not be found";
+            var account = _context.Accounts.Single(a => a.AccountId == admin.AccountId);
+            _context.Admins.Remove(admin);
+            _context.Accounts.Remove(account);
+            _context.SaveChanges();
+            return "Admin removed";
+        }
     }
 }

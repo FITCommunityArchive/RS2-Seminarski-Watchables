@@ -31,15 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoviesForm));
             this.dgvMovies = new System.Windows.Forms.DataGridView();
-            this.MovieId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Title = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.Year = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rating = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Standalone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.AddMovieBtn = new System.Windows.Forms.Button();
             this.clearSearch = new System.Windows.Forms.Button();
@@ -51,6 +42,18 @@
             this.Movie = new System.Windows.Forms.TextBox();
             this.YearSearch = new System.Windows.Forms.NumericUpDown();
             this.StandaloneCB = new System.Windows.Forms.CheckBox();
+            this.MovieId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Title = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.Genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Year = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rating = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Standalone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.GenreBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.YearSearch)).BeginInit();
             this.SuspendLayout();
@@ -83,6 +86,7 @@
             this.dgvMovies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MovieId,
             this.Title,
+            this.Genre,
             this.Year,
             this.Rating,
             this.Duration,
@@ -119,84 +123,6 @@
             this.dgvMovies.Size = new System.Drawing.Size(1669, 618);
             this.dgvMovies.TabIndex = 15;
             this.dgvMovies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovies_CellContentClick);
-            // 
-            // MovieId
-            // 
-            this.MovieId.DataPropertyName = "MovieId";
-            this.MovieId.FillWeight = 118.8829F;
-            this.MovieId.HeaderText = "MovieId";
-            this.MovieId.MinimumWidth = 6;
-            this.MovieId.Name = "MovieId";
-            this.MovieId.Visible = false;
-            // 
-            // Title
-            // 
-            this.Title.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.Title.DataPropertyName = "Title";
-            this.Title.FillWeight = 232.3584F;
-            this.Title.HeaderText = "Title";
-            this.Title.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            this.Title.MinimumWidth = 6;
-            this.Title.Name = "Title";
-            this.Title.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Title.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
-            // 
-            // Year
-            // 
-            this.Year.DataPropertyName = "Year";
-            this.Year.FillWeight = 93.89278F;
-            this.Year.HeaderText = "Year";
-            this.Year.MinimumWidth = 6;
-            this.Year.Name = "Year";
-            // 
-            // Rating
-            // 
-            this.Rating.DataPropertyName = "Rating";
-            this.Rating.FillWeight = 87.64162F;
-            this.Rating.HeaderText = "Rating";
-            this.Rating.MinimumWidth = 6;
-            this.Rating.Name = "Rating";
-            // 
-            // Duration
-            // 
-            this.Duration.DataPropertyName = "Duration";
-            this.Duration.FillWeight = 86.72899F;
-            this.Duration.HeaderText = "Duration";
-            this.Duration.MinimumWidth = 6;
-            this.Duration.Name = "Duration";
-            // 
-            // Price
-            // 
-            this.Price.DataPropertyName = "Price";
-            this.Price.FillWeight = 73.81454F;
-            this.Price.HeaderText = "Price";
-            this.Price.MinimumWidth = 6;
-            this.Price.Name = "Price";
-            // 
-            // Standalone
-            // 
-            this.Standalone.DataPropertyName = "Standalone";
-            this.Standalone.FillWeight = 117.0038F;
-            this.Standalone.HeaderText = "Standalone";
-            this.Standalone.MinimumWidth = 6;
-            this.Standalone.Name = "Standalone";
-            // 
-            // Edit
-            // 
-            this.Edit.FillWeight = 42.78198F;
-            this.Edit.HeaderText = "";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.MinimumWidth = 6;
-            this.Edit.Name = "Edit";
-            // 
-            // Delete
-            // 
-            this.Delete.FillWeight = 46.89513F;
-            this.Delete.HeaderText = "";
-            this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
-            this.Delete.MinimumWidth = 6;
-            this.Delete.Name = "Delete";
             // 
             // label1
             // 
@@ -263,7 +189,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(1110, 80);
+            this.label4.Location = new System.Drawing.Point(953, 79);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(103, 22);
             this.label4.TabIndex = 24;
@@ -274,7 +200,7 @@
             this.RatingSearch.BackColor = System.Drawing.Color.Snow;
             this.RatingSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.RatingSearch.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RatingSearch.Location = new System.Drawing.Point(1292, 105);
+            this.RatingSearch.Location = new System.Drawing.Point(1116, 106);
             this.RatingSearch.Name = "RatingSearch";
             this.RatingSearch.Size = new System.Drawing.Size(141, 28);
             this.RatingSearch.TabIndex = 23;
@@ -283,7 +209,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(1288, 80);
+            this.label3.Location = new System.Drawing.Point(1112, 81);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(121, 22);
             this.label3.TabIndex = 21;
@@ -293,7 +219,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(762, 81);
+            this.label2.Location = new System.Drawing.Point(620, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(177, 22);
             this.label2.TabIndex = 20;
@@ -304,7 +230,7 @@
             this.Movie.BackColor = System.Drawing.Color.Snow;
             this.Movie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Movie.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Movie.Location = new System.Drawing.Point(766, 106);
+            this.Movie.Location = new System.Drawing.Point(624, 104);
             this.Movie.Name = "Movie";
             this.Movie.Size = new System.Drawing.Size(315, 28);
             this.Movie.TabIndex = 19;
@@ -312,7 +238,7 @@
             // YearSearch
             // 
             this.YearSearch.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.YearSearch.Location = new System.Drawing.Point(1114, 106);
+            this.YearSearch.Location = new System.Drawing.Point(957, 105);
             this.YearSearch.Maximum = new decimal(new int[] {
             2025,
             0,
@@ -343,11 +269,119 @@
             this.StandaloneCB.Text = "Standalone";
             this.StandaloneCB.UseVisualStyleBackColor = true;
             // 
+            // MovieId
+            // 
+            this.MovieId.DataPropertyName = "MovieId";
+            this.MovieId.FillWeight = 118.8829F;
+            this.MovieId.HeaderText = "MovieId";
+            this.MovieId.MinimumWidth = 6;
+            this.MovieId.Name = "MovieId";
+            this.MovieId.Visible = false;
+            // 
+            // Title
+            // 
+            this.Title.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.Title.DataPropertyName = "Title";
+            this.Title.FillWeight = 222.8445F;
+            this.Title.HeaderText = "Title";
+            this.Title.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.Title.MinimumWidth = 6;
+            this.Title.Name = "Title";
+            this.Title.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Title.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            // 
+            // Genre
+            // 
+            this.Genre.DataPropertyName = "Genre";
+            this.Genre.FillWeight = 131.9828F;
+            this.Genre.HeaderText = "Genre";
+            this.Genre.MinimumWidth = 6;
+            this.Genre.Name = "Genre";
+            // 
+            // Year
+            // 
+            this.Year.DataPropertyName = "Year";
+            this.Year.FillWeight = 90.04834F;
+            this.Year.HeaderText = "Year";
+            this.Year.MinimumWidth = 6;
+            this.Year.Name = "Year";
+            // 
+            // Rating
+            // 
+            this.Rating.DataPropertyName = "Rating";
+            this.Rating.FillWeight = 84.05313F;
+            this.Rating.HeaderText = "Rating";
+            this.Rating.MinimumWidth = 6;
+            this.Rating.Name = "Rating";
+            // 
+            // Duration
+            // 
+            this.Duration.DataPropertyName = "Duration";
+            this.Duration.FillWeight = 83.17787F;
+            this.Duration.HeaderText = "Duration";
+            this.Duration.MinimumWidth = 6;
+            this.Duration.Name = "Duration";
+            // 
+            // Price
+            // 
+            this.Price.DataPropertyName = "Price";
+            this.Price.FillWeight = 70.79221F;
+            this.Price.HeaderText = "Price";
+            this.Price.MinimumWidth = 6;
+            this.Price.Name = "Price";
+            // 
+            // Standalone
+            // 
+            this.Standalone.DataPropertyName = "Standalone";
+            this.Standalone.FillWeight = 112.2131F;
+            this.Standalone.HeaderText = "Standalone";
+            this.Standalone.MinimumWidth = 6;
+            this.Standalone.Name = "Standalone";
+            // 
+            // Edit
+            // 
+            this.Edit.FillWeight = 41.03027F;
+            this.Edit.HeaderText = "";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.MinimumWidth = 6;
+            this.Edit.Name = "Edit";
+            // 
+            // Delete
+            // 
+            this.Delete.FillWeight = 44.97501F;
+            this.Delete.HeaderText = "";
+            this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
+            this.Delete.MinimumWidth = 6;
+            this.Delete.Name = "Delete";
+            // 
+            // GenreBox
+            // 
+            this.GenreBox.BackColor = System.Drawing.Color.Snow;
+            this.GenreBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.GenreBox.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GenreBox.Location = new System.Drawing.Point(1276, 105);
+            this.GenreBox.Name = "GenreBox";
+            this.GenreBox.Size = new System.Drawing.Size(164, 28);
+            this.GenreBox.TabIndex = 28;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(1272, 80);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 22);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Genre:";
+            // 
             // MoviesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1775, 835);
+            this.Controls.Add(this.GenreBox);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.StandaloneCB);
             this.Controls.Add(this.YearSearch);
             this.Controls.Add(this.label4);
@@ -376,15 +410,6 @@
         private System.Windows.Forms.DataGridView dgvMovies;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button AddMovieBtn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MovieId;
-        private System.Windows.Forms.DataGridViewLinkColumn Title;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Year;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rating;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Standalone;
-        private System.Windows.Forms.DataGridViewImageColumn Edit;
-        private System.Windows.Forms.DataGridViewImageColumn Delete;
         private System.Windows.Forms.Button clearSearch;
         private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.Label label4;
@@ -394,5 +419,17 @@
         private System.Windows.Forms.TextBox Movie;
         private System.Windows.Forms.NumericUpDown YearSearch;
         private System.Windows.Forms.CheckBox StandaloneCB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MovieId;
+        private System.Windows.Forms.DataGridViewLinkColumn Title;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Genre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Year;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rating;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Standalone;
+        private System.Windows.Forms.DataGridViewImageColumn Edit;
+        private System.Windows.Forms.DataGridViewImageColumn Delete;
+        private System.Windows.Forms.TextBox GenreBox;
+        private System.Windows.Forms.Label label5;
     }
 }

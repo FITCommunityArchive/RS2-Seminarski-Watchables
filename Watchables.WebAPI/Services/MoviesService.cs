@@ -24,6 +24,7 @@ namespace Watchables.WebAPI.Services
 
             var query = _context.Movies.AsQueryable();
             if (!string.IsNullOrWhiteSpace(request.Title)) query = query.Where(m => m.Title.ToLower().StartsWith(request.Title.ToLower()));
+            if (!string.IsNullOrWhiteSpace(request.Genre)) query = query.Where(m => m.Genre.ToLower().StartsWith(request.Genre.ToLower()));
             if (request.Year >= 0) query = query.Where(m => m.Year >= request.Year);
             if (request.Rating >= 0) query = query.Where(m => m.Rating >= request.Rating);
             if (!string.IsNullOrWhiteSpace(request.Standalone) && request.Standalone == "true") query = query.Where(m => m.Standalone);

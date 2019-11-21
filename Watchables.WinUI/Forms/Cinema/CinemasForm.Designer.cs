@@ -367,6 +367,7 @@
             this.Name = "CinemasForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cinemas";
+            this.Load += new System.EventHandler(this.CinemasForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCinemas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

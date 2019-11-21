@@ -61,6 +61,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIService.cs" />
+    <Compile Include="Forms\Admin\AddEditAdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AddEditAdminForm.Designer.cs">
+      <DependentUpon>AddEditAdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminsForm.Designer.cs">
+      <DependentUpon>AdminsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Cinema\AddEditAppointmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +163,24 @@
     <Compile Include="Forms\Movie\MoviesForm.Designer.cs">
       <DependentUpon>MoviesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Show\AddEditShowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Show\AddEditShowForm.Designer.cs">
+      <DependentUpon>AddEditShowForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Show\ShowsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Show\ShowsForm.Designer.cs">
+      <DependentUpon>ShowsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\User\UsersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\User\UsersForm.Designer.cs">
+      <DependentUpon>UsersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -172,6 +202,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Admin\AddEditAdminForm.resx">
+      <DependentUpon>AddEditAdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminsForm.resx">
+      <DependentUpon>AdminsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Cinema\AddEditAppointmentForm.resx">
       <DependentUpon>AddEditAppointmentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +252,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Movie\MoviesForm.resx">
       <DependentUpon>MoviesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Show\AddEditShowForm.resx">
+      <DependentUpon>AddEditShowForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Show\ShowsForm.resx">
+      <DependentUpon>ShowsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User\UsersForm.resx">
+      <DependentUpon>UsersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

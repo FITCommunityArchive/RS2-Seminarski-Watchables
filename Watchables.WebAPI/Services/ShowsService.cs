@@ -20,11 +20,12 @@ namespace Watchables.WebAPI.Services
         public List<Model.Show> Get(Model.Requests.ShowSearchRequest request) {
 
             var query = _context.Shows.AsQueryable();
-            if (!string.IsNullOrWhiteSpace(request.Title)) query = query.Where(s => s.Title.ToLower().StartsWith(request.Title.ToLower()));
-            if (request.Year >= 0) query = query.Where(s => s.Year >= request.Year);
-            if (request.Rating >= 0) query = query.Where(s => s.Rating >= request.Rating);
-            if (!string.IsNullOrWhiteSpace(request.Ongoing) && request.Ongoing == "true") query = query.Where(s => s.Ongoing);
-            if (!string.IsNullOrWhiteSpace(request.Ongoing) && request.Ongoing == "false") query = query.Where(s => !s.Ongoing);
+            if (!string.IsNullOrWhiteSpace(request.Title)) query = query.Where(m => m.Title.ToLower().StartsWith(request.Title.ToLower()));
+            if (!string.IsNullOrWhiteSpace(request.Genre)) query = query.Where(m => m.Genre.ToLower().StartsWith(request.Genre.ToLower()));
+            if (request.Year >= 0) query = query.Where(m => m.Year >= request.Year);
+            if (request.Rating >= 0) query = query.Where(m => m.Rating >= request.Rating);
+            if (!string.IsNullOrWhiteSpace(request.Ongoing) && request.Ongoing == "true") query = query.Where(m => m.Ongoing);
+            if (!string.IsNullOrWhiteSpace(request.Ongoing) && request.Ongoing == "false") query = query.Where(m => !m.Ongoing);
 
             return _mapper.Map<List<Model.Show>>(query.ToList());
         }

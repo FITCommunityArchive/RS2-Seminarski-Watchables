@@ -43,5 +43,9 @@ namespace Watchables.Model.Requests
 
         [Required]
         public bool Ongoing { get; set; }
+
+        [Required]
+        [MinLength(4)]
+        public string Genre { get; set; }
     }
 }

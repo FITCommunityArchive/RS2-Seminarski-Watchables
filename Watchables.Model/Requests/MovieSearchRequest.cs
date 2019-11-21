@@ -10,5 +10,6 @@ namespace Watchables.Model.Requests
         public int Year { get; set; }
         public decimal Rating { get; set; }
         public string Standalone { get; set; }
+        public string Genre { get; set; }
     }
 }

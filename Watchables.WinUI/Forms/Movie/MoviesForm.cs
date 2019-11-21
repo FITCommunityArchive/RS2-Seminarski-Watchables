@@ -82,7 +82,8 @@ namespace Watchables.WinUI.Forms.Movie
                 Rating = rating,
                 Standalone = standalone,
                 Title = Movie.Text,
-                Year = int.Parse(YearSearch.Value.ToString())
+                Year = int.Parse(YearSearch.Value.ToString()),
+                Genre = GenreBox.Text
             };
 
             var list = await _apiService.Get<List<Model.Movie>>(search);
@@ -96,7 +97,8 @@ namespace Watchables.WinUI.Forms.Movie
             RatingSearch.Text = "";
             YearSearch.Value = YearSearch.Minimum;
             StandaloneCB.Checked = false;
-            Movie.Text = "";           
+            Movie.Text = "";
+            GenreBox.Text = "";
 
             var list = await _apiService.Get<List<Model.Movie>>(null);
             list.Sort((a, b) => a.Title.CompareTo(b.Title));

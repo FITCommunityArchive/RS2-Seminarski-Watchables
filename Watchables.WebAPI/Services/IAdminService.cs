@@ -10,6 +10,8 @@ namespace Watchables.WebAPI.Services
         public Model.Admin Insert(Model.Requests.InsertAdminRequest request);
         public List<Model.Admin> Get();
         public Model.Admin Update(int adminId, Model.Requests.InsertAdminRequest request);
-       
+        Model.Admin GetById(int id);
+        string Delete(int id);
+
     }
 }

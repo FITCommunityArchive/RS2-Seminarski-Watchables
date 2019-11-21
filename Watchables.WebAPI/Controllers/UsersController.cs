@@ -9,7 +9,7 @@ using Watchables.WebAPI.Services;
 
 namespace Watchables.WebAPI.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -20,19 +20,34 @@ namespace Watchables.WebAPI.Controllers
             _service = service;
         }
 
+        
         [HttpPost]
         public ActionResult<Model.User> Insert(Model.Requests.InsertUserRequest request) {
             return _service.Insert(request);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult<List<Model.User>> Get([FromQuery]Model.Requests.UserSearchRequest request) {
             return _service.Get(request);
         }
 
+        [Authorize(Roles = "Korisnik")]
         [HttpPut("{userId}")]
         public ActionResult<Model.User> Update(int userId, Model.Requests.InsertUserRequest request) {
            return _service.Update(userId, request);
         }
+
+        [Authorize(Roles = "Admin, Korisnik")]
+        [HttpGet("{userId}")]
+        public ActionResult<Model.User> GetById(int userId) {
+            return _service.GetById(userId);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("Lock/{flag}")]
+        public ActionResult<string> LockToggle(bool flag) {
+            return _service.LockToggle(flag);
+        }   
     }
 }

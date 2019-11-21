@@ -135,5 +135,9 @@ namespace Watchables.WinUI.Forms
                 else return;
             }
         }
+
+        private void CinemasForm_Load(object sender, EventArgs e) {
+
+        }
     }
 }

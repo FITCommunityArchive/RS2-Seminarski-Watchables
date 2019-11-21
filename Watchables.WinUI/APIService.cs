@@ -46,9 +46,38 @@ namespace Watchables.WinUI
 
         public async Task<T> GetById<T>(object id) {
 
-            var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{id}";           
-            var result = await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
-            return result;
+            var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{id}";
+            try {
+                var result = await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    _customMessageBox.Show("Access denied!", "error");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    _customMessageBox.Show("Access forbidden", "error");
+                }
+                throw;
+            }
+        }
+
+        public async Task<string> Delete<T>(object id) {
+
+            var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{id}";
+            try {
+                var result = await url.WithBasicAuth(Username, Password).DeleteAsync().ReceiveString();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    _customMessageBox.Show("Access denied!", "error");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    _customMessageBox.Show("Access forbidden", "error");
+                }
+                throw;
+            }
         }
 
         public async Task<T> Insert<T>(object request) {
@@ -153,8 +182,24 @@ namespace Watchables.WinUI
                 }
                 throw;
             }
+        }
 
+        public async Task<string> Lock<T>(bool flag) {
 
+            var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/Lock/{flag}";
+            try {
+                var result = await url.WithBasicAuth(Username, Password).GetStringAsync();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    _customMessageBox.Show("Access denied!", "error");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    _customMessageBox.Show("Access forbidden", "error");
+                }
+                throw;
+            }
         }
     }
 }

@@ -52,6 +52,13 @@ namespace Watchables.WebAPI.Services
             return _mapper.Map<Model.User>(user);
         }
 
+        public string LockToggle(bool flag) {
+            foreach (var user in _context.Users.ToList()) user.Locked = flag;
+            _context.SaveChanges();
+            if (flag) return "Users are locked";
+            else return "Users are unlocked";
+        }
+
         public User Update(int userId, InsertUserRequest request) {
             var user = _context.Users.Find(userId);
             _mapper.Map(request, user);

@@ -44,5 +44,9 @@ namespace Watchables.Model.Requests
         [Required]
         [Range(1, 200)]
         public decimal Price { get; set; }
+
+        [Required]
+        [MinLength(4)]
+        public string Genre { get; set; }
     }
 }
