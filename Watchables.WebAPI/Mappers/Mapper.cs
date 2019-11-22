@@ -39,6 +39,9 @@ namespace Watchables.WebAPI.Mappers
 
             CreateMap<Database.Appointments, Model.Requests.InsertAppointmentRequest>().ReverseMap();
 
+            CreateMap<Database.Subscriptions, Model.Subscription>().ReverseMap();
+            CreateMap<Database.Subscriptions, Model.Requests.InsertSubscriptionRequest>().ReverseMap();
+
         }
     }
 }

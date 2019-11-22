@@ -8,5 +8,6 @@ namespace Watchables.Model.Requests
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Userneme { get; set; }
     }
 }
