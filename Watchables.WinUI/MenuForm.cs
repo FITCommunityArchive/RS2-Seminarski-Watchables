@@ -12,6 +12,7 @@ using Watchables.WinUI.Forms.Admin;
 using Watchables.WinUI.Forms.Cinema;
 using Watchables.WinUI.Forms.Movie;
 using Watchables.WinUI.Forms.Show;
+using Watchables.WinUI.Forms.Subscription;
 using Watchables.WinUI.Forms.User;
 
 namespace Watchables.WinUI
@@ -180,6 +181,14 @@ namespace Watchables.WinUI
         }
 
         private void ShowSubscriptionsBtn_Click(object sender, EventArgs e) {
+            foreach (Form frm in this.MdiChildren) {
+                frm.Close();
+            }
+            SubscriptionsForm form = new SubscriptionsForm {
+                MdiParent = this,
+                Dock = DockStyle.Fill
+            };
+            form.Show();      
             Slider.Top = ShowSubscriptionsBtn.Top;
             Slider.Height = ShowSubscriptionsBtn.Height;
         }

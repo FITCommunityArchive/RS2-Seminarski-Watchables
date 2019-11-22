@@ -175,6 +175,18 @@
     <Compile Include="Forms\Show\ShowsForm.Designer.cs">
       <DependentUpon>ShowsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Subscription\AddEditSubsciptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Subscription\AddEditSubsciptionForm.Designer.cs">
+      <DependentUpon>AddEditSubsciptionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Subscription\SubscriptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Subscription\SubscriptionsForm.Designer.cs">
+      <DependentUpon>SubscriptionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\User\UsersForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -258,6 +270,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Show\ShowsForm.resx">
       <DependentUpon>ShowsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Subscription\AddEditSubsciptionForm.resx">
+      <DependentUpon>AddEditSubsciptionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Subscription\SubscriptionsForm.resx">
+      <DependentUpon>SubscriptionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\User\UsersForm.resx">
       <DependentUpon>UsersForm.cs</DependentUpon>

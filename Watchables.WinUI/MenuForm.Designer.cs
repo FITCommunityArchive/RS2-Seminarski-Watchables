@@ -43,9 +43,9 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.LockCB = new System.Windows.Forms.CheckBox();
-            this.User = new System.Windows.Forms.Label();
             this.MinimizeBtn = new System.Windows.Forms.Button();
             this.ExitBtn = new System.Windows.Forms.Button();
+            this.User = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -314,18 +314,6 @@
             this.LockCB.UseVisualStyleBackColor = true;
             this.LockCB.Click += new System.EventHandler(this.LockCB_Click);
             // 
-            // User
-            // 
-            this.User.AutoSize = true;
-            this.User.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.User.Font = new System.Drawing.Font("Century Gothic", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.User.ForeColor = System.Drawing.Color.White;
-            this.User.Location = new System.Drawing.Point(0, 0);
-            this.User.Name = "User";
-            this.User.Size = new System.Drawing.Size(62, 30);
-            this.User.TabIndex = 2;
-            this.User.Text = "User";
-            // 
             // MinimizeBtn
             // 
             this.MinimizeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -357,6 +345,18 @@
             this.ExitBtn.TabIndex = 3;
             this.ExitBtn.UseVisualStyleBackColor = true;
             this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click_1);
+            // 
+            // User
+            // 
+            this.User.AutoSize = true;
+            this.User.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.User.Font = new System.Drawing.Font("Century Gothic", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.User.ForeColor = System.Drawing.Color.White;
+            this.User.Location = new System.Drawing.Point(0, 0);
+            this.User.Name = "User";
+            this.User.Size = new System.Drawing.Size(62, 30);
+            this.User.TabIndex = 2;
+            this.User.Text = "User";
             // 
             // MenuForm
             // 
