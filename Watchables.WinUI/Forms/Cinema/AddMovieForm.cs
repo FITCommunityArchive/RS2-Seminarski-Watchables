@@ -81,7 +81,7 @@ namespace Watchables.WinUI.Forms.Cinema
             else {
                 saveBtn.Dispose();
                 select.Dispose();
-                Title.Text = "All movies are airing that day";
+                Title.Text = "No movies to select!";
             }
                    
             

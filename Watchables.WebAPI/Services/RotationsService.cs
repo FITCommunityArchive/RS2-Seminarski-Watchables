@@ -14,7 +14,8 @@ namespace Watchables.WebAPI.Services
 
         public override List<Model.Rotation> Get(Model.Requests.RotationSearchRequest search) {
             var query = _context.Set<Database.Rotations>().AsQueryable();
-
+            if (!string.IsNullOrWhiteSpace(search.ForBirthday) && search.ForBirthday.ToLower() =="true") query = query.Where(r => r.ForBirthday == true);
+            if (!string.IsNullOrWhiteSpace(search.ForBirthday) && search.ForBirthday.ToLower() == "false") query = query.Where(r => r.ForBirthday == false);
 
             var list = query.ToList();
 

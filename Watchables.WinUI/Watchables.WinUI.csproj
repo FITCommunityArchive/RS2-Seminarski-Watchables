@@ -163,6 +163,18 @@
     <Compile Include="Forms\Movie\MoviesForm.Designer.cs">
       <DependentUpon>MoviesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Rotation\AddEditRotationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Rotation\AddEditRotationForm.Designer.cs">
+      <DependentUpon>AddEditRotationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Rotation\RotationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Rotation\RotationsForm.Designer.cs">
+      <DependentUpon>RotationsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Show\AddEditShowForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,6 +276,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Movie\MoviesForm.resx">
       <DependentUpon>MoviesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Rotation\AddEditRotationForm.resx">
+      <DependentUpon>AddEditRotationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Rotation\RotationsForm.resx">
+      <DependentUpon>RotationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Show\AddEditShowForm.resx">
       <DependentUpon>AddEditShowForm.cs</DependentUpon>

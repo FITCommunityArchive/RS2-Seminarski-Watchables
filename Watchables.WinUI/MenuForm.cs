@@ -11,6 +11,7 @@ using Watchables.WinUI.Forms;
 using Watchables.WinUI.Forms.Admin;
 using Watchables.WinUI.Forms.Cinema;
 using Watchables.WinUI.Forms.Movie;
+using Watchables.WinUI.Forms.Rotation;
 using Watchables.WinUI.Forms.Show;
 using Watchables.WinUI.Forms.Subscription;
 using Watchables.WinUI.Forms.User;
@@ -194,6 +195,14 @@ namespace Watchables.WinUI
         }
 
         private void ShowRotationsBtn_Click(object sender, EventArgs e) {
+            foreach (Form frm in this.MdiChildren) {
+                frm.Close();
+            }
+            RotationsForm form = new RotationsForm {
+                MdiParent = this,
+                Dock = DockStyle.Fill
+            };
+            form.Show();
             Slider.Top = ShowRotationsBtn.Top;
             Slider.Height = ShowRotationsBtn.Height;
         }
