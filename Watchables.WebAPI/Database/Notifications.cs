@@ -13,6 +13,7 @@ namespace Watchables.WebAPI.Database
         public int NotificationId { get; set; }
         public string Content { get; set; }
         public string Type { get; set; }
+        public DateTime Created { get; set; }
 
         public virtual ICollection<UsersNotifications> UsersNotifications { get; set; }
     }

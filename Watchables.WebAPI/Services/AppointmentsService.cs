@@ -85,10 +85,16 @@ namespace Watchables.WebAPI.Services
 
 
             var baseAppointment = _context.Appointments.Find(appointmentId);
+            var oldPrice = baseAppointment.Price;
             baseAppointment.Price = app.Price;
             baseAppointment.StartsAt = app.StartsAt;
             baseAppointment.HallId = app.HallId;
             _context.SaveChanges();
+
+           Helper helper = new Helper(_context);
+           helper.ChangeAppointmentNotification(baseAppointment, $"Appointment information changed (price: {baseAppointment.Price}, starts at: {baseAppointment.StartsAt}, hall: {_context.Hall.Find(baseAppointment.HallId).HallName} {_context.Hall.Find(baseAppointment.HallId).HallNumber})", "Warning", oldPrice, baseAppointment.Price);
+
+
             return _mapper.Map<Model.Appointments>(baseAppointment);
         }
     }

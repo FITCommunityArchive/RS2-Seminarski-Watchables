@@ -71,6 +71,8 @@ namespace Watchables.WinUI.Forms.Rotation
             }
             else {
                 Title.Text = "Add a rotation";
+                Movies.SelectedIndex = -1;
+                Shows.SelectedIndex = -1;
             }
         }
 
@@ -98,7 +100,66 @@ namespace Watchables.WinUI.Forms.Rotation
             }
         }
 
-        private void saveBtn_Click(object sender, EventArgs e) {
+        private async void saveBtn_Click(object sender, EventArgs e) {
+            var messageBox = new CustomMessageBox();
+
+            if (string.IsNullOrWhiteSpace(Description.Text) || Description.Text.Length < 4) {
+                messageBox.Show("The description field requires 4 letters!", "error");
+                return;
+            }
+
+            if(From.Value > To.Value) {
+                messageBox.Show("'To' must come after 'from'!", "error");
+                return;
+            }
+            if((To.Value - From.Value).TotalDays < 1) {
+                messageBox.Show("Dates must be at least one day apart!", "error");
+                return;
+            }
+
+            if (Movies.SelectedIndex == -1) {
+                messageBox.Show("Please select a movie!", "error");
+                return;
+            }
+
+            if (Shows.SelectedIndex == -1) {
+                messageBox.Show("Please select a show!", "error");
+                return;
+            }
+
+            var movieId = (Movies.SelectedItem as dynamic).Value;
+            var showId = (Shows.SelectedItem as dynamic).Value;
+
+            Model.Requests.InsertRotationRequest request = new Model.Requests.InsertRotationRequest() {
+                Available=Available.Checked,
+                Description=Description.Text,
+                ForBirthday=Birthday.Checked,
+                From=From.Value.Date,
+                To=To.Value.Date,
+                MovieId=movieId,
+                ShowId=showId
+            };
+
+            if (_rotationId.HasValue) {
+                await _apiService.Update<Model.Rotation>(_rotationId, request);
+                messageBox.Show("Rotation updated succesfully", "Success");
+            }
+            else {
+                await _apiService.Insert<Model.Rotation>(request);
+                messageBox.Show("Rotation added succesfully", "Success");
+            }
+            this.Close();
+
+            foreach (var child in _menuForm.MdiChildren) {
+                child.Close();
+            }
+
+            RotationsForm form = new RotationsForm() {
+                MdiParent = _menuForm,
+                Dock = DockStyle.Fill
+            };
+            form.Show();
+            _helper.CloseForm(this, 15);
 
         }
     }

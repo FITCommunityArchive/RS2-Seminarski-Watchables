@@ -78,11 +78,18 @@ namespace Watchables.WebAPI.Services
 
             if (!validCinemaId) throw new UserException("Invalid cinemaId inside of hall!");
 
-
+            var oldName = baseHall.HallName;
             baseHall.HallName = hall.HallName;
             baseHall.HallNumber = hall.HallNumber;
             baseHall.NumberOfseats = hall.NumberOfseats;
             _context.SaveChanges();
+
+            var list = _context.Appointments.Where(a => a.HallId == baseHall.HallId).ToList();
+
+            var helper = new Helper(_context);
+            helper.NonDeleteNotification(list, $"The hall '{oldName}' was renamed to '{baseHall.HallName}'!", "Information");
+
+
             return _mapper.Map<Model.Hall>(baseHall);
         }
 

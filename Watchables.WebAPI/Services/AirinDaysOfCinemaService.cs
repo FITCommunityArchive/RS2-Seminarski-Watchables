@@ -76,6 +76,7 @@ namespace Watchables.WebAPI.Services
             if (!validCinemaId) throw new UserException("Invalid cinemaId inside of airing day of cinema!");
 
             var baseAd = _context.AiringDaysOfCinema.Find(airingDayId);
+            var oldDate = baseAd.Date.Date;
             baseAd.Date = ad.Date;
             var day = ad.Date.DayOfWeek;
             var days = _context.AiringDays.ToList();
@@ -86,6 +87,20 @@ namespace Watchables.WebAPI.Services
                 }
             }
             _context.SaveChanges();
+
+            var cdms = _context.CinemaDayMovie.Where(c => c.AiringDaysOfCinemaId == baseAd.AiringDaysOfCinemaId).ToList();
+            var list = new List<Database.Appointments>();
+            foreach(var cdm in cdms) {
+                foreach(var app in _context.Appointments.ToList()) {
+                    if (app.CinemaDayMovieId == cdm.CinemaDayMovieId) {
+                        list.Add(app);
+                    }
+                }
+            }
+
+            Helper helper = new Helper(_context);
+            helper.NonDeleteNotification(list, $"Orders from the {oldDate} have been changed to the {baseAd.Date.Date}", "Warning");
+
             return _mapper.Map<Model.AiringDaysOfCinema>(baseAd);
         }
     }
