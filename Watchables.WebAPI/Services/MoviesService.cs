@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Watchables.Model;
 using Watchables.Model.Requests;
 using Watchables.WebAPI.Database;
+using Watchables.WebAPI.Exceptions;
 
 namespace Watchables.WebAPI.Services
 {
@@ -51,6 +52,28 @@ namespace Watchables.WebAPI.Services
             _mapper.Map(request, movie);
             _context.SaveChanges();
             return _mapper.Map<Model.Movie>(movie);
+        }
+
+        public string Delete(int id) {
+
+            Helper helper = new Helper(_context);
+
+            var validMovie = false;
+            foreach (var m in _context.Movies.ToList()) {
+                if (m.MovieId == id) {
+                    validMovie = true;
+                    break;
+                }
+            }
+            if (!validMovie) throw new UserException("Cannot find a movie with the specified id");
+
+            var movie = _context.Movies.Find(id);
+
+            string notificationContent = $"The movie '{movie.Title}', has been removed";
+
+            helper.DeleteMovieNotification(movie, notificationContent, "Removal");
+
+            return "Movie removed";
         }
     }
 }

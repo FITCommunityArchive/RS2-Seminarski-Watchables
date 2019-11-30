@@ -3,7 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Watchables.Model;
+using Watchables.Model.Requests;
 using Watchables.WebAPI.Database;
+using Watchables.WebAPI.Exceptions;
 
 namespace Watchables.WebAPI.Services
 {
@@ -26,7 +29,33 @@ namespace Watchables.WebAPI.Services
         }
 
         public override string Delete(int id) {
-            return "Sada se desava ovo i nista se ne brise";    
+
+            Helper helper = new Helper(_context);
+
+            var validSubscription = false;
+            foreach (var s in _context.Subscriptions.ToList()) {
+                if (s.SubscriptionId == id) {
+                    validSubscription = true;
+                    break;
+                }
+            }
+            if (!validSubscription) throw new UserException("Cannot find a subscription with specified id");
+
+            var subscription = _context.Subscriptions.Find(id);
+            helper.DeleteSubscriptionNotification(subscription, $"The subscription with number of movies: {subscription.NumberOfMovies}, number of shows: {subscription.NumberOfShows}, number of tickets: {subscription.NumberOfTickets}, with the price of {subscription.Price}/month, has been removed", "Removal");
+
+            return "Subscription removed";    
         }
+
+        public override Subscription Update(int id, InsertSubscriptionRequest request) {
+
+            var changedSubscription = base.Update(id, request);
+
+            Helper helper = new Helper(_context);
+            helper.ChangeSubscriptionNotification(_mapper.Map<Database.Subscriptions>(changedSubscription), $"Subscription information changed (number of movies: {changedSubscription.NumberOfMovies}, number of shows: {changedSubscription.NumberOfShows}, number of tickets: {changedSubscription.NumberOfTickets}, price: {changedSubscription.Price}, avaiable: {changedSubscription.Available}", "Warning");
+
+            return changedSubscription;
+        }
+
     }
 }

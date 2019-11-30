@@ -130,7 +130,54 @@ namespace Watchables.WebAPI.Services
             };
 
             return schedule;
-        }    
-    
+        }
+
+        public string Delete(int id) {
+
+            var cinemas = _context.Cinemas.ToList();
+            bool validCinema = false;
+            foreach(var c in cinemas) {
+                if (c.CinemaId == id) {
+                    validCinema = true;
+                    break;
+                }
+            }
+            if (!validCinema) throw new UserException("Cannot find a cinema with the specified id");
+
+            var cinema = _context.Cinemas.Find(id);
+            var airingDaysOfCinema = _context.AiringDaysOfCinema.Where(adoc => adoc.CinemaId == id).ToList();
+            List<Database.CinemaDayMovie> cdms = new List<Database.CinemaDayMovie>();
+
+            foreach(var adoc in airingDaysOfCinema) {
+                foreach(var cdm in _context.CinemaDayMovie.ToList()) {
+                    if (cdm.AiringDaysOfCinemaId == adoc.AiringDaysOfCinemaId) cdms.Add(cdm);
+                }                
+            }
+
+            Helper helper = new Helper(_context);
+            helper.DeleteCdmsNotification(cdms, $"The cinema '{cinema.Name}' is no longer a Watchable cinema, an item associated with this cinema has been removed", "Removal");
+
+            foreach(var adoc in airingDaysOfCinema) {
+                _context.AiringDaysOfCinema.Remove(adoc);
+                _context.SaveChanges();
+            }
+            var halls = _context.Hall.Where(h => h.CinemaId == id).ToList();
+            var products = _context.Products.Where(p => p.CinemaId == id).ToList();
+
+            foreach(var hall in halls) {
+                _context.Hall.Remove(hall);
+                _context.SaveChanges();
+            }
+
+            foreach(var product in products) {
+                _context.Products.Remove(product);
+                _context.SaveChanges();
+            }
+
+            _context.Cinemas.Remove(cinema);
+            _context.SaveChanges();
+
+            return "Cinema removed";
+        }
     }
 }

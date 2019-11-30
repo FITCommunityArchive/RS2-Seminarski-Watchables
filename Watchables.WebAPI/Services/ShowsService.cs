@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Watchables.WebAPI.Database;
+using Watchables.WebAPI.Exceptions;
 
 namespace Watchables.WebAPI.Services
 {
@@ -49,6 +50,28 @@ namespace Watchables.WebAPI.Services
             _mapper.Map(request, show);
             _context.SaveChanges();
             return _mapper.Map<Model.Show>(show);
+        }
+
+        public string Delete(int id) {
+
+            Helper helper = new Helper(_context);
+
+            var validShow = false;
+            foreach (var s in _context.Shows.ToList()) {
+                if (s.ShowId== id) {
+                    validShow= true;
+                    break;
+                }
+            }
+            if (!validShow) throw new UserException("Cannot find a show with the specified id");
+
+            var show = _context.Shows.Find(id);
+
+            string notificationContent = $"The show '{show.Title}', has been removed";
+
+            helper.DeleteShowNotification(show, notificationContent, "Removal");      
+
+            return "Show removed";
         }
 
     }

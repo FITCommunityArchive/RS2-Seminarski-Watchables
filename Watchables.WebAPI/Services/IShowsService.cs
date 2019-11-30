@@ -11,5 +11,6 @@ namespace Watchables.WebAPI.Services
         Model.Show GetById(int id);
         Model.Show Insert(Model.Requests.InsertShowRequest request);
         Model.Show Update(int movieId, Model.Requests.InsertShowRequest request);
+        string Delete(int id);
     }
 }

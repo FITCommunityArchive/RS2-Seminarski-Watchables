@@ -11,5 +11,6 @@ namespace Watchables.WebAPI.Services
         Model.AiringDaysOfCinema GetById(int id);
         Model.AiringDaysOfCinema Insert(Model.Requests.InserAiringDayOfCinemaRequest ad);
         Model.AiringDaysOfCinema Update(int airingDayId, Model.Requests.InserAiringDayOfCinemaRequest ad);
+        string Delete(int id);
     }
 }

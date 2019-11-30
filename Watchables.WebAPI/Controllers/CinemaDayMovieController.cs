@@ -30,5 +30,9 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.CinemaDayMovie> AddCinemaDayMovieToCinema(Model.Requests.InsertCinemaDayMovieRequest cdm) {
             return _service.Insert(cdm);
         }
+        [HttpDelete("{cdmId}")]
+        public ActionResult<string> Delete(int cdmId) {
+            return _service.Delete(cdmId);
+        }
     }
 }

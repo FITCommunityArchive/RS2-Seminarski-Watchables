@@ -37,5 +37,10 @@ namespace Watchables.WebAPI.Controllers
             return _service.Update(movieId, request);
         }
 
+        [HttpDelete("{movieId}")]
+        public ActionResult<string> Delete(int movieId) {
+            return _service.Delete(movieId);
+        }
+
     }
 }

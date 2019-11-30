@@ -35,5 +35,9 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.Show> Update(int showId, Model.Requests.InsertShowRequest request) {
             return _service.Update(showId, request);
         }
+        [HttpDelete("{showId}")]
+        public ActionResult<string> Delete(int showId) {
+            return _service.Delete(showId);
+        }
     }
 }

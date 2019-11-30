@@ -36,5 +36,10 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.AiringDaysOfCinema> UpdateAiringDay(int airingDayId, Model.Requests.InserAiringDayOfCinemaRequest ad) {
             return _service.Update(airingDayId, ad);
         }
+
+        [HttpDelete("{adocId}")]
+        public ActionResult<string> Delete(int adocId) {
+            return _service.Delete(adocId);
+        }
     }
 }

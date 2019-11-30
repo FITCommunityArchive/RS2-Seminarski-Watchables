@@ -103,5 +103,31 @@ namespace Watchables.WebAPI.Services
 
             return _mapper.Map<Model.AiringDaysOfCinema>(baseAd);
         }
+
+        public string Delete(int id) {
+
+            Helper helper = new Helper(_context);
+
+            var validAdoc = false;
+            foreach (var a in _context.AiringDaysOfCinema.ToList()) {
+                if (a.AiringDaysOfCinemaId == id) {
+                    validAdoc = true;
+                    break;
+                }
+            }
+            if (!validAdoc) throw new UserException("Cannot find airing day of cinema with specified id");
+
+            var adoc = _context.AiringDaysOfCinema.Find(id);
+
+            string notificationContent = $"The airing day on {adoc.Date.Date}, {_context.AiringDays.Find(adoc.AiringDayId).Name} was removed";
+
+            helper.DeleteCdmsNotification(_context.CinemaDayMovie.Where(cdm=>cdm.AiringDaysOfCinemaId==id).ToList(), notificationContent, "Removal");
+
+            _context.AiringDaysOfCinema.Remove(adoc);
+            _context.SaveChanges();
+
+            return "Airing day of cinema removed";
+        }
+
     }
 }

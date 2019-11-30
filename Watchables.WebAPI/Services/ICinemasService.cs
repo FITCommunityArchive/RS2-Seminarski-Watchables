@@ -16,5 +16,6 @@ namespace Watchables.WebAPI.Services
         List<Model.Product> GetProductsOfCinema(int cinemaId);
         Model.Cinema Update(int cinemaId, InsertCinemaRequest request);
         CinemasScheduleRequest GetCinemasSchedule(int id);
+        string Delete(int id);
     }
 }

@@ -97,5 +97,36 @@ namespace Watchables.WebAPI.Services
 
             return _mapper.Map<Model.Appointments>(baseAppointment);
         }
+
+        public string Delete(int id) {
+
+            Helper helper = new Helper(_context);
+
+            var validApp = false;
+            foreach (var a in _context.Appointments.ToList()) {
+                if (a.AppointmentId== id) {
+                    validApp = true;
+                    break;
+                }
+            }
+            if (!validApp) throw new UserException("Cannot find appointment with specified id");
+
+            var appointment = _context.Appointments.Find(id);
+            var cdm = _context.CinemaDayMovie.Find(appointment.CinemaDayMovieId);
+            string movie = _context.Movies.Find(cdm.MovieId).Title;
+            var date = _context.AiringDaysOfCinema.Find(cdm.AiringDaysOfCinemaId).Date.Date;
+
+            string notificationContent = $"The appointment on the {date} for the movie {movie}, at {appointment.StartsAt} was removed";
+            var list = new List<Database.Appointments>();
+            list.Add(appointment);
+
+            helper.DeleteAppointmentsNotification(list, notificationContent, "Removal");
+
+            _context.Appointments.Remove(appointment);
+            _context.SaveChanges();
+
+            return "Appointment removed";
+        }
+
     }
 }

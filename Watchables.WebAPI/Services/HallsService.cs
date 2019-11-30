@@ -93,6 +93,31 @@ namespace Watchables.WebAPI.Services
             return _mapper.Map<Model.Hall>(baseHall);
         }
 
+        public string Delete(int id) {
+
+            Helper helper = new Helper(_context);
+
+            var validHall = false;
+            foreach(var h in _context.Hall.ToList()) {
+                if (h.HallId == id) {
+                    validHall = true;
+                    break;
+                }
+            }
+            if (!validHall) throw new UserException("Cannot find hall with specified id");
+
+            var hall = _context.Hall.Find(id);
+
+            string notificationContent = $"The hall '{hall.HallName} {hall.HallNumber}' in the '{_context.Cinemas.Find(hall.CinemaId).Name}' cinema, has been removed, with all it's appointments";
+
+            helper.DeleteAppointmentsNotification(_context.Appointments.Where(a => a.HallId == id).ToList(), notificationContent, "Removal");
+
+            _context.Hall.Remove(hall);
+            _context.SaveChanges();
+
+            return "Hall removed";
+        }
+
 
     }
 }

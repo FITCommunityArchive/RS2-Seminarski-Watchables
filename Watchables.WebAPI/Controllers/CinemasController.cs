@@ -59,5 +59,10 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<CinemasScheduleRequest> GetCinemasSchedule(int id) {
             return _service.GetCinemasSchedule(id);
         }
+
+        [HttpDelete("{cinemaId}")]
+        public ActionResult<string> Delete(int cinemaId) {
+            return _service.Delete(cinemaId);
+        }
     }
 }

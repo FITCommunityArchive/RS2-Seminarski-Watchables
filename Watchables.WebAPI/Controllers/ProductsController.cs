@@ -36,5 +36,10 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.Product> UpdateProduct(int productId, Model.Requests.InsertProductRequest product) {
             return _service.Update(productId, product);
         }
+
+        [HttpDelete("{productId}")]
+        public ActionResult<string> Delete(int productId) {
+            return _service.Delete(productId);
+        }
     }
 }

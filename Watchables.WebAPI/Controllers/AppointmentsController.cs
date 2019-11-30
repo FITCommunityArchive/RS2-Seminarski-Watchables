@@ -34,5 +34,9 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<Model.Appointments> UpdateAppointment(int appointmentId, Model.Requests.InsertAppointmentRequest ap) {
             return _service.Update(appointmentId, ap);
         }
+        [HttpDelete("{appointmentId}")]
+        public ActionResult<string> Delete(int appointmentId) {
+            return _service.Delete(appointmentId);
+        }
     }
 }

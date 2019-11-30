@@ -76,10 +76,39 @@ namespace Watchables.WebAPI.Services
 
             if (!validCinemaId) throw new UserException("Invalid cinemaId inside of hall!");
 
+            var oldPrice = baseProduct.Price;
             baseProduct.Name = product.Name;
             baseProduct.Price = product.Price;
             _context.SaveChanges();
+
+
+            Helper helper = new Helper(_context);
+            helper.ChangeProductNotification(baseProduct, $"Product information changed (price: {baseProduct.Price}, name: {baseProduct.Name})", "Warning", oldPrice, baseProduct.Price);
+
             return _mapper.Map<Model.Product>(baseProduct);
+        }
+
+        public string Delete(int id) {
+
+            Helper helper = new Helper(_context);
+
+            var validProduct = false;
+            foreach (var p in _context.Products.ToList()) {
+                if (p.ProductId == id) {
+                    validProduct = true;
+                    break;
+                }
+            }
+            if (!validProduct) throw new UserException("Cannot find product with specified id");
+
+            var product = _context.Products.Find(id);
+
+            string notificationContent = $"The product {product.Name} for {product.Price} in cinema '{_context.Cinemas.Find(product.CinemaId).Name}' has beeen removed";
+
+            helper.DeleteProductNotification(product, notificationContent, "Removal");
+     
+
+            return "Product removed";
         }
     }
 }

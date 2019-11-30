@@ -11,5 +11,6 @@ namespace Watchables.WebAPI.Services
         Model.Hall GetById(int id);
         Model.Hall Insert(Model.Requests.InsertHallRequest hall);
         Model.Hall Update(int hallId, Model.Requests.InsertHallRequest hall);
+        string Delete(int id);
     }
 }

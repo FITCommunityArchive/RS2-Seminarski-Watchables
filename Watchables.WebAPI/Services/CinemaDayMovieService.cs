@@ -53,5 +53,30 @@ namespace Watchables.WebAPI.Services
             return _mapper.Map<Model.CinemaDayMovie>(CDM);
         }
 
+        public string Delete(int id) {
+
+            Helper helper = new Helper(_context);
+
+            var validCdm = false;
+            foreach(var c in _context.CinemaDayMovie.ToList()) {
+                if (c.CinemaDayMovieId == id) {
+                    validCdm = true;
+                    break;
+                }
+            }
+            if (!validCdm) throw new UserException("Cannot find entity with specified id");
+
+            var cdm = _context.CinemaDayMovie.Find(id);
+            List<Database.CinemaDayMovie> list = new List<CinemaDayMovie>();
+            list.Add(cdm);
+
+            string notificationContent = $"The movie {_context.Movies.Find(cdm.MovieId).Title} on the {_context.AiringDaysOfCinema.Find(cdm.AiringDaysOfCinemaId).Date.Date}, {_context.AiringDays.Find(_context.AiringDaysOfCinema.Find(cdm.AiringDaysOfCinemaId).AiringDayId).Name} was removed";
+
+            helper.DeleteCdmsNotification(list, notificationContent, "Removal");
+            
+
+            return "Movie removed";
+        }
+
     }
 }
