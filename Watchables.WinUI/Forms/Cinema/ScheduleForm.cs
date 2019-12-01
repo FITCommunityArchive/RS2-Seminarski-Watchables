@@ -92,18 +92,31 @@ namespace Watchables.WinUI.Forms.Cinema
 
         }
 
-        private void dgvSchedule_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
+        private async void dgvSchedule_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var airingDayOfCinemaId = dgvSchedule.Rows[e.RowIndex].Cells["AiringDaysOfCinemasId"].Value;
                 var action = dgvSchedule.Columns[e.ColumnIndex].Name;
                 var date = dgvSchedule.Rows[e.RowIndex].Cells["Date"].Value;
                 var day = dgvSchedule.Rows[e.RowIndex].Cells["Day"].Value;
+                CustomMessageBox messageBox = new CustomMessageBox();
+                var adocApi = new APIService("airingdaysofcinema");
                 if (action == "Edit") {
                     var form = new AddEditDayOfCinemaForm(this, _schedule, _menuForm, int.Parse(airingDayOfCinemaId.ToString()));
                     _helper.ShowForm(form, 15);
                 }
                 else if (action == "Delete") {
-                    MessageBox.Show("delete", airingDayOfCinemaId.ToString());
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to permanently delete {day} on the {DateTime.Parse(date.ToString()).ToShortDateString()}?", "Delete day?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                        await adocApi.Delete<Model.AiringDaysOfCinema>(airingDayOfCinemaId);
+
+                        this.Close();
+                        ScheduleForm form = new ScheduleForm(_schedule.Cinema.CinemaId, _menuForm) {
+                            MdiParent = _menuForm,
+                            Dock = DockStyle.Fill
+                        };
+                        form.Show();
+                        messageBox.Show("Day deleted successfully", "success");
+                    }
                 }
                 else if (action == "MoviesBtn") {
                     var form = new CinemaDayMovieForm(this, _schedule, _menuForm, int.Parse(airingDayOfCinemaId.ToString()), (DateTime)date, day.ToString());

@@ -48,16 +48,27 @@ namespace Watchables.WinUI.Forms.Cinema
             _helper.ShowForm(form, 15);
         }
 
-        private void dgvProducts_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
+        private async void dgvProducts_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var productId = dgvProducts.Rows[e.RowIndex].Cells["ProductId"].Value;
                 var action = dgvProducts.Columns[e.ColumnIndex].Name;
+                var productApi = new APIService("products");
+                var product = await productApi.GetById<Model.Product>(productId);
+                CustomMessageBox messageBox = new CustomMessageBox();
                 if (action == "Edit") {
                     AddEditProductForm form = new AddEditProductForm(_menuForm, this, _cinemaName, _cinemaId, int.Parse(productId.ToString())) { };
                     _helper.ShowForm(form, 15);
                 }
                 else if (action == "Delete") {
-                    MessageBox.Show("Implement delete", "To-Do");
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to delete '{product.Name}' for {product.Price} in '{_cinemaName}'?", "Delete product", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                        Helper helper = new Helper();
+                        await productApi.Delete<Model.Product>(productId);
+                        helper.CloseForm(this, 15);
+                        CinemasProductsForm form = new CinemasProductsForm(_menuForm, _cinemaId, _cinemaName);
+                        helper.ShowForm(form, 15);
+                        messageBox.Show("Product deleted successfully", "success");
+                    }
                 }
             }
         }

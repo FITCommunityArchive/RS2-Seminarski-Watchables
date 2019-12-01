@@ -30,11 +30,13 @@ namespace Watchables.WinUI.Forms.Movie
             Title.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
         }
 
-        private void dgvMovies_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private async void dgvMovies_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var movieId = dgvMovies.Rows[e.RowIndex].Cells["MovieId"].Value;
                 var action = dgvMovies.Columns[e.ColumnIndex].Name;
                 MenuForm menuForm = (MenuForm)this.MdiParent;
+                var movie = await _apiService.GetById<Model.Movie>(movieId);
+                CustomMessageBox messageBox = new CustomMessageBox();
 
                 if (action == "Edit" || action == "Title") {
                     AddEditMovieForm form = new AddEditMovieForm(menuForm, int.Parse(movieId.ToString())) {
@@ -44,7 +46,20 @@ namespace Watchables.WinUI.Forms.Movie
                     form.Show();
                 }
                 else if (action == "Delete") {
-                    MessageBox.Show("Implement delete movie", "To-do");
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to permanently delete '{movie.Title}'?", "Delete movie?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                        await _apiService.Delete<Model.Movie>(movieId);
+
+                        foreach (Form frm in menuForm.MdiChildren) {
+                            frm.Close();
+                        }
+                        MoviesForm form = new MoviesForm {
+                            MdiParent = menuForm,
+                            Dock = DockStyle.Fill
+                        };
+                        form.Show();
+                        messageBox.Show("Movie deleted successfully", "success");
+                    }
                 }              
                 else return;
             }

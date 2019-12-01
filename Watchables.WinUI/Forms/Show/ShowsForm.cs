@@ -75,11 +75,13 @@ namespace Watchables.WinUI.Forms.Show
             dgvShows.DataSource = list;
         }
 
-        private void dgvShows_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private async void dgvShows_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var showId = dgvShows.Rows[e.RowIndex].Cells["ShowId"].Value;
                 var action = dgvShows.Columns[e.ColumnIndex].Name;
                 MenuForm menuForm = (MenuForm)this.MdiParent;
+                var show = await _apiService.GetById<Model.Show>(showId);
+                CustomMessageBox messageBox = new CustomMessageBox();
 
                 if (action == "Edit" || action == "Title") {
                     AddEditShowForm form = new AddEditShowForm(menuForm, int.Parse(showId.ToString())) {
@@ -89,7 +91,20 @@ namespace Watchables.WinUI.Forms.Show
                     form.Show();
                 }
                 else if (action == "Delete") {
-                    MessageBox.Show("Implement delete movie", "To-do");
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to permanently delete '{show.Title}'?", "Delete show?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                        await _apiService.Delete<Model.Show>(showId);
+
+                        foreach (Form frm in menuForm.MdiChildren) {
+                            frm.Close();
+                        }
+                        ShowsForm form = new ShowsForm {
+                            MdiParent = menuForm,
+                            Dock = DockStyle.Fill
+                        };
+                        form.Show();
+                        messageBox.Show("Show deleted successfully", "success");
+                    }
                 }
                 else return;
             }

@@ -94,10 +94,12 @@ namespace Watchables.WinUI.Forms
 
         }
 
-        private void dgvCinemas_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private async void dgvCinemas_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var cinemaId = dgvCinemas.Rows[e.RowIndex].Cells["CinemaId"].Value;
                 var action = dgvCinemas.Columns[e.ColumnIndex].Name;
+                var cinema = await _apiService.GetById<Model.Cinema>(cinemaId);
+                CustomMessageBox messageBox = new CustomMessageBox();
                 MenuForm menuForm = (MenuForm)this.MdiParent;
 
                 if (action == "Edit" || action == "Cinema") {
@@ -108,7 +110,20 @@ namespace Watchables.WinUI.Forms
                     form.Show();
                 }
                 else if (action == "Delete") {
-                    MessageBox.Show("Implement delete cinema", "To-do");
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to permanently delete '{cinema.Name}'?", "Delete cinema?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                       await _apiService.Delete<Model.Cinema>(cinemaId);
+
+                        foreach (Form frm in menuForm.MdiChildren) {
+                            frm.Close();
+                        }
+                        CinemasForm form = new CinemasForm {
+                            MdiParent = menuForm,
+                            Dock = DockStyle.Fill
+                        };
+                        form.Show();
+                        messageBox.Show("Cinema deleted successfully", "success");
+                    }                  
                 }
                 else if (action == "Halls") {
                     var cinemaName = dgvCinemas.Rows[e.RowIndex].Cells["Cinema"].Value;

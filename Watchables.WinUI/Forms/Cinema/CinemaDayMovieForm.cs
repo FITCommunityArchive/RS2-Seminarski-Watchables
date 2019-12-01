@@ -75,13 +75,36 @@ namespace Watchables.WinUI.Forms.Cinema
             _helper.ShowForm(form, 15);
         }      
 
-        private void dgvScheduledMovies_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
+        private async void dgvScheduledMovies_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var cinemaDayMovieId = dgvScheduledMovies.Rows[e.RowIndex].Cells["CinemaDayMovieId"].Value;
                 var movieId = dgvScheduledMovies.Rows[e.RowIndex].Cells["MovieId"].Value;
                 var action = dgvScheduledMovies.Columns[e.ColumnIndex].Name;
+                var cdmApi = new APIService("cinemaDayMovie");
+                var movieApi = new APIService("movies");
+                var cdm = await cdmApi.GetById<Model.CinemaDayMovie>(cinemaDayMovieId);
+                var movie = await movieApi.GetById<Model.Movie>(cdm.MovieId);
+                CustomMessageBox messageBox = new CustomMessageBox();
+
                 if (action == "Delete") {
-                    MessageBox.Show("Delete", cinemaDayMovieId.ToString());
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to permanently delete '{movie.Title}' on the {DateTime.Parse(_date.ToString()).ToShortDateString()}, {_day}?", "Delete movie?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                        await cdmApi.Delete<Model.CinemaDayMovie>(cinemaDayMovieId);
+
+                        this.Close();
+                        _scheduleForm.Close();
+                        ScheduleForm sch = new ScheduleForm(_schedule.Cinema.CinemaId, _menuForm) {
+                            MdiParent = _menuForm,
+                            Dock = DockStyle.Fill
+                        };
+
+                        var schedule = await _apiService.CustomGet<Model.Requests.CinemasScheduleRequest>("GetCinemasSchedule", _schedule.Cinema.CinemaId);
+                        CinemaDayMovieForm form = new CinemaDayMovieForm(sch, schedule, _menuForm, _airingDayId, _date, _day);
+                        sch.Show();
+                        _helper.ShowForm(form, 15);
+
+                        messageBox.Show("Movie deleted successfully", "success");
+                    }
                 }
                 else if (action == "Apps") {
                     AppointmentsForm form = new AppointmentsForm(_scheduleForm, _schedule, _menuForm, _airingDayId, _date, _day, int.Parse(cinemaDayMovieId.ToString()), int.Parse(movieId.ToString()), this);

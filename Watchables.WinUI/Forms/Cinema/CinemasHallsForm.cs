@@ -64,6 +64,9 @@ namespace Watchables.WinUI.Forms.Cinema
             if (e.RowIndex >= 0) {
                 var hallId = dgvHalls.Rows[e.RowIndex].Cells["HallId"].Value;
                 var action = dgvHalls.Columns[e.ColumnIndex].Name;
+                var hallApi = new APIService("halls");
+                var hall = await hallApi.GetById<Model.Hall>(hallId);
+                CustomMessageBox messageBox = new CustomMessageBox();
                 if (action == "Edit") {
                     AddEditHallForm form = new AddEditHallForm(_menuForm, this, _cinemaName, _cinemaLoactin, _cinemaId, int.Parse(hallId.ToString())) { };
                     form.Show();
@@ -76,7 +79,16 @@ namespace Watchables.WinUI.Forms.Cinema
                     form.Opacity = 1;
                 }
                 else if (action == "Delete") {
-                    MessageBox.Show("Implement delete", "To-Do");
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to delete the hall '{hall.HallName} {hall.HallNumber}' in '{_cinemaName}'?", "Delete hall", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                        Helper helper = new Helper();
+                        await hallApi.Delete<Model.Hall>(hallId);
+                        helper.CloseForm(this, 15);
+                        CinemasHallsForm form = new CinemasHallsForm(_menuForm, _cinemaId, _cinemaName, _cinemaLoactin);
+                        helper.ShowForm(form, 15);
+                        messageBox.Show("Hall deleted successfully", "success");
+                    }
+                   
                 }
             }
         }

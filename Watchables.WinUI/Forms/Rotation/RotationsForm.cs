@@ -98,18 +98,32 @@ namespace Watchables.WinUI.Forms.Rotation
             dgvRotations.DataSource = list;
         }
 
-        private void dgvRotations_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private async void dgvRotations_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var rotationId = dgvRotations.Rows[e.RowIndex].Cells["RotationId"].Value;
                 var action = dgvRotations.Columns[e.ColumnIndex].Name;
                 MenuForm menuForm = (MenuForm)this.MdiParent;
+                CustomMessageBox messageBox = new CustomMessageBox();
 
                 if (action == "Edit") {
                     AddEditRotationForm form = new AddEditRotationForm(menuForm, int.Parse(rotationId.ToString())) {};
                     _helper.ShowForm(form, 15);
                 }
                 else if (action == "Delete") {
-                    MessageBox.Show("Implement delete movie", "To-do");
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to permanently delete this rotation?", "Delete rotation?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                        await _apiService.Delete<Model.Rotation>(rotationId);
+
+                        foreach (Form frm in menuForm.MdiChildren) {
+                            frm.Close();
+                        }
+                        RotationsForm form = new RotationsForm {
+                            MdiParent = menuForm,
+                            Dock = DockStyle.Fill
+                        };
+                        form.Show();
+                        messageBox.Show("Rotation deleted successfully", "success");
+                    }
                 }
                 else return;
             }

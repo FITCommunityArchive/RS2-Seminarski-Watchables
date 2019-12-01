@@ -30,18 +30,32 @@ namespace Watchables.WinUI.Forms.Subscription
             dgvSubscriptions.DataSource = result;
         }
 
-        private void dgvSubscriptions_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private async void dgvSubscriptions_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var subscriptionId = dgvSubscriptions.Rows[e.RowIndex].Cells["SubscriptionId"].Value;
                 var action = dgvSubscriptions.Columns[e.ColumnIndex].Name;
                 MenuForm menuForm = (MenuForm)this.MdiParent;
+                CustomMessageBox messageBox = new CustomMessageBox();
 
                 if (action == "Edit") {
                     AddEditSubsciptionForm form = new AddEditSubsciptionForm(menuForm, int.Parse(subscriptionId.ToString()));
                     _helper.ShowForm(form, 15);
                 }
                 else if (action == "Delete") {
-                    MessageBox.Show("Implement delete cinema", "To-do");
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to permanently delete this subscription?", "Delete subscription?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                        await _apiService.Delete<Model.Subscription>(subscriptionId);
+
+                        foreach (Form frm in menuForm.MdiChildren) {
+                            frm.Close();
+                        }
+                        SubscriptionsForm form = new SubscriptionsForm {
+                            MdiParent = menuForm,
+                            Dock = DockStyle.Fill
+                        };
+                        form.Show();
+                        messageBox.Show("Subscription deleted successfully", "success");
+                    }
                 }
             }
         }
