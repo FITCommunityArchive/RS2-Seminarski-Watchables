@@ -25,7 +25,7 @@ namespace Watchables.WinUI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:44324/api")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:51756/api")]
         public string APIUrl {
             get {
                 return ((string)(this["APIUrl"]));

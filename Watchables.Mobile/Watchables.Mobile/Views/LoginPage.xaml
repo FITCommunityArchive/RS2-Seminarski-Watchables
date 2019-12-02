@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Watchables.Mobile.Views.LoginPage">
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel></vm:LoginViewModel>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" Padding="5">
+            <Label Text="Username: "></Label>
+            <Entry Text="{Binding Username}"></Entry>
+            <Label Text="Password: "></Label>
+            <Entry Text="{Binding Password}" IsPassword="{Binding isPassword}" WidthRequest="250"></Entry>
+            <Button Text="Show" Command="{Binding ShowButton}"></Button>
+
+            <Button Command="{Binding LoginButton}" Text="Login"></Button>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
