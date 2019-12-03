@@ -139,4 +139,7 @@
       <Name>Watchables.Mobile</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\profil.png" />
+  </ItemGroup>
 </Project>

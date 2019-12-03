@@ -10,12 +10,10 @@ using Xamarin.Forms.Xaml;
 namespace Watchables.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
-    {        
-
-        public LoginPage() {
+    public partial class RegisterPage : ContentPage
+    {
+        public RegisterPage() {
             InitializeComponent();
         }
-
     }
 }

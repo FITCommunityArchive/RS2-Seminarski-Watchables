@@ -3,23 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"             
              mc:Ignorable="d"
-             x:Class="Watchables.Mobile.Views.LoginPage">
+             x:Class="Watchables.Mobile.Views.LoginPage"
+             BackgroundColor="White">
     <ContentPage.BindingContext>
         <vm:LoginViewModel></vm:LoginViewModel>
     </ContentPage.BindingContext>
+
+ 
+    
     
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center" Padding="5">
-            <Label Text="Username: "></Label>
-            <Entry Text="{Binding Username}"></Entry>
-            <Label Text="Password: "></Label>
-            <Entry Text="{Binding Password}" IsPassword="{Binding isPassword}" WidthRequest="250"></Entry>
-            <Button Text="Show" Command="{Binding ShowButton}"></Button>
+        <StackLayout VerticalOptions="FillAndExpand" Padding="10" Margin="0,10,0,0">
+            <Image Source="logo.png"></Image>
+          
+          
+            <Grid RowSpacing="0" VerticalOptions="Center" Margin="0,100,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label FontFamily="Century Gothic" Text="Username" Grid.Row="0"></Label>
+                <Entry FontFamily="Century Gothic" Text="{Binding Username}" Grid.Row="1"></Entry>
+                <Label FontFamily="Century Gothic" Margin="0,30,0,0" Text="Password" Grid.Row="2"></Label>
 
-            <Button Command="{Binding LoginButton}" Text="Login"></Button>
-            
+
+                <Grid Grid.Row="5">
+                    <Grid.RowDefinitions>                      
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Entry FontFamily="Century Gothic" Grid.Row="0" Grid.Column="0"  Text="{Binding Password}" IsPassword="{Binding isPassword}" WidthRequest="250"></Entry>
+       
+                    <ImageButton BackgroundColor="White" Source="eye.png" Grid.Row="0" Grid.Column="1" Command="{Binding ShowButton}"></ImageButton>
+                </Grid>
+
+
+                <Button CornerRadius="5" FontFamily="Century Gothic" Margin="0,30,0,0" Grid.Row="6" Command="{Binding LoginButton}" Text="Login" TextColor="White" BackgroundColor="#B20837" BorderColor="#B20837" ></Button>
+                <Label Margin="0,30,0,0" Grid.Row="7" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontFamily="Century Gothic" Text="Don't have an account? " />
+                            <Span FontFamily="Century Gothic" Text="Register now!" TextColor="Blue">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RegisterButton}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

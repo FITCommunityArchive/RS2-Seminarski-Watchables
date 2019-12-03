@@ -33,11 +33,13 @@ namespace Watchables.Mobile.ViewModels
 
         public ICommand LoginButton { get; set; }
         public ICommand ShowButton { get; set; }
+        public ICommand RegisterButton { get; set; }
 
         public LoginViewModel() {
 
             LoginButton = new Command(async () => await Login());
             ShowButton = new Command(() => Show());
+            RegisterButton = new Command(() => Register());
             Username = "mobile";
             Password = "test";
             isPassword = "True";
@@ -66,7 +68,10 @@ namespace Watchables.Mobile.ViewModels
         void Show() {
             if (isPassword == "True") isPassword = "False";
             else isPassword = "True";
+        }
 
+        void Register() {
+            Application.Current.MainPage = new RegisterPage();
         }
     }
 }
