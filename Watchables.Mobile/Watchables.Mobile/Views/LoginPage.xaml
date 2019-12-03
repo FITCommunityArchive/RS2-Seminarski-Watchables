@@ -15,7 +15,7 @@
     
     
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" Padding="10" Margin="0,10,0,0">
+        <StackLayout VerticalOptions="FillAndExpand" Padding="10" Margin="0,20,0,0">
             <Image Source="logo.png"></Image>
           
           
@@ -38,11 +38,11 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="50"></ColumnDefinition>
+                        <ColumnDefinition Width="60"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Entry FontFamily="Century Gothic" Grid.Row="0" Grid.Column="0"  Text="{Binding Password}" IsPassword="{Binding isPassword}" WidthRequest="250"></Entry>
        
-                    <ImageButton BackgroundColor="White" Source="eye.png" Grid.Row="0" Grid.Column="1" Command="{Binding ShowButton}"></ImageButton>
+                    <ImageButton Source="eye.png" Grid.Row="0" Grid.Column="1" Command="{Binding ShowButton}"></ImageButton>
                 </Grid>
 
 
