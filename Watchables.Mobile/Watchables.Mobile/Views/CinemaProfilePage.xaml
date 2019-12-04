@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Watchables.Mobile.Views.CinemaProfilePage"
+             Title="{Binding Name}"
+             BackgroundColor="#e7ecee"
+             >
+    
+    <ContentPage.BindingContext>
+        <vm:CinemaProfileViewModel></vm:CinemaProfileViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="StartAndExpand" Padding="0">
+            <Image HeightRequest="300" Aspect="Fill" Source="{Binding ImageLink}"></Image>
+         
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

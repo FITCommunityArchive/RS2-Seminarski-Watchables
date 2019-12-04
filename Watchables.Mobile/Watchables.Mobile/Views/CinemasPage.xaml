@@ -3,13 +3,71 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
              mc:Ignorable="d"
-             x:Class="Watchables.Mobile.Views.CinemasPage">
+             x:Class="Watchables.Mobile.Views.CinemasPage"
+             Title="Cinemas"
+             BackgroundColor="#e7ecee"
+             >
+
+    <ContentPage.BindingContext>
+        <vm:CinemasViewModel></vm:CinemasViewModel>
+    </ContentPage.BindingContext>
+    
+    
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Cinemas!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+            <StackLayout Orientation="Horizontal"  Margin="20">
+                <Label Margin="0,6,0,0" Style="{StaticResource SpecialFont}" TextColor="{StaticResource MainColor}" Text="Search: "></Label>
+                <Picker HorizontalOptions="FillAndExpand" ItemsSource="{Binding Locations}" SelectedItem="{Binding SelectedLocation}"></Picker>
+            </StackLayout>
+            
+            <ListView ItemsSource="{Binding Cinemas}" ItemSelected="ListView_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10" Orientation="Horizontal">
+                                <StackLayout>
+                                    <Frame Padding="0" CornerRadius="10">
+                                    <Image WidthRequest="170" HeightRequest="180" Aspect="AspectFill" Source="{Binding ImageLink}"></Image>
+                                    </Frame>
+                                </StackLayout>
+                                <StackLayout Orientation="Vertical" Margin="5,0,0,0">
+                                   
+                                        <Label Text="{Binding Name}" 
+                                d:Text="{Binding .}"
+                                LineBreakMode="NoWrap" 
+                                Style="{StaticResource CinemaTitle}" />
+
+                                    <Label Text="{Binding Description}" 
+                                d:Text="Item descripton"
+                                LineBreakMode="WordWrap"
+                                Style="{StaticResource SpecialFont}"
+                                FontSize="15"/>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Location: "></Label>
+                                        <Label Style="{StaticResource SpecialFont}" Text="{Binding Location}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                    </StackLayout>
+
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Rating: "></Label>
+                                        <Label Style="{StaticResource SpecialFont}" Text="{Binding Rating}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                    </StackLayout>
+                                    
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Phone: "></Label>
+                                        <Label Style="{StaticResource SpecialFont}" Text="{Binding PhoneNumber}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                    </StackLayout>
+
+                                </StackLayout>  
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

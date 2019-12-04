@@ -11,14 +11,13 @@
         <vm:LoginViewModel></vm:LoginViewModel>
     </ContentPage.BindingContext>
 
- 
-    
-    
+
+
+
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" Padding="10" Margin="0,20,0,0">
             <Image Source="logo.png"></Image>
-          
-          
+
             <Grid RowSpacing="0" VerticalOptions="Center" Margin="0,100,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="AUTO"></RowDefinition>
@@ -34,14 +33,14 @@
 
 
                 <Grid Grid.Row="5">
-                    <Grid.RowDefinitions>                      
+                    <Grid.RowDefinitions>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="60"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Entry FontFamily="Century Gothic" Grid.Row="0" Grid.Column="0"  Text="{Binding Password}" IsPassword="{Binding isPassword}" WidthRequest="250"></Entry>
-       
+
                     <ImageButton Source="eye.png" Grid.Row="0" Grid.Column="1" Command="{Binding ShowButton}"></ImageButton>
                 </Grid>
 
@@ -60,6 +59,7 @@
                     </Label.FormattedText>
                 </Label>
             </Grid>
+            <Label IsVisible="{Binding IsBusy}" FontSize="20" FontFamily="Century Gothic" Text="Loging in..." TextColor="{StaticResource MainColor}" HorizontalOptions="Center"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
