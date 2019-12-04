@@ -7,6 +7,7 @@
             xmlns:views="clr-namespace:Watchables.Mobile.Views"
             x:Class="Watchables.Mobile.Views.MainPage">
 
+
     <MasterDetailPage.Master>
         <views:MenuPage />
     </MasterDetailPage.Master>

@@ -64,7 +64,7 @@
                             <RowDefinition Height="AUTO"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Label Margin="0,20,0,0" Grid.Row="0" FontFamily="Century Gothic" Text="BIrthday"></Label>
-                        <DatePicker Grid.Row="1"  Date="{Binding BirthDate}"></DatePicker>
+                        <DatePicker Grid.Row="1"  Date="{Binding BirthDate}" MinimumDate="{Binding MinimumDate}" MaximumDate="{Binding MaximumDate}"></DatePicker>
                     </Grid>
 
                     <Grid>

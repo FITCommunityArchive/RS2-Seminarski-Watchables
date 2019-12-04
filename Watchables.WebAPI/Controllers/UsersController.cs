@@ -20,7 +20,7 @@ namespace Watchables.WebAPI.Controllers
             _service = service;
         }
 
-        
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult<Model.User> Insert(Model.Requests.InsertUserRequest request) {
             return _service.Insert(request);

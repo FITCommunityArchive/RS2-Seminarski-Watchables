@@ -7,7 +7,8 @@ namespace Watchables.Mobile.Models
     public enum MenuItemType
     {
         Browse,
-        About
+        About,
+        Cinemas
     }
     public class HomeMenuItem
     {

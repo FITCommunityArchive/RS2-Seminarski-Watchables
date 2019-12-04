@@ -3,15 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
              mc:Ignorable="d"
              x:Class="Watchables.Mobile.Views.MenuPage"
-             Title="Menu">
-             
-    <StackLayout VerticalOptions="FillAndExpand">
+             Title="Menu"
+             >
+
+    <ContentPage.BindingContext>
+        <vm:MenuViewModel></vm:MenuViewModel>
+    </ContentPage.BindingContext>
+
+
+
+    <StackLayout VerticalOptions="FillAndExpand" WidthRequest="10">
+
+
+        <StackLayout Orientation="Horizontal" Padding="10" Margin="0,20,0,0">
+            <Frame Padding="0" HorizontalOptions="CenterAndExpand" CornerRadius="100">
+                <Image Source="{Binding ImageLink}" WidthRequest="150" HeightRequest="150" Aspect="AspectFill" HorizontalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped">
+                            
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Frame>            
+        </StackLayout>
+        <Label Margin="0,-10,0,20" HorizontalOptions="Center" Text="{Binding Name}" FontFamily="Century Gothic" FontSize="20" TextColor="#B20837"></Label>
+
+
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True">
             <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
+                <x:Array Type="{x:Type x:String}">                    
                     <x:String>Item 1</x:String>
                     <x:String>Item 2</x:String>
                 </x:Array>
@@ -20,12 +44,23 @@
                 <DataTemplate>
                     <ViewCell>
                         <Grid Padding="10">
-                            <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="20"/>
+                            <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="20" FontFamily="Century Gothic"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Label Style="{StaticResource LogoutLabel}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span FontFamily="Century Gothic" FontSize="20" Text="Logout">
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LogoutButton}"/>
+                        </Span.GestureRecognizers>
+                    </Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
     </StackLayout>
 
 </ContentPage>

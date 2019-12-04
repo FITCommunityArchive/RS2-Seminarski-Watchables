@@ -15,12 +15,13 @@ namespace Watchables.Mobile.Views
         MainPage RootPage { get => Application.Current.MainPage as MainPage; }
         List<HomeMenuItem> menuItems;
         public MenuPage() {
-            InitializeComponent();
+            InitializeComponent();           
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
+                new HomeMenuItem {Id = MenuItemType.Cinemas, Title="Cinemas"},
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" }
+                
             };
 
             ListViewMenu.ItemsSource = menuItems;
@@ -33,6 +34,11 @@ namespace Watchables.Mobile.Views
                 var id = (int)((HomeMenuItem)e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };
+        
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e) {
+            ListViewMenu.SelectedItem = new HomeMenuItem { Id = MenuItemType.Browse, Title = "Browse" };
         }
     }
 }
