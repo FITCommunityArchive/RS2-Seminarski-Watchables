@@ -20,5 +20,10 @@ namespace Watchables.Mobile.Views
             BindingContext = _viewModel = new CinemaProfileViewModel();
             _viewModel.SetCinema(cinemaId);
         }
+
+        private async void Button_Clicked(object sender, EventArgs e) {
+            var cinemaId = _viewModel.CinemaId;
+            await Navigation.PushAsync(new CinemaSchedulePage(cinemaId));
+        }
     }
 }

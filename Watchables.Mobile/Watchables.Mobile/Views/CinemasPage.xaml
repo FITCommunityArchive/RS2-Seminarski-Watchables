@@ -6,8 +6,7 @@
              xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
              mc:Ignorable="d"
              x:Class="Watchables.Mobile.Views.CinemasPage"
-             Title="Cinemas"
-             BackgroundColor="#e7ecee"
+             Title="Cinemas"            
              >
 
     <ContentPage.BindingContext>
@@ -30,7 +29,7 @@
                             <StackLayout Padding="10" Orientation="Horizontal">
                                 <StackLayout>
                                     <Frame Padding="0" CornerRadius="10">
-                                    <Image WidthRequest="170" HeightRequest="180" Aspect="AspectFill" Source="{Binding ImageLink}"></Image>
+                                    <Image WidthRequest="170" HeightRequest="250" Aspect="AspectFill" Source="{Binding ImageLink}"></Image>
                                     </Frame>
                                 </StackLayout>
                                 <StackLayout Orientation="Vertical" Margin="5,0,0,0">

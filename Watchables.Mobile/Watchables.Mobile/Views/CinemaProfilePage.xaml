@@ -6,8 +6,7 @@
              xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
              mc:Ignorable="d"
              x:Class="Watchables.Mobile.Views.CinemaProfilePage"
-             Title="{Binding Name}"
-             BackgroundColor="#e7ecee"
+             Title="{Binding Name}"            
              >
     
     <ContentPage.BindingContext>
@@ -15,9 +14,46 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand" Padding="0">
+        <StackLayout VerticalOptions="StartAndExpand" Padding="0" Orientation="Vertical">
             <Image HeightRequest="300" Aspect="Fill" Source="{Binding ImageLink}"></Image>
-         
-        </StackLayout>
+
+            
+            <Label Margin="20" FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding Description}"></Label>
+
+            <StackLayout Orientation="Horizontal" Margin="20,0,20,20">
+                <StackLayout Orientation="Vertical" Margin="0,0,30,20">
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Location: "></Label>
+                        <Label Style="{StaticResource SpecialFont}" Text="{Binding Location}"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Address: "></Label>
+                        <Label Style="{StaticResource SpecialFont}" Text="{Binding Address}"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Street number: "></Label>
+                        <Label Style="{StaticResource SpecialFont}" Text="{Binding StreetNumber}"></Label>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Margin="20,0,20,0" Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Phone number: "></Label>
+                        <Label Style="{StaticResource SpecialFont}" Text="{Binding PhoneNumber}"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Rating: "></Label>
+                        <Label Style="{StaticResource SpecialFont}" Text="{Binding Rating}"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Status: "></Label>
+                        <Label Style="{StaticResource SpecialFont}" Text="{Binding Open}" TextColor="{Binding OpenColor}"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                <Button TextColor="White" Margin="0" Text="Schedule" BackgroundColor="{StaticResource MainColor}" CornerRadius="5" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked"></Button>
+            </StackLayout>
+            </StackLayout>
     </ContentPage.Content>
 </ContentPage>
