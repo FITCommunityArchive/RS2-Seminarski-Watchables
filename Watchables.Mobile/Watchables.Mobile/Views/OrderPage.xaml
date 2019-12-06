@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Watchables.Mobile.Views.OrderPage"
+             Title="{Binding Title}"
+             >
+
+
+    <ContentPage.BindingContext>
+        <vm:OrderViewModel></vm:OrderViewModel>
+    </ContentPage.BindingContext>
+    
+    
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout Orientation="Vertical">
+            <WebView Source="{Binding Movie.TrailerLink}" HeightRequest="280"></WebView>
+                <StackLayout Margin="10" HorizontalOptions="Center">
+                    <Label FontSize="30" Style="{StaticResource SpecialFont}" TextColor="{StaticResource MainColor}" Text="{Binding Movie.Title}" HorizontalOptions="Center"></Label>
+                    <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding Movie.Description}" HorizontalOptions="Center"></Label>
+                    <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+                    <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding Movie.Cast}" HorizontalOptions="Center"></Label>
+                    <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <StackLayout Orientation="Horizontal">
+                            <Label FontSize="15" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Rating: "></Label>
+                            <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Movie.Rating}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label FontSize="15" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Duration: "></Label>
+                            <Label FontSize="15"  Style="{StaticResource SpecialFont}" Text="{Binding Movie.Duration}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label FontSize="15" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Genre: "></Label>
+                            <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Movie.Genre}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="10,10,10,10">
+
+                    <StackLayout Orientation="Vertical" WidthRequest="280">
+                        <Label FontSize="15" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Appointment"></Label>
+                        <Picker FontSize="15" FontFamily="Century Gothic" ItemsSource="{Binding Apps}" ItemDisplayBinding="{Binding Display}" SelectedItem="{Binding SelectedItem}"></Picker>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" Margin="20,0,0,0" WidthRequest="70">
+                        <Label FontSize="15" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Seats"></Label>
+                        <Picker FontSize="15" FontFamily="Century Gothic" ItemsSource="{Binding Seats}" SelectedItem="{Binding SelectedNumberOfTickets}"></Picker>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" Margin="20,0,0,0" WidthRequest="70">
+                        <Label FontSize="15" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Items"></Label>
+                        <Picker FontSize="15" FontFamily="Century Gothic" ItemsSource="{Binding Products}" ItemDisplayBinding="{Binding Display}" SelectedItem="{Binding .}" SelectedIndexChanged="Picker_SelectedIndexChanged_1"></Picker>
+                    </StackLayout>
+                </StackLayout>
+
+
+
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout WidthRequest="280" Margin="10,10,10,10" HorizontalOptions="FillAndExpand">
+                        <StackLayout Margin="0" Orientation="Vertical"  WidthRequest="70">
+                            <StackLayout Orientation="Horizontal">
+                                <Label FontSize="15" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Cart"></Label>
+                                <ImageButton HeightRequest="17" Aspect="AspectFit" Margin="0,-5,0,0" Source="Trash.png" Command="{Binding ClearCommand}"></ImageButton>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <ListView ItemsSource="{Binding OrderedProducts}" ItemTapped="ListView_ItemSelected" HeightRequest="70">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                                    <StackLayout  HeightRequest="30"  HorizontalOptions="Center">
+                                                        <Label Style="{StaticResource SpecialFont}" FontSize="20" Text="{Binding Display}"></Label>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout BackgroundColor="Blue">
+                       
+                  </StackLayout>                   
+                </StackLayout>
+
+
+           
+
+
+            
+
+                <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                    <Button TextColor="White" Margin="0" Text="Order" BackgroundColor="{StaticResource MainColor}" CornerRadius="5" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked"></Button>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

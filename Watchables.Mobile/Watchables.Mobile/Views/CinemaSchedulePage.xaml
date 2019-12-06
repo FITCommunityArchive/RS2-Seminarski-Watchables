@@ -17,7 +17,11 @@
         <StackLayout HorizontalOptions="Center">
             <Label Margin="10" HorizontalOptions="Center" Style="{StaticResource SpecialFont}" FontSize="Title" IsVisible="{Binding HasSchedule}" Text="No schedule avaiable"></Label>
 
-            <Picker IsVisible="{Binding HasPicker}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding AllDays}" SelectedItem="{Binding SelectedDay}"></Picker>
+            <StackLayout Orientation="Horizontal"  Margin="20">
+                <Label Margin="0,6,0,0" Style="{StaticResource SpecialFont}" TextColor="{StaticResource MainColor}" Text="Search: "></Label>
+                <Picker IsVisible="{Binding HasPicker}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding AllDays}" SelectedItem="{Binding SelectedDay}"></Picker>
+            </StackLayout>
+
 
             <ListView HorizontalOptions="Center" ItemsSource="{Binding Adocs}" ItemSelected="ListView_ItemSelected">
                 <ListView.ItemTemplate>

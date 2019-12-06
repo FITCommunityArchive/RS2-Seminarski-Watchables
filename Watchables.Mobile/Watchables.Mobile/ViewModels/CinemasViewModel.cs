@@ -31,6 +31,10 @@ namespace Watchables.Mobile.ViewModels
         public CinemasViewModel() {
             GetCinemasButton = new Command(async () => await GetCinemas());
         }
+
+        public async void Test() {
+            await Application.Current.MainPage.DisplayAlert("HI", "HI", "HI");
+        }
         
         public async Task GetCinemas() {
 

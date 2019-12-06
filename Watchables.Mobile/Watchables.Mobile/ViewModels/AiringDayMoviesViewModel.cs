@@ -28,6 +28,12 @@ namespace Watchables.Mobile.ViewModels
             set { SetProperty(ref _adocId, value); }
         }
 
+        int _cinemaId = 0;
+        public int CinemaId {
+            get { return _cinemaId; }
+            set { SetProperty(ref _cinemaId, value); }
+        }
+
         string _day = string.Empty;
         public string Day {
             get { return _day; }
@@ -45,12 +51,13 @@ namespace Watchables.Mobile.ViewModels
         }
 
 
-        public void Init(int adocId, string day, string cinema, string date) {
+        public void Init(int adocId, string day, string cinema, string date, int cinemaId) {
             AdocId = adocId;
             Day = day;
             Cinema = cinema;
             Date = date;
             Title = Cinema + ", " + date + ", " + day;
+            CinemaId = cinemaId;
         }
 
         public async Task GetData() {

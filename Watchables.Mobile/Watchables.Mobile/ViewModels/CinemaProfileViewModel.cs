@@ -96,7 +96,7 @@ namespace Watchables.Mobile.ViewModels
                 string to = "23:30:00";
                 var From = DateTime.ParseExact(from, "HH:mm:ss", CultureInfo.InvariantCulture).TimeOfDay;
                 var To = DateTime.ParseExact(to, "HH:mm:ss", CultureInfo.InvariantCulture).TimeOfDay;
-                if((currentTime > From) || (currentTime < To)) {
+                if(!((currentTime>From) && (currentTime<To))) {
                     Open = "Closed";
                     OpenColor = Color.Red;
                 }
@@ -124,7 +124,7 @@ namespace Watchables.Mobile.ViewModels
                 string to = "23:00:00";
                 var From = DateTime.ParseExact(from, "HH:mm:ss", CultureInfo.InvariantCulture).TimeOfDay;
                 var To = DateTime.ParseExact(to, "HH:mm:ss", CultureInfo.InvariantCulture).TimeOfDay;
-                if (currentTime > From || currentTime < To) {
+                if (!((currentTime > From) && (currentTime < To))) {
                     Open = "Closed";
                 }
                 else {

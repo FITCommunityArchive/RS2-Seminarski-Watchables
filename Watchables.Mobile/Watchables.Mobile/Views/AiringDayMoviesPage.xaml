@@ -20,7 +20,7 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding CdmItems}">
+            <ListView ItemsSource="{Binding CdmItems}" ItemSelected="ListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

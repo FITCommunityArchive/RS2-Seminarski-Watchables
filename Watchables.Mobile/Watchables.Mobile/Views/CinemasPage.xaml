@@ -64,9 +64,8 @@
                                         <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Phone: "></Label>
                                         <Label Style="{StaticResource SpecialFont}" Text="{Binding PhoneNumber}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
                                     </StackLayout>
-
-                                </StackLayout>  
-                            </StackLayout>
+                                </StackLayout>
+                            </StackLayout>                           
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

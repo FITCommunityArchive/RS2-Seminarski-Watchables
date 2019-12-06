@@ -36,7 +36,7 @@ namespace Watchables.Mobile.Views
             date = date.Substring(0, date.Length - 2);
             day = day.Substring(0, day.Length - 2);
 
-            await Navigation.PushAsync(new AiringDayMoviesPage(adocId, day, cinema, date));
+            await Navigation.PushAsync(new AiringDayMoviesPage(adocId, day, cinema, date, _viewModel.cinemaId));
         }
     }
 }
