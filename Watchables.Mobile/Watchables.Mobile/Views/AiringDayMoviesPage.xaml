@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
+             xmlns:converters="clr-namespace:Watchables.Mobile"
+             mc:Ignorable="d"
+             x:Class="Watchables.Mobile.Views.AiringDayMoviesPage"
+             Title="{Binding Title}"
+             >
+
+    <ContentPage.BindingContext>
+        <vm:AiringDayMoviesViewModel></vm:AiringDayMoviesViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <converters:LabelMaxLengthConverter x:Key="LabelMaxLengthConverter" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding CdmItems}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10" Orientation="Horizontal" Margin="0,0,0,10">
+                                <StackLayout>
+                                    <Frame Padding="0" CornerRadius="10">
+                                        <Image WidthRequest="180" HeightRequest="240" Aspect="AspectFill" Source="{Binding Movie.ImageLink}"></Image>
+                                    </Frame>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Vertical" Margin="5,0,0,0">
+                                    <Label Text="{Binding Movie.Title}" 
+                                d:Text="{Binding .}"
+                                LineBreakMode="WordWrap" 
+                                Style="{StaticResource CinemaTitle}" />
+
+                                    <Label Text="{Binding Movie.Description, Converter={StaticResource LabelMaxLengthConverter}}" 
+                                d:Text="Item descripton"
+                                Style="{StaticResource SpecialFont}"
+                                LineBreakMode="WordWrap" 
+                                FontSize="15"/>
+
+                                    <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+
+                                    <Label Text="{Binding Movie.Cast, Converter={StaticResource LabelMaxLengthConverter}}" 
+                                d:Text="Item descripton"
+                                Style="{StaticResource SpecialFont}"
+                                LineBreakMode="WordWrap" 
+                                FontSize="15"/>
+
+                                    <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout Orientation="Vertical">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Rating: "></Label>
+                                                <Label Style="{StaticResource SpecialFont}" Text="{Binding Movie.Rating}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Duration: "></Label>
+                                                <Label Style="{StaticResource SpecialFont}" Text="{Binding Movie.Duration}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Genre: "></Label>
+                                                <Label Style="{StaticResource SpecialFont}" Text="{Binding Movie.Genre}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Vertical" WidthRequest="40" Margin="120,0,0,0">
+
+                                            <StackLayout HeightRequest="50">
+                                                <ListView ItemsSource="{Binding Appointments}">
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <ViewCell>
+                                                                <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="{Binding StartsAt}"></Label>
+                                                        </ViewCell>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        
+                                    </StackLayout>
+                                    
+                                    
+                                    
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -14,10 +14,29 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout HorizontalOptions="Center">
+            <Label Margin="10" HorizontalOptions="Center" Style="{StaticResource SpecialFont}" FontSize="Title" IsVisible="{Binding HasSchedule}" Text="No schedule avaiable"></Label>
+
+            <Picker IsVisible="{Binding HasPicker}" HorizontalOptions="FillAndExpand" ItemsSource="{Binding AllDays}" SelectedItem="{Binding SelectedDay}"></Picker>
+
+            <ListView HorizontalOptions="Center" ItemsSource="{Binding Adocs}" ItemSelected="ListView_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout HorizontalOptions="Center" Margin="40,10,10,10" Padding="10" Orientation="Horizontal">
+                                <Label FontSize="20" TextColor="{d:StaticResource MainColor}" Style="{StaticResource SpecialFont}" Text="{Binding Date}"></Label>
+                                <Label FontSize="20" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="{Binding Day}"></Label>
+                                <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="Movies airing: "></Label>
+                                        <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding NumberOfMovies}"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
