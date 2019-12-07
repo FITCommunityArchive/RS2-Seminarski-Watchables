@@ -49,7 +49,9 @@ namespace Watchables.WebAPI.Services
 
                 Database.UsersMovies newMovie = new UsersMovies() {
                     MovieId = buy.ItemId,
-                    UserId = buy.UserId
+                    UserId = buy.UserId,
+                    PurchaseDate=DateTime.Now,
+                    PurchaseAmount=_context.Movies.Find(buy.ItemId).Price
                 };
                 _context.UsersMovies.Add(newMovie);
                 _context.SaveChanges();
@@ -70,7 +72,9 @@ namespace Watchables.WebAPI.Services
 
                 Database.UsersShows newShow = new UsersShows() {
                     ShowId = buy.ItemId,
-                    UserId = buy.UserId
+                    UserId = buy.UserId,
+                    PurchaseDate = DateTime.Now,
+                    PurchaseAmount = _context.Shows.Find(buy.ItemId).Price
                 };
                 _context.UsersShows.Add(newShow);
                 _context.SaveChanges();
@@ -91,7 +95,8 @@ namespace Watchables.WebAPI.Services
 
                 Database.UsersSubscriptions newSubscription = new UsersSubscriptions() {
                     SubscriptionId = buy.ItemId,
-                    UserId = buy.UserId
+                    UserId = buy.UserId,
+                    SubscriptionDate=DateTime.Now
                 };
                 _context.UsersSubscriptions.Add(newSubscription);
                 _context.SaveChanges();
@@ -113,7 +118,8 @@ namespace Watchables.WebAPI.Services
 
                 Database.UsersRotations newRotation = new UsersRotations() {
                     RotationId = buy.ItemId,
-                    UserId = buy.UserId
+                    UserId = buy.UserId,
+                    RotationClaimed=DateTime.Now
                 };
                 _context.UsersRotations.Add(newRotation);
                 _context.SaveChanges();

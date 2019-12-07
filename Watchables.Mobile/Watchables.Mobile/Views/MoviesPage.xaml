@@ -32,7 +32,7 @@
                 </StackLayout>
             </StackLayout>
 
-            <StackLayout HorizontalOptions="Center" Margin="0,20,0,0" Orientation="Horizontal">
+            <StackLayout HorizontalOptions="Center" Margin="0,10,0,0" Orientation="Horizontal">
 
                 <StackLayout HorizontalOptions="StartAndExpand">
                     <Picker SelectedItem="{Binding Genre}" Title="Genre"  FontFamily="Century Gothic" WidthRequest="240" HorizontalOptions="FillAndExpand" ItemsSource="{Binding Genres}"></Picker>

@@ -7,6 +7,8 @@ namespace Watchables.WebAPI.Database
     {
         public int UserId { get; set; }
         public int ShowId { get; set; }
+        public DateTime PurchaseDate { get; set; }
+        public decimal PurchaseAmount { get; set; }
 
         public virtual Shows Show { get; set; }
         public virtual Users User { get; set; }
