@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Watchables.Mobile.ViewModels
 {
@@ -52,6 +51,7 @@ namespace Watchables.Mobile.ViewModels
         public APIService _cdmApi = new APIService("CinemaDayMovie");
         public APIService _appApi = new APIService("Appointments");
         public APIService _hallsApi = new APIService("halls");
+        public APIService _ordersApi = new APIService("orders");
         public ObservableCollection<Model.ObservableLists.AppointmentItem> Apps { get; set; } = new ObservableCollection<Model.ObservableLists.AppointmentItem>();
         public ObservableCollection<int> Seats { get; set; } = new ObservableCollection<int>();
         public ObservableCollection<Model.ObservableLists.ProductItem> Products { get; set; } = new ObservableCollection<Model.ObservableLists.ProductItem>();
@@ -133,8 +133,11 @@ namespace Watchables.Mobile.ViewModels
         }
 
         public async void PlaceOrder() {
+
+            var app = await _appApi.GetById<Model.Appointments>(SelectedItem.AppId);
+
             Model.Requests.InsertOrderRequest request = new Model.Requests.InsertOrderRequest() {
-                AppointmentId = SelectedItem.AppId,
+                Appointment = app,
                 NumberOfTickets = _selectedNumberOfTickets,
                 Products = new List<Model.Product>(),
                 UserId=APIService.User.UserId
@@ -144,7 +147,8 @@ namespace Watchables.Mobile.ViewModels
                 request.Products.Add(product.Product);
             }
 
-            //call API
+            await _ordersApi.Insert<Model.Order>(request);
+
         }
 
         public OrderViewModel() {

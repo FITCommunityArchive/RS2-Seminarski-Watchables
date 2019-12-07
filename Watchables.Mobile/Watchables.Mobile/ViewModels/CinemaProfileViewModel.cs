@@ -113,9 +113,11 @@ namespace Watchables.Mobile.ViewModels
                 var To = DateTime.ParseExact(to, "HH:mm:ss", CultureInfo.InvariantCulture).TimeOfDay;
                 if (currentTime < From && currentTime > To) {
                     Open = "Closed";
+                    OpenColor = Color.Red;
                 }
                 else {
                     Open = "Open";
+                    OpenColor = Color.Green;
                 }
             }
 

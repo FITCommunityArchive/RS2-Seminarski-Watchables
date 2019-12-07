@@ -8,7 +8,8 @@ namespace Watchables.Mobile.Models
     {
         Browse,
         About,
-        Cinemas
+        Cinemas,
+        Movies
     }
     public class HomeMenuItem
     {

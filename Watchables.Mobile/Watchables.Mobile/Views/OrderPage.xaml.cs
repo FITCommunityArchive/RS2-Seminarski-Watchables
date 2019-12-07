@@ -45,6 +45,15 @@ namespace Watchables.Mobile.Views
                 return;
             }
 
+            var helper = new Helper();
+            bool isLocked = await helper.IsLocked();
+
+            if (isLocked) {
+                await Application.Current.MainPage.DisplayAlert("Warning", "No orders can be placed at this time, some changes are being made. Plese try again later.", "OK");
+                await Navigation.PopAsync();
+                return;
+            }        
+
             decimal price = 0;
             foreach(var product in _viewModel.OrderedProducts) {
                 price += product.Product.Price;

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:Watchables.Mobile"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Watchables.Mobile.Views.BuyMoviePage"
+             Title="{Binding Title}"
+             >
+
+    <ContentPage.Resources>
+        <converters:LabelMaxLengthConverter x:Key="LabelMaxLengthConverter" />
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <StackLayout Padding="0" Orientation="Vertical">
+            <ScrollView>
+                <StackLayout Orientation="Vertical">
+                    <WebView Source="{Binding Movie.TrailerLink}" HeightRequest="280"></WebView>
+                    <StackLayout Margin="10" HorizontalOptions="Center">
+                        <Label FontSize="30" Style="{StaticResource SpecialFont}" TextColor="{StaticResource MainColor}" Text="{Binding Movie.Title}" HorizontalOptions="Center"></Label>
+                        <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding Movie.Description}" HorizontalOptions="Center"></Label>
+                        <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+                        <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding Movie.Cast}" HorizontalOptions="Center"></Label>
+                        <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                            <StackLayout  Orientation="Horizontal">
+                                <Label FontSize="15" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Rating: "></Label>
+                                <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Movie.Rating}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                            </StackLayout>
+                            <StackLayout Margin="10,0,0,0" Orientation="Horizontal">
+                                <Label FontSize="15" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Duration: "></Label>
+                                <Label FontSize="15"  Style="{StaticResource SpecialFont}" Text="{Binding Movie.Duration}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                            </StackLayout>
+                            <StackLayout Margin="10,0,0,0" Orientation="Horizontal">
+                                <Label FontSize="15" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Genre: "></Label>
+                                <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Movie.Genre}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                            </StackLayout>
+                            <StackLayout Margin="10,0,0,0" Orientation="Horizontal">
+                                <Label FontSize="15" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Year: "></Label>
+                                <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Movie.Year}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+
+
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                <Button Command="{Binding BuyCommnd}" TextColor="White" Margin="0" Text="{Binding Btn}" BackgroundColor="{StaticResource MainColor}" CornerRadius="5" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

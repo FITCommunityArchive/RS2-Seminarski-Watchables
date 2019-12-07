@@ -46,6 +46,18 @@ namespace Watchables.WebAPI.Controllers
         [HttpGet("Lock/{flag}")]
         public ActionResult<string> LockToggle(bool flag) {
             return _service.LockToggle(flag);
-        }   
+        }
+
+        [Authorize(Roles = "Korisnik")]
+        [HttpPost("BuyItem")]
+        public ActionResult<string> Buy(Model.Buy buy) {
+            return _service.BuyItem(buy);
+        }
+
+        [Authorize(Roles = "Korisnik")]
+        [HttpPost("DeleteItem")]
+        public ActionResult<string> Delete(Model.Delete delete) {
+            return _service.DeleteItem(delete);
+        }
     }
 }

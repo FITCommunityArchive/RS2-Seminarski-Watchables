@@ -87,16 +87,9 @@
                         </StackLayout>
                     </StackLayout>
                     <StackLayout BackgroundColor="Blue">
-                       
-                  </StackLayout>                   
+
+                    </StackLayout>
                 </StackLayout>
-
-
-           
-
-
-            
-
                 <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
                     <Button TextColor="White" Margin="0" Text="Order" BackgroundColor="{StaticResource MainColor}" CornerRadius="5" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked"></Button>
                 </StackLayout>

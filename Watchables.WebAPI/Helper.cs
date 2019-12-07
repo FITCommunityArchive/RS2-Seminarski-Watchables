@@ -13,7 +13,9 @@ namespace Watchables.WebAPI
         public Helper(_160304Context context) {
             _context = context;
         }
-        
+
+        private static Random random = new Random();
+
         public void NonDeleteNotification(List<Database.Appointments> apps, string content, string type) {
 
             bool hasOrders = false;
@@ -492,6 +494,47 @@ namespace Watchables.WebAPI
 
             _context.Movies.Remove(movie);
             _context.SaveChanges();
+        }
+
+        public void DeleteOrderNotification(int orderId, string content, string type) {
+            Database.Notifications notification = new Notifications() {
+                Content = content,
+                Created = DateTime.Now,
+                Type = type
+            };
+            _context.Notifications.Add(notification);
+            _context.SaveChanges();
+
+            var order = _context.Orders.Find(orderId);
+            Database.UsersNotifications not = new UsersNotifications() {
+                Notification = notification,
+                UserId = order.UserId
+            };
+            _context.UsersNotifications.Add(not);
+            _context.SaveChanges();
+
+            foreach(var ticket in _context.Tickets.ToList()) {
+                if (ticket.OrderId == order.OrderId) {
+                    _context.Tickets.Remove(ticket);
+                    _context.SaveChanges();
+                }
+            }
+
+            foreach(var orderProduct in _context.OrderProducts.ToList()) {
+                if(orderProduct.OrderId == order.OrderId) {
+                    _context.OrderProducts.Remove(orderProduct);
+                    _context.SaveChanges();
+                }
+            }
+
+            _context.Orders.Remove(order);
+            _context.SaveChanges();
+        }
+
+        public string RandomString(int length) {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

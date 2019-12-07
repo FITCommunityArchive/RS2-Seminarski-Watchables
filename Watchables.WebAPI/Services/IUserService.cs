@@ -12,5 +12,8 @@ namespace Watchables.WebAPI.Services
         Model.User Insert(Model.Requests.InsertUserRequest request);
         Model.User Update(int userId, Model.Requests.InsertUserRequest request);
         string LockToggle(bool flag);
+        string BuyItem(Model.Buy buy);
+        string DeleteItem(Model.Delete delete);
+
     }
 }

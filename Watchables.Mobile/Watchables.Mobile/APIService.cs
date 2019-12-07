@@ -206,5 +206,41 @@ namespace Watchables.Mobile
                 throw;
             }
         }
+
+        public async Task<string> Buy<T>(Model.Buy buy) {
+
+            var url = $"{_apiUrl}/{_controller}/BuyItem";
+            try {
+                var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(buy).ReceiveString();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Access denied!", "OK");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Access forbidden!", "OK");
+                }
+                throw;
+            }
+        }
+        
+        public async Task<string> Delete<T>(Model.Delete delete) {
+
+            var url = $"{_apiUrl}/{_controller}/DeleteItem";
+            try {
+                var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(delete).ReceiveString();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Access denied!", "OK");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Access forbidden!", "OK");
+                }
+                throw;
+            }
+        }
     }
 }

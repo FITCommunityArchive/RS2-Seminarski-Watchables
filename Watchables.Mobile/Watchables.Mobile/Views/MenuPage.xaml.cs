@@ -20,8 +20,9 @@ namespace Watchables.Mobile.Views
             menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Cinemas, Title="Cinemas"},
+                 new HomeMenuItem {Id=MenuItemType.Movies, Title="Movies"},
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" }
-                
+               
             };
 
             ListViewMenu.ItemsSource = menuItems;

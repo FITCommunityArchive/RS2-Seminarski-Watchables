@@ -45,6 +45,8 @@ namespace Watchables.WebAPI.Mappers
             CreateMap<Database.Rotations, Model.Rotation>().ReverseMap();
             CreateMap<Database.Rotations, Model.Requests.InsertRotationRequest>().ReverseMap();
 
+            CreateMap<Database.Orders, Model.Order>().ReverseMap();
+
         }
     }
 }
