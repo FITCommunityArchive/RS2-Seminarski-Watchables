@@ -14,6 +14,7 @@ namespace Watchables.WebAPI.Services
         string LockToggle(bool flag);
         string BuyItem(Model.Buy buy);
         string DeleteItem(Model.Delete delete);
-
+        List<Model.Movie> RecommendedMovies(int userId);
+        List<Model.Show> RecommendedShows(int userId);
     }
 }

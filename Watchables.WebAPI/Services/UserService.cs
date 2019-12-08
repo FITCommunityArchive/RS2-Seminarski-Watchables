@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Watchables.Model;
 using Watchables.Model.Requests;
+using Watchables.WebAPI.CBF;
 using Watchables.WebAPI.Database;
 using Watchables.WebAPI.Exceptions;
 
@@ -23,6 +24,8 @@ namespace Watchables.WebAPI.Services
             _mapper = mapper;
             _accoutnService = accountService;
         }
+        private readonly WordBagGenerator _wordBagGenerator = new WordBagGenerator();
+        private readonly Similarity _similarity = new Similarity();
 
         public string BuyItem(Buy buy) {
 
@@ -219,6 +222,76 @@ namespace Watchables.WebAPI.Services
 
 
             return _mapper.Map<Model.User>(user);
+        }
+
+        public List<Movie> RecommendedMovies(int userId) {
+
+            var consumerList = _context.UsersMovies.Where(um=>um.UserId == userId).Include(um => um.Movie).ToList();
+            List<Model.Movie> usersMovies = new List<Movie>();
+            foreach(var movie in consumerList) {
+                usersMovies.Add(_mapper.Map<Model.Movie>(movie.Movie));
+            }
+            var allMovies = _mapper.Map<List<Model.Movie>>(_context.Movies.ToList());
+            foreach(var item in usersMovies) {
+                allMovies.RemoveAll(m => m.MovieId == item.MovieId);
+            }
+            List<ItemScore<Model.Movie>> allMoviesWithScore = new List<ItemScore<Movie>>();
+            foreach(var movie in allMovies) {
+                ItemScore<Model.Movie> newItem = new ItemScore<Movie>() {
+                    Item = movie,
+                    Score = 0
+                };
+                allMoviesWithScore.Add(newItem);
+            }
+
+            foreach(var movie in allMoviesWithScore) {
+                foreach(var usersMovie in usersMovies) {
+                    movie.Score += _similarity.CalculateSimilarity(_wordBagGenerator.GenerateWordBag<Model.Movie>(movie.Item), _wordBagGenerator.GenerateWordBag<Model.Movie>(usersMovie));
+                }
+            }
+
+            allMoviesWithScore.Sort((a, b) => b.Score.CompareTo(a.Score));
+            List<Model.Movie> recommendedMovies = new List<Movie>();
+            foreach(var movie in allMoviesWithScore) {
+                recommendedMovies.Add(movie.Item);
+            }
+
+            return recommendedMovies;
+        }
+
+        public List<Show> RecommendedShows(int userId) {
+
+            var consumerList = _context.UsersShows.Where(um => um.UserId == userId).Include(um => um.Show).ToList();
+            List<Model.Show> usersShows = new List<Show>();
+            foreach (var show in consumerList) {
+                usersShows.Add(_mapper.Map<Model.Show>(show.Show));
+            }
+            var allShows = _mapper.Map<List<Model.Show>>(_context.Shows.ToList());
+            foreach (var item in usersShows) {
+                allShows.RemoveAll(m => m.ShowId == item.ShowId);
+            }
+            List<ItemScore<Model.Show>> allShowsWithScore = new List<ItemScore<Show>>();
+            foreach (var show in allShows) {
+                ItemScore<Model.Show> newItem = new ItemScore<Show>() {
+                    Item = show,
+                    Score = 0
+                };
+                allShowsWithScore.Add(newItem);
+            }
+
+            foreach (var show in allShowsWithScore) {
+                foreach (var usersShow in usersShows) {
+                    show.Score += _similarity.CalculateSimilarity(_wordBagGenerator.GenerateWordBag<Model.Show>(show.Item), _wordBagGenerator.GenerateWordBag<Model.Show>(usersShow));
+                }
+            }
+
+            allShowsWithScore.Sort((a, b) => b.Score.CompareTo(a.Score));
+            List<Model.Show> recommendedShows = new List<Show>();
+            foreach (var show in allShowsWithScore) {
+                recommendedShows.Add(show.Item);
+            }
+
+            return recommendedShows;
         }
     }
 }

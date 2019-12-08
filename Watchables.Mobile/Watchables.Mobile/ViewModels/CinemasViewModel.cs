@@ -60,7 +60,7 @@ namespace Watchables.Mobile.ViewModels
                     list.Add(cinema.Location);
                 }
                 list = list.Distinct().ToList();
-
+                list.Sort();
                 foreach (var location in list) {
                     Locations.Add(location);
                 }

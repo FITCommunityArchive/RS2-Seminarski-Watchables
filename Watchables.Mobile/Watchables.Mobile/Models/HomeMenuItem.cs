@@ -9,7 +9,8 @@ namespace Watchables.Mobile.Models
         Browse,
         About,
         Cinemas,
-        Movies
+        Movies,
+        Shows
     }
     public class HomeMenuItem
     {

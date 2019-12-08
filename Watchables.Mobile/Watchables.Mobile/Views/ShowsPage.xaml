@@ -6,14 +6,13 @@
              xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
              xmlns:converters="clr-namespace:Watchables.Mobile"
              mc:Ignorable="d"
-             x:Class="Watchables.Mobile.Views.MoviesPage"
-             Title="Movies"
+             x:Class="Watchables.Mobile.Views.ShowsPage"
+             Title="Shows"
              >
 
     <ContentPage.BindingContext>
-        <vm:MoviesViewModel></vm:MoviesViewModel>
+        <vm:ShowsViewModel></vm:ShowsViewModel>
     </ContentPage.BindingContext>
-
 
     <ContentPage.Resources>
         <converters:LabelMaxLengthConverter x:Key="LabelMaxLengthConverter" />
@@ -21,38 +20,37 @@
 
     <ContentPage.Content>
         <StackLayout>
-
             <StackLayout BackgroundColor="#f9f9f9">
-            <StackLayout Margin="0,10,0,0" Orientation="Horizontal" HorizontalOptions="Center">
-                <StackLayout HorizontalOptions="StartAndExpand">
-                    <Button Command="{Binding AllMoviesButton}" BorderColor="{StaticResource MainColor}" FontSize="15" TextColor="{StaticResource MainColor}" CornerRadius="5" FontFamily="Century Gothic" WidthRequest="240" BackgroundColor="White" Text="Movies"></Button>
+                <StackLayout Margin="0,10,0,0" Orientation="Horizontal" HorizontalOptions="Center">
+                    <StackLayout HorizontalOptions="StartAndExpand">
+                        <Button Command="{Binding AllShowsButton}" BorderColor="{StaticResource MainColor}" FontSize="15" TextColor="{StaticResource MainColor}" CornerRadius="5" FontFamily="Century Gothic" WidthRequest="240" BackgroundColor="White" Text="Shows"></Button>
+                    </StackLayout>
+
+                    <StackLayout HorizontalOptions="EndAndExpand">
+                        <Button Command="{Binding ForMeButton}" BorderColor="{StaticResource MainColor}" FontSize="15" TextColor="{StaticResource MainColor}" CornerRadius="5" FontFamily="Century Gothic" WidthRequest="240" BackgroundColor="White" Text="For me"></Button>
+                    </StackLayout>
                 </StackLayout>
 
-                <StackLayout HorizontalOptions="EndAndExpand">
-                    <Button Command="{Binding ForMeButton}" BorderColor="{StaticResource MainColor}" FontSize="15" TextColor="{StaticResource MainColor}" CornerRadius="5" FontFamily="Century Gothic" WidthRequest="240" BackgroundColor="White" Text="For me"></Button>
-                </StackLayout>
-            </StackLayout>
+                <StackLayout IsVisible="{Binding ShowFilters}" HorizontalOptions="Center" Margin="0,10,0,0" Orientation="Horizontal">
 
-            <StackLayout IsVisible="{Binding ShowFilters}" HorizontalOptions="Center" Margin="0,10,0,0" Orientation="Horizontal">
+                    <StackLayout HorizontalOptions="StartAndExpand">
+                        <Picker BackgroundColor="White" SelectedItem="{Binding Genre}" Title="Genre"  FontFamily="Century Gothic" WidthRequest="240" HorizontalOptions="FillAndExpand" ItemsSource="{Binding Genres}"></Picker>
+                    </StackLayout>
 
-                <StackLayout HorizontalOptions="StartAndExpand">
-                    <Picker BackgroundColor="White" SelectedItem="{Binding Genre}" Title="Genre"  FontFamily="Century Gothic" WidthRequest="240" HorizontalOptions="FillAndExpand" ItemsSource="{Binding Genres}"></Picker>
-                </StackLayout>
-
-                <StackLayout HorizontalOptions="StartAndExpand">
+                    <StackLayout HorizontalOptions="StartAndExpand">
                         <Picker BackgroundColor="White" SelectedItem="{Binding Rating}" Title="Rating" FontFamily="Century Gothic" WidthRequest="240" HorizontalOptions="FillAndExpand" ItemsSource="{Binding Ratings}"></Picker>
+                    </StackLayout>
                 </StackLayout>
 
-            </StackLayout>
+                <StackLayout Margin="10,25,10,10" IsVisible="{Binding ShowFilters}">
+                    <Entry Text="{Binding Search}" Placeholder="Search" HorizontalOptions="FillAndExpand"></Entry>
+                </StackLayout>
 
-            <StackLayout Margin="10,25,10,10" IsVisible="{Binding ShowFilters}">
-                <Entry Text="{Binding Search}" Placeholder="Search" HorizontalOptions="FillAndExpand"></Entry>
-            </StackLayout>
                 <BoxView IsVisible="{Binding ShowFilters}" Margin="0,10,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
             </StackLayout>
-
-
-            <ListView ItemsSource="{Binding Movies}" ItemTapped="ListView_ItemTapped">
+            
+            
+            <ListView ItemsSource="{Binding Shows}" ItemTapped="ListView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -93,8 +91,8 @@
                                             </StackLayout>
 
                                             <StackLayout Orientation="Horizontal">
-                                                <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Duration: "></Label>
-                                                <Label Style="{StaticResource SpecialFont}" Text="{Binding Duration}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                                <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Seasons: "></Label>
+                                                <Label Style="{StaticResource SpecialFont}" Text="{Binding NumberOfSeasons}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
                                             </StackLayout>
 
                                             <StackLayout Orientation="Horizontal">
@@ -112,7 +110,8 @@
                                                 <Label Style="{StaticResource SpecialFont}" Text="{Binding Price}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Standalone"></Label>
+                                                <Label IsVisible="{Binding Ongoing}" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Ongoing"></Label>
+                                                <Label IsVisible="{Binding !Ongoing}" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Over"></Label>
                                             </StackLayout>
                                         </StackLayout>
                                     </StackLayout>
@@ -125,10 +124,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-
-
-
 
 
 

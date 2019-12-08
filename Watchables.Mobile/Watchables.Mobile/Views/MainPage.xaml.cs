@@ -38,6 +38,9 @@ namespace Watchables.Mobile.Views
                     case (int)MenuItemType.Movies:
                         MenuPages.Add(id, new NavigationPage(new MoviesPage()));
                         break;
+                    case (int)MenuItemType.Shows:
+                        MenuPages.Add(id, new NavigationPage(new ShowsPage()));
+                        break;
                 }
             }
 

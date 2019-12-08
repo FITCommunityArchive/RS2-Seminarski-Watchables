@@ -7,17 +7,17 @@ using Xamarin.Forms;
 
 namespace Watchables.Mobile.ViewModels
 {
-    public class BuyMovieViewModel : BaseViewModel
+    public class BuyShowViewModel : BaseViewModel
     {
 
-        public readonly APIService _moviesApi = new APIService("movies");
+        public readonly APIService _showsApi = new APIService("shows");
         private readonly APIService _usersApi = new APIService("users");
         public ICommand BuyCommnd { get; set; }
 
-        Model.Movie _movie = null;
-        public Model.Movie Movie {
-            get { return _movie; }
-            set { SetProperty(ref _movie, value); }
+        Model.Show _show = null;
+        public Model.Show Show {
+            get { return _show; }
+            set { SetProperty(ref _show, value); }
         }
 
         string _btn = string.Empty;
@@ -32,20 +32,20 @@ namespace Watchables.Mobile.ViewModels
             set { SetProperty(ref _nav, value); }
         }
 
-        public async void Init(int movieId) {
-            var movie = await _moviesApi.GetById<Model.Movie>(movieId);
-            Title = movie.Title;
-            Movie = movie;
-            Btn = $"Buy ({movie.Price})";
+        public async void Init(int showId) {
+            var show = await _showsApi.GetById<Model.Show>(showId);
+            Title = show.Title;
+            Show = show;
+            Btn = $"Buy ({show.Price})";
         }
 
-        public BuyMovieViewModel() {
+        public BuyShowViewModel() {
             BuyCommnd = new Command(async () => await Buy());
         }
 
         public async Task Buy() {
 
-            var answer = await Application.Current.MainPage.DisplayAlert("Confirm", $"Buy '{Movie.Title}' for {Movie.Price}?", "Yes", "No");
+            var answer = await Application.Current.MainPage.DisplayAlert("Confirm", $"Buy '{Show.Title}' for {Show.Price}?", "Yes", "No");
             if (answer) {
                 Helper helper = new Helper();
                 var isLocked = await helper.IsLocked();
@@ -55,21 +55,19 @@ namespace Watchables.Mobile.ViewModels
                 }
                 else {
                     Model.Buy buy = new Model.Buy() {
-                        Item = BuyItem.Movie,
-                        ItemId = Movie.MovieId,
+                        Item = BuyItem.Show,
+                        ItemId = Show.ShowId,
                         UserId = APIService.User.UserId
                     };
                     try {
                         await _usersApi.Buy<string>(buy);
                         await Nav.PopAsync();
-                        await Application.Current.MainPage.DisplayAlert("Success", "Movie bought successfully", "OK");
+                        await Application.Current.MainPage.DisplayAlert("Success", "Show bought successfully", "OK");
                     }
                     catch {
                         await Nav.PopAsync();
-                        await Application.Current.MainPage.DisplayAlert("Oops", $"You already bought '{Movie.Title}'", "OK");
+                        await Application.Current.MainPage.DisplayAlert("Oops", $"You already bought '{Show.Title}'", "OK");
                     }
-                   
-                   
                 }
             }
         }

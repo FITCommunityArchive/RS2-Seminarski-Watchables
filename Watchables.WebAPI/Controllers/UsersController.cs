@@ -59,5 +59,18 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<string> Delete(Model.Delete delete) {
             return _service.DeleteItem(delete);
         }
+
+        [Authorize(Roles = "Korisnik")]
+        [HttpGet("RecommendedMovies/{userId}")]
+        public ActionResult<List<Model.Movie>> RecommendedMovies(int userId) {
+            return _service.RecommendedMovies(userId);
+        }
+
+        [Authorize(Roles = "Korisnik")]
+        [HttpGet("RecommendedShows/{userId}")]
+        public ActionResult<List<Model.Show>> RecommendedShows(int userId) {
+            return _service.RecommendedShows(userId);
+        }
+
     }
 }

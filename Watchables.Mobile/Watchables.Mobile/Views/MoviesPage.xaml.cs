@@ -30,5 +30,7 @@ namespace Watchables.Mobile.Views
             var movieId = (e.Item as Model.Movie).MovieId;
             await Navigation.PushAsync(new BuyMoviePage(movieId));
         }
+
+   
     }
 }
