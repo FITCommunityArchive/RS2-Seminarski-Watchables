@@ -14,6 +14,6 @@ namespace Watchables.Model.dgvLists
         public string Address { get; set; }
         public DateTime BirthDate { get; set; }
         public string Username { get; set; }
-
+        public bool Active { get; set; }
     }
 }

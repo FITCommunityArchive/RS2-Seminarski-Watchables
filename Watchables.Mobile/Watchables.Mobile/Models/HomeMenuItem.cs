@@ -10,7 +10,9 @@ namespace Watchables.Mobile.Models
         About,
         Cinemas,
         Movies,
-        Shows
+        Shows,
+        Subscriptions,
+        Rotations
     }
     public class HomeMenuItem
     {

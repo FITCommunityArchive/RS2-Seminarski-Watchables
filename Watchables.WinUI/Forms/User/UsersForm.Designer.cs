@@ -39,6 +39,7 @@
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Active = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.FNSrch = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -84,7 +85,8 @@
             this.Mail,
             this.Address,
             this.BirthDate,
-            this.PhoneNumber});
+            this.PhoneNumber,
+            this.Active});
             this.dgvUsers.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
@@ -125,7 +127,7 @@
             // FirstName
             // 
             this.FirstName.DataPropertyName = "FirstName";
-            this.FirstName.FillWeight = 82.64245F;
+            this.FirstName.FillWeight = 84.93908F;
             this.FirstName.HeaderText = "First name";
             this.FirstName.MinimumWidth = 6;
             this.FirstName.Name = "FirstName";
@@ -133,7 +135,7 @@
             // LastName
             // 
             this.LastName.DataPropertyName = "LastName";
-            this.LastName.FillWeight = 82.64245F;
+            this.LastName.FillWeight = 84.93908F;
             this.LastName.HeaderText = "Last name";
             this.LastName.MinimumWidth = 6;
             this.LastName.Name = "LastName";
@@ -141,7 +143,7 @@
             // Username
             // 
             this.Username.DataPropertyName = "Username";
-            this.Username.FillWeight = 82.64245F;
+            this.Username.FillWeight = 84.93908F;
             this.Username.HeaderText = "Username";
             this.Username.MinimumWidth = 6;
             this.Username.Name = "Username";
@@ -149,7 +151,7 @@
             // Mail
             // 
             this.Mail.DataPropertyName = "Mail";
-            this.Mail.FillWeight = 139.9932F;
+            this.Mail.FillWeight = 153.3853F;
             this.Mail.HeaderText = "Mail";
             this.Mail.MinimumWidth = 6;
             this.Mail.Name = "Mail";
@@ -157,7 +159,7 @@
             // Address
             // 
             this.Address.DataPropertyName = "Address";
-            this.Address.FillWeight = 146.7945F;
+            this.Address.FillWeight = 150.8739F;
             this.Address.HeaderText = "Address";
             this.Address.MinimumWidth = 6;
             this.Address.Name = "Address";
@@ -165,7 +167,7 @@
             // BirthDate
             // 
             this.BirthDate.DataPropertyName = "BirthDate";
-            this.BirthDate.FillWeight = 82.64245F;
+            this.BirthDate.FillWeight = 84.93908F;
             this.BirthDate.HeaderText = "Birth date";
             this.BirthDate.MinimumWidth = 6;
             this.BirthDate.Name = "BirthDate";
@@ -173,10 +175,18 @@
             // PhoneNumber
             // 
             this.PhoneNumber.DataPropertyName = "PhoneNumber";
-            this.PhoneNumber.FillWeight = 82.64245F;
+            this.PhoneNumber.FillWeight = 84.93908F;
             this.PhoneNumber.HeaderText = "Number";
             this.PhoneNumber.MinimumWidth = 6;
             this.PhoneNumber.Name = "PhoneNumber";
+            // 
+            // Active
+            // 
+            this.Active.DataPropertyName = "Active";
+            this.Active.FillWeight = 71.04537F;
+            this.Active.HeaderText = "Active";
+            this.Active.MinimumWidth = 6;
+            this.Active.Name = "Active";
             // 
             // label1
             // 
@@ -311,14 +321,6 @@
 
         private System.Windows.Forms.DataGridView dgvUsers;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Username;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PhoneNumber;
         private System.Windows.Forms.TextBox FNSrch;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox LNSrch;
@@ -327,5 +329,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button clearSearch;
         private System.Windows.Forms.Button searchBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Username;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Mail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PhoneNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Active;
     }
 }

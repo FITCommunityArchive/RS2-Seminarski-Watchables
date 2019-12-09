@@ -22,7 +22,8 @@ namespace Watchables.Mobile.Views
                 new HomeMenuItem {Id = MenuItemType.Cinemas, Title="Cinemas"},
                 new HomeMenuItem {Id=MenuItemType.Movies, Title="Movies"},
                 new HomeMenuItem {Id=MenuItemType.Shows, Title="Shows"},
-                new HomeMenuItem {Id = MenuItemType.About, Title="About" }
+                new HomeMenuItem {Id=MenuItemType.Subscriptions, Title="Subscriptions"},
+                new HomeMenuItem {Id = MenuItemType.Rotations, Title="Rotations" }
                
             };
 

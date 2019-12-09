@@ -15,6 +15,7 @@ namespace Watchables.Model
         public DateTime BirthDate { get; set; }
         public string ImageLink { get; set; }
         public bool Locked { get; set; }
+        public bool Active { get; set; }
 
         public int AccountId { get; set; }
         public virtual Account Account { get; set; }

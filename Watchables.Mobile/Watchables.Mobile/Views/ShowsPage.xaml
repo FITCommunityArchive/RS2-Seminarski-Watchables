@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
              xmlns:converters="clr-namespace:Watchables.Mobile"
+             xmlns:converters1="clr-namespace:Watchables.Mobile.Converters"
              mc:Ignorable="d"
              x:Class="Watchables.Mobile.Views.ShowsPage"
              Title="Shows"
@@ -16,7 +17,10 @@
 
     <ContentPage.Resources>
         <converters:LabelMaxLengthConverter x:Key="LabelMaxLengthConverter" />
+        <converters1:NegateBooleanConverter x:Key="NegateBooleanConverter" />
     </ContentPage.Resources>
+
+
 
     <ContentPage.Content>
         <StackLayout>
@@ -111,7 +115,7 @@
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal">
                                                 <Label IsVisible="{Binding Ongoing}" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Ongoing"></Label>
-                                                <Label IsVisible="{Binding !Ongoing}" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Over"></Label>
+                                                <Label IsVisible="{Binding Ongoing, Converter={StaticResource NegateBooleanConverter }}" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Over"></Label>
                                             </StackLayout>
                                         </StackLayout>
                                     </StackLayout>

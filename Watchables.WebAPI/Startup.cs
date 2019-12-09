@@ -86,6 +86,7 @@ namespace Watchables.WebAPI
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<ICRUDService<Model.Subscription, Model.Requests.SubscriptionSearchRequest, Model.Requests.InsertSubscriptionRequest, Model.Requests.InsertSubscriptionRequest>, SubscriptionService>();
             services.AddScoped<ICRUDService<Model.Rotation, Model.Requests.RotationSearchRequest, Model.Requests.InsertRotationRequest, Model.Requests.InsertRotationRequest>, RotationsService>();
             services.AddScoped<ICRUDService<Model.Order, Model.Requests.OrderSerachRequest, Model.Requests.InsertOrderRequest, Model.Requests.InsertOrderRequest>, OrderService>();

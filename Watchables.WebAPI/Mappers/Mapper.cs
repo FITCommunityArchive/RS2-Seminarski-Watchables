@@ -47,6 +47,8 @@ namespace Watchables.WebAPI.Mappers
 
             CreateMap<Database.Orders, Model.Order>().ReverseMap();
 
+            CreateMap<Database.Notifications, Model.Notification>().ReverseMap();
+
         }
     }
 }

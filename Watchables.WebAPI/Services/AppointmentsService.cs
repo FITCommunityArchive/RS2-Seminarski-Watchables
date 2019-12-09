@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,8 +92,9 @@ namespace Watchables.WebAPI.Services
             baseAppointment.HallId = app.HallId;
             _context.SaveChanges();
 
+            var forNot = _context.Appointments.Include(a => a.CinemaDayMovie).ThenInclude(cdm => cdm.Movie).Single(a => a.AppointmentId == appointmentId);
            Helper helper = new Helper(_context);
-           helper.ChangeAppointmentNotification(baseAppointment, $"Appointment information changed (price: {baseAppointment.Price}, starts at: {baseAppointment.StartsAt}, hall: {_context.Hall.Find(baseAppointment.HallId).HallName} {_context.Hall.Find(baseAppointment.HallId).HallNumber})", "Warning", oldPrice, baseAppointment.Price);
+           helper.ChangeAppointmentNotification(baseAppointment, $"Appointment information for the movie '{forNot.CinemaDayMovie.Movie.Title}' changed (price: {baseAppointment.Price}, starts at: {baseAppointment.StartsAt}, hall: {_context.Hall.Find(baseAppointment.HallId).HallName} {_context.Hall.Find(baseAppointment.HallId).HallNumber})", "Warning", oldPrice, baseAppointment.Price);
 
 
             return _mapper.Map<Model.Appointments>(baseAppointment);

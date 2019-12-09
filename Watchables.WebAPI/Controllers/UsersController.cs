@@ -72,5 +72,47 @@ namespace Watchables.WebAPI.Controllers
             return _service.RecommendedShows(userId);
         }
 
+        [Authorize(Roles = "Korisnik, Admin")]
+        [HttpGet("Movies/{userId}")]
+        public ActionResult<List<Model.Movie>> Movies(int userId) {
+            return _service.Movies(userId);
+        }
+
+        [Authorize(Roles = "Korisnik, Admin")]
+        [HttpGet("Shows/{userId}")]
+        public ActionResult<List<Model.Show>> Shows(int userId) {
+            return _service.Shows(userId);
+        }
+
+        [Authorize(Roles = "Korisnik, Admin")]
+        [HttpGet("Subscriptions/{userId}")]
+        public ActionResult<List<Model.Subscription>> Subscriptions(int userId) {
+            return _service.Subscriptions(userId);
+        }
+
+        [Authorize(Roles = "Korisnik, Admin")]
+        [HttpGet("Rotations/{userId}")]
+        public ActionResult<List<Model.Rotation>> Rotations(int userId) {
+            return _service.Rotations(userId);
+        }
+
+        [Authorize(Roles = "Korisnik, Admin")]
+        [HttpGet("Notifications/{userId}")]
+        public ActionResult<List<Model.Notification>> Notifications(int userId) {
+            return _service.Notifications(userId);
+        }
+
+        [Authorize(Roles = "Korisnik, Admin")]
+        [HttpPost("Deactivate/{userId}")]
+        public ActionResult<Model.User> DeactivateUser(int userId) {
+            return _service.DeactivateUser(userId);
+        }
+
+        [Authorize(Roles = "Korisnik, Admin")]
+        [HttpPost("Activate/{userId}")]
+        public ActionResult<Model.User> ActivateUser(int userId) {
+            return _service.ActivateUser(userId);
+        }
+
     }
 }

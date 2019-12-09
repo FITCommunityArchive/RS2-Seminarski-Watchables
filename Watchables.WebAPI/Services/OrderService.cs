@@ -42,6 +42,21 @@ namespace Watchables.WebAPI.Services
             }
 
             _context.Orders.Add(order);
+            _context.Appointments.Find(request.Appointment.AppointmentId).SoldSeats += request.NumberOfTickets;
+            _context.SaveChanges();
+
+            var app = _context.Appointments.Include(a => a.CinemaDayMovie).ThenInclude(cdm => cdm.Movie).Single(a => a.AppointmentId == request.Appointment.AppointmentId);
+            Database.Notifications notification = new Notifications() {
+                Created = DateTime.Now,
+                Type = "Order",
+                Content = $"{_context.Users.Find(request.UserId).FirstName} {_context.Users.Find(request.UserId).FirstName} placed an order for '{app.CinemaDayMovie.Movie.Title}' of {order.Total}"
+            };
+            _context.Notifications.Add(notification);
+            Database.UsersNotifications not = new UsersNotifications() {
+                Notification=notification, 
+                UserId=request.UserId
+            };
+            _context.UsersNotifications.Add(not);
             _context.SaveChanges();
 
             return _mapper.Map<Model.Order>(order);
@@ -65,8 +80,9 @@ namespace Watchables.WebAPI.Services
             }
             if (!validOrder) throw new UserException("Cannot find an order with specified id");
 
-            var order = _context.Orders.Include(o => o.User).Single(o=>o.OrderId == id);
-
+            var order = _context.Orders.Include(o => o.User).Include(o=>o.Appointment).Single(o=>o.OrderId == id);
+            var tickets = _context.Tickets.Where(t => t.OrderId == order.OrderId).ToList();
+            order.Appointment.SoldSeats -= tickets.Count;
             helper.DeleteOrderNotification(id, $"{order.User.FirstName} {order.User.LastName} removed an order of {order.Total}", "Removal");
 
             return "Order removed";

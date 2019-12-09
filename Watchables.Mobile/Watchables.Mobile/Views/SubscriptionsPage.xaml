@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Watchables.Mobile.Views.SubscriptionsPage"
+             Title="Monthly subscriptions"
+             >
+
+
+    <ContentPage.BindingContext>
+        <vm:SubscriptionsViewModel></vm:SubscriptionsViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding Subscriptions}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10" Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Frame Padding="10" Margin="0,0,20,0" BorderColor="{StaticResource MainColor}" CornerRadius="5">
+                                    <StackLayout Orientation="Vertical">
+                                    <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="Movies"></Label>
+                                    <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding NumberOfMovies}" HorizontalOptions="Center"></Label>
+                                    </StackLayout>
+                                    </Frame>
+                                    <Frame Padding="10" Margin="0,0,20,0" BorderColor="{StaticResource MainColor}" CornerRadius="5">
+                                        <StackLayout Orientation="Vertical">
+                                            <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="Shows"></Label>
+                                            <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding NumberOfShows}" HorizontalOptions="Center"></Label>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame Padding="10" Margin="0,0,20,0" BorderColor="{StaticResource MainColor}" CornerRadius="5">
+                                        <StackLayout Orientation="Vertical">
+                                            <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="Tickets"></Label>
+                                            <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding NumberOfTickets}" HorizontalOptions="Center"></Label>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame Padding="10" Margin="0,0,20,0" BorderColor="Green" CornerRadius="5">
+                                        <StackLayout Orientation="Vertical">
+                                            <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="Price"></Label>
+                                            <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding Price}" HorizontalOptions="Center"></Label>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Button Clicked="Button_Clicked" CommandParameter="{Binding .}" TextColor="White" Margin="0,5,0,0" Text="Subscribe" BackgroundColor="{StaticResource MainColor}" CornerRadius="5" HorizontalOptions="FillAndExpand"></Button>
+                                </StackLayout>
+
+                            </StackLayout>
+                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

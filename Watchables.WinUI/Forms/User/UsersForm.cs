@@ -34,7 +34,8 @@ namespace Watchables.WinUI.Forms.User
                     Mail = user.Mail,
                     PhoneNumber = user.PhoneNumber,
                     UserId = user.UserId,
-                    Username = user.Account.Username
+                    Username = user.Account.Username,
+                    Active=user.Active
                 };
                 list.Add(Object);
             }

@@ -16,5 +16,16 @@ namespace Watchables.WebAPI.Services
         string DeleteItem(Model.Delete delete);
         List<Model.Movie> RecommendedMovies(int userId);
         List<Model.Show> RecommendedShows(int userId);
+
+        List<Model.Movie> Movies(int id);
+        List<Model.Show> Shows(int id);
+        List<Model.Subscription> Subscriptions(int id);
+        List<Model.Rotation> Rotations(int id);
+        List<Model.Notification> Notifications(int id);
+
+        Model.User DeactivateUser(int id);
+        Model.User ActivateUser(int id);
+
     }
 }
+

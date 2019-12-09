@@ -41,6 +41,12 @@ namespace Watchables.Mobile.Views
                     case (int)MenuItemType.Shows:
                         MenuPages.Add(id, new NavigationPage(new ShowsPage()));
                         break;
+                    case (int)MenuItemType.Subscriptions:
+                        MenuPages.Add(id, new NavigationPage(new SubscriptionsPage()));
+                        break;
+                    case (int)MenuItemType.Rotations:
+                        MenuPages.Add(id, new NavigationPage(new RotationsPage()));
+                        break;
                 }
             }
 

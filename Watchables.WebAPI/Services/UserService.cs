@@ -38,6 +38,15 @@ namespace Watchables.WebAPI.Services
             }
             if (!validUser) throw new UserException("The user could not be found");
 
+            Database.Notifications notification = new Notifications() {
+                Created = DateTime.Now,
+                Type = "Add"
+            };
+            Database.UsersNotifications not = new UsersNotifications() {
+                UserId = buy.UserId
+            };
+            
+
             if (buy.Item == global::BuyItem.Movie) {
 
                 bool valid = false;
@@ -57,6 +66,10 @@ namespace Watchables.WebAPI.Services
                     PurchaseAmount=_context.Movies.Find(buy.ItemId).Price
                 };
                 _context.UsersMovies.Add(newMovie);
+                notification.Content = $"{_context.Users.Find(buy.UserId).FirstName} {_context.Users.Find(buy.UserId).LastName} bought the movie '{_context.Movies.Find(buy.ItemId).Title}'";
+                _context.Notifications.Add(notification);
+                not.Notification = notification;
+                _context.UsersNotifications.Add(not);
                 _context.SaveChanges();
                 return "Movie bought!";
 
@@ -80,6 +93,10 @@ namespace Watchables.WebAPI.Services
                     PurchaseAmount = _context.Shows.Find(buy.ItemId).Price
                 };
                 _context.UsersShows.Add(newShow);
+                notification.Content = $"{_context.Users.Find(buy.UserId).FirstName} {_context.Users.Find(buy.UserId).LastName} bought the show '{_context.Shows.Find(buy.ItemId).Title}'";
+                _context.Notifications.Add(notification);
+                not.Notification = notification;
+                _context.UsersNotifications.Add(not);
                 _context.SaveChanges();
 
                 return "Show bought!";
@@ -102,8 +119,13 @@ namespace Watchables.WebAPI.Services
                     SubscriptionDate=DateTime.Now
                 };
                 _context.UsersSubscriptions.Add(newSubscription);
-                _context.SaveChanges();
+               
 
+                notification.Content = $"{_context.Users.Find(buy.UserId).FirstName} {_context.Users.Find(buy.UserId).LastName} subscribed for {_context.Subscriptions.Find(buy.ItemId).Price}";
+                _context.Notifications.Add(notification);
+                not.Notification = notification;
+                _context.UsersNotifications.Add(not);
+                _context.SaveChanges();
                 return "Subscription bought!";
             }
 
@@ -125,6 +147,11 @@ namespace Watchables.WebAPI.Services
                     RotationClaimed=DateTime.Now
                 };
                 _context.UsersRotations.Add(newRotation);
+                var rotation = _context.Rotations.Include(r => r.Movie).Include(r => r.Show).Single(r => r.RotationId == buy.ItemId);
+                notification.Content = $"{_context.Users.Find(buy.UserId).FirstName} {_context.Users.Find(buy.UserId).LastName} claimed the rotation '{rotation.Movie.Title} / {rotation.Show.Title}'";
+                _context.Notifications.Add(notification);
+                not.Notification = notification;
+                _context.UsersNotifications.Add(not);
                 _context.SaveChanges();
 
                 return "Rotation bought!";
@@ -141,6 +168,14 @@ namespace Watchables.WebAPI.Services
                 }
             }
             if (!validUser) throw new UserException("The user could not be found");
+
+            Database.Notifications notification = new Notifications() {
+                Created = DateTime.Now,
+                Type = "Removal"
+            };
+            Database.UsersNotifications not = new UsersNotifications() {
+                UserId = delete.UserId
+            };
 
             if (delete.Item == global::BuyItem.Movie) {
                 var inBase = _context.UsersMovies.Where(i => i.MovieId == delete.ItemId && i.UserId == i.UserId).Single();
@@ -162,6 +197,10 @@ namespace Watchables.WebAPI.Services
                 var inBase = _context.UsersSubscriptions.Where(i => i.SubscriptionId == delete.ItemId && i.UserId == i.UserId).Single();
                 if (inBase == null) throw new UserException("Subscription could not be found");
                 _context.UsersSubscriptions.Remove(inBase);
+                notification.Content = $"{_context.Users.Find(delete.UserId).FirstName} {_context.Users.Find(delete.UserId).LastName} canceled a subscription of {_context.Subscriptions.Find(delete.ItemId).Price}";
+                _context.Notifications.Add(notification);
+                not.Notification = notification;
+                _context.UsersNotifications.Add(not);
                 _context.SaveChanges();
                 return "Subscription deleted";
             }
@@ -199,6 +238,7 @@ namespace Watchables.WebAPI.Services
 
             user.AccountId = accountId;
             user.Locked = false;
+            user.Active = true;
 
             _context.Users.Add(user);
             _context.SaveChanges();
@@ -292,6 +332,125 @@ namespace Watchables.WebAPI.Services
             }
 
             return recommendedShows;
+        }
+
+        public List<Movie> Movies(int id) {
+
+            bool validUser = false;
+            foreach(var user in _context.Users.ToList()) {
+                if (user.UserId == id) {
+                    validUser = true;
+                    break;
+                }
+            }
+            if (!validUser) throw new UserException("The user with that id could not be found!");
+
+            var list = _context.UsersMovies.Include(l => l.Movie).Where(l => l.UserId == id).ToList();
+            var items = new List<Model.Movie>();
+            foreach (var item in list) {
+                items.Add(_mapper.Map<Model.Movie>(item.Movie));
+            }
+            return items;
+        }
+
+        public List<Show> Shows(int id) {
+            bool validUser = false;
+            foreach (var user in _context.Users.ToList()) {
+                if (user.UserId == id) {
+                    validUser = true;
+                    break;
+                }
+            }
+            if (!validUser) throw new UserException("The user with that id could not be found!");
+
+            var list = _context.UsersShows.Include(l => l.Show).Where(l => l.UserId == id).ToList();
+            var items = new List<Model.Show>();
+            foreach (var item in list) {
+                items.Add(_mapper.Map<Model.Show>(item.Show));
+            }
+            return items;
+        }
+
+        public List<Subscription> Subscriptions(int id) {
+            bool validUser = false;
+            foreach (var user in _context.Users.ToList()) {
+                if (user.UserId == id) {
+                    validUser = true;
+                    break;
+                }
+            }
+            if (!validUser) throw new UserException("The user with that id could not be found!");
+
+            var list = _context.UsersSubscriptions.Include(l => l.Subscription).Where(l => l.UserId == id).ToList();
+            var items = new List<Model.Subscription>();
+            foreach (var item in list) {
+                items.Add(_mapper.Map<Model.Subscription>(item.Subscription));
+            }
+            return items;
+        }
+
+        public List<Rotation> Rotations(int id) {
+            bool validUser = false;
+            foreach (var user in _context.Users.ToList()) {
+                if (user.UserId == id) {
+                    validUser = true;
+                    break;
+                }
+            }
+            if (!validUser) throw new UserException("The user with that id could not be found!");
+
+            var list = _context.UsersRotations.Include(l => l.Rotation).Where(l => l.UserId == id).ToList();
+            var items = new List<Model.Rotation>();
+            foreach (var item in list) {
+                items.Add(_mapper.Map<Model.Rotation>(item.Rotation));
+            }
+            return items;
+        }
+
+        public List<Notification> Notifications(int id) {
+            bool validUser = false;
+            foreach (var user in _context.Users.ToList()) {
+                if (user.UserId == id) {
+                    validUser = true;
+                    break;
+                }
+            }
+            if (!validUser) throw new UserException("The user with that id could not be found!");
+
+            var list = _context.UsersNotifications.Include(l => l.Notification).Where(l => l.UserId == id).ToList();
+            var items = new List<Model.Notification>();
+            foreach (var item in list) {
+                items.Add(_mapper.Map<Model.Notification>(item.Notification));
+            }
+            return items;
+        }
+
+        public Model.User DeactivateUser(int id) {
+            bool validUser = false;
+            foreach (var user in _context.Users.ToList()) {
+                if (user.UserId == id) {
+                    validUser = true;
+                    break;
+                }
+            }
+            if (!validUser) throw new UserException("The user with that id could not be found!");
+            _context.Users.Find(id).Active = false;
+            _context.SaveChanges();
+            return _mapper.Map<Model.User>(_context.Users.Find(id));
+        }
+
+        public Model.User ActivateUser(int id) {
+            bool validUser = false;
+            foreach (var user in _context.Users.ToList()) {
+                if (user.UserId == id) {
+                    validUser = true;
+                    break;
+                }
+            }
+            if (!validUser) throw new UserException("The user with that id could not be found!");
+            _context.Users.Find(id).Active = true;
+            _context.SaveChanges();
+            return _mapper.Map<Model.User>(_context.Users.Find(id));
         }
     }
 }
