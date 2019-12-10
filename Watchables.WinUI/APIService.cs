@@ -15,13 +15,12 @@ namespace Watchables.WinUI
         public static string Username { get; set; }
         public static string Password { get; set; }
         private readonly string _controller;
-        private readonly CustomMessageBox _customMessageBox = new CustomMessageBox();
         public APIService(string route) {
             _controller = route;
         }
 
         public async Task<T> Get<T>(object search) {
-
+            var _customMessageBox = new CustomMessageBox();
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}";
 
             if (search != null) {
@@ -45,7 +44,7 @@ namespace Watchables.WinUI
         }
 
         public async Task<T> GetById<T>(object id) {
-
+            var _customMessageBox = new CustomMessageBox();
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{id}";
             try {
                 var result = await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
@@ -63,7 +62,7 @@ namespace Watchables.WinUI
         }
 
         public async Task<string> Delete<T>(object id) {
-
+            var _customMessageBox = new CustomMessageBox();
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{id}";
             try {
                 var result = await url.WithBasicAuth(Username, Password).DeleteAsync().ReceiveString();
@@ -81,7 +80,7 @@ namespace Watchables.WinUI
         }
 
         public async Task<T> Insert<T>(object request) {
-
+            var _customMessageBox = new CustomMessageBox();
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}";
             try {
                 var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(request).ReceiveJson<T>();
@@ -99,7 +98,7 @@ namespace Watchables.WinUI
         }
 
         public async Task<T> Update<T>(object id, object request) {
-
+            var _customMessageBox = new CustomMessageBox();
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{id}";
             try {
                 var result = await url.WithBasicAuth(Username, Password).PutJsonAsync(request).ReceiveJson<T>();
@@ -118,14 +117,14 @@ namespace Watchables.WinUI
 
 
         public async Task<T> GetItems<T>(object id, string items) {
-
+            var _customMessageBox = new CustomMessageBox();
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{items}/{id}";
             var result = await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
             return result;
         }
 
         public async Task<T> UpdateItem<T>(object id, string action, object item) {
-
+            var _customMessageBox = new CustomMessageBox();
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}/{id}";
             try {
                 var result = await url.WithBasicAuth(Username, Password).PutJsonAsync(item).ReceiveJson<T>();
@@ -143,8 +142,8 @@ namespace Watchables.WinUI
         }
 
         public async Task<T> InsertItem<T>(string action, object item) {
-         
-                var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}";
+            var _customMessageBox = new CustomMessageBox();
+            var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}";
             try {
                 var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(item).ReceiveJson<T>();
                 return result;
@@ -161,7 +160,7 @@ namespace Watchables.WinUI
         }
 
         public async Task<T> CustomGet<T>(string action, object id=null) {
-
+            var _customMessageBox = new CustomMessageBox();
             var url="";
             if (id == null) {
                 url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}";
@@ -185,7 +184,7 @@ namespace Watchables.WinUI
         }
 
         public async Task<string> Lock<T>(bool flag) {
-
+            var _customMessageBox = new CustomMessageBox();
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/Lock/{flag}";
             try {
                 var result = await url.WithBasicAuth(Username, Password).GetStringAsync();
@@ -203,7 +202,7 @@ namespace Watchables.WinUI
         }
 
         public async Task<T> Analytics<T>(string item) {
-
+            var _customMessageBox = new CustomMessageBox();
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{item}";
 
             try {
@@ -223,7 +222,7 @@ namespace Watchables.WinUI
         }
 
         public async Task<T> Activate<T>(object userId, string action) {
-
+            var _customMessageBox = new CustomMessageBox();
             var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}/{userId}";
             try {
                 var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(null).ReceiveJson<T>();

@@ -99,12 +99,13 @@ namespace Watchables.WinUI.Forms.Admin
                 messageBox.Show("Passwords don't match!", "error");
                 return;
             }
-            
+            var usersApi = new APIService("users");
+            var allUsers = await usersApi.Get<List<Model.User>>(null);
             var allAdmins = await _apiService.Get<List<Model.Admin>>(null);
           
             if (_adminId.HasValue) {
                 var admin = await _apiService.GetById<Model.Admin>(_adminId);
-                allAdmins.RemoveAll(a => a.Account.Username == admin.Account.Username);
+                allAdmins.RemoveAll(a => a.Account.Username == admin.Account.Username);               
             }
 
             foreach (var admin in allAdmins) {
@@ -113,6 +114,15 @@ namespace Watchables.WinUI.Forms.Admin
                     return;
                 }
             }
+
+            
+            foreach(var user in allUsers) {
+                if(user.Account.Username == Username.Text) {
+                    messageBox.Show("Username already taken!", "error");
+                    return;
+                }
+            }
+
             var thisAdmin= new Model.Admin();
             if (_adminId.HasValue) {
                 thisAdmin = await _apiService.GetById<Model.Admin>(_adminId);
