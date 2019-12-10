@@ -44,9 +44,10 @@ namespace Watchables.WebAPI.Services
             if (!valid) throw new UserException("The user could not be found!");
 
 
-            var remove = _context.UsersNotifications.Where(n => n.UserId == userId && n.NotificationId == notificationId).Single();
+            var remove = _context.UsersNotifications.Where(n => n.UserId == userId && n.NotificationId == notificationId).ToList();
+          
 
-            _context.UsersNotifications.Remove(remove);
+            _context.UsersNotifications.Remove(remove[0]);
             _context.SaveChanges();
             return "Notification removed!";
         }

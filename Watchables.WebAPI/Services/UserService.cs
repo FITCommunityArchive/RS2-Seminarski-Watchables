@@ -59,7 +59,7 @@ namespace Watchables.WebAPI.Services
                 if (!valid) throw new UserException("The movie could not be found");
 
 
-                Database.UsersMovies newMovie = new UsersMovies() {
+                Database.UsersMovies newMovie = new Database.UsersMovies {
                     MovieId = buy.ItemId,
                     UserId = buy.UserId,
                     PurchaseDate=DateTime.Now,
@@ -86,7 +86,7 @@ namespace Watchables.WebAPI.Services
                 if (!valid) throw new UserException("The show could not be found");
 
 
-                Database.UsersShows newShow = new UsersShows() {
+                Database.UsersShows newShow = new Database.UsersShows() {
                     ShowId = buy.ItemId,
                     UserId = buy.UserId,
                     PurchaseDate = DateTime.Now,
@@ -113,7 +113,7 @@ namespace Watchables.WebAPI.Services
                 if (!valid) throw new UserException("The subscription could not be found");
 
 
-                Database.UsersSubscriptions newSubscription = new UsersSubscriptions() {
+                Database.UsersSubscriptions newSubscription = new Database.UsersSubscriptions() {
                     SubscriptionId = buy.ItemId,
                     UserId = buy.UserId,
                     SubscriptionDate=DateTime.Now

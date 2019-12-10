@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace Watchables.Mobile.ViewModels
 {
@@ -22,6 +23,7 @@ namespace Watchables.Mobile.ViewModels
 
         public async Task GetNotifications() {
             var notifications = await _usersApi.GetItems<List<Model.Notification>>(APIService.User.UserId, "Notifications");
+            notifications = notifications.OrderByDescending(n => n.Created).ToList();
             Notifications.Clear();
             foreach(var notification in notifications) {
                 Notifications.Add(notification);

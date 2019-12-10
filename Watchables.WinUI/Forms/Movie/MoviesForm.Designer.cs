@@ -120,7 +120,7 @@
             this.dgvMovies.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvMovies.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvMovies.RowTemplate.Height = 45;
-            this.dgvMovies.Size = new System.Drawing.Size(1669, 618);
+            this.dgvMovies.Size = new System.Drawing.Size(1669, 710);
             this.dgvMovies.TabIndex = 15;
             this.dgvMovies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovies_CellContentClick);
             // 
@@ -229,7 +229,7 @@
             this.AddMovieBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddMovieBtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddMovieBtn.ForeColor = System.Drawing.Color.White;
-            this.AddMovieBtn.Location = new System.Drawing.Point(0, 792);
+            this.AddMovieBtn.Location = new System.Drawing.Point(0, 877);
             this.AddMovieBtn.Name = "AddMovieBtn";
             this.AddMovieBtn.Size = new System.Drawing.Size(1775, 43);
             this.AddMovieBtn.TabIndex = 16;
@@ -379,7 +379,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1775, 835);
+            this.ClientSize = new System.Drawing.Size(1775, 920);
             this.Controls.Add(this.GenreBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.StandaloneCB);

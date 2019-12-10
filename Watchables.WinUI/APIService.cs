@@ -201,5 +201,44 @@ namespace Watchables.WinUI
                 throw;
             }
         }
+
+        public async Task<T> Analytics<T>(string item) {
+
+            var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{item}";
+
+            try {
+                var result = await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    _customMessageBox.Show("Access denied!", "error");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    _customMessageBox.Show("Access forbidden", "error");
+                }
+                throw;
+            }
+
+        }
+
+        public async Task<T> Activate<T>(object userId, string action) {
+
+            var url = $"{Properties.Settings.Default.APIUrl}/{_controller}/{action}/{userId}";
+            try {
+                var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(null).ReceiveJson<T>();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    _customMessageBox.Show("Access denied!", "error");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    _customMessageBox.Show("Access denied!", "error");
+                }
+                throw;
+            }
+        }
+
     }
 }

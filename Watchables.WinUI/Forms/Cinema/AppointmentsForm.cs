@@ -95,12 +95,11 @@ namespace Watchables.WinUI.Forms.Cinema
         private async void dgvAppointments_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0) {
                 var appointmentId = dgvAppointments.Rows[e.RowIndex].Cells["AppointmentId"].Value;
-                var movieId = dgvAppointments.Rows[e.RowIndex].Cells["HallId"].Value;
                 var action = dgvAppointments.Columns[e.ColumnIndex].Name;
                 CustomMessageBox messageBox = new CustomMessageBox();
                 var appApi = new APIService("appointments");
                 var movieApi = new APIService("movies");
-                var movie = await movieApi.GetById<Model.Movie>(movieId);
+                var movie = await movieApi.GetById<Model.Movie>(_movieId);
                 if (action == "Edit") {
                     var form = new AddEditAppointmentForm(this, _scheduleForm, _schedule, _menuForm, _airingDayId, _date, _day, _cinemaDayMovieId, _movieId, _cinemaDayMovieForm, int.Parse(appointmentId.ToString()));
                     _helper.CloseForm(this, 15);

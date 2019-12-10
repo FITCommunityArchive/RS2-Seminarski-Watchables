@@ -135,7 +135,7 @@ namespace Watchables.Mobile.ViewModels
         public async void PlaceOrder() {
 
             var app = await _appApi.GetById<Model.Appointments>(SelectedItem.AppId);
-
+            app.SoldSeats = 0; //for annotation
             Model.Requests.InsertOrderRequest request = new Model.Requests.InsertOrderRequest() {
                 Appointment = app,
                 NumberOfTickets = _selectedNumberOfTickets,

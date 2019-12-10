@@ -11,7 +11,6 @@ using Watchables.WebAPI.Services;
 
 namespace Watchables.WebAPI.Controllers
 {
-    
     [Route("api/[controller]")]
     [ApiController]
     public class CinemasController : ControllerBase

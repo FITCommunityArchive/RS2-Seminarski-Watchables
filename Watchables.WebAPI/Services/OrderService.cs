@@ -49,7 +49,7 @@ namespace Watchables.WebAPI.Services
             Database.Notifications notification = new Notifications() {
                 Created = DateTime.Now,
                 Type = "Order",
-                Content = $"{_context.Users.Find(request.UserId).FirstName} {_context.Users.Find(request.UserId).FirstName} placed an order for '{app.CinemaDayMovie.Movie.Title}' of {order.Total}"
+                Content = $"{_context.Users.Find(request.UserId).FirstName} {_context.Users.Find(request.UserId).LastName} placed an order for '{app.CinemaDayMovie.Movie.Title}' of {order.Total}"
             };
             _context.Notifications.Add(notification);
             Database.UsersNotifications not = new UsersNotifications() {
@@ -63,7 +63,7 @@ namespace Watchables.WebAPI.Services
         }
 
         public override List<Order> Get(OrderSerachRequest search) {
-            var query = _context.Orders.AsQueryable();
+            var query = _context.Orders.Include(o=>o.Tickets).AsQueryable();
             if (search.Total > 0) query = query.Where(o => o.Total >= search.Total);
             return _mapper.Map<List<Model.Order>>(query.ToList());
         }
@@ -86,6 +86,12 @@ namespace Watchables.WebAPI.Services
             helper.DeleteOrderNotification(id, $"{order.User.FirstName} {order.User.LastName} removed an order of {order.Total}", "Removal");
 
             return "Order removed";
+        }
+
+        public override Order GetById(int id) {
+            var entity = _context.Orders.Include(o=>o.Tickets).Single(o=>o.OrderId == id);
+
+            return _mapper.Map<Model.Order>(entity);
         }
 
     }

@@ -31,15 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsersForm));
             this.dgvUsers = new System.Windows.Forms.DataGridView();
-            this.UserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Active = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.FNSrch = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -49,6 +40,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.clearSearch = new System.Windows.Forms.Button();
             this.searchBtn = new System.Windows.Forms.Button();
+            this.UserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Active = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deactivate = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Activate = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,12 +82,13 @@
             this.UserId,
             this.FirstName,
             this.LastName,
-            this.Username,
             this.Mail,
             this.Address,
             this.BirthDate,
             this.PhoneNumber,
-            this.Active});
+            this.Active,
+            this.Deactivate,
+            this.Activate});
             this.dgvUsers.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
@@ -115,78 +117,7 @@
             this.dgvUsers.RowTemplate.Height = 45;
             this.dgvUsers.Size = new System.Drawing.Size(1669, 618);
             this.dgvUsers.TabIndex = 15;
-            // 
-            // UserId
-            // 
-            this.UserId.DataPropertyName = "UserId";
-            this.UserId.HeaderText = "UserId";
-            this.UserId.MinimumWidth = 6;
-            this.UserId.Name = "UserId";
-            this.UserId.Visible = false;
-            // 
-            // FirstName
-            // 
-            this.FirstName.DataPropertyName = "FirstName";
-            this.FirstName.FillWeight = 84.93908F;
-            this.FirstName.HeaderText = "First name";
-            this.FirstName.MinimumWidth = 6;
-            this.FirstName.Name = "FirstName";
-            // 
-            // LastName
-            // 
-            this.LastName.DataPropertyName = "LastName";
-            this.LastName.FillWeight = 84.93908F;
-            this.LastName.HeaderText = "Last name";
-            this.LastName.MinimumWidth = 6;
-            this.LastName.Name = "LastName";
-            // 
-            // Username
-            // 
-            this.Username.DataPropertyName = "Username";
-            this.Username.FillWeight = 84.93908F;
-            this.Username.HeaderText = "Username";
-            this.Username.MinimumWidth = 6;
-            this.Username.Name = "Username";
-            // 
-            // Mail
-            // 
-            this.Mail.DataPropertyName = "Mail";
-            this.Mail.FillWeight = 153.3853F;
-            this.Mail.HeaderText = "Mail";
-            this.Mail.MinimumWidth = 6;
-            this.Mail.Name = "Mail";
-            // 
-            // Address
-            // 
-            this.Address.DataPropertyName = "Address";
-            this.Address.FillWeight = 150.8739F;
-            this.Address.HeaderText = "Address";
-            this.Address.MinimumWidth = 6;
-            this.Address.Name = "Address";
-            // 
-            // BirthDate
-            // 
-            this.BirthDate.DataPropertyName = "BirthDate";
-            this.BirthDate.FillWeight = 84.93908F;
-            this.BirthDate.HeaderText = "Birth date";
-            this.BirthDate.MinimumWidth = 6;
-            this.BirthDate.Name = "BirthDate";
-            // 
-            // PhoneNumber
-            // 
-            this.PhoneNumber.DataPropertyName = "PhoneNumber";
-            this.PhoneNumber.FillWeight = 84.93908F;
-            this.PhoneNumber.HeaderText = "Number";
-            this.PhoneNumber.MinimumWidth = 6;
-            this.PhoneNumber.Name = "PhoneNumber";
-            // 
-            // Active
-            // 
-            this.Active.DataPropertyName = "Active";
-            this.Active.FillWeight = 71.04537F;
-            this.Active.HeaderText = "Active";
-            this.Active.MinimumWidth = 6;
-            this.Active.Name = "Active";
+            this.dgvUsers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellContentClick);
             // 
             // label1
             // 
@@ -292,6 +223,86 @@
             this.searchBtn.UseVisualStyleBackColor = false;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
+            // UserId
+            // 
+            this.UserId.DataPropertyName = "UserId";
+            this.UserId.HeaderText = "UserId";
+            this.UserId.MinimumWidth = 6;
+            this.UserId.Name = "UserId";
+            this.UserId.Visible = false;
+            // 
+            // FirstName
+            // 
+            this.FirstName.DataPropertyName = "FirstName";
+            this.FirstName.FillWeight = 98.23579F;
+            this.FirstName.HeaderText = "First name";
+            this.FirstName.MinimumWidth = 6;
+            this.FirstName.Name = "FirstName";
+            // 
+            // LastName
+            // 
+            this.LastName.DataPropertyName = "LastName";
+            this.LastName.FillWeight = 98.23579F;
+            this.LastName.HeaderText = "Last name";
+            this.LastName.MinimumWidth = 6;
+            this.LastName.Name = "LastName";
+            // 
+            // Mail
+            // 
+            this.Mail.DataPropertyName = "Mail";
+            this.Mail.FillWeight = 177.3969F;
+            this.Mail.HeaderText = "Mail";
+            this.Mail.MinimumWidth = 6;
+            this.Mail.Name = "Mail";
+            // 
+            // Address
+            // 
+            this.Address.DataPropertyName = "Address";
+            this.Address.FillWeight = 174.4923F;
+            this.Address.HeaderText = "Address";
+            this.Address.MinimumWidth = 6;
+            this.Address.Name = "Address";
+            // 
+            // BirthDate
+            // 
+            this.BirthDate.DataPropertyName = "BirthDate";
+            this.BirthDate.FillWeight = 98.23579F;
+            this.BirthDate.HeaderText = "Birth date";
+            this.BirthDate.MinimumWidth = 6;
+            this.BirthDate.Name = "BirthDate";
+            // 
+            // PhoneNumber
+            // 
+            this.PhoneNumber.DataPropertyName = "PhoneNumber";
+            this.PhoneNumber.FillWeight = 98.23579F;
+            this.PhoneNumber.HeaderText = "Number";
+            this.PhoneNumber.MinimumWidth = 6;
+            this.PhoneNumber.Name = "PhoneNumber";
+            // 
+            // Active
+            // 
+            this.Active.DataPropertyName = "Active";
+            this.Active.FillWeight = 82.16711F;
+            this.Active.HeaderText = "Active";
+            this.Active.MinimumWidth = 6;
+            this.Active.Name = "Active";
+            // 
+            // Deactivate
+            // 
+            this.Deactivate.FillWeight = 35.94967F;
+            this.Deactivate.HeaderText = "";
+            this.Deactivate.Image = ((System.Drawing.Image)(resources.GetObject("Deactivate.Image")));
+            this.Deactivate.MinimumWidth = 6;
+            this.Deactivate.Name = "Deactivate";
+            // 
+            // Activate
+            // 
+            this.Activate.FillWeight = 38.81503F;
+            this.Activate.HeaderText = "";
+            this.Activate.Image = ((System.Drawing.Image)(resources.GetObject("Activate.Image")));
+            this.Activate.MinimumWidth = 6;
+            this.Activate.Name = "Activate";
+            // 
             // UsersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -332,11 +343,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn UserId;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Username;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mail;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn PhoneNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn Active;
+        private System.Windows.Forms.DataGridViewImageColumn Deactivate;
+        private System.Windows.Forms.DataGridViewImageColumn Activate;
     }
 }

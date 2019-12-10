@@ -42,7 +42,7 @@
             // 
             this.panel1.Controls.Add(this.reloadBtn);
             this.panel1.Controls.Add(this.closeBtn);
-            this.panel1.Location = new System.Drawing.Point(384, -1);
+            this.panel1.Location = new System.Drawing.Point(489, -1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 39);
             this.panel1.TabIndex = 10;
@@ -88,9 +88,9 @@
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveBtn.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.White;
-            this.saveBtn.Location = new System.Drawing.Point(0, 311);
+            this.saveBtn.Location = new System.Drawing.Point(0, 323);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(596, 39);
+            this.saveBtn.Size = new System.Drawing.Size(689, 39);
             this.saveBtn.TabIndex = 11;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = false;
@@ -100,7 +100,7 @@
             // 
             this.Title.AutoSize = true;
             this.Title.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(-6, -1);
+            this.Title.Location = new System.Drawing.Point(3, 4);
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(99, 34);
             this.Title.TabIndex = 12;
@@ -121,14 +121,14 @@
             this.ProductName.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProductName.Location = new System.Drawing.Point(33, 149);
             this.ProductName.Name = "ProductName";
-            this.ProductName.Size = new System.Drawing.Size(291, 36);
+            this.ProductName.Size = new System.Drawing.Size(395, 36);
             this.ProductName.TabIndex = 13;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(373, 116);
+            this.label2.Location = new System.Drawing.Point(470, 116);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 30);
             this.label2.TabIndex = 16;
@@ -137,7 +137,7 @@
             // ProductPrice
             // 
             this.ProductPrice.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProductPrice.Location = new System.Drawing.Point(378, 149);
+            this.ProductPrice.Location = new System.Drawing.Point(475, 149);
             this.ProductPrice.Name = "ProductPrice";
             this.ProductPrice.Size = new System.Drawing.Size(171, 36);
             this.ProductPrice.TabIndex = 15;
@@ -147,7 +147,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Snow;
-            this.ClientSize = new System.Drawing.Size(596, 350);
+            this.ClientSize = new System.Drawing.Size(689, 362);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ProductPrice);
             this.Controls.Add(this.label1);

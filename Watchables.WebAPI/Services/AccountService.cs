@@ -73,9 +73,13 @@ namespace Watchables.WebAPI.Services
         public Model.Account Update(int accountId, InsertAccountRequest request) {
             var account = _context.Accounts.Find(accountId);
 
-            if (request.Username != null) {
-                account.Username = request.Username;
+            foreach(var acc in _context.Accounts.ToList()) {
+                if(acc.Username == request.Username && acc.Username!=account.Username) throw new UserException("The username is taken");
             }
+
+           
+            account.Username = request.Username;
+            
             if (request.Password != null) {
                 if (request.Password != request.ConfirmPassword) {
                     throw new UserException("Passwords are not matching");

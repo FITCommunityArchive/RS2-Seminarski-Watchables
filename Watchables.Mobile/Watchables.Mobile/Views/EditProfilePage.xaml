@@ -5,7 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
              mc:Ignorable="d"
-             x:Class="Watchables.Mobile.Views.EditProfilePage">
+             x:Class="Watchables.Mobile.Views.EditProfilePage"
+             Title="Profile"
+             >
 
     <ContentPage.BindingContext>
         <vm:EditProfileViewModel></vm:EditProfileViewModel>
@@ -64,7 +66,7 @@
                                 <RowDefinition Height="AUTO"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Label Margin="0,20,0,0" Grid.Row="0" FontFamily="Century Gothic" Text="Username"></Label>
-                            <Entry IsReadOnly="True" Grid.Row="1"  Text="{Binding Username}"></Entry>
+                            <Entry Grid.Row="1"  Text="{Binding Username}"></Entry>
                         </Grid>
 
                         <Grid>

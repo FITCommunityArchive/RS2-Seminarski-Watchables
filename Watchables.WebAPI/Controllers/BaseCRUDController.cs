@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Watchables.WebAPI.Services;
 
 namespace Watchables.WebAPI.Controllers
 {
-
+    [Authorize]
     public class BaseCRUDController<T, TSearch, TInsert, TUpdate> : BaseController<T, TSearch>
     {
         private readonly ICRUDService<T, TSearch, TInsert, TUpdate> _service = null;

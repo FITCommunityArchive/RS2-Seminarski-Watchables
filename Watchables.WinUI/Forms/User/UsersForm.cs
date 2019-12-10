@@ -91,5 +91,59 @@ namespace Watchables.WinUI.Forms.User
             LNSrch.Text = "";
             UNSrch.Text = "";
         }
+
+        private async void dgvUsers_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.RowIndex >= 0) {
+                var userId = dgvUsers.Rows[e.RowIndex].Cells["UserId"].Value;
+                var action = dgvUsers.Columns[e.ColumnIndex].Name;
+                var userApi = new APIService("users");
+                var user = await userApi.GetById<Model.User>(userId);
+                CustomMessageBox messageBox = new CustomMessageBox();
+             
+                if (action == "Deactivate") {
+                    if (!user.Active) {
+                        messageBox.Show("User already deactivated", "error");
+                        return;
+                    }
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to deactivate user {user.FirstName} {user.LastName}?", "Deactivate user", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                        await userApi.Activate<Model.User>(userId, "Deactivate");
+                        var menuForm = this.MdiParent;
+                        foreach (Form frm in menuForm.MdiChildren) {
+                            frm.Close();
+                        }
+
+                        UsersForm form = new UsersForm  {
+                            MdiParent = menuForm,
+                            Dock = DockStyle.Fill
+                        };
+                        form.Show();
+                        messageBox.Show("User deactivated successfully", "success");
+                    }
+                }
+
+                if (action == "Activate") {
+                    if (user.Active) {
+                        messageBox.Show("User is active", "error");
+                        return;
+                    }
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to activate user {user.FirstName} {user.LastName}?", "Activate user", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                        await userApi.Activate<Model.User>(userId, "Activate");
+                        var menuForm = this.MdiParent;
+                        foreach (Form frm in menuForm.MdiChildren) {
+                            frm.Close();
+                        }
+
+                        UsersForm form = new UsersForm {
+                            MdiParent = menuForm,
+                            Dock = DockStyle.Fill
+                        };
+                        form.Show();
+                        messageBox.Show("User activated successfully", "success");
+                    }
+                }
+            }
+        }
     }
 }

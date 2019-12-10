@@ -98,5 +98,7 @@ namespace Watchables.WinUI.Forms.Cinema
             _helper.CloseForm(this, 15);
             _helper.ShowForm(form, 15);
         }
+
+   
     }
 }

@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:Watchables.Mobile"
+             xmlns:converters1="clr-namespace:Watchables.Mobile.Converters"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
              mc:Ignorable="d"
              x:Class="Watchables.Mobile.Views.ItemsPage"
              Title="Dashboard"
@@ -13,10 +16,24 @@
         <ToolbarItem IconImageSource="not.png" Text="News" Clicked="ToolbarItem_Clicked" />
         <ToolbarItem IconImageSource="user.png" Text="Profile" Clicked="ToolbarItem_Clicked_1" />       
     </ContentPage.ToolbarItems>
-    
 
+    <ContentPage.Resources>
+        <converters:LabelMaxLengthConverter x:Key="LabelMaxLengthConverter" />
+        <converters1:PutInBracketsConverter x:Key="PutInBracketsConverter" />
+        <converters1:AddCommaConverter x:Key="AddCommaConverter" />
+        <converters1:NegateBooleanConverter x:Key="NegateBooleanConverter" />
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:ItemsViewModel></vm:ItemsViewModel>
+    </ContentPage.BindingContext>
+
+
+
+
+    <ScrollView>
     <StackLayout>
-        <StackLayout Margin="0,10,0,0" IsVisible="{Binding HasNotifications}">
+        <StackLayout Margin="0,10,0,0" IsVisible="{Binding HasNotifications}" >
             <Frame Padding="5" HorizontalOptions="Center" BackgroundColor="#f7f7f7" BorderColor="{StaticResource MainColor}">
                 <Label Style="{StaticResource SpecialFont}" Text="you have notifications">
                     <Label.GestureRecognizers>
@@ -26,9 +43,287 @@
             </Frame>
         </StackLayout>
 
-        
-        <Label Text="TO BE CONTINUED"></Label>
+            <StackLayout Orientation="Vertical" WidthRequest="10">
+                <StackLayout Orientation="Horizontal">
+                <Label  Margin="10,10,10,0" FontAttributes="Italic" FontSize="25" Style="{StaticResource SpecialFont}" Text="Upcoming orders"></Label>
+                <ImageButton Margin="0,15,0,0" Source="more.png" Clicked="ImageButton_Clicked"></ImageButton>
+                </StackLayout>
+                <ListView ItemsSource="{Binding Orders}"  HeightRequest="150">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                <StackLayout Padding="10" Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label TextColor="{StaticResource MainColor}" FontSize="Subtitle" Style="{StaticResource SpecialFont}" Text="{Binding Movie}"></Label>
+                                        <Label TextColor="{StaticResource MainColor}" FontSize="Subtitle" Style="{StaticResource SpecialFont}" Text="{Binding Cinema, Converter={StaticResource PutInBracketsConverter}}"></Label>
 
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontAttributes="Bold" FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Day, Converter={StaticResource AddCommaConverter}}"></Label>
+                                        <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Date}"></Label>
+                                        <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="at"></Label>
+                                        <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Time}"></Label>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                    <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Seats}"></Label>
+                                    <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="seats"></Label>
+                                    <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="/"></Label>
+                                    <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Total}"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                    <StackLayout Margin="0,0,10,0" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                                    <Button CommandParameter="{Binding .}" Clicked="Button_Clicked" CornerRadius="5" FontFamily="Century Gothic" TextColor="White" BackgroundColor="{StaticResource MainColor}" HeightRequest="50" WidthRequest="100" HorizontalOptions="EndAndExpand" Text="Cancel"></Button>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+                <Label  Margin="10,0,10,0" FontAttributes="Italic"  FontSize="25" Style="{StaticResource SpecialFont}" Text="Your movies"></Label>
+                <ListView ItemsSource="{Binding Movies}" HeightRequest="400" ItemTapped="ListView_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="10" Orientation="Horizontal" Margin="0,0,0,0">
+                                    <StackLayout>
+                                        <Frame Padding="0" CornerRadius="10">
+                                            <Image WidthRequest="180" HeightRequest="220" Aspect="AspectFill" Source="{Binding ImageLink}"></Image>
+                                        </Frame>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Vertical" Margin="5,0,0,0">
+                                        <Label Text="{Binding Title}" 
+                                d:Text="{Binding .}"
+                                LineBreakMode="WordWrap" 
+                                Style="{StaticResource CinemaTitle}" />
+
+                                        <Label Text="{Binding Description, Converter={StaticResource LabelMaxLengthConverter}}" 
+                                d:Text="Item descripton"
+                                Style="{StaticResource SpecialFont}"
+                                LineBreakMode="WordWrap" 
+                                FontSize="15"/>
+
+                                        <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+
+                                        <Label Text="{Binding Cast, Converter={StaticResource LabelMaxLengthConverter}}" 
+                                d:Text="Item descripton"
+                                Style="{StaticResource SpecialFont}"
+                                LineBreakMode="WordWrap" 
+                                FontSize="15"/>
+
+                                        <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout Orientation="Vertical">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Rating: "></Label>
+                                                    <Label Style="{StaticResource SpecialFont}" Text="{Binding Rating}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                                </StackLayout>
+
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Duration: "></Label>
+                                                    <Label Style="{StaticResource SpecialFont}" Text="{Binding Duration}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                                </StackLayout>
+
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Genre: "></Label>
+                                                    <Label Style="{StaticResource SpecialFont}" Text="{Binding Genre}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <StackLayout Margin="20,0,0,0" Orientation="Vertical">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Year: "></Label>
+                                                    <Label Style="{StaticResource SpecialFont}" Text="{Binding Year}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Price: "></Label>
+                                                    <Label Style="{StaticResource SpecialFont}" Text="{Binding Price}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Standalone"></Label>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </StackLayout>
+
+
+
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+                <Label  Margin="10,0,10,0" FontAttributes="Italic" FontSize="25" Style="{StaticResource SpecialFont}" Text="Your shows"></Label>
+                <ListView ItemsSource="{Binding Shows}" ItemTapped="ListView_ItemTapped_1" HeightRequest="400">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="10" Orientation="Horizontal" Margin="0,0,0,0">
+                                    <StackLayout>
+                                        <Frame Padding="0" CornerRadius="10">
+                                            <Image WidthRequest="180" HeightRequest="220" Aspect="AspectFill" Source="{Binding ImageLink}"></Image>
+                                        </Frame>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Vertical" Margin="5,0,0,0">
+                                        <Label Text="{Binding Title}" 
+                                d:Text="{Binding .}"
+                                LineBreakMode="WordWrap" 
+                                Style="{StaticResource CinemaTitle}" />
+
+                                        <Label Text="{Binding Description, Converter={StaticResource LabelMaxLengthConverter}}" 
+                                d:Text="Item descripton"
+                                Style="{StaticResource SpecialFont}"
+                                LineBreakMode="WordWrap" 
+                                FontSize="15"/>
+
+                                        <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+
+                                        <Label Text="{Binding Cast, Converter={StaticResource LabelMaxLengthConverter}}" 
+                                d:Text="Item descripton"
+                                Style="{StaticResource SpecialFont}"
+                                LineBreakMode="WordWrap" 
+                                FontSize="15"/>
+
+                                        <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout Orientation="Vertical">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Rating: "></Label>
+                                                    <Label Style="{StaticResource SpecialFont}" Text="{Binding Rating}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                                </StackLayout>
+
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Seasons: "></Label>
+                                                    <Label Style="{StaticResource SpecialFont}" Text="{Binding NumberOfSeasons}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                                </StackLayout>
+
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Genre: "></Label>
+                                                    <Label Style="{StaticResource SpecialFont}" Text="{Binding Genre}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <StackLayout Margin="20,0,0,0" Orientation="Vertical">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Year: "></Label>
+                                                    <Label Style="{StaticResource SpecialFont}" Text="{Binding Year}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Price: "></Label>
+                                                    <Label Style="{StaticResource SpecialFont}" Text="{Binding Price}" d:Text="{Binding .}" LineBreakMode="NoWrap"/>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label IsVisible="{Binding Ongoing}" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Ongoing"></Label>
+                                                    <Label IsVisible="{Binding Ongoing, Converter={StaticResource NegateBooleanConverter }}" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="Over"></Label>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </StackLayout>
+
+
+
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+                <Label  Margin="10,0,10,0" FontAttributes="Italic" FontSize="25" Style="{StaticResource SpecialFont}" Text="Your subscriptions"></Label>
+                <ListView ItemsSource="{Binding Subscriptions}" HeightRequest="200">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="10" Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                        <Frame Padding="10" Margin="0,0,20,0" BorderColor="{StaticResource MainColor}" CornerRadius="5">
+                                            <StackLayout Orientation="Vertical">
+                                                <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="Movies"></Label>
+                                                <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding NumberOfMovies}" HorizontalOptions="Center"></Label>
+                                            </StackLayout>
+                                        </Frame>
+                                        <Frame Padding="10" Margin="0,0,20,0" BorderColor="{StaticResource MainColor}" CornerRadius="5">
+                                            <StackLayout Orientation="Vertical">
+                                                <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="Shows"></Label>
+                                                <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding NumberOfShows}" HorizontalOptions="Center"></Label>
+                                            </StackLayout>
+                                        </Frame>
+                                        <Frame Padding="10" Margin="0,0,20,0" BorderColor="{StaticResource MainColor}" CornerRadius="5">
+                                            <StackLayout Orientation="Vertical">
+                                                <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="Tickets"></Label>
+                                                <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding NumberOfTickets}" HorizontalOptions="Center"></Label>
+                                            </StackLayout>
+                                        </Frame>
+                                        <Frame Padding="10" Margin="0,0,20,0" BorderColor="Green" CornerRadius="5">
+                                            <StackLayout Orientation="Vertical">
+                                                <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="Price"></Label>
+                                                <Label FontSize="20" Style="{StaticResource SpecialFont}" Text="{Binding Price}" HorizontalOptions="Center"></Label>
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Button CommandParameter="{Binding .}" Clicked="Button_Clicked_1" TextColor="White" Margin="0,5,0,0" Text="Unsubscribe" BackgroundColor="{StaticResource MainColor}" CornerRadius="5" HorizontalOptions="FillAndExpand"></Button>
+                                    </StackLayout>
+
+                                </StackLayout>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <BoxView Margin="0,0,0,0" Color="{StaticResource MainColor}" HeightRequest="0.5"></BoxView>
+                <Label  Margin="10,0,10,0" FontAttributes="Italic" FontSize="25" Style="{StaticResource SpecialFont}" Text="Your Rotations"></Label>
+                <ListView ItemsSource="{Binding Rotations}" HeightRequest="200">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Margin="0,10,0,0">
+
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout>
+                                            <Frame Padding="0" CornerRadius="5" BorderColor="{StaticResource MainColor}">
+                                                <Image Source="{Binding MovieImage}" HeightRequest="190"></Image>
+                                            </Frame>
+                                        </StackLayout>
+
+
+                                        <StackLayout>
+                                            <Frame Padding="0" CornerRadius="5" BorderColor="{StaticResource MainColor}">
+                                                <Image Source="{Binding ShowImage}" HeightRequest="190"></Image>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Margin="5,0,0,0" Orientation="Vertical">
+                                            <Label TextColor="{StaticResource MainColor}" Style="{StaticResource SpecialFont}" FontSize="20" Text="{Binding Description}"></Label>
+
+                                            <Label Text="Congratz! You claimed this rotation while it was up!" FontAttributes="Bold" Style="{StaticResource SpecialFont}"></Label>
+                                            <StackLayout Margin="0,10,0,0" IsVisible="{Binding Birthday, Converter={StaticResource NegateBooleanConverter}}" Orientation="Horizontal">
+                                                <Label FontSize="18" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="From:"></Label>
+                                                <Label FontSize="18" Style="{StaticResource SpecialFont}" Text="{Binding From}"></Label>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding Birthday, Converter={StaticResource NegateBooleanConverter}}" Orientation="Horizontal">
+                                                <Label FontSize="18" FontAttributes="Bold" Style="{StaticResource SpecialFont}" Text="To:"></Label>
+                                                <Label FontSize="18" Style="{StaticResource SpecialFont}" Text="{Binding To}"></Label>
+                                            </StackLayout>
+
+                                        </StackLayout>
+
+                                    </StackLayout>                              
+                                </StackLayout>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+
+            </StackLayout>   
     </StackLayout>
-    
+    </ScrollView>
+
 </ContentPage>

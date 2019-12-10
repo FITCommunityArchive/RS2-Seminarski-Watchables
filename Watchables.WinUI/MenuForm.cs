@@ -268,5 +268,7 @@ namespace Watchables.WinUI
         private void MinimizeBtn_Click_1(object sender, EventArgs e) {
             this.WindowState = FormWindowState.Minimized;
         }
+
+    
     }
 }

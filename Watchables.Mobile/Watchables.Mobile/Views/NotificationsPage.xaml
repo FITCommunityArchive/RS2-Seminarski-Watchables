@@ -6,7 +6,9 @@
              xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
              xmlns:converters1="clr-namespace:Watchables.Mobile.Converters"
              mc:Ignorable="d"
-             x:Class="Watchables.Mobile.Views.NotificationsPage">
+             x:Class="Watchables.Mobile.Views.NotificationsPage"
+             Title="Notifications"
+             >
 
     <ContentPage.BindingContext>
         <vm:NotificationViewModel></vm:NotificationViewModel>

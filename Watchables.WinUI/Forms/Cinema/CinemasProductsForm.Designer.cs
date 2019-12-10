@@ -57,7 +57,7 @@
             this.AddProductBtn.ForeColor = System.Drawing.Color.White;
             this.AddProductBtn.Location = new System.Drawing.Point(0, 323);
             this.AddProductBtn.Name = "AddProductBtn";
-            this.AddProductBtn.Size = new System.Drawing.Size(596, 39);
+            this.AddProductBtn.Size = new System.Drawing.Size(689, 39);
             this.AddProductBtn.TabIndex = 4;
             this.AddProductBtn.Text = "Add product";
             this.AddProductBtn.UseVisualStyleBackColor = false;
@@ -77,7 +77,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Snow;
             this.panel1.Controls.Add(this.closeBtn);
-            this.panel1.Location = new System.Drawing.Point(470, 12);
+            this.panel1.Location = new System.Drawing.Point(575, 10);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(114, 36);
             this.panel1.TabIndex = 6;
@@ -155,7 +155,7 @@
             this.dgvProducts.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvProducts.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvProducts.RowTemplate.Height = 45;
-            this.dgvProducts.Size = new System.Drawing.Size(583, 263);
+            this.dgvProducts.Size = new System.Drawing.Size(688, 263);
             this.dgvProducts.TabIndex = 15;
             this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick_1);
             // 
@@ -170,6 +170,7 @@
             // Product
             // 
             this.Product.DataPropertyName = "Name";
+            this.Product.FillWeight = 137.6671F;
             this.Product.HeaderText = "Product";
             this.Product.MinimumWidth = 6;
             this.Product.Name = "Product";
@@ -177,13 +178,14 @@
             // Price
             // 
             this.Price.DataPropertyName = "Price";
+            this.Price.FillWeight = 82.53863F;
             this.Price.HeaderText = "Price";
             this.Price.MinimumWidth = 6;
             this.Price.Name = "Price";
             // 
             // Edit
             // 
-            this.Edit.FillWeight = 61.8565F;
+            this.Edit.FillWeight = 51.0555F;
             this.Edit.HeaderText = "";
             this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
             this.Edit.MinimumWidth = 6;
@@ -191,7 +193,7 @@
             // 
             // Delete
             // 
-            this.Delete.FillWeight = 53.85996F;
+            this.Delete.FillWeight = 44.45527F;
             this.Delete.HeaderText = "";
             this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
             this.Delete.MinimumWidth = 6;
@@ -202,7 +204,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Snow;
-            this.ClientSize = new System.Drawing.Size(596, 362);
+            this.ClientSize = new System.Drawing.Size(689, 362);
             this.Controls.Add(this.dgvProducts);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Title);

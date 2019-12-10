@@ -42,5 +42,9 @@ namespace Watchables.Mobile.Views
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e) {
             ListViewMenu.SelectedItem = new HomeMenuItem { Id = MenuItemType.Browse, Title = "Browse" };
         }
+
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e) {
+            ListViewMenu.SelectedItem = new HomeMenuItem { Id = MenuItemType.Browse, Title = "Browse" };
+        }
     }
 }

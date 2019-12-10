@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
+             xmlns:converters="clr-namespace:Watchables.Mobile"
+             xmlns:converters1="clr-namespace:Watchables.Mobile.Converters"
+             mc:Ignorable="d"
+             x:Class="Watchables.Mobile.Views.PastOrdersPage"
+             Title="Past orders"
+             >
+
+    <ContentPage.BindingContext>
+        <vm:PastOrdersViewModel></vm:PastOrdersViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <converters:LabelMaxLengthConverter x:Key="LabelMaxLengthConverter" />
+        <converters1:PutInBracketsConverter x:Key="PutInBracketsConverter" />
+        <converters1:AddCommaConverter x:Key="AddCommaConverter" />
+        <converters1:NegateBooleanConverter x:Key="NegateBooleanConverter" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding Orders}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Padding="10" Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label TextColor="{StaticResource MainColor}" FontSize="Subtitle" Style="{StaticResource SpecialFont}" Text="{Binding Movie}"></Label>
+                                        <Label TextColor="{StaticResource MainColor}" FontSize="Subtitle" Style="{StaticResource SpecialFont}" Text="{Binding Cinema, Converter={StaticResource PutInBracketsConverter}}"></Label>
+
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontAttributes="Bold" FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Day, Converter={StaticResource AddCommaConverter}}"></Label>
+                                        <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Date}"></Label>
+                                        <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="at"></Label>
+                                        <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Time}"></Label>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Seats}"></Label>
+                                        <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="seats"></Label>
+                                        <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="/"></Label>
+                                        <Label FontSize="15" Style="{StaticResource SpecialFont}" Text="{Binding Total}"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

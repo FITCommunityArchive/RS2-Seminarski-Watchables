@@ -48,6 +48,11 @@ namespace Watchables.WebAPI.Mappers
             CreateMap<Database.Orders, Model.Order>().ReverseMap();
 
             CreateMap<Database.Notifications, Model.Notification>().ReverseMap();
+            CreateMap<Database.Tickets, Model.Ticket>().ReverseMap();
+
+            CreateMap<Database.UsersMovies, Model.UsersMovies>().ReverseMap();
+            CreateMap<Database.UsersShows, Model.UsersShows>().ReverseMap();
+            CreateMap<Database.UsersSubscriptions, Model.UsersSubscriptions>().ReverseMap();
 
         }
     }
