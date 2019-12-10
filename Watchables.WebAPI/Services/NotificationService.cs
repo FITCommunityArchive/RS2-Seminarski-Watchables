@@ -23,19 +23,30 @@ namespace Watchables.WebAPI.Services
             return _mapper.Map<List<Model.Notification>>(_context.Notifications.ToList());
         }
 
-        public string RemoveNotification(int usersNotificationId) {
+        public string RemoveNotification(int notificationId, int userId) {
 
             bool valid = false;
-            foreach(var not in _context.UsersNotifications.ToList()) {
-                if(not.UsersNotificationsId == usersNotificationId) {
+            foreach(var not in _context.Notifications.ToList()) {
+                if(not.NotificationId == notificationId) {
                     valid = true;
                     break;
                 }
             }
-
             if (!valid) throw new UserException("The notificaiton could not be found!");
 
-            _context.UsersNotifications.Remove(_context.UsersNotifications.Find(usersNotificationId));
+            valid = false;
+            foreach (var user in _context.Users.ToList()) {
+                if (user.UserId == userId) {
+                    valid = true;
+                    break;
+                }
+            }
+            if (!valid) throw new UserException("The user could not be found!");
+
+
+            var remove = _context.UsersNotifications.Where(n => n.UserId == userId && n.NotificationId == notificationId).Single();
+
+            _context.UsersNotifications.Remove(remove);
             _context.SaveChanges();
             return "Notification removed!";
         }

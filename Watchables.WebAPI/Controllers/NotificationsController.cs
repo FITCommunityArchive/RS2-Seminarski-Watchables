@@ -25,9 +25,9 @@ namespace Watchables.WebAPI.Controllers
         public ActionResult<List<Model.Notification>> Get() {
             return _service.Get();
         }
-        [HttpDelete("RemoveNotification/{userNotificationId}")]
-        public ActionResult<string> RemoveNotification(int userNotificationId) {
-            return _service.RemoveNotification(userNotificationId);
+        [HttpDelete("RemoveNotification/{notificationId}/{userId}")]
+        public ActionResult<string> RemoveNotification(int notificationId, int userId) {
+            return _service.RemoveNotification(notificationId, userId);
         }
 
     }

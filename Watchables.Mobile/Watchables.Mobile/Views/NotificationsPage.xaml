@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
+             xmlns:converters1="clr-namespace:Watchables.Mobile.Converters"
+             mc:Ignorable="d"
+             x:Class="Watchables.Mobile.Views.NotificationsPage">
+
+    <ContentPage.BindingContext>
+        <vm:NotificationViewModel></vm:NotificationViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <converters1:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <ListView ItemsSource="{Binding Notifications}" ItemTapped="ListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>                            
+                            <StackLayout Padding="10">
+                                <Label Style="{StaticResource SpecialFont}" FontSize="Subtitle" TextColor="{StaticResource MainColor}" Text="{Binding Type}"></Label>
+                                <Label Style="{StaticResource SpecialFont}" Text="{Binding Content}"></Label>
+                                <Label Style="{StaticResource SpecialFont}" FontAttributes="Bold" Text="{Binding Created, Converter={StaticResource DateTimeToStringConverter}}"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

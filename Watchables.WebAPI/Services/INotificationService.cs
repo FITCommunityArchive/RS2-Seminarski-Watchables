@@ -8,6 +8,6 @@ namespace Watchables.WebAPI.Services
     public interface INotificationService
     {
         public List<Model.Notification> Get();
-        public string RemoveNotification(int usersNotificationId);
+        public string RemoveNotification(int notificationId, int userId);
     }
 }

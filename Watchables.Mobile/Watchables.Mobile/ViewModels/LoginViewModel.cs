@@ -55,7 +55,12 @@ namespace Watchables.Mobile.ViewModels
                 var allUsers = await _apiService.Get<List<Model.User>>(null);
                 foreach(var u in allUsers) {
                     if (u.Account.Username == Username) {
-                        APIService.User = await _apiService.GetById<Model.User>(u.UserId);
+                        var user = await _apiService.GetById<Model.User>(u.UserId);
+                        if (!user.Active) {
+                            await Application.Current.MainPage.DisplayAlert("Error", $"This account has been deactivated!", "OK");
+                            return;
+                        }
+                        APIService.User = user;
                     }
                 }
                 Application.Current.MainPage = new MainPage();

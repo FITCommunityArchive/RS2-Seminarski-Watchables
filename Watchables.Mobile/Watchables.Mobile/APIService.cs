@@ -242,5 +242,44 @@ namespace Watchables.Mobile
                 throw;
             }
         }
+
+        public async Task<string> RemoveNotification(object notificationId, object userId) {
+
+            var url = $"{_apiUrl}/{_controller}/RemoveNotification/{notificationId}/{userId}";
+            try {
+                var result = await url.WithBasicAuth(Username, Password).DeleteAsync().ReceiveString();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Access denied!", "OK");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Access forbidden!", "OK");
+                }
+                throw;
+            }
+        }
+
+        public async Task<T> Deactivate<T>(object userId) {
+
+            var url = $"{_apiUrl}/{_controller}/Deactivate/{userId}";
+            try {
+                var result = await url.WithBasicAuth(Username, Password).PostJsonAsync(null).ReceiveJson<T>();
+                return result;
+            }
+            catch (FlurlHttpException ex) {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized) {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Access denied!", "OK");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden) {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Access forbidden!", "OK");
+                }
+                throw;
+            }
+        }
+
+
+
     }
 }

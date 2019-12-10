@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Watchables.Mobile.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Watchables.Mobile.Views.EditProfilePage">
+
+    <ContentPage.BindingContext>
+        <vm:EditProfileViewModel></vm:EditProfileViewModel>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+
+            <ScrollView>
+                <StackLayout HorizontalOptions="Fill">
+       
+                    <StackLayout Padding="15,0,15,0" Margin="0,20,0,0">
+                        <Label FontAttributes="Bold" TextColor="#B20837" FontFamily="Century Gothic" FontSize="Title" HorizontalOptions="Center" Text="Your account"></Label>
+
+                        <Grid Margin="0,20,0,0" RowSpacing="0" ColumnSpacing="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" FontFamily="Century Gothic" Text="Fist name"></Label>
+                            <Label Grid.Row="0" Grid.Column="1" FontFamily="Century Gothic" Text="Last name"></Label>
+                            <Entry Grid.Row="1" Grid.Column="0" FontFamily="Century Gothic" Text="{Binding FirstName}"></Entry>
+                            <Entry Grid.Row="1" Grid.Column="1" FontFamily="Century Gothic" Text="{Binding LastName}"></Entry>
+                            <Label Margin="0,20,0,0" Grid.Row="2" Grid.Column="0" FontFamily="Century Gothic" Text="Phone number"></Label>
+                            <Label Margin="0,20,0,0" Grid.Row="2" Grid.Column="1" FontFamily="Century Gothic" Text="Adress"></Label>
+                            <Entry Grid.Row="3" Grid.Column="0" FontFamily="Century Gothic" Text="{Binding PhoneNumber}"></Entry>
+                            <Entry Grid.Row="3" Grid.Column="1" FontFamily="Century Gothic" Text="{Binding Address}"></Entry>
+                            <Label Margin="0,20,0,0" Grid.Row="5" Grid.Column="0" FontFamily="Century Gothic" Text="Mail"></Label>
+                            <Label Margin="0,20,0,0" Grid.Row="5" Grid.Column="1" FontFamily="Century Gothic" Text="Image link"></Label>
+                            <Entry Grid.Row="6" Grid.Column="0" FontFamily="Century Gothic" Text="{Binding Mail}"></Entry>
+                            <Entry Grid.Row="6" Grid.Column="1" FontFamily="Century Gothic" Text="{Binding ImageLink}"></Entry>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Margin="0,20,0,0" Grid.Row="0" FontFamily="Century Gothic" Text="BIrthday"></Label>
+                            <DatePicker Grid.Row="1"  Date="{Binding BirthDate}"></DatePicker>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Margin="0,20,0,0" Grid.Row="0" FontFamily="Century Gothic" Text="Username"></Label>
+                            <Entry IsReadOnly="True" Grid.Row="1"  Text="{Binding Username}"></Entry>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Margin="0,20,0,0" Grid.Row="0" FontFamily="Century Gothic" Text="Password"></Label>
+                            <Entry Grid.Row="1"  Text="{Binding Password}" IsPassword="{Binding isPassword}"></Entry>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Margin="0,20,0,0" Grid.Row="0" FontFamily="Century Gothic" Text="Confirm password"></Label>
+                            <Entry Grid.Row="1"  Text="{Binding ConfirmPassword}" IsPassword="{Binding isPassword}"></Entry>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="AUTO"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button TextColor="White" BackgroundColor="#B20837" BorderColor="#B20837" CornerRadius="5" Grid.Column="0" Margin="0,20,0,20" Text="Save changes" Command="{Binding SaveCommand}"></Button>
+                            <ImageButton Aspect="AspectFit" Margin="0,20,0,20" Source="eye.png" Grid.Column="1" Command="{Binding ShowPasswordCommand}"></ImageButton>
+                            <Button TextColor="White" BackgroundColor="Red" BorderColor="Red" CornerRadius="5" Grid.Column="2" Margin="0,20,0,20" Text="Deactivate" Command="{Binding DeactivateCommand}"></Button>
+                        </Grid>
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -25,10 +25,17 @@ namespace Watchables.Mobile.Views
             BindingContext = _viewModel = new ItemsViewModel();
         }
 
+        protected async override void OnAppearing() {
+            base.OnAppearing();
+            await _viewModel.GetData();
+        }
 
+        private async void ToolbarItem_Clicked(object sender, EventArgs e) {
+            await Navigation.PushAsync(new NotificationsPage());
+        }
 
-
-
-
+        private async void ToolbarItem_Clicked_1(object sender, EventArgs e) {
+            await Navigation.PushAsync(new EditProfilePage());
+        }
     }
 }

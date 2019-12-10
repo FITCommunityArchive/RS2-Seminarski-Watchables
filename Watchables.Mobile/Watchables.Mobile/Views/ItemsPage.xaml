@@ -10,13 +10,23 @@
              >
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="user.png" Text="Profile" />
-        <ToolbarItem IconImageSource="not.png" Text="News" />
+        <ToolbarItem IconImageSource="not.png" Text="News" Clicked="ToolbarItem_Clicked" />
+        <ToolbarItem IconImageSource="user.png" Text="Profile" Clicked="ToolbarItem_Clicked_1" />       
     </ContentPage.ToolbarItems>
     
 
     <StackLayout>
+        <StackLayout Margin="0,10,0,0" IsVisible="{Binding HasNotifications}">
+            <Frame Padding="5" HorizontalOptions="Center" BackgroundColor="#f7f7f7" BorderColor="{StaticResource MainColor}">
+                <Label Style="{StaticResource SpecialFont}" Text="you have notifications">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RemoveNotificationCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>                
+            </Frame>
+        </StackLayout>
 
+        
         <Label Text="TO BE CONTINUED"></Label>
 
     </StackLayout>
